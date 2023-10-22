@@ -1,0 +1,22 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emik.SourceGenerators.Choices", "Emik.SourceGenerators.Choices.csproj", "{7D239D49-3A7A-4CD9-87D7-0A20DFAD0EF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emik.SourceGenerators.Choices.Generated.Tests", "Emik.SourceGenerators.Choices.Generated.Tests\Emik.SourceGenerators.Choices.Generated.Tests.csproj", "{A4ABAE60-1C14-4865-B421-7E51659B9BA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D239D49-3A7A-4CD9-87D7-0A20DFAD0EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D239D49-3A7A-4CD9-87D7-0A20DFAD0EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D239D49-3A7A-4CD9-87D7-0A20DFAD0EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D239D49-3A7A-4CD9-87D7-0A20DFAD0EF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4ABAE60-1C14-4865-B421-7E51659B9BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4ABAE60-1C14-4865-B421-7E51659B9BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4ABAE60-1C14-4865-B421-7E51659B9BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4ABAE60-1C14-4865-B421-7E51659B9BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
+
