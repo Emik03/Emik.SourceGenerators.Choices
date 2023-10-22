@@ -40,7 +40,7 @@ partial class Number :
     global::System.IEquatable<global::Emik.SourceGenerators.Choices.Generated.Tests.Number>
 {
     /// <summary>
-    /// Compact representation of all unmanaged memory within the union <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/>.
+    /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     [global::System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit)]
@@ -60,7 +60,7 @@ partial class Number :
     private Unmanaged _unmanaged;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Integer"/> of type <see cref="int"/>.
+    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Integer"/> of type <see cref="int"/>.
     /// </summary>
     /// <param name="integer">The variant.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
@@ -73,7 +73,7 @@ partial class Number :
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/>.
+    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/>.
     /// </summary>
     /// <param name="floating">The variant.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
@@ -86,7 +86,7 @@ partial class Number :
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="global::System.ValueTuple"/>.
+    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="System.ValueTuple"/>.
     /// </summary>
     /// <param name="unknown">The variant.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
@@ -98,7 +98,7 @@ partial class Number :
     }
 
     /// <summary>
-    /// Gets the value determining if the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> is the variant <see cref="Integer"/> of type <see cref="int"/>.
+    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> is the variant <see cref="Integer"/> of type <see cref="int"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public bool IsInteger
@@ -110,7 +110,7 @@ partial class Number :
     }
 
     /// <summary>
-    /// Gets the value determining if the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> is the variant <see cref="Floating"/> of type <see cref="float"/>.
+    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> is the variant <see cref="Floating"/> of type <see cref="float"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public bool IsFloating
@@ -122,7 +122,7 @@ partial class Number :
     }
 
     /// <summary>
-    /// Gets the value determining if the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> is the variant Unknown of type <see cref="global::System.ValueTuple"/>.
+    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> is the variant Unknown of type <see cref="System.ValueTuple"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public bool IsUnknown
@@ -211,7 +211,7 @@ partial class Number :
         => x.Floating;
 
     /// <summary>
-    /// Implicitly converts the <see cref="global::System.ValueTuple"/> parameter to the union.
+    /// Implicitly converts the <see cref="System.ValueTuple"/> parameter to the union.
     /// </summary>
     /// <param name="unknown">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="unknown"/>.</returns>
@@ -222,7 +222,7 @@ partial class Number :
         => new global::Emik.SourceGenerators.Choices.Generated.Tests.Number(unknown);
 
     /// <summary>
-    /// Creates a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Integer"/> of type <see cref="int"/>.
+    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Integer"/> of type <see cref="int"/>.
     /// </summary>
     /// <param name="integer">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="integer"/>.</returns>
@@ -233,7 +233,7 @@ partial class Number :
         => new global::Emik.SourceGenerators.Choices.Generated.Tests.Number(integer);
 
     /// <summary>
-    /// Creates a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/>.
+    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/>.
     /// </summary>
     /// <param name="floating">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="floating"/>.</returns>
@@ -244,7 +244,7 @@ partial class Number :
         => new global::Emik.SourceGenerators.Choices.Generated.Tests.Number(floating);
 
     /// <summary>
-    /// Creates a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="global::System.ValueTuple"/>.
+    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="System.ValueTuple"/>.
     /// </summary>
     /// <param name="unknown">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="unknown"/>.</returns>
@@ -416,9 +416,9 @@ partial class Number :
     /// <summary>
     /// Invokes the callback based on current variance.
     /// </summary>
-    /// <param name="onInteger">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Integer"/> of type <see cref="int"/> is held.</param>
-    /// <param name="onFloating">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/> is held.</param>
-    /// <param name="onUnknown">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="global::System.ValueTuple"/> is held.</param>
+    /// <param name="onInteger">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Integer"/> of type <see cref="int"/> is held.</param>
+    /// <param name="onFloating">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/> is held.</param>
+    /// <param name="onUnknown">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="System.ValueTuple"/> is held.</param>
     /// <returns>Itself.</returns>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
@@ -448,9 +448,9 @@ partial class Number :
     /// Maps each variant to <typeparamref name="TMappingResult"/>.
     /// </summary>
     /// <typeparam name="TMappingResult">The resulting type from the mapping.</typeparam>
-    /// <param name="onInteger">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Integer"/> of type <see cref="int"/> is held.</param>
-    /// <param name="onFloating">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/> is held.</param>
-    /// <param name="onUnknown">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="global::System.ValueTuple"/> is held.</param>
+    /// <param name="onInteger">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Integer"/> of type <see cref="int"/> is held.</param>
+    /// <param name="onFloating">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/> is held.</param>
+    /// <param name="onUnknown">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="System.ValueTuple"/> is held.</param>
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
@@ -505,7 +505,7 @@ partial record struct Result<TOk, TErr> :
     private readonly byte _discriminator;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <see cref="TOk"/>.
+    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
     /// </summary>
     /// <param name="ok">The variant.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
@@ -518,7 +518,7 @@ partial record struct Result<TOk, TErr> :
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <see cref="TErr"/>.
+    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
     /// </summary>
     /// <param name="err">The variant.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
@@ -531,7 +531,7 @@ partial record struct Result<TOk, TErr> :
     }
 
     /// <summary>
-    /// Gets the value determining if the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> is the variant <see cref="Ok"/> of type <see cref="TOk"/>.
+    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> is the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public readonly bool IsOk
@@ -544,7 +544,7 @@ partial record struct Result<TOk, TErr> :
     }
 
     /// <summary>
-    /// Gets the value determining if the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> is the variant <see cref="Err"/> of type <see cref="TErr"/>.
+    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> is the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public readonly bool IsErr
@@ -557,7 +557,7 @@ partial record struct Result<TOk, TErr> :
     }
 
     /// <summary>
-    /// Gets the <see cref="TOk"/> variant.
+    /// Gets the <typeparamref name="TOk"/> variant.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public readonly TOk? Ok
@@ -568,7 +568,7 @@ partial record struct Result<TOk, TErr> :
     }
 
     /// <summary>
-    /// Gets the <see cref="TErr"/> variant.
+    /// Gets the <typeparamref name="TErr"/> variant.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public readonly TErr? Err
@@ -579,7 +579,7 @@ partial record struct Result<TOk, TErr> :
     }
 
     /// <summary>
-    /// Creates a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <see cref="TOk"/>.
+    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
     /// </summary>
     /// <param name="ok">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="ok"/>.</returns>
@@ -590,7 +590,7 @@ partial record struct Result<TOk, TErr> :
         => new global::Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr>(ok);
 
     /// <summary>
-    /// Creates a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <see cref="TErr"/>.
+    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
     /// </summary>
     /// <param name="err">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="err"/>.</returns>
@@ -715,8 +715,8 @@ partial record struct Result<TOk, TErr> :
     /// <summary>
     /// Invokes the callback based on current variance.
     /// </summary>
-    /// <param name="onOk">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <see cref="TOk"/> is held.</param>
-    /// <param name="onErr">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <see cref="TErr"/> is held.</param>
+    /// <param name="onOk">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/> is held.</param>
+    /// <param name="onErr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/> is held.</param>
     /// <returns>Itself.</returns>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
@@ -742,8 +742,8 @@ partial record struct Result<TOk, TErr> :
     /// Maps each variant to <typeparamref name="TMappingResult"/>.
     /// </summary>
     /// <typeparam name="TMappingResult">The resulting type from the mapping.</typeparam>
-    /// <param name="onOk">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <see cref="TOk"/> is held.</param>
-    /// <param name="onErr">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <see cref="TErr"/> is held.</param>
+    /// <param name="onOk">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/> is held.</param>
+    /// <param name="onErr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/> is held.</param>
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
@@ -784,14 +784,14 @@ ref partial struct SpanEncodings
 partial struct SpanEncodings
 {
     /// <summary>
-    /// Explicit side effect delegate for the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="global::System.Span{byte}"/> due to it being a by-ref like type.
+    /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/> due to it being a by-ref like type.
     /// </summary>
     /// <param name="utf8">The referenced value.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public delegate void Utf8Handler(System.Span<byte> utf8);
 
     /// <summary>
-    /// Explicit mapper delegate for the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="global::System.Span{byte}"/> due to it being a by-ref like type.
+    /// Explicit mapper delegate for the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/> due to it being a by-ref like type.
     /// </summary>
     /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
     /// <param name="utf8">The referenced value.</param>
@@ -800,14 +800,14 @@ partial struct SpanEncodings
     public delegate TMappingResult Utf8Handler<out TMappingResult>(System.Span<byte> utf8);
 
     /// <summary>
-    /// Explicit side effect delegate for the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="global::System.Span{char}"/> due to it being a by-ref like type.
+    /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/> due to it being a by-ref like type.
     /// </summary>
     /// <param name="utf16">The referenced value.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public delegate void Utf16Handler(System.Span<char> utf16);
 
     /// <summary>
-    /// Explicit mapper delegate for the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="global::System.Span{char}"/> due to it being a by-ref like type.
+    /// Explicit mapper delegate for the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/> due to it being a by-ref like type.
     /// </summary>
     /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
     /// <param name="utf16">The referenced value.</param>
@@ -819,7 +819,7 @@ partial struct SpanEncodings
     private byte _discriminator;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="global::System.Span{byte}"/>.
+    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
     /// <param name="utf8">The variant.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
@@ -832,7 +832,7 @@ partial struct SpanEncodings
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="global::System.Span{char}"/>.
+    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
     /// <param name="utf16">The variant.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
@@ -845,7 +845,7 @@ partial struct SpanEncodings
     }
 
     /// <summary>
-    /// Gets the value determining if the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> is the variant <see cref="Utf8"/> of type <see cref="global::System.Span{byte}"/>.
+    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> is the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public readonly bool IsUtf8
@@ -858,7 +858,7 @@ partial struct SpanEncodings
     }
 
     /// <summary>
-    /// Gets the value determining if the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> is the variant <see cref="Utf16"/> of type <see cref="global::System.Span{char}"/>.
+    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> is the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public readonly bool IsUtf16
@@ -871,7 +871,7 @@ partial struct SpanEncodings
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="global::System.Span{byte}"/> variant.
+    /// Gets or sets the <see cref="System.Span{T}"/> variant.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public System.Span<byte> Utf8
@@ -888,7 +888,7 @@ partial struct SpanEncodings
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="global::System.Span{char}"/> variant.
+    /// Gets or sets the <see cref="System.Span{T}"/> variant.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     public System.Span<char> Utf16
@@ -905,7 +905,7 @@ partial struct SpanEncodings
     }
 
     /// <summary>
-    /// Implicitly converts the <see cref="global::System.Span{byte}"/> parameter to the union.
+    /// Implicitly converts the <see cref="System.Span{T}"/> parameter to the union.
     /// </summary>
     /// <param name="utf8">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="utf8"/>.</returns>
@@ -916,7 +916,7 @@ partial struct SpanEncodings
         => new global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings(utf8);
 
     /// <summary>
-    /// Explicitly converts the union to the target type <see cref="global::System.Span{byte}"/>.
+    /// Explicitly converts the union to the target type <see cref="System.Span{T}"/>.
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
@@ -927,7 +927,7 @@ partial struct SpanEncodings
         => x.Utf8;
 
     /// <summary>
-    /// Implicitly converts the <see cref="global::System.Span{char}"/> parameter to the union.
+    /// Implicitly converts the <see cref="System.Span{T}"/> parameter to the union.
     /// </summary>
     /// <param name="utf16">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="utf16"/>.</returns>
@@ -938,7 +938,7 @@ partial struct SpanEncodings
         => new global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings(utf16);
 
     /// <summary>
-    /// Explicitly converts the union to the target type <see cref="global::System.Span{char}"/>.
+    /// Explicitly converts the union to the target type <see cref="System.Span{T}"/>.
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
@@ -949,7 +949,7 @@ partial struct SpanEncodings
         => x.Utf16;
 
     /// <summary>
-    /// Creates a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="global::System.Span{byte}"/>.
+    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
     /// <param name="utf8">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="utf8"/>.</returns>
@@ -960,7 +960,7 @@ partial struct SpanEncodings
         => new global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings(utf8);
 
     /// <summary>
-    /// Creates a new instance of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="global::System.Span{char}"/>.
+    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
     /// <param name="utf16">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="utf16"/>.</returns>
@@ -1128,8 +1128,8 @@ partial struct SpanEncodings
     /// <summary>
     /// Invokes the callback based on current variance.
     /// </summary>
-    /// <param name="onUtf8">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="global::System.Span{byte}"/> is held.</param>
-    /// <param name="onUtf16">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="global::System.Span{char}"/> is held.</param>
+    /// <param name="onUtf8">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/> is held.</param>
+    /// <param name="onUtf16">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/> is held.</param>
     /// <returns>Itself.</returns>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.0.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
@@ -1155,8 +1155,8 @@ partial struct SpanEncodings
     /// Maps each variant to <typeparamref name="TMappingResult"/>.
     /// </summary>
     /// <typeparam name="TMappingResult">The resulting type from the mapping.</typeparam>
-    /// <param name="onUtf8">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="global::System.Span{byte}"/> is held.</param>
-    /// <param name="onUtf16">The callback to use when the contract of the <see cref="global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="global::System.Span{char}"/> is held.</param>
+    /// <param name="onUtf8">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/> is held.</param>
+    /// <param name="onUtf16">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/> is held.</param>
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
