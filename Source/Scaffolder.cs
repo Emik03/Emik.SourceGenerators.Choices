@@ -23,46 +23,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     string? _discriminator, _source;
 
     [Pure]
-    public string Discriminator =>
-        _discriminator ??= Reference.Count != Symbols.Count ||
-            Symbols.Select(x => x.Type).GroupDuplicates(TypeSymbolComparer.Default).Any()
-                ? DiscriminatorField
-                : DiscriminatorProperty;
-
-    [Pure]
-    public string Name { get; } = Named.GetFullyQualifiedName();
-
-    [Pure]
-    public string NullableName { get; } = $"{Named.WithNullableAnnotation(NullableAnnotation.Annotated)}";
-
-    [Pure]
-    public string XmlName { get; } = XmlTypeName(Named);
-
-    [Pure]
-    public ISet<FieldOrProperty> Members { get; } = Named
-       .GetMembers()
-       .Select(x => FieldOrProperty.TryCreate(x, out var res) ? res : (FieldOrProperty?)null)
-       .Filter()
-       .ToSet();
-
-    [Pure]
-    public SmallList<FieldOrProperty> Reference { get; } = Symbols.Omit(IsUnmanaged).Where(IsReference).ToSmallList();
-
-    [Pure]
-    public SmallList<FieldOrProperty> Rest { get; } = Symbols.Omit(IsUnmanaged).Omit(IsReference).ToSmallList();
-
-    [Pure]
-    public SmallList<FieldOrProperty> Unmanaged { get; } = Symbols.Where(IsUnmanaged).Omit(IsEmpty).ToSmallList();
-
-    [Pure]
-    public string HintName { get; } = Named.HintName();
-
-    [Pure]
-    public string Source =>
-        _source ??= $"{Header}{Named
-           .ContainingWithoutGlobal()
-           .FindSmallPathToNull(x => x.ContainingWithoutGlobal())
-           .Aggregate(DeclareType, WrapNamespace)}\n";
+    public GeneratedSource Result => (HintName, Source);
 
     [Pure]
     bool CanOverlapReferenceMemorySpace => Reference.Omit(Members.Contains).Skip(MinimumBoxedSize - 1).Any();
@@ -238,7 +199,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             )
             : "";
 
-    public string DeclareObjectEquals =>
+    string DeclareObjectEquals =>
         Named.IsRecord
             ? ""
             : CSharp(
@@ -466,6 +427,48 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         );
 
     [Pure]
+    string Discriminator =>
+        _discriminator ??= Reference.Count != Symbols.Count ||
+            Symbols.Select(x => x.Type).GroupDuplicates(TypeSymbolComparer.Default).Any()
+                ? DiscriminatorField
+                : DiscriminatorProperty;
+
+    [Pure]
+    string HintName { get; } = Named.HintName();
+
+    [Pure]
+    string Name { get; } = Named.GetFullyQualifiedName();
+
+    [Pure]
+    string NullableName { get; } = $"{Named.WithNullableAnnotation(NullableAnnotation.Annotated)}";
+
+    [Pure]
+    string Source =>
+        _source ??= $"{Header}{Named
+           .ContainingWithoutGlobal()
+           .FindSmallPathToNull(x => x.ContainingWithoutGlobal())
+           .Aggregate(DeclareType, WrapNamespace)}\n";
+
+    [Pure]
+    string XmlName { get; } = XmlTypeName(Named);
+
+    [Pure]
+    ISet<FieldOrProperty> Members { get; } = Named
+       .GetMembers()
+       .Select(x => FieldOrProperty.TryCreate(x, out var res) ? res : (FieldOrProperty?)null)
+       .Filter()
+       .ToSet();
+
+    [Pure]
+    SmallList<FieldOrProperty> Reference { get; } = Symbols.Omit(IsUnmanaged).Where(IsReference).ToSmallList();
+
+    [Pure]
+    SmallList<FieldOrProperty> Rest { get; } = Symbols.Omit(IsUnmanaged).Omit(IsReference).ToSmallList();
+
+    [Pure]
+    SmallList<FieldOrProperty> Unmanaged { get; } = Symbols.Where(IsUnmanaged).Omit(IsEmpty).ToSmallList();
+
+    [Pure]
     public static bool IsSystemTuple([NotNullWhen(true)] ITypeSymbol? symbol) =>
         symbol is INamedTypeSymbol
         {
@@ -475,21 +478,22 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         };
 
     [Pure]
-    public static IEnumerable<FieldOrProperty> Decouple(ImmutableArray<IFieldSymbol> fields) =>
-        fields.Length is TupleGenericLimit &&
-        fields[^1].Type is INamedTypeSymbol { IsTupleType: true, IsValueType: true, TupleElements: var tuple }
-            ? fields.Take(TupleGenericLimit - 1).Select(x => new FieldOrProperty(x)).Concat(Decouple(tuple))
-            : fields.Select(x => new FieldOrProperty(x));
+    public static SmallList<FieldOrProperty> Decouple(ImmutableArray<IFieldSymbol> fields) =>
+        (fields.Length is TupleGenericLimit &&
+            fields[^1].Type is INamedTypeSymbol { IsTupleType: true, IsValueType: true, TupleElements: var tuple }
+                ? fields.Take(TupleGenericLimit - 1).Select(x => new FieldOrProperty(x)).Concat(Decouple(tuple))
+                : fields.Select(x => new FieldOrProperty(x))).ToSmallList();
 
     [Pure]
-    public static IEnumerable<FieldOrProperty> Instances(INamespaceOrTypeSymbol x) =>
+    public static Scaffolder From(Raw x) => new(x.Named, x.Fields, x.PubliclyMutable);
+
+    [Pure]
+    public static SmallList<FieldOrProperty> Instances(INamespaceOrTypeSymbol x) =>
         x.GetMembers()
            .Select(x => FieldOrProperty.TryCreate(x, out var res) ? res : (FieldOrProperty?)null)
            .Filter()
-           .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] });
-
-    [Pure]
-    public static Scaffolder From(ScaffolderTuple x) => new(x.Named, x.Fields, x.PubliclyMutable);
+           .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] })
+           .ToSmallList();
 
     [Pure]
     static bool IsEmpty(FieldOrProperty x) =>
