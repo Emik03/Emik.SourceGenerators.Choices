@@ -488,6 +488,9 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     public static Scaffolder From(Raw x) => new(x.Named, x.Fields, x.PubliclyMutable);
 
     [Pure]
+    public static Scaffolder From(Raw x, CancellationToken _) => From(x);
+
+    [Pure]
     public static SmallList<FieldOrProperty> Instances(INamespaceOrTypeSymbol x) =>
         x.GetMembers()
            .Select(x => FieldOrProperty.TryCreate(x, out var res) ? res : (FieldOrProperty?)null)
@@ -656,12 +659,12 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     [Pure]
     string DeclareAlternativeFactory(FieldOrProperty x, string discriminator)
     {
-        var parameters = (x.Type switch
+        var parameters = x.Type switch
         {
             INamedTypeSymbol { IsTupleType: true, TupleElements: var e, TypeArguments.Length: > 1 } => Decouple(e),
             INamedTypeSymbol t when IsSystemTuple(t) => Instances(t),
-            _ => null,
-        }).ToSmallList();
+            _ => default,
+        };
 
         if (parameters is [])
             return "";

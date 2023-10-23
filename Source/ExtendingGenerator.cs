@@ -29,7 +29,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
            .WithComparer(s_raws)
            .WithTrackingName(nameof(Raw))
            .Where(HasSufficientFields)
-           .Select(ToScaffolder)
+           .Select(Scaffolder.From)
            .WithComparer(s_comparer)
            .WithTrackingName(nameof(Scaffolder));
 
@@ -47,10 +47,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         x is (_, { Count: >= MinimumFields }, _);
 
     [Pure]
-    static Raw DiscoverFields(
-        Fold x,
-        CancellationToken _
-    )
+    static Raw DiscoverFields(Fold x, CancellationToken _)
     {
         var (type, named, isPubliclyMutable) = x;
 
@@ -66,10 +63,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     }
 
     [Pure]
-    static Fold Target(
-        GeneratorAttributeSyntaxContext context,
-        CancellationToken _
-    )
+    static Fold Target(GeneratorAttributeSyntaxContext context, CancellationToken _)
     {
         bool? publiclyMutable = null;
         INamedTypeSymbol? symbolSet = null;
@@ -87,8 +81,4 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 
         return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, publiclyMutable);
     }
-
-    [Pure]
-    static Scaffolder ToScaffolder((INamedTypeSymbol, SmallList<FieldOrProperty>, bool?) x, CancellationToken _) =>
-        Scaffolder.From(x);
 }
