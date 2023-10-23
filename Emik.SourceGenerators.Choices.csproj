@@ -7,4 +7,8 @@
         <Description>Annotate [Choice] to transform your type into a highly performant and flexible disjoint union.</Description>
         <PackageTags>Analyzer Coproduct Delegate Discriminated Disjoint Either Forwarder Functional Generator Infer Inference Interface Monad Monadic Monoid Performant Roslyn Source Union</PackageTags>
     </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Remove="Asyncify"/>
+        <PackageReference Remove="Roslynator.Analyzers"/>
+    </ItemGroup>
 </Project>
