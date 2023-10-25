@@ -183,11 +183,11 @@ readonly record struct Signature(
     static string? InterfaceDeclaration(ISymbol x) => x.Name.LastIndexOf('.') is not -1 and var i ? x.Name[..i] : null;
 
     [Pure]
-    static Extract AsDirectExtract(ISymbol x) => (x, default, default);
+    static Extract AsDirectExtract(ISymbol x) => (x, RefKindFrom(x), default);
 
     [Pure]
     static Extract AsDirectExtract(ISymbol x, int count, string? element = null) =>
-        (x, default, Enumerable.Repeat(element, count).ToSmallList());
+        (x, RefKindFrom(x), Enumerable.Repeat(element, count).ToSmallList());
 
     [Pure]
     static HashSet<Extract> Add(
@@ -252,6 +252,16 @@ readonly record struct Signature(
     static RefKind Min(RefKind left, RefKind right) =>
         left is RefKind.None || right is RefKind.None ? RefKind.None :
         left is RefKind.Ref || right is RefKind.Ref ? RefKind.Ref : RefKind.RefReadOnly;
+
+    [Pure]
+    static RefKind RefKindFrom(ISymbol symbol) =>
+        symbol switch
+        {
+            IFieldSymbol { RefKind: var x } => x,
+            IMethodSymbol { RefKind: var x } => x,
+            IPropertySymbol { RefKind: var x } => x,
+            _ => default,
+        };
 
     [Pure]
     static HashSet<Signature> ToSelf(IEnumerable<FieldOrProperty>? except, IAssemblySymbol assembly) =>
