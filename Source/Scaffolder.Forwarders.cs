@@ -221,7 +221,7 @@ sealed partial record Scaffolder
            .ToSmallList() is [_, ..] boxes
             ? CSharp(
                 $"""
-                 
+
                      /// <remarks>
                      /// Boxes when the current instance is
                      /// {boxes.Conjoin(",\n    /// ")}.
