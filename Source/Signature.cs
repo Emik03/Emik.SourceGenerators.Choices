@@ -11,8 +11,9 @@ readonly record struct Signature(
 {
     static readonly IEqualityComparer<Extract> s_extracts =
         Equating<Extract>(
-            (x, y) => From(x.Symbol) is var l == From(y.Symbol) is var r &&
-                (l is null || r is null || l.Value.Equivalent(r.Value))
+            (x, y) => From(x.Symbol) is var l &&
+                From(y.Symbol) is var r &&
+                (l is null ? r is null : r is not null && l.Value.Equivalent(r.Value))
         );
 
     static readonly IEqualityComparer<Signature> s_signatures = Equating<Signature>((x, y) => x.Equivalent(y));
@@ -50,6 +51,19 @@ readonly record struct Signature(
 
         return forwarders.Where(IsValid);
     }
+
+    [Pure]
+    public static RefKind Kind(in FieldOrProperty x) => Kind(x.Symbol);
+
+    [Pure]
+    public static RefKind Kind(in ISymbol x) =>
+        x switch
+        {
+            IFieldSymbol { RefKind: var ret } => ret,
+            IMethodSymbol { RefKind: var ret } => ret,
+            IPropertySymbol { RefKind: var ret } => ret,
+            _ => throw Unreachable,
+        };
 
     [Pure]
     public static Signature? From(ISymbol symbol) =>
@@ -183,11 +197,11 @@ readonly record struct Signature(
     static string? InterfaceDeclaration(ISymbol x) => x.Name.LastIndexOf('.') is not -1 and var i ? x.Name[..i] : null;
 
     [Pure]
-    static Extract AsDirectExtract(ISymbol x) => (x, RefKindFrom(x), default);
+    static Extract AsDirectExtract(ISymbol x) => (x, Kind(x), default);
 
     [Pure]
     static Extract AsDirectExtract(ISymbol x, int count, string? element = null) =>
-        (x, RefKindFrom(x), Enumerable.Repeat(element, count).ToSmallList());
+        (x, Kind(x), Enumerable.Repeat(element, count).ToSmallList());
 
     [Pure]
     static HashSet<Extract> Add(
@@ -240,30 +254,14 @@ readonly record struct Signature(
        .Select(AsDirectExtract);
 
     [Pure]
-    static RefKind Kind(in FieldOrProperty x) =>
-        x.Symbol switch
-        {
-            IFieldSymbol { RefKind: var ret } => ret,
-            IPropertySymbol { RefKind: var ret } => ret,
-            _ => throw Unreachable,
-        };
-
-    [Pure]
     static RefKind Min(RefKind left, RefKind right) =>
         left is RefKind.None || right is RefKind.None ? RefKind.None :
         left is RefKind.Ref || right is RefKind.Ref ? RefKind.Ref : RefKind.RefReadOnly;
 
     [Pure]
-    static RefKind RefKindFrom(ISymbol symbol) =>
-        symbol switch
-        {
-            IFieldSymbol { RefKind: var x } => x,
-            IMethodSymbol { RefKind: var x } => x,
-            IPropertySymbol { RefKind: var x } => x,
-            _ => default,
-        };
-
-    [Pure]
     static HashSet<Signature> ToSelf(IEnumerable<FieldOrProperty>? except, IAssemblySymbol assembly) =>
-        (except ?? Enumerable.Empty<FieldOrProperty>()).Select(x => From(x.Type, assembly)).Filter().ToSet(s_signatures);
+        (except ?? Enumerable.Empty<FieldOrProperty>())
+       .Select(x => From(x.Type, assembly))
+       .Filter()
+       .ToSet(s_signatures);
 }
