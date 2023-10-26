@@ -500,7 +500,9 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
 
     [Pure]
     static bool IsEmpty(FieldOrProperty x) =>
-        x.Type is { IsValueType: true } type && !type.IsUnmanagedPrimitive() && type.GetMembers().All(IsEmpty);
+        x.Type is { BaseType.SpecialType: not SpecialType.System_Enum, IsValueType: true } type &&
+        !type.IsUnmanagedPrimitive() &&
+        type.GetMembers().All(IsEmpty);
 
     [Pure]
     static bool IsEmpty(ISymbol x) =>
@@ -518,7 +520,9 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
 
     [Pure]
     static bool IsOperatorComparable(FieldOrProperty x) =>
-        x.Type.IsUnmanagedPrimitive() || x.Type.GetMembers().Any(x => IsOperator(x, "op_GreaterThan"));
+        x.Type.BaseType?.SpecialType is SpecialType.System_Enum ||
+        x.Type.IsUnmanagedPrimitive() ||
+        x.Type.GetMembers().Any(x => IsOperator(x, "op_GreaterThan"));
 
     [Pure]
     static bool IsOperator(ISymbol symbol, string expect) =>
@@ -533,7 +537,9 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
 
     [Pure]
     static bool IsOperatorEquatable(FieldOrProperty x) =>
-        x.Type.IsUnmanagedPrimitive() || x.Type.GetMembers().Any(x => IsOperator(x, "op_Equality"));
+        x.Type.BaseType?.SpecialType is SpecialType.System_Enum ||
+        x.Type.IsUnmanagedPrimitive() ||
+        x.Type.GetMembers().Any(x => IsOperator(x, "op_Equality"));
 
     [Pure]
     static bool IsReference(FieldOrProperty x) => x.Type.IsReferenceType;
