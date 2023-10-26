@@ -19,3 +19,6 @@ readonly partial record struct Result<TOk, TErr>
 
     readonly TErr? _err;
 }
+
+[Choice(typeof((AuditFlags Audits, BindingFlags Bindings, SocketFlags Sockets, ObjectAceFlags ObjectAces)))]
+readonly partial struct Enums;
