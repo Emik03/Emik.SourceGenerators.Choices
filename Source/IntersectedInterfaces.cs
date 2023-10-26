@@ -29,20 +29,6 @@ sealed record IntersectedInterfaces(SmallList<FieldOrProperty> Symbols, bool IsR
             ContainingNamespace: { ContainingNamespace.IsGlobalNamespace: true, Name: nameof(System) },
         };
 
-    HashSet<INamedTypeSymbol> Intersect(HashSet<INamedTypeSymbol> acc, FieldOrProperty next)
-    {
-        acc.IntersectWith(UnimplementedInterfaces(next));
-        return acc;
-    }
-
-    [Pure]
-    IEnumerable<INamedTypeSymbol> UnimplementedInterfaces(FieldOrProperty next) =>
-        next
-           .Type
-           .AllInterfaces
-           .Omit(IsImplementedInterface)
-           .Omit(x => x.GetMembers().Any(x => IsReadOnly && x is IEventSymbol || x.IsStatic));
-
     [Pure]
     IEnumerable<Extract> DelegateImplementors(SmallList<INamedTypeSymbol> interfaces)
     {
@@ -72,8 +58,25 @@ sealed record IntersectedInterfaces(SmallList<FieldOrProperty> Symbols, bool IsR
 
         var interfaceDeclarations = interfaces.Select(x => $"{x}").ItemCanBeNull().ToSmallList();
 
-        return first.GetMembers().Where(CanBeIncluded).Select(x => (Extract)(x, default, interfaceDeclarations));
+        return first
+           .GetMembers()
+           .Where(CanBeIncluded)
+           .Select(x => (Extract)(x, Signature.Kind(x), interfaceDeclarations));
     }
+
+    HashSet<INamedTypeSymbol> Intersect(HashSet<INamedTypeSymbol> acc, FieldOrProperty next)
+    {
+        acc.IntersectWith(UnimplementedInterfaces(next));
+        return acc;
+    }
+
+    [Pure]
+    IEnumerable<INamedTypeSymbol> UnimplementedInterfaces(FieldOrProperty next) =>
+        next
+           .Type
+           .AllInterfaces
+           .Omit(IsImplementedInterface)
+           .Omit(x => x.GetMembers().Any(x => IsReadOnly && x is IEventSymbol || x.IsStatic));
 
     [Pure]
     SmallList<INamedTypeSymbol> GroupOriginalDefinitions(INamedTypeSymbol first)
@@ -83,8 +86,8 @@ sealed record IntersectedInterfaces(SmallList<FieldOrProperty> Symbols, bool IsR
             all.FirstOrDefault(x => NamedTypeSymbolComparer.Equal(x.OriginalDefinition, first.OriginalDefinition));
 
         return Symbols
-           .Select(x => x.Type.AllInterfaces)
            .Skip(1)
+           .Select(x => x.Type.AllInterfaces)
            .Select(FindComparableInterface)
            .Filter()
            .Prepend(first)
