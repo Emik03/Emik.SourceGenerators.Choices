@@ -22,3 +22,9 @@ readonly partial record struct Result<TOk, TErr>
 
 [Choice(typeof((AuditFlags Audits, BindingFlags Bindings, SocketFlags Sockets, ObjectAceFlags ObjectAces)))]
 readonly partial struct Enums;
+
+[Choice(typeof((Task Referenced, ValueTask Valued)))]
+readonly partial struct Tasks;
+
+[Choice(typeof((Task Left, Task Right)))]
+partial class SuperTask;
