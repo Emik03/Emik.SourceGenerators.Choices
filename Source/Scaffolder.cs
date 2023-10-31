@@ -8,8 +8,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     [StringSyntax("C#")]
     const string
         Action = "global::System.Action",
-        AggressiveInlining =
-            "[global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]",
+        AggressiveInlining = "[global::System.Runtime.CompilerServices.MethodImpl(256)]",
         DiscriminatorField = "_discriminator",
         DiscriminatorProperty = "Discriminator",
         Func = "global::System.Func",
@@ -453,7 +452,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     string XmlName { get; } = XmlTypeName(Named);
 
     [Pure]
-    ISet<FieldOrProperty> Members { get; } = Named
+    HashSet<FieldOrProperty> Members { get; } = Named
        .GetMembers()
        .Select(x => FieldOrProperty.TryCreate(x, out var res) ? res : (FieldOrProperty?)null)
        .Filter()
