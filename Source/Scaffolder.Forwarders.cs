@@ -86,22 +86,22 @@ sealed partial record Scaffolder
             {
                 var instance = IsEmpty(x) ? CSharp($"default({x.Type})") : Prefix(x);
 
-                var cast = interfacesDeclared[i] is { } to ? $"(({to}){instance})" :
-                    instance is ReferenceField ? $"(({x.Type}){ReferenceField})" :
-                    instance;
+                var cast = interfacesDeclared[i] is { } to ? $"(({to}){instance}{NullableSuppression(x)})" :
+                    instance is ReferenceField ? $"(({x.Type}){ReferenceField}{NullableSuppression(x)})" :
+                    $"{instance}{NullableSuppression(x)}";
 
                 if (isSwitchCase)
                     return CSharp(
                         $"""
                                  case {i}:
-                                         {cast}{NullableSuppression(x)}{member}
+                                         {cast}{member}
                          """
                     );
 
                 var value = (x.Type.IsValueType || x.Type.IsSealed) &&
                     symbol is IMethodSymbol { Name: nameof(GetType), Parameters: [] }
                         ? CSharp($"typeof({x.Type})")
-                        : $"{kind.KeywordInReturn()}{cast}{NullableSuppression(x)}{member}";
+                        : $"{kind.KeywordInReturn()}{cast}{member}";
 
                 return CSharp($"        {i} => {value}");
             }
@@ -154,7 +154,7 @@ sealed partial record Scaffolder
         builder.Append(
             symbol switch
             {
-                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => "GetUnderlyingType()",
+                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => nameof(Enum.GetUnderlyingType),
                 IPropertySymbol { Parameters: not [] } => CSharp("this"),
                 _ => symbol.GetFullyQualifiedName(),
             }
