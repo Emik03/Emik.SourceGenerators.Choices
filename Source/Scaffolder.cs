@@ -487,8 +487,9 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     public static Scaffolder From(Raw x) => new(x.Named, x.Fields, x.PubliclyMutable);
 
     [Pure]
+#pragma warning disable MA0040
     public static Scaffolder From(Raw x, CancellationToken _) => From(x);
-
+#pragma warning restore MA0040
     [Pure]
     public static SmallList<FieldOrProperty> Instances(INamespaceOrTypeSymbol x) =>
         x.GetMembers()

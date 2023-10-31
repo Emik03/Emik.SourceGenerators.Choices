@@ -59,7 +59,7 @@ sealed partial record Scaffolder
         StringBuilder AppendParametersTyped(StringBuilder builder, bool typed = true) =>
             symbol switch
             {
-                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => builder,
+                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => builder.Append("()"),
                 IMethodSymbol { Parameters: var x } => AppendParameterSymbols('(', x, ')', typed),
                 IPropertySymbol { Parameters: [_, ..] x } => AppendParameterSymbols('[', x, ']', typed),
                 _ => builder,
@@ -101,7 +101,7 @@ sealed partial record Scaffolder
                 var value = (x.Type.IsValueType || x.Type.IsSealed) &&
                     symbol is IMethodSymbol { Name: nameof(GetType), Parameters: [] }
                         ? CSharp($"typeof({x.Type})")
-                        : $"{kind.KeywordInReturn()}{cast}{member}";
+                        : $"{kind.KeywordInReturn()}{cast}{NullableSuppression(x)}{member}";
 
                 return CSharp($"        {i} => {value}");
             }

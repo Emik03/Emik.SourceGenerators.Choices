@@ -4,7 +4,7 @@ namespace Emik.SourceGenerators.Choices;
 // ReSharper disable NullableWarningSuppressionIsUsed
 sealed record IntersectedInterfaces(SmallList<FieldOrProperty> Symbols, bool IsReadOnly)
 {
-    [Pure]
+    [Pure] // ReSharper disable once ReturnTypeCanBeEnumerable.Global
     public HashSet<INamedTypeSymbol> Set =>
         Symbols
            .Skip(1)
