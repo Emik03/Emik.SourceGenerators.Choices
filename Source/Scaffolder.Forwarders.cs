@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices;
-#pragma warning disable CA1502, IDE0039, MA0051, MEN003
+#pragma warning disable CA1502, IDE0039, MA0051
 sealed partial record Scaffolder
 {
     [Pure]
@@ -54,11 +54,6 @@ sealed partial record Scaffolder
         StringBuilder AppendParameterSymbols(char begin, ImmutableArray<IParameterSymbol> all, char end, bool typed) =>
             builder.Append(begin).AppendMany(all.Select(typed ? FullyQualified : name)).Append(end);
 
-        StringBuilder AppendTypeParameters(StringBuilder builder) =>
-            symbol is IMethodSymbol { TypeArguments: [_, ..] args }
-                ? builder.Append('<').AppendMany(args.Select(x => x.Name)).Append('>')
-                : builder;
-
         StringBuilder AppendParameters(StringBuilder builder) => AppendParametersTyped(builder, false);
 
         StringBuilder AppendParametersTyped(StringBuilder builder, bool typed = true) =>
@@ -81,7 +76,6 @@ sealed partial record Scaffolder
                 builder
                    .Append("    ")
                    .Append(x)
-                   .Then(AppendTypeParameters)
                    .Then(AppendParameters)
                    .Append(suffix)
                    .AppendLine(isSwitchCase ? CSharp(";\n                break;") : ",");
@@ -166,7 +160,6 @@ sealed partial record Scaffolder
             }
         );
 
-        AppendTypeParameters(builder);
         AppendParametersTyped(builder);
 
         switch (symbol)
