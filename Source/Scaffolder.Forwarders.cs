@@ -106,7 +106,7 @@ sealed partial record Scaffolder
                 return CSharp($"        {i} => {value}");
             }
 
-            var discard = suffix is "" ? "" : "_ =";
+            var discard = suffix is "" ? "" : "_ = ";
 
             var arrow = isSwitchCase
                 ? CSharp(
