@@ -91,12 +91,12 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         return y is null;
     }
 
+    // Rust knows the best memory layout. Therefore, this is guaranteed to be the blazingly fastest implementation.
+    // [src/main.rs:4] unsafe { mem::transmute::<Option<bool>, u8>(Some(false)) } = 0
+    // [src/main.rs:5] unsafe { mem::transmute::<Option<bool>, u8>(Some(true)) } = 1
+    // [src/main.rs:6] unsafe { mem::transmute::<Option<bool>, u8>(None) } = 2
     [Pure]
     static int BetterHashCode(bool? x) =>
-        // Clearly, rust knows the best memory layout. Guaranteed to be the blazingly fastest implementation.
-        // [src/main.rs:4] unsafe { mem::transmute::<Option<bool>, u8>(Some(false)) } = 0
-        // [src/main.rs:5] unsafe { mem::transmute::<Option<bool>, u8>(Some(true)) } = 1
-        // [src/main.rs:6] unsafe { mem::transmute::<Option<bool>, u8>(None) } = 2
         x switch
         {
             false => 0,
@@ -106,7 +106,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 
     [Pure]
     static int Hash<T>((INamedTypeSymbol Named, T _, bool? MutablePublicly) x) =>
-        (BetterHashCode(x.MutablePublicly) * 42061 ^ x.Named.MetadataName.GetHashCode()) * 42071;
+        (BetterHashCode(x.MutablePublicly) * 42061 ^ StringComparer.Ordinal.GetHashCode(x.Named.MetadataName)) * 42071;
 
     [Pure]
     static Raw DiscoverFields(Fold x, CancellationToken _)
