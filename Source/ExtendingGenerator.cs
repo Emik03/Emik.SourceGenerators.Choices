@@ -7,13 +7,17 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 {
     const int MinimumFields = 2;
 
-    static readonly IEqualityComparer<Fold> s_folds = Equating((Fold x) => x.Named, NamedTypeSymbolComparer.Default);
+    static readonly IEqualityComparer<Fold> s_folds = Equating(
+        (Fold x, Fold y) => Same(x, y) && NamedTypeSymbolComparer.Equal(x.SymbolSet, y.SymbolSet)
+    );
 
-    static readonly IEqualityComparer<Raw> s_raws = Equating((Raw x) => x.Named, NamedTypeSymbolComparer.Default);
+    static readonly IEqualityComparer<Raw> s_raws = Equating(
+        (Raw x, Raw y) => Same(x, y) && SameMembers(x.Fields, y.Fields)
+    );
 
-    static readonly IEqualityComparer<Scaffolder> s_comparer = Equating(
-        (Scaffolder? x) => x?.Named, // ReSharper disable once NullableWarningSuppressionIsUsed
-        NamedTypeSymbolComparer.Default!
+    static readonly IEqualityComparer<Scaffolder> s_comparer = Equating<Scaffolder, Raw>(
+        x => x is null ? default : (x.Named, x.Symbols, x.MutablePublicly),
+        s_raws
     );
 
     /// <inheritdoc />
@@ -21,7 +25,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     {
         var provider = context
            .SyntaxProvider
-           .ForAttributeWithMetadataName(Of<AttributeGenerator>(), AnnotatedAndIs<BaseTypeDeclarationSyntax>, Target)
+           .ForAttributeWithMetadataName(Of<AttributeGenerator>(), IsExtendable, Target)
            .WithComparer(s_folds)
            .WithTrackingName(nameof(Fold))
            .Where(HasAnnotatedCorrectly)
@@ -47,9 +51,68 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         x is (_, { Count: >= MinimumFields }, _);
 
     [Pure]
+    static bool IsExtendable(SyntaxNode node, CancellationToken token)
+    {
+        if (node is not TypeDeclarationSyntax { AttributeLists.Count: >= 1 } type)
+            return false;
+
+        if (type is InterfaceDeclarationSyntax)
+            return false;
+
+        foreach (var modifier in type.Modifiers)
+        {
+            token.ThrowIfCancellationRequested();
+
+            if (modifier.IsKind(SyntaxKind.PartialKeyword))
+                return true;
+        }
+
+        return false;
+    }
+
+    [Pure]
+    static bool Same<T>(
+        in (INamedTypeSymbol Named, T _, bool? MutablePublicly) x,
+        in (INamedTypeSymbol Named, T _, bool? MutablePublicly) y
+    ) =>
+        x.MutablePublicly == y.MutablePublicly &&
+        SameMetadataNames(x.Named, y.Named);
+
+    [Pure]
+    static bool SameMembers(in SmallList<FieldOrProperty> xs, in SmallList<FieldOrProperty> ys)
+    {
+        if (xs.Count != ys.Count)
+            return false;
+
+        for (var i = 0; i < xs.Count; i++)
+            if (!xs[i].Equals(ys[i]))
+                return false;
+
+        return true;
+    }
+
+    [Pure]
+    static bool SameMetadataNames(ISymbol? x, ISymbol? y)
+    {
+        if (ReferenceEquals(x, y))
+            return true;
+
+        while (true)
+        {
+            if (x is null)
+                return y is null;
+
+            if (y is null || x.MetadataName != y.MetadataName)
+                return false;
+
+            (x, y) = (x.ContainingSymbol, y.ContainingSymbol);
+        }
+    }
+
+    [Pure]
     static Raw DiscoverFields(Fold x, CancellationToken _)
     {
-        var (type, named, isPubliclyMutable) = x;
+        var (type, named, mutablePublicly) = x;
 
         var fields = named switch
         {
@@ -59,26 +122,26 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             _ => default,
         };
 
-        return (type, fields, isPubliclyMutable);
+        return (type, fields, mutablePublicly);
     }
 
     [Pure]
     static Fold Target(GeneratorAttributeSyntaxContext context, CancellationToken _)
     {
-        bool? publiclyMutable = null;
+        bool? mutablePublicly = null;
         INamedTypeSymbol? symbolSet = null;
 
         foreach (var arg in context.Attributes[0].ConstructorArguments)
             switch (arg.Value)
             {
                 case bool x:
-                    publiclyMutable = x;
+                    mutablePublicly = x;
                     break;
                 case INamedTypeSymbol x:
                     symbolSet = x;
                     break;
             }
 
-        return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, publiclyMutable);
+        return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, mutablePublicly);
     }
 }

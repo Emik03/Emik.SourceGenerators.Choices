@@ -484,7 +484,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                 : fields.Select(x => new FieldOrProperty(x))).ToSmallList();
 
     [Pure]
-    public static Scaffolder From(Raw x) => new(x.Named, x.Fields, x.PubliclyMutable);
+    public static Scaffolder From(Raw x) => new(x.Named, x.Fields, x.MutablePublicly);
 
     [Pure]
 #pragma warning disable MA0040

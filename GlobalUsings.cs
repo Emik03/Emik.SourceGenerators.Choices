@@ -6,9 +6,9 @@ global using Extract =
     InterfaceDeclarations);
 global using Fold =
     (Microsoft.CodeAnalysis.INamedTypeSymbol Named, Microsoft.CodeAnalysis.INamedTypeSymbol? SymbolSet, bool?
-    PubliclyMutable);
+    MutablePublicly);
 global using Raw =
     (Microsoft.CodeAnalysis.INamedTypeSymbol Named, Emik.Morsels.SmallList<Gu.Roslyn.AnalyzerExtensions.FieldOrProperty>
-    Fields, bool? PubliclyMutable);
+    Fields, bool? MutablePublicly);
 
 [assembly: NullGuard(ValidationFlags.None)]
