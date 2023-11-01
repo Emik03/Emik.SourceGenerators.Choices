@@ -443,7 +443,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
 
     [Pure]
     string Source =>
-        _source ??= $"{Header}{Named
+        _source ??= $"{Header}{CSharp("#pragma warning disable")}\n{Named
            .ContainingWithoutGlobal()
            .FindSmallPathToNull(x => x.ContainingWithoutGlobal())
            .Aggregate(DeclareType, WrapNamespace)}\n";

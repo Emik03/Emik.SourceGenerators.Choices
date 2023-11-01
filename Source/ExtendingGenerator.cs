@@ -15,11 +15,6 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         (Raw x, Raw y) => Same(x, y) && SameMembers(x.Fields, y.Fields)
     );
 
-    static readonly IEqualityComparer<Scaffolder> s_comparer = Equating<Scaffolder, Raw>(
-        x => x is null ? default : (x.Named, x.Symbols, x.MutablePublicly),
-        s_raws
-    );
-
     /// <inheritdoc />
     void IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -32,15 +27,12 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
            .Select(DiscoverFields)
            .WithComparer(s_raws)
            .WithTrackingName(nameof(Raw))
-           .Where(HasSufficientFields)
-           .Select(Scaffolder.From)
-           .WithComparer(s_comparer)
-           .WithTrackingName(nameof(Scaffolder));
+           .Where(HasSufficientFields);
 
         context.RegisterSourceOutput(provider, Generate);
     }
 
-    static void Generate(SourceProductionContext context, Scaffolder x) => AddSource(context, x.Result);
+    static void Generate(SourceProductionContext context, Raw x) => AddSource(context, Scaffolder.From(x).Result);
 
     [Pure]
     static bool HasAnnotatedCorrectly(Fold x) =>
@@ -53,19 +45,13 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     [Pure]
     static bool IsExtendable(SyntaxNode node, CancellationToken token)
     {
-        if (node is not TypeDeclarationSyntax { AttributeLists.Count: >= 1 } type)
+        if (node is not TypeDeclarationSyntax { AttributeLists.Count: >= 1 } type || type is InterfaceDeclarationSyntax)
             return false;
 
-        if (type is InterfaceDeclarationSyntax)
-            return false;
-
+        // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
         foreach (var modifier in type.Modifiers)
-        {
-            token.ThrowIfCancellationRequested();
-
             if (modifier.IsKind(SyntaxKind.PartialKeyword))
                 return true;
-        }
 
         return false;
     }
@@ -75,8 +61,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         in (INamedTypeSymbol Named, T _, bool? MutablePublicly) x,
         in (INamedTypeSymbol Named, T _, bool? MutablePublicly) y
     ) =>
-        x.MutablePublicly == y.MutablePublicly &&
-        SameMetadataNames(x.Named, y.Named);
+        x.MutablePublicly == y.MutablePublicly && SameMetadataNames(x.Named, y.Named);
 
     [Pure]
     static bool SameMembers(in SmallList<FieldOrProperty> xs, in SmallList<FieldOrProperty> ys)
@@ -97,16 +82,11 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         if (ReferenceEquals(x, y))
             return true;
 
-        while (true)
-        {
-            if (x is null)
-                return y is null;
-
+        for (; x is not null; x = x.ContainingSymbol, y = y.ContainingSymbol)
             if (y is null || x.MetadataName != y.MetadataName)
                 return false;
 
-            (x, y) = (x.ContainingSymbol, y.ContainingSymbol);
-        }
+        return y is null;
     }
 
     [Pure]
