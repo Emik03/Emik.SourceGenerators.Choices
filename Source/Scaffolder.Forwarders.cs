@@ -59,7 +59,7 @@ sealed partial record Scaffolder
         StringBuilder AppendParametersTyped(StringBuilder builder, bool typed = true) =>
             symbol switch
             {
-                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => builder.Append("()"),
+                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => builder,
                 IMethodSymbol { Parameters: var x } => AppendParameterSymbols('(', x, ')', typed),
                 IPropertySymbol { Parameters: [_, ..] x } => AppendParameterSymbols('[', x, ']', typed),
                 _ => builder,
@@ -98,12 +98,14 @@ sealed partial record Scaffolder
                          """
                     );
 
-                var value = (x.Type.IsValueType || x.Type.IsSealed) &&
-                    symbol is IMethodSymbol { Name: nameof(GetType), Parameters: [] }
-                        ? CSharp($"typeof({x.Type})")
-                        : $"{kind.KeywordInReturn()}{cast}{member}";
+                var isTypeKnown = x.Type.IsValueType || x.Type.IsSealed;
+                var isGetType = symbol is IMethodSymbol { Name: nameof(GetType), Parameters: [] };
 
-                return CSharp($"        {i} => {value}");
+                var value = isTypeKnown && isGetType
+                    ? CSharp($"typeof({x.Type})")
+                    : $"{kind.KeywordInReturn()}{cast}{member}";
+
+                return CSharp($"        {i} => {value}{(!isTypeKnown && isGetType ? "()" : "")}");
             }
 
             var discard = suffix is "" ? "" : "_ = ";
