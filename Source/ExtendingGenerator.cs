@@ -8,11 +8,13 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     const int MinimumFields = 2;
 
     static readonly IEqualityComparer<Fold> s_folds = Equating(
-        (Fold x, Fold y) => Same(x, y) && NamedTypeSymbolComparer.Equal(x.SymbolSet, y.SymbolSet)
+        (Fold x, Fold y) => Same(x, y) && NamedTypeSymbolComparer.Equal(x.SymbolSet, y.SymbolSet),
+        Hash
     );
 
     static readonly IEqualityComparer<Raw> s_raws = Equating(
-        (Raw x, Raw y) => Same(x, y) && SameMembers(x.Fields, y.Fields)
+        (Raw x, Raw y) => Same(x, y) && SameMembers(x.Fields, y.Fields),
+        Hash
     );
 
     /// <inheritdoc />
@@ -88,6 +90,23 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 
         return y is null;
     }
+
+    [Pure]
+    static int BetterHashCode(bool? x) =>
+        // Clearly, rust knows the best memory layout. Guaranteed to be the blazingly fastest implementation.
+        // [src/main.rs:4] unsafe { mem::transmute::<Option<bool>, u8>(Some(false)) } = 0
+        // [src/main.rs:5] unsafe { mem::transmute::<Option<bool>, u8>(Some(true)) } = 1
+        // [src/main.rs:6] unsafe { mem::transmute::<Option<bool>, u8>(None) } = 2
+        x switch
+        {
+            false => 0,
+            true => 1,
+            null => 2,
+        };
+
+    [Pure]
+    static int Hash<T>((INamedTypeSymbol Named, T _, bool? MutablePublicly) x) =>
+        (BetterHashCode(x.MutablePublicly) * 42061 ^ x.Named.MetadataName.GetHashCode()) * 42071;
 
     [Pure]
     static Raw DiscoverFields(Fold x, CancellationToken _)
