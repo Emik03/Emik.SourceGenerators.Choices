@@ -156,7 +156,7 @@ sealed partial record Scaffolder
         builder.Append(
             symbol switch
             {
-                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => nameof(Enum.GetUnderlyingType),
+                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => $"{nameof(Enum.GetUnderlyingType)}()",
                 IPropertySymbol { Parameters: not [] } => CSharp("this"),
                 _ => symbol.GetFullyQualifiedName(),
             }
