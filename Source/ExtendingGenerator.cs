@@ -59,7 +59,9 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         in (INamedTypeSymbol Named, T _, bool? MutablePublicly) x,
         in (INamedTypeSymbol Named, T _, bool? MutablePublicly) y
     ) =>
-        x.MutablePublicly == y.MutablePublicly && SameMetadataNames(x.Named, y.Named);
+        x.MutablePublicly == y.MutablePublicly &&
+        x.Named.Keyword() == y.Named.Keyword() &&
+        SameMetadataNames(x.Named, y.Named);
 
     [Pure]
     static bool SameMembers(in SmallList<FieldOrProperty> xs, in SmallList<FieldOrProperty> ys)
@@ -102,7 +104,8 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 
     [Pure]
     static int Hash<T>((INamedTypeSymbol Named, T _, bool? MutablePublicly) x) =>
-        (BetterHashCode(x.MutablePublicly) * 42061 ^ StringComparer.Ordinal.GetHashCode(x.Named.MetadataName)) * 42071;
+        (BetterHashCode(x.MutablePublicly) * 42061 ^ StringComparer.Ordinal.GetHashCode(x.Named.MetadataName)) * 42071 ^
+        StringComparer.Ordinal.GetHashCode(x.Named.Keyword());
 
     [Pure]
     static Raw DiscoverFields(Fold x, CancellationToken _)
