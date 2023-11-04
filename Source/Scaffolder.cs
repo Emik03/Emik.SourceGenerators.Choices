@@ -16,6 +16,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         ReadOnly = "readonly ",
         ReferenceField = "_reference",
         ResultGeneric = "TMappingResult",
+        Suppression = "#pragma warning disable\n",
         Throw = "throw new global::System.InvalidOperationException()",
         UnmanagedField = "_unmanaged";
 
@@ -443,7 +444,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
 
     [Pure]
     string Source =>
-        _source ??= $"{Header}{CSharp("#pragma warning disable")}\n{Named
+        _source ??= $"{Header}{Suppression}{Named
            .ContainingWithoutGlobal()
            .FindSmallPathToNull(x => x.ContainingWithoutGlobal())
            .Aggregate(DeclareType, WrapNamespace)}\n";
