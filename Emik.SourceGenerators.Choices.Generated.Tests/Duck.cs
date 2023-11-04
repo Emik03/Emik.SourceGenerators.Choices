@@ -1,6 +1,14 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices.Generated.Tests;
 #pragma warning disable
+[Choice]
+readonly partial record struct Result<TOk, TErr>
+{
+    readonly TOk? _ok;
+
+    readonly TErr? _err;
+}
+
 [Choice(true)]
 ref partial struct SpanEncodings
 {
@@ -12,22 +20,14 @@ ref partial struct SpanEncodings
 [Choice(typeof((int Integer, float Floating, ValueTuple Unknown)), false)]
 partial class Number;
 
-[Choice]
-readonly partial record struct Result<TOk, TErr>
-{
-    readonly TOk? _ok;
-
-    readonly TErr? _err;
-}
-
 [Choice(typeof((AuditFlags Audits, BindingFlags Bindings, SocketFlags Sockets, ObjectAceFlags ObjectAces)))]
 readonly partial struct Enums;
 
-[Choice(typeof((Task Referenced, ValueTask Valued)))]
-readonly partial struct Tasks;
+[Choice(typeof((Task Referenced, ValueTask Valued)), true)]
+partial struct Tasks;
 
-[Choice(typeof((Task Left, Task Right)))]
-partial class SuperTask;
+[Choice(typeof((Task Left, Task Right)), false)]
+partial record SuperTask;
 
 [Choice(typeof((KMBombModule Regular, KMNeedyModule Needy)))]
 partial class KMModule
