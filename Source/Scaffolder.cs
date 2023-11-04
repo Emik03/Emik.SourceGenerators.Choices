@@ -726,7 +726,6 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                       /// <param name="{{ParameterName(x)}}">The variant.</param>{{
                           (conflict ? "\n    /// <param name=\"x\">The discriminator.</param>" : "")}}
                       {{Annotation}}
-                      {{Pure}}
                       {{AggressiveInlining}}
                       {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{ParameterName(x)}}{{(conflict ? ", byte x" : IsEmpty(x) ? " = default" : "")}})
                       {
