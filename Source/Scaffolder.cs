@@ -428,6 +428,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     [Pure]
     string Discriminator =>
         _discriminator ??= Reference.Count != Symbols.Count ||
+            Symbols.Any(Members.Contains) ||
             Symbols.Select(x => x.Type).GroupDuplicates(TypeSymbolComparer.Default).Any()
                 ? DiscriminatorField
                 : DiscriminatorProperty;
