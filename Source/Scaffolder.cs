@@ -100,35 +100,34 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
 
     [Pure]
     string DeclareDiscriminator =>
-        Discriminator is DiscriminatorProperty
-            ? CSharp(
-                $$"""
-                      {{Annotation}}
-                      private {{ReadOnlyIfStruct}}byte {{Discriminator}}
+        Members.Any(x => x.Name == Discriminator) ? "" :
+        Discriminator is DiscriminatorProperty ? CSharp(
+            $$"""
+                  {{Annotation}}
+                  private {{ReadOnlyIfStruct}}byte {{Discriminator}}
+                  {
+                      {{Pure}}
+                      {{AggressiveInlining}}
+                      get => {{ReferenceField}} switch
                       {
-                          {{Pure}}
-                          {{AggressiveInlining}}
-                          get => {{ReferenceField}} switch
-                          {
-                              {{Symbols
-                                 .Select((x, i) => (x, i))
-                                 .OrderByDescending(Inheritance)
-                                 .Select(x => $"{x.x.Type} => {x.i},")
-                                 .Conjoin("\n            ")}}
-                              _ => {{Throw}},
-                          };
-                          {{Pure}}
-                          {{AggressiveInlining}}
-                          set { }
-                      }
-                  """
-            )
-            : CSharp(
-                $"""
-                     {Annotation}
-                     private {PrivatelyReadOnly}byte {Discriminator};
-                 """
-            );
+                          {{Symbols
+                             .Select((x, i) => (x, i))
+                             .OrderByDescending(Inheritance)
+                             .Select(x => $"{x.x.Type} => {x.i},")
+                             .Conjoin("\n            ")}}
+                          _ => {{Throw}},
+                      };
+                      {{Pure}}
+                      {{AggressiveInlining}}
+                      set { }
+                  }
+              """
+        ) : CSharp(
+            $"""
+                 {Annotation}
+                 private {PrivatelyReadOnly}byte {Discriminator};
+             """
+        );
 
     [Pure]
     public string DeclareEqualityOperators =>

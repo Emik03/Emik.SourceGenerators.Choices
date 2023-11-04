@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
+        <IsKtane>true</IsKtane>
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <DisableDefaultDocumentation>true</DisableDefaultDocumentation>

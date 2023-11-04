@@ -30,11 +30,12 @@ sealed partial record Scaffolder
     [Pure] // ReSharper disable once CognitiveComplexity
     string DeclareForwarder(Extract extract)
     {
-        var name = (IParameterSymbol x) => $"{x.RefKind.KeywordInParameter()}{x.Name}";
         var (symbol, kind, interfacesDeclared) = extract;
 
         if (IsIgnored(symbol))
             return "";
+
+        var attributes = Attributes(symbol, '\n');
 
         StringBuilder builder = new(
             CSharp(
@@ -43,13 +44,17 @@ sealed partial record Scaffolder
 
                      /// {XmlTypeName(symbol, "inheritdoc")}{Remarks(ref interfacesDeclared)}
                      {Annotation}{(symbol is IMethodSymbol ? $"\n    {AggressiveInlining}" : "")}
-                     public{' '}
+                     {attributes}{(attributes is "" ? "" : "    ")}public{' '}
                  """
             )
         );
 
-        static string FullyQualified(IParameterSymbol x) =>
-            $"{PrefixAnnotations(x)}{x.Type.GetFullyQualifiedNameWithNullabilityAnnotations()} {x.Name}{SuffixAnnotations(x)}";
+        var name = (IParameterSymbol x) => $"{x.RefKind.KeywordInParameter()}{x.Name}";
+
+        string FullyQualified(IParameterSymbol x) =>
+            $"{Attributes(x, ' ')}{PrefixAnnotations(x)
+            }{x.Type.GetFullyQualifiedNameWithNullabilityAnnotations()} {x.Name
+            }{SuffixAnnotations(x)}";
 
         StringBuilder AppendParameterSymbols(char begin, ImmutableArray<IParameterSymbol> all, char end, bool typed) =>
             builder.Append(begin).AppendMany(all.Select(typed ? FullyQualified : name)).Append(end);
@@ -202,6 +207,99 @@ sealed partial record Scaffolder
         AppendSwitchExpression(builder, "remove ", " -= value");
         return $"{builder.Append("\n    }")}";
     }
+
+    [Pure]
+    static bool IsGoodAttribute(AttributeData x) =>
+        x.AttributeClass is not
+            {
+                ContainingNamespace:
+                {
+                    ContainingNamespace:
+                    {
+                        ContainingNamespace:
+                        { ContainingNamespace.IsGlobalNamespace: true, Name: nameof(System) },
+                        Name: nameof(System.CodeDom),
+                    },
+                    Name: nameof(System.CodeDom.Compiler),
+                },
+                Name: nameof(GeneratedCodeAttribute),
+            } and
+            not
+            {
+                ContainingNamespace:
+                {
+                    ContainingNamespace:
+                    {
+                        ContainingNamespace:
+                        { ContainingNamespace.IsGlobalNamespace: true, Name: nameof(System) },
+                        Name: nameof(System.Runtime),
+                    },
+                    Name: nameof(System.Runtime.CompilerServices),
+                },
+                Name: nameof(MethodImplAttribute) or "NullableAttribute" or "NullableContextAttribute",
+            };
+
+    [Pure]
+    static string Display(AttributeData x) => $"[{x.AttributeClass}{DisplayArguments(x)}]";
+
+    [Pure]
+    static string Display(KeyValuePair<string, TypedConstant> x) => $"{x.Key} = {Display(x.Value)}";
+
+    [Pure]
+    static string Display(TypedConstant x) =>
+        x.Kind switch
+        {
+            _ when x.IsNull => "null",
+            _ when x.Type?.SpecialType is SpecialType.System_Boolean ||
+                x.Type is INamedTypeSymbol
+                {
+                    TypeArguments: [{ SpecialType: SpecialType.System_Boolean }],
+                    SpecialType: SpecialType.System_Nullable_T,
+                } => x.Value switch { true => "true", false => "false", _ => throw Unreachable },
+            _ when x.Type?.SpecialType is SpecialType.System_String =>
+                $"\"{x.Value?.ToString().SelectMany(Escape).Concat()}\"",
+            TypedConstantKind.Error or TypedConstantKind.Primitive => $"{x.Value}",
+            TypedConstantKind.Enum => $"({x.Type}){x.Value}",
+            TypedConstantKind.Type => $"typeof({x.Type})",
+            TypedConstantKind.Array => $"new{ObjectSuffix(x)}[] {{ {x.Values.Select(Display).Conjoin()} }}",
+            _ => throw Unreachable,
+        };
+
+    [Pure]
+    static string DisplayArguments(AttributeData x) =>
+        x.ConstructorArguments.IsEmpty && x.NamedArguments.IsEmpty
+            ? ""
+            : $"({x.ConstructorArguments.Select(Display).Concat(x.NamedArguments.Select(Display)).Conjoin()})";
+
+    [Pure]
+    static string Escape(char x) =>
+        x switch
+        {
+            '\0' => @"\0",
+            '\a' => @"\a",
+            '\b' => @"\b",
+            '\f' => @"\f",
+            '\n' => @"\n",
+            '\r' => @"\r",
+            '\t' => @"\t",
+            '\v' => @"\v",
+            '\\' => @"\\",
+            '\"' => @"\""",
+            _ when char.IsControl(x) => @$"\u{(int)x:x4}",
+            _ => $"{x}",
+        };
+
+    [Pure]
+    static string ObjectSuffix(TypedConstant x) =>
+        x.Type.ToUnderlying()?.SpecialType is SpecialType.System_Object ? " object" : "";
+
+    [Pure]
+    string Attributes(ISymbol symbol, char separator) =>
+        symbol
+           .GetAttributes()
+           .Where(x => IsGoodAttribute(x) && x.AttributeConstructor.CanBeAccessedFrom(Named.ContainingAssembly))
+           .Select(x => $"{Display(x)}{separator}")
+           .Conjoin("");
 
     [Pure]
     string Remarks(ref SmallList<string?> interfaces) =>

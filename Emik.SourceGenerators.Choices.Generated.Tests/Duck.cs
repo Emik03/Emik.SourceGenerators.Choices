@@ -28,3 +28,9 @@ readonly partial struct Tasks;
 
 [Choice(typeof((Task Left, Task Right)))]
 partial class SuperTask;
+
+[Choice(typeof((KMBombModule Regular, KMNeedyModule Needy)))]
+partial class KMModule
+{
+    readonly byte _discriminator;
+}
