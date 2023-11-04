@@ -40,10 +40,6 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             : "";
 
     [Pure]
-    string OverrideIfRecordClass { get; } =
-        Named is { IsRecord: true, IsValueType: false } ? CSharp("override ") : "";
-
-    [Pure]
     string PrivatelyReadOnly { get; } = MutablePublicly is null ? ReadOnly : "";
 
     [Pure]
@@ -54,6 +50,10 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
 
     [Pure]
     string ReadOnlyIfMutableStruct { get; } = Named.IsValueType && MutablePublicly is not null ? ReadOnly : "";
+
+    [Pure]
+    string VirtualIfNonSealedRecordClass { get; } =
+        Named is { IsRecord: true, IsSealed: false, IsValueType: false } ? CSharp("virtual ") : "";
 
     [Pure]
     string DeclareType =>
@@ -320,7 +320,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
-                  public {{OverrideIfRecordClass}}{{ReadOnlyIfStruct}}bool Equals({{NullableName}} other)
+                  public {{VirtualIfNonSealedRecordClass}}{{ReadOnlyIfStruct}}bool Equals({{NullableName}} other)
                       => this == other;
               
                   /// <inheritdoc cref="IComparable.CompareTo(object)"/>
