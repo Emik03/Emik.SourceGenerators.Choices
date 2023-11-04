@@ -40,6 +40,10 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             : "";
 
     [Pure]
+    string OverrideIfRecordClass { get; } =
+        Named is { IsRecord: true, IsValueType: false } ? CSharp("override ") : "";
+
+    [Pure]
     string PrivatelyReadOnly { get; } = MutablePublicly is null ? ReadOnly : "";
 
     [Pure]
@@ -316,7 +320,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
-                  public {{ReadOnlyIfStruct}}bool Equals({{NullableName}} other)
+                  public {{OverrideIfRecordClass}}{{ReadOnlyIfStruct}}bool Equals({{NullableName}} other)
                       => this == other;
               
                   /// <inheritdoc cref="IComparable.CompareTo(object)"/>
