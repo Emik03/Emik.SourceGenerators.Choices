@@ -7,15 +7,11 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 {
     const int MinimumFields = 2;
 
-    static readonly IEqualityComparer<Fold> s_folds = Equating(
-        (Fold x, Fold y) => Same(x, y) && NamedTypeSymbolComparer.Equal(x.SymbolSet, y.SymbolSet),
-        Hash
-    );
+    static readonly IEqualityComparer<Fold> s_folds =
+        Equating((Fold x, Fold y) => Same(x, y) && NamedTypeSymbolComparer.Equal(x.SymbolSet, y.SymbolSet), Hash);
 
-    static readonly IEqualityComparer<Raw> s_raws = Equating(
-        (Raw x, Raw y) => Same(x, y) && SameMembers(x.Fields, y.Fields),
-        Hash
-    );
+    static readonly IEqualityComparer<Raw> s_raws =
+        Equating((Raw x, Raw y) => Same(x, y) && SameMembers(x.Fields, y.Fields), Hash);
 
     /// <inheritdoc />
     void IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext context)
