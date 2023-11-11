@@ -59,6 +59,81 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     string DeclareType =>
         CSharp(
             $$"""
+              /// {{XmlTypeName(Named, "inheritdoc")}}
+              /// <remarks>
+              ///     <para>
+              ///         The type {{XmlName}}
+              ///         is {{MutablePublicly switch {
+                  true => "a mutable",
+                  false => "a",
+                  null => "an immutable",
+              }}} disjoint union representing the following variants:
+              ///     </para>
+              ///     <list type="table">
+              ///         <listheader>
+              ///             <term>
+              ///                 <c>Name</c> <see langword="as"/> <c>Type</c>
+              ///                 <list type="bullet">
+              ///                     <item>
+              ///                         <description>
+              ///                             Predicate
+              ///                         </description>
+              ///                     </item>
+              ///                     <item>
+              ///                         <description>
+              ///                             {{(Symbols.All(SkipOperator) ? "Factory" : "Factories")}}
+              ///                         </description>
+              ///                     </item>
+              ///                 </list>
+              ///             </term>
+              ///         </listheader>
+              {{Symbols
+                 .Select(x =>
+                      CSharp(
+                          $"""
+                           ///         <item>
+                           ///             <term>
+                           ///                 {See(x)} <see langword="as"/> {XmlTypeName(x.Type)}
+                           ///                 <list type="bullet">
+                           ///                     <item>
+                           ///                         <description>
+                           ///                             <see cref="Is{PropertyName(x)}"/>
+                           ///                         </description>
+                           ///                     </item>
+                           ///                     <item>
+                           ///                         <description>
+                           {(SkipOperator(x) ?
+                               CSharp(
+                                   $"""///                             <see cref="Of{PropertyName(x)}({XmlEscape(x.Type)})"/>"""
+                               ) : CSharp(
+                                   $"""
+                                    ///                             <list type="number">
+                                    ///                                 <item>
+                                    ///                                     <description>
+                                    ///                                         <see cref="Of{PropertyName(x)}({XmlEscape(x.Type)})"/>
+                                    ///                                     </description>
+                                    ///                                 </item>
+                                    ///                                 <item>
+                                    ///                                     <description>
+                                    ///                                         <see cref="{XmlEscape(Named)}({XmlEscape(x.Type, true)})"/>
+                                    ///                                     </description>
+                                    ///                                 </item>
+                                    ///                                 <item>
+                                    ///                                     <description>
+                                    ///                                         <see cref="op_Implicit({XmlEscape(x.Type, true)})"/>
+                                    ///                                     </description>
+                                    ///                                 </item>
+                                    ///                             </list>
+                                    """))}
+                           ///                         </description>
+                           ///                     </item>
+                           ///                 </list>
+                           ///             </term>
+                           ///         </item>
+                           """))
+                 .Conjoin("\n")}}
+              ///     </list>
+              /// </remarks>
               {{AutoIfStruct}}partial {{Named.Keyword()}} {{Named.Name
               }}{{(Named.TypeArguments is [] ? "" : $"<{Named.TypeArguments.Conjoin()}>")
               }}{{DeclareInterfaces}}
@@ -596,20 +671,20 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         );
 
     [Pure]
+    static string XmlEscape(ISymbol x, bool allowTypeSubstitution = false) =>
+        (x is INamedTypeSymbol { IsTupleType: true, TypeArguments: { Length: > 1 } args }
+            ? $"{nameof(System)}.{nameof(ValueTuple)}{{{args.Select((_, i) => $"T{i + 1}").Conjoin()}}}"
+            : $"{(allowTypeSubstitution ? x : x.OriginalDefinition)}")
+       .Replace('<', '{')
+       .Replace('>', '}')
+       .Replace("scoped ", "");
+
+    [Pure]
     static string XmlTypeName(ISymbol x, string tag = "see")
     {
-        [Pure]
-        static string Inner(ISymbol x) =>
-            (x is INamedTypeSymbol { IsTupleType: true, TypeArguments: { Length: > 1 } args }
-                ? $"{nameof(System)}.{nameof(ValueTuple)}{{{args.Select((_, i) => $"T{i + 1}").Conjoin()}}}"
-                : $"{x.OriginalDefinition}")
-           .Replace('<', '{')
-           .Replace('>', '}')
-           .Replace("scoped ", "");
-
         var genericTag = x is ITypeParameterSymbol ? "typeparamref" : tag;
         var attribute = x is ITypeParameterSymbol ? "name" : "cref";
-        return $"<{genericTag} {attribute}=\"{Inner(x)}\"/>";
+        return $"<{genericTag} {attribute}=\"{XmlEscape(x)}\"/>";
     }
 
     [Pure]
@@ -618,6 +693,9 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     [Pure]
     bool IsNoninitial(FieldOrProperty x) =>
         Symbols.Where(y => TypeSymbolComparer.Equal(x.Type, y.Type)).Skip(1).Contains(x);
+
+    [Pure]
+    bool SkipOperator(FieldOrProperty x) => x.Type.BaseType is null || HasConflict(x) || IsNoninitial(x);
 
     [Pure]
     int Inheritance((FieldOrProperty Field, int Index) tuple) =>
@@ -825,7 +903,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
 
     [Pure]
     string DeclareOperators(FieldOrProperty x) =>
-        x.Type.BaseType is null || HasConflict(x) || IsNoninitial(x)
+        SkipOperator(x)
             ? ""
             : CSharp(
                 $"""

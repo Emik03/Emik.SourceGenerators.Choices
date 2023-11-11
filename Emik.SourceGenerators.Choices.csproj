@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <FileVersion>1.1.1</FileVersion>
+        <FileVersion>1.2</FileVersion>
+        <NoWarn>$(NoWarn);SA1600</NoWarn>
         <TargetFramework>netstandard2.0</TargetFramework>
         <DisableDefaultDocumentation>true</DisableDefaultDocumentation>
         <RepositoryUrl>https://github.com/Emik03/Emik.SourceGenerators.Choices</RepositoryUrl>
