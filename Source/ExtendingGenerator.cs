@@ -13,6 +13,12 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     static readonly IEqualityComparer<Raw> s_raws =
         Equating((Raw x, Raw y) => Same(x, y) && SameMembers(x.Fields, y.Fields), Hash);
 
+    [Pure]
+    public static GeneratedSource? Transform(in Fold fold) =>
+        HasAnnotatedCorrectly(fold) && DiscoverFields(fold) is var raw && HasSufficientFields(raw)
+            ? Scaffolder.From(raw).Result
+            : null;
+
     /// <inheritdoc />
     void IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -108,7 +114,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         StringComparer.Ordinal.GetHashCode(x.Named.Keyword());
 
     [Pure]
-    static Raw DiscoverFields(Fold x, CancellationToken _)
+    static Raw DiscoverFields(Fold x, CancellationToken _ = default)
     {
         var (type, named, mutablePublicly) = x;
 
