@@ -39,6 +39,66 @@ readonly partial record struct Result<TOk, TErr>
 // ReSharper disable once CheckNamespace
 #nullable enable
 #pragma warning disable
+/// <inheritdoc cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/>
+/// <remarks>
+///     <para>
+///         The type <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/>
+///         is an immutable disjoint union representing the following variants:
+///     </para>
+///     <list type="table">
+///         <listheader>
+///             <term>
+///                 <c>Name</c> <see langword="as"/> <c>Type</c>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             Predicate
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             Factory
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </listheader>
+///         <item>
+///             <term>
+///                 <see cref="Ok"/> <see langword="as"/> <typeparamref name="TOk"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsOk"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <see cref="OfOk(TOk)"/>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 <see cref="Err"/> <see langword="as"/> <typeparamref name="TErr"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsErr"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <see cref="OfErr(TErr)"/>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///     </list>
+/// </remarks>
 [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Auto)]
 partial record struct Result<TOk, TErr> :
     global::System.IComparable,
@@ -50,14 +110,14 @@ partial record struct Result<TOk, TErr> :
     global::System.IEquatable<object>,
     global::System.IEquatable<global::Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr>>
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private readonly byte _discriminator;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
     /// </summary>
     /// <param name="ok">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Result(TOk? ok)
     {
@@ -69,7 +129,7 @@ partial record struct Result<TOk, TErr> :
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
     /// </summary>
     /// <param name="err">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Result(TErr? err)
     {
@@ -80,7 +140,7 @@ partial record struct Result<TOk, TErr> :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> is the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsOk
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -93,7 +153,7 @@ partial record struct Result<TOk, TErr> :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> is the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsErr
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -106,7 +166,7 @@ partial record struct Result<TOk, TErr> :
     /// <summary>
     /// Gets the <typeparamref name="TOk"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly TOk? Ok
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -117,7 +177,7 @@ partial record struct Result<TOk, TErr> :
     /// <summary>
     /// Gets the <typeparamref name="TErr"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly TErr? Err
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -130,7 +190,7 @@ partial record struct Result<TOk, TErr> :
     /// </summary>
     /// <param name="ok">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="ok"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> OfOk(TOk? ok)
@@ -141,7 +201,7 @@ partial record struct Result<TOk, TErr> :
     /// </summary>
     /// <param name="err">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="err"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> OfErr(TErr? err)
@@ -156,7 +216,7 @@ partial record struct Result<TOk, TErr> :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >(Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> left, Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> right)
@@ -177,7 +237,7 @@ partial record struct Result<TOk, TErr> :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >=(Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> left, Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> right)
@@ -192,7 +252,7 @@ partial record struct Result<TOk, TErr> :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <(Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> left, Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> right)
@@ -207,35 +267,35 @@ partial record struct Result<TOk, TErr> :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <=(Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> left, Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> right)
         => right >= left;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly bool Equals(Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> other)
         => this == other;
 
     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly int CompareTo(object? obj)
         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> x ? CompareTo(x) : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly int CompareTo(Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> other)
         => Equals(other) ? 0 : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly override int GetHashCode()
@@ -248,7 +308,7 @@ partial record struct Result<TOk, TErr> :
         });
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly override string ToString()
@@ -265,7 +325,7 @@ partial record struct Result<TOk, TErr> :
     /// <param name="onOk">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/> is held.</param>
     /// <param name="onErr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Result{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/> is held.</param>
     /// <returns>Itself.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly Emik.SourceGenerators.Choices.Generated.Tests.Result<TOk, TErr> Map(
@@ -294,7 +354,7 @@ partial record struct Result<TOk, TErr> :
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly TMappingResult Map<TMappingResult>(
@@ -334,6 +394,98 @@ ref partial struct SpanEncodings
 // ReSharper disable once CheckNamespace
 #nullable enable
 #pragma warning disable
+/// <inheritdoc cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/>
+/// <remarks>
+///     <para>
+///         The type <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/>
+///         is a mutable disjoint union representing the following variants:
+///     </para>
+///     <list type="table">
+///         <listheader>
+///             <term>
+///                 <c>Name</c> <see langword="as"/> <c>Type</c>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             Predicate
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             Factories
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </listheader>
+///         <item>
+///             <term>
+///                 <see cref="Utf8"/> <see langword="as"/> <see cref="System.Span{T}"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsUtf8"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfUtf8(System.Span{byte})"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings(System.Span{byte})"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(System.Span{byte})"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 <see cref="Utf16"/> <see langword="as"/> <see cref="System.Span{T}"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsUtf16"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfUtf16(System.Span{char})"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings(System.Span{char})"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(System.Span{char})"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///     </list>
+/// </remarks>
 [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Auto)]
 partial struct SpanEncodings
 {
@@ -341,7 +493,7 @@ partial struct SpanEncodings
     /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/> due to it being a by-ref like type.
     /// </summary>
     /// <param name="utf8">The referenced value.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public delegate void Utf8Handler(System.Span<byte> utf8);
 
     /// <summary>
@@ -350,14 +502,14 @@ partial struct SpanEncodings
     /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
     /// <param name="utf8">The referenced value.</param>
     /// <returns>The result of the mapping.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public delegate TMappingResult Utf8Handler<out TMappingResult>(System.Span<byte> utf8);
 
     /// <summary>
     /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/> due to it being a by-ref like type.
     /// </summary>
     /// <param name="utf16">The referenced value.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public delegate void Utf16Handler(System.Span<char> utf16);
 
     /// <summary>
@@ -366,17 +518,17 @@ partial struct SpanEncodings
     /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
     /// <param name="utf16">The referenced value.</param>
     /// <returns>The result of the mapping.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public delegate TMappingResult Utf16Handler<out TMappingResult>(System.Span<char> utf16);
 
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private byte _discriminator;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
     /// <param name="utf8">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public SpanEncodings(System.Span<byte> utf8)
     {
@@ -388,7 +540,7 @@ partial struct SpanEncodings
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
     /// <param name="utf16">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public SpanEncodings(System.Span<char> utf16)
     {
@@ -399,7 +551,7 @@ partial struct SpanEncodings
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> is the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsUtf8
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -412,7 +564,7 @@ partial struct SpanEncodings
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> is the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsUtf16
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -425,7 +577,7 @@ partial struct SpanEncodings
     /// <summary>
     /// Gets or sets the <see cref="System.Span{T}"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.Span<byte> Utf8
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -442,7 +594,7 @@ partial struct SpanEncodings
     /// <summary>
     /// Gets or sets the <see cref="System.Span{T}"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.Span<char> Utf16
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -461,7 +613,7 @@ partial struct SpanEncodings
     /// </summary>
     /// <param name="utf8">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="utf8"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings(System.Span<byte> utf8)
@@ -472,7 +624,7 @@ partial struct SpanEncodings
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator System.Span<byte>(global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings x)
@@ -483,7 +635,7 @@ partial struct SpanEncodings
     /// </summary>
     /// <param name="utf16">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="utf16"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings(System.Span<char> utf16)
@@ -494,7 +646,7 @@ partial struct SpanEncodings
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator System.Span<char>(global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings x)
@@ -505,7 +657,7 @@ partial struct SpanEncodings
     /// </summary>
     /// <param name="utf8">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="utf8"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings OfUtf8(System.Span<byte> utf8)
@@ -516,7 +668,7 @@ partial struct SpanEncodings
     /// </summary>
     /// <param name="utf16">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="utf16"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings OfUtf16(System.Span<char> utf16)
@@ -531,7 +683,7 @@ partial struct SpanEncodings
     /// The value determining whether the parameter <paramref name="left"/>
     /// is equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator ==(Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings right)
@@ -552,7 +704,7 @@ partial struct SpanEncodings
     /// The value determining whether the parameter <paramref name="left"/>
     /// is unequal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator !=(Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings right)
@@ -567,7 +719,7 @@ partial struct SpanEncodings
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >(Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings right)
@@ -588,7 +740,7 @@ partial struct SpanEncodings
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >=(Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings right)
@@ -603,7 +755,7 @@ partial struct SpanEncodings
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <(Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings right)
@@ -618,42 +770,42 @@ partial struct SpanEncodings
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <=(Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings right)
         => right >= left;
 
     /// <inheritdoc cref="object.Equals(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override bool Equals(object? obj)
         => false;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly bool Equals(Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings other)
         => this == other;
 
     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly int CompareTo(object? obj)
         => -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly int CompareTo(Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings other)
         => Equals(other) ? 0 : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly override int GetHashCode()
@@ -666,7 +818,7 @@ partial struct SpanEncodings
         });
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly override string ToString()
@@ -683,7 +835,7 @@ partial struct SpanEncodings
     /// <param name="onUtf8">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/> is held.</param>
     /// <param name="onUtf16">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/> is held.</param>
     /// <returns>Itself.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly Emik.SourceGenerators.Choices.Generated.Tests.SpanEncodings Map(
@@ -712,7 +864,7 @@ partial struct SpanEncodings
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly TMappingResult Map<TMappingResult>(
@@ -728,7 +880,7 @@ partial struct SpanEncodings
         };
 
     /// <inheritdoc cref="System.Span{T}.Clear()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly void Clear()
     {
@@ -745,7 +897,7 @@ partial struct SpanEncodings
     }
 
     /// <inheritdoc cref="System.Span{T}.IsEmpty"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsEmpty
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -758,7 +910,7 @@ partial struct SpanEncodings
     }
 
     /// <inheritdoc cref="System.Span{T}.Length"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly int Length
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -771,7 +923,7 @@ partial struct SpanEncodings
     }
 
     /// <inheritdoc cref="object.GetType()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Type GetUnderlyingType()
         => _discriminator switch
@@ -801,6 +953,131 @@ partial class Number;
 // ReSharper disable once CheckNamespace
 #nullable enable
 #pragma warning disable
+/// <inheritdoc cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/>
+/// <remarks>
+///     <para>
+///         The type <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/>
+///         is a disjoint union representing the following variants:
+///     </para>
+///     <list type="table">
+///         <listheader>
+///             <term>
+///                 <c>Name</c> <see langword="as"/> <c>Type</c>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             Predicate
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             Factories
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </listheader>
+///         <item>
+///             <term>
+///                 <see cref="Integer"/> <see langword="as"/> <see cref="int"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsInteger"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfInteger(int)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number(int)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(int)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 <see cref="Floating"/> <see langword="as"/> <see cref="float"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsFloating"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfFloating(float)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number(float)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(float)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 Unknown <see langword="as"/> <see cref="System.ValueTuple"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsUnknown"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfUnknown(System.ValueTuple)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number(System.ValueTuple)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(System.ValueTuple)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///     </list>
+/// </remarks>
 partial class Number :
     global::System.IComparable,
     global::System.IComparable<object>,
@@ -814,7 +1091,7 @@ partial class Number :
     /// <summary>
     /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit)]
     partial struct Unmanaged
     {
@@ -825,17 +1102,17 @@ partial class Number :
         internal float _floating;
     }
 
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private byte _discriminator;
 
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private Unmanaged _unmanaged;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Integer"/> of type <see cref="int"/>.
     /// </summary>
     /// <param name="integer">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Number(int integer)
     {
@@ -847,7 +1124,7 @@ partial class Number :
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/>.
     /// </summary>
     /// <param name="floating">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Number(float floating)
     {
@@ -859,7 +1136,7 @@ partial class Number :
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="System.ValueTuple"/>.
     /// </summary>
     /// <param name="unknown">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Number(System.ValueTuple unknown = default)
     {
@@ -869,7 +1146,7 @@ partial class Number :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> is the variant <see cref="Integer"/> of type <see cref="int"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsInteger
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -881,7 +1158,7 @@ partial class Number :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> is the variant <see cref="Floating"/> of type <see cref="float"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsFloating
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -893,7 +1170,7 @@ partial class Number :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> is the variant Unknown of type <see cref="System.ValueTuple"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsUnknown
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -904,7 +1181,7 @@ partial class Number :
     /// <summary>
     /// Gets the <see cref="int"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public int Integer
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -921,7 +1198,7 @@ partial class Number :
     /// <summary>
     /// Gets the <see cref="float"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public float Floating
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -940,7 +1217,7 @@ partial class Number :
     /// </summary>
     /// <param name="integer">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="integer"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.Number(int integer)
@@ -951,7 +1228,7 @@ partial class Number :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator int(global::Emik.SourceGenerators.Choices.Generated.Tests.Number x)
@@ -962,7 +1239,7 @@ partial class Number :
     /// </summary>
     /// <param name="floating">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="floating"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.Number(float floating)
@@ -973,7 +1250,7 @@ partial class Number :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator float(global::Emik.SourceGenerators.Choices.Generated.Tests.Number x)
@@ -984,7 +1261,7 @@ partial class Number :
     /// </summary>
     /// <param name="unknown">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="unknown"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.Number(System.ValueTuple unknown)
@@ -995,7 +1272,7 @@ partial class Number :
     /// </summary>
     /// <param name="integer">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="integer"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Number OfInteger(int integer)
@@ -1006,7 +1283,7 @@ partial class Number :
     /// </summary>
     /// <param name="floating">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="floating"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Number OfFloating(float floating)
@@ -1017,7 +1294,7 @@ partial class Number :
     /// </summary>
     /// <param name="unknown">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="unknown"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Number OfUnknown(System.ValueTuple unknown = default)
@@ -1032,7 +1309,7 @@ partial class Number :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator ==(Emik.SourceGenerators.Choices.Generated.Tests.Number? left, Emik.SourceGenerators.Choices.Generated.Tests.Number? right)
@@ -1054,7 +1331,7 @@ partial class Number :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is unequal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator !=(Emik.SourceGenerators.Choices.Generated.Tests.Number? left, Emik.SourceGenerators.Choices.Generated.Tests.Number? right)
@@ -1069,7 +1346,7 @@ partial class Number :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >(Emik.SourceGenerators.Choices.Generated.Tests.Number? left, Emik.SourceGenerators.Choices.Generated.Tests.Number? right)
@@ -1091,7 +1368,7 @@ partial class Number :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >=(Emik.SourceGenerators.Choices.Generated.Tests.Number? left, Emik.SourceGenerators.Choices.Generated.Tests.Number? right)
@@ -1106,7 +1383,7 @@ partial class Number :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <(Emik.SourceGenerators.Choices.Generated.Tests.Number? left, Emik.SourceGenerators.Choices.Generated.Tests.Number? right)
@@ -1121,42 +1398,42 @@ partial class Number :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <=(Emik.SourceGenerators.Choices.Generated.Tests.Number? left, Emik.SourceGenerators.Choices.Generated.Tests.Number? right)
         => right >= left;
 
     /// <inheritdoc cref="object.Equals(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override bool Equals(object? obj)
         => obj is global::Emik.SourceGenerators.Choices.Generated.Tests.Number x && Equals(x);
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool Equals(Emik.SourceGenerators.Choices.Generated.Tests.Number? other)
         => this == other;
 
     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public int CompareTo(object? obj)
         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Generated.Tests.Number x ? CompareTo(x) : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public int CompareTo(Emik.SourceGenerators.Choices.Generated.Tests.Number? other)
         => other is null ? 1 : Equals(other) ? 0 : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override int GetHashCode()
@@ -1170,7 +1447,7 @@ partial class Number :
         });
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override string ToString()
@@ -1189,7 +1466,7 @@ partial class Number :
     /// <param name="onFloating">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant <see cref="Floating"/> of type <see cref="float"/> is held.</param>
     /// <param name="onUnknown">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/> class with the variant Unknown of type <see cref="System.ValueTuple"/> is held.</param>
     /// <returns>Itself.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Emik.SourceGenerators.Choices.Generated.Tests.Number? Map(
@@ -1223,7 +1500,7 @@ partial class Number :
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public TMappingResult Map<TMappingResult>(
@@ -1241,7 +1518,7 @@ partial class Number :
         };
 
     /// <inheritdoc cref="object.GetType()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Type GetUnderlyingType()
         => _discriminator switch
@@ -1272,6 +1549,164 @@ readonly partial struct Enums;
 // ReSharper disable once CheckNamespace
 #nullable enable
 #pragma warning disable
+/// <inheritdoc cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/>
+/// <remarks>
+///     <para>
+///         The type <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/>
+///         is an immutable disjoint union representing the following variants:
+///     </para>
+///     <list type="table">
+///         <listheader>
+///             <term>
+///                 <c>Name</c> <see langword="as"/> <c>Type</c>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             Predicate
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             Factories
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </listheader>
+///         <item>
+///             <term>
+///                 <see cref="Audits"/> <see langword="as"/> <see cref="System.Security.AccessControl.AuditFlags"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsAudits"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfAudits(System.Security.AccessControl.AuditFlags)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums(System.Security.AccessControl.AuditFlags)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(System.Security.AccessControl.AuditFlags)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 <see cref="Bindings"/> <see langword="as"/> <see cref="System.Reflection.BindingFlags"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsBindings"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfBindings(System.Reflection.BindingFlags)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums(System.Reflection.BindingFlags)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(System.Reflection.BindingFlags)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 <see cref="Sockets"/> <see langword="as"/> <see cref="System.Net.Sockets.SocketFlags"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsSockets"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfSockets(System.Net.Sockets.SocketFlags)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums(System.Net.Sockets.SocketFlags)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(System.Net.Sockets.SocketFlags)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 <see cref="ObjectAces"/> <see langword="as"/> <see cref="System.Security.AccessControl.ObjectAceFlags"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsObjectAces"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfObjectAces(System.Security.AccessControl.ObjectAceFlags)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums(System.Security.AccessControl.ObjectAceFlags)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(System.Security.AccessControl.ObjectAceFlags)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///     </list>
+/// </remarks>
 [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Auto)]
 partial struct Enums :
     global::System.IComparable,
@@ -1289,7 +1724,7 @@ partial struct Enums :
     /// <summary>
     /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit)]
     partial struct Unmanaged
     {
@@ -1306,17 +1741,17 @@ partial struct Enums :
         internal System.Security.AccessControl.ObjectAceFlags _objectAces;
     }
 
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private readonly byte _discriminator;
 
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private readonly Unmanaged _unmanaged;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> struct with the variant <see cref="Audits"/> of type <see cref="System.Security.AccessControl.AuditFlags"/>.
     /// </summary>
     /// <param name="audits">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Enums(System.Security.AccessControl.AuditFlags audits)
     {
@@ -1328,7 +1763,7 @@ partial struct Enums :
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> struct with the variant <see cref="Bindings"/> of type <see cref="System.Reflection.BindingFlags"/>.
     /// </summary>
     /// <param name="bindings">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Enums(System.Reflection.BindingFlags bindings)
     {
@@ -1340,7 +1775,7 @@ partial struct Enums :
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> struct with the variant <see cref="Sockets"/> of type <see cref="System.Net.Sockets.SocketFlags"/>.
     /// </summary>
     /// <param name="sockets">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Enums(System.Net.Sockets.SocketFlags sockets)
     {
@@ -1352,7 +1787,7 @@ partial struct Enums :
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> struct with the variant <see cref="ObjectAces"/> of type <see cref="System.Security.AccessControl.ObjectAceFlags"/>.
     /// </summary>
     /// <param name="objectAces">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Enums(System.Security.AccessControl.ObjectAceFlags objectAces)
     {
@@ -1363,7 +1798,7 @@ partial struct Enums :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> is the variant <see cref="Audits"/> of type <see cref="System.Security.AccessControl.AuditFlags"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsAudits
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -1375,7 +1810,7 @@ partial struct Enums :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> is the variant <see cref="Bindings"/> of type <see cref="System.Reflection.BindingFlags"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsBindings
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -1387,7 +1822,7 @@ partial struct Enums :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> is the variant <see cref="Sockets"/> of type <see cref="System.Net.Sockets.SocketFlags"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsSockets
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -1399,7 +1834,7 @@ partial struct Enums :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> is the variant <see cref="ObjectAces"/> of type <see cref="System.Security.AccessControl.ObjectAceFlags"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsObjectAces
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -1411,7 +1846,7 @@ partial struct Enums :
     /// <summary>
     /// Gets the <see cref="System.Security.AccessControl.AuditFlags"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly System.Security.AccessControl.AuditFlags Audits
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -1422,7 +1857,7 @@ partial struct Enums :
     /// <summary>
     /// Gets the <see cref="System.Reflection.BindingFlags"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly System.Reflection.BindingFlags Bindings
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -1433,7 +1868,7 @@ partial struct Enums :
     /// <summary>
     /// Gets the <see cref="System.Net.Sockets.SocketFlags"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly System.Net.Sockets.SocketFlags Sockets
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -1444,7 +1879,7 @@ partial struct Enums :
     /// <summary>
     /// Gets the <see cref="System.Security.AccessControl.ObjectAceFlags"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly System.Security.AccessControl.ObjectAceFlags ObjectAces
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -1457,7 +1892,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="audits">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="audits"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.Enums(System.Security.AccessControl.AuditFlags audits)
@@ -1468,7 +1903,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator System.Security.AccessControl.AuditFlags(global::Emik.SourceGenerators.Choices.Generated.Tests.Enums x)
@@ -1479,7 +1914,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="bindings">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="bindings"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.Enums(System.Reflection.BindingFlags bindings)
@@ -1490,7 +1925,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator System.Reflection.BindingFlags(global::Emik.SourceGenerators.Choices.Generated.Tests.Enums x)
@@ -1501,7 +1936,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="sockets">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="sockets"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.Enums(System.Net.Sockets.SocketFlags sockets)
@@ -1512,7 +1947,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator System.Net.Sockets.SocketFlags(global::Emik.SourceGenerators.Choices.Generated.Tests.Enums x)
@@ -1523,7 +1958,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="objectAces">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="objectAces"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.Enums(System.Security.AccessControl.ObjectAceFlags objectAces)
@@ -1534,7 +1969,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator System.Security.AccessControl.ObjectAceFlags(global::Emik.SourceGenerators.Choices.Generated.Tests.Enums x)
@@ -1545,7 +1980,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="audits">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="audits"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Enums OfAudits(System.Security.AccessControl.AuditFlags audits)
@@ -1556,7 +1991,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="bindings">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="bindings"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Enums OfBindings(System.Reflection.BindingFlags bindings)
@@ -1567,7 +2002,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="sockets">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="sockets"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Enums OfSockets(System.Net.Sockets.SocketFlags sockets)
@@ -1578,7 +2013,7 @@ partial struct Enums :
     /// </summary>
     /// <param name="objectAces">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="objectAces"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Enums OfObjectAces(System.Security.AccessControl.ObjectAceFlags objectAces)
@@ -1593,7 +2028,7 @@ partial struct Enums :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator ==(Emik.SourceGenerators.Choices.Generated.Tests.Enums left, Emik.SourceGenerators.Choices.Generated.Tests.Enums right)
@@ -1616,7 +2051,7 @@ partial struct Enums :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is unequal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator !=(Emik.SourceGenerators.Choices.Generated.Tests.Enums left, Emik.SourceGenerators.Choices.Generated.Tests.Enums right)
@@ -1631,7 +2066,7 @@ partial struct Enums :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >(Emik.SourceGenerators.Choices.Generated.Tests.Enums left, Emik.SourceGenerators.Choices.Generated.Tests.Enums right)
@@ -1654,7 +2089,7 @@ partial struct Enums :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >=(Emik.SourceGenerators.Choices.Generated.Tests.Enums left, Emik.SourceGenerators.Choices.Generated.Tests.Enums right)
@@ -1669,7 +2104,7 @@ partial struct Enums :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <(Emik.SourceGenerators.Choices.Generated.Tests.Enums left, Emik.SourceGenerators.Choices.Generated.Tests.Enums right)
@@ -1684,42 +2119,42 @@ partial struct Enums :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <=(Emik.SourceGenerators.Choices.Generated.Tests.Enums left, Emik.SourceGenerators.Choices.Generated.Tests.Enums right)
         => right >= left;
 
     /// <inheritdoc cref="object.Equals(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override bool Equals(object? obj)
         => obj is global::Emik.SourceGenerators.Choices.Generated.Tests.Enums x && Equals(x);
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly bool Equals(Emik.SourceGenerators.Choices.Generated.Tests.Enums other)
         => this == other;
 
     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly int CompareTo(object? obj)
         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Generated.Tests.Enums x ? CompareTo(x) : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly int CompareTo(Emik.SourceGenerators.Choices.Generated.Tests.Enums other)
         => Equals(other) ? 0 : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly override int GetHashCode()
@@ -1734,7 +2169,7 @@ partial struct Enums :
         });
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly override string ToString()
@@ -1755,7 +2190,7 @@ partial struct Enums :
     /// <param name="onSockets">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> struct with the variant <see cref="Sockets"/> of type <see cref="System.Net.Sockets.SocketFlags"/> is held.</param>
     /// <param name="onObjectAces">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/> struct with the variant <see cref="ObjectAces"/> of type <see cref="System.Security.AccessControl.ObjectAceFlags"/> is held.</param>
     /// <returns>Itself.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly Emik.SourceGenerators.Choices.Generated.Tests.Enums Map(
@@ -1794,7 +2229,7 @@ partial struct Enums :
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly TMappingResult Map<TMappingResult>(
@@ -1821,7 +2256,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.TypeCode GetTypeCode()
         => _discriminator switch
@@ -1841,7 +2276,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool ToBoolean(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -1861,7 +2296,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public byte ToByte(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -1881,7 +2316,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public char ToChar(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -1901,7 +2336,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.DateTime ToDateTime(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -1921,7 +2356,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public decimal ToDecimal(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -1941,7 +2376,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public double ToDouble(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -1961,7 +2396,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public short ToInt16(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -1981,7 +2416,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public int ToInt32(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2001,7 +2436,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public long ToInt64(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2021,7 +2456,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public sbyte ToSByte(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2041,7 +2476,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public float ToSingle(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2061,7 +2496,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public string ToString(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2081,7 +2516,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public object ToType(global::System.Type conversionType, global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2101,7 +2536,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public ushort ToUInt16(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2121,7 +2556,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public uint ToUInt32(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2141,7 +2576,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IConvertible"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public ulong ToUInt64(global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2161,7 +2596,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.ISpanFormattable"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.ISpanFormattable"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool TryFormat(global::System.Span<char> destination, scoped out int charsWritten, global::System.ReadOnlySpan<char> format, global::System.IFormatProvider? provider)
         => _discriminator switch
@@ -2181,7 +2616,7 @@ partial struct Enums :
     /// <see cref="Sockets"/> as <see cref="System.IFormattable"/>,
     /// <see cref="ObjectAces"/> as <see cref="System.IFormattable"/>.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public string ToString(string? format, global::System.IFormatProvider? formatProvider)
         => _discriminator switch
@@ -2194,7 +2629,7 @@ partial struct Enums :
         };
 
     /// <inheritdoc cref="object.GetType()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Type GetUnderlyingType()
         => _discriminator switch
@@ -2207,7 +2642,7 @@ partial struct Enums :
         };
 
     /// <inheritdoc cref="System.Enum.HasFlag(System.Enum)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool HasFlag(global::System.Enum flag)
         => _discriminator switch
@@ -2220,7 +2655,7 @@ partial struct Enums :
         };
 
     /// <inheritdoc cref="System.Enum.ToString(string?)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public string ToString([System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("EnumFormat")] string? format)
         => _discriminator switch
@@ -2252,6 +2687,98 @@ partial struct Tasks;
 // ReSharper disable once CheckNamespace
 #nullable enable
 #pragma warning disable
+/// <inheritdoc cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks"/>
+/// <remarks>
+///     <para>
+///         The type <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks"/>
+///         is a mutable disjoint union representing the following variants:
+///     </para>
+///     <list type="table">
+///         <listheader>
+///             <term>
+///                 <c>Name</c> <see langword="as"/> <c>Type</c>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             Predicate
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             Factories
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </listheader>
+///         <item>
+///             <term>
+///                 <see cref="Referenced"/> <see langword="as"/> <see cref="System.Threading.Tasks.Task"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsReferenced"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfReferenced(System.Threading.Tasks.Task)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks(System.Threading.Tasks.Task)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(System.Threading.Tasks.Task)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 <see cref="Valued"/> <see langword="as"/> <see cref="System.Threading.Tasks.ValueTask"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsValued"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfValued(System.Threading.Tasks.ValueTask)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks(System.Threading.Tasks.ValueTask)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(System.Threading.Tasks.ValueTask)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///     </list>
+/// </remarks>
 [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Auto)]
 partial struct Tasks :
     global::System.IComparable,
@@ -2263,7 +2790,7 @@ partial struct Tasks :
     global::System.IEquatable<object>,
     global::System.IEquatable<global::Emik.SourceGenerators.Choices.Generated.Tests.Tasks>
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private byte _discriminator;
 
     private System.Threading.Tasks.Task? _referenced;
@@ -2274,7 +2801,7 @@ partial struct Tasks :
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks"/> struct with the variant <see cref="Referenced"/> of type <see cref="System.Threading.Tasks.Task"/>.
     /// </summary>
     /// <param name="referenced">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Tasks(System.Threading.Tasks.Task referenced)
     {
@@ -2286,7 +2813,7 @@ partial struct Tasks :
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks"/> struct with the variant <see cref="Valued"/> of type <see cref="System.Threading.Tasks.ValueTask"/>.
     /// </summary>
     /// <param name="valued">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Tasks(System.Threading.Tasks.ValueTask valued)
     {
@@ -2297,7 +2824,7 @@ partial struct Tasks :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks"/> is the variant <see cref="Referenced"/> of type <see cref="System.Threading.Tasks.Task"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsReferenced
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -2310,7 +2837,7 @@ partial struct Tasks :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks"/> is the variant <see cref="Valued"/> of type <see cref="System.Threading.Tasks.ValueTask"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsValued
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -2323,7 +2850,7 @@ partial struct Tasks :
     /// <summary>
     /// Gets or sets the <see cref="System.Threading.Tasks.Task"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.Threading.Tasks.Task? Referenced
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -2340,7 +2867,7 @@ partial struct Tasks :
     /// <summary>
     /// Gets or sets the <see cref="System.Threading.Tasks.ValueTask"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.Threading.Tasks.ValueTask Valued
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -2359,7 +2886,7 @@ partial struct Tasks :
     /// </summary>
     /// <param name="referenced">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="referenced"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.Tasks(System.Threading.Tasks.Task referenced)
@@ -2370,7 +2897,7 @@ partial struct Tasks :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator System.Threading.Tasks.Task?(global::Emik.SourceGenerators.Choices.Generated.Tests.Tasks x)
@@ -2381,7 +2908,7 @@ partial struct Tasks :
     /// </summary>
     /// <param name="valued">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="valued"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.Tasks(System.Threading.Tasks.ValueTask valued)
@@ -2392,7 +2919,7 @@ partial struct Tasks :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator System.Threading.Tasks.ValueTask(global::Emik.SourceGenerators.Choices.Generated.Tests.Tasks x)
@@ -2403,7 +2930,7 @@ partial struct Tasks :
     /// </summary>
     /// <param name="referenced">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="referenced"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Tasks OfReferenced(System.Threading.Tasks.Task referenced)
@@ -2414,7 +2941,7 @@ partial struct Tasks :
     /// </summary>
     /// <param name="valued">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="valued"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.Tasks OfValued(System.Threading.Tasks.ValueTask valued)
@@ -2429,7 +2956,7 @@ partial struct Tasks :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator ==(Emik.SourceGenerators.Choices.Generated.Tests.Tasks left, Emik.SourceGenerators.Choices.Generated.Tests.Tasks right)
@@ -2450,7 +2977,7 @@ partial struct Tasks :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is unequal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator !=(Emik.SourceGenerators.Choices.Generated.Tests.Tasks left, Emik.SourceGenerators.Choices.Generated.Tests.Tasks right)
@@ -2465,7 +2992,7 @@ partial struct Tasks :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >(Emik.SourceGenerators.Choices.Generated.Tests.Tasks left, Emik.SourceGenerators.Choices.Generated.Tests.Tasks right)
@@ -2486,7 +3013,7 @@ partial struct Tasks :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >=(Emik.SourceGenerators.Choices.Generated.Tests.Tasks left, Emik.SourceGenerators.Choices.Generated.Tests.Tasks right)
@@ -2501,7 +3028,7 @@ partial struct Tasks :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <(Emik.SourceGenerators.Choices.Generated.Tests.Tasks left, Emik.SourceGenerators.Choices.Generated.Tests.Tasks right)
@@ -2516,42 +3043,42 @@ partial struct Tasks :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <=(Emik.SourceGenerators.Choices.Generated.Tests.Tasks left, Emik.SourceGenerators.Choices.Generated.Tests.Tasks right)
         => right >= left;
 
     /// <inheritdoc cref="object.Equals(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override bool Equals(object? obj)
         => obj is global::Emik.SourceGenerators.Choices.Generated.Tests.Tasks x && Equals(x);
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly bool Equals(Emik.SourceGenerators.Choices.Generated.Tests.Tasks other)
         => this == other;
 
     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly int CompareTo(object? obj)
         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Generated.Tests.Tasks x ? CompareTo(x) : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly int CompareTo(Emik.SourceGenerators.Choices.Generated.Tests.Tasks other)
         => Equals(other) ? 0 : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly override int GetHashCode()
@@ -2564,7 +3091,7 @@ partial struct Tasks :
         });
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly override string ToString()
@@ -2581,7 +3108,7 @@ partial struct Tasks :
     /// <param name="onReferenced">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks"/> struct with the variant <see cref="Referenced"/> of type <see cref="System.Threading.Tasks.Task"/> is held.</param>
     /// <param name="onValued">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Tasks"/> struct with the variant <see cref="Valued"/> of type <see cref="System.Threading.Tasks.ValueTask"/> is held.</param>
     /// <returns>Itself.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly Emik.SourceGenerators.Choices.Generated.Tests.Tasks Map(
@@ -2610,7 +3137,7 @@ partial struct Tasks :
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public readonly TMappingResult Map<TMappingResult>(
@@ -2626,7 +3153,7 @@ partial struct Tasks :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.IsCanceled"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsCanceled
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -2639,7 +3166,7 @@ partial struct Tasks :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.IsCompleted"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsCompleted
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -2652,7 +3179,7 @@ partial struct Tasks :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.IsCompletedSuccessfully"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public readonly bool IsCompletedSuccessfully
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -2665,7 +3192,7 @@ partial struct Tasks :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.IsFaulted"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Exception")]
     public readonly bool IsFaulted
     {
@@ -2679,7 +3206,7 @@ partial struct Tasks :
     }
 
     /// <inheritdoc cref="object.GetType()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Type GetUnderlyingType()
         => _discriminator switch
@@ -2709,6 +3236,66 @@ partial record SuperTask;
 // ReSharper disable once CheckNamespace
 #nullable enable
 #pragma warning disable
+/// <inheritdoc cref="Emik.SourceGenerators.Choices.Generated.Tests.SuperTask"/>
+/// <remarks>
+///     <para>
+///         The type <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SuperTask"/>
+///         is a disjoint union representing the following variants:
+///     </para>
+///     <list type="table">
+///         <listheader>
+///             <term>
+///                 <c>Name</c> <see langword="as"/> <c>Type</c>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             Predicate
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             Factory
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </listheader>
+///         <item>
+///             <term>
+///                 <see cref="Left"/> <see langword="as"/> <see cref="System.Threading.Tasks.Task"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsLeft"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <see cref="OfLeft(System.Threading.Tasks.Task)"/>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 <see cref="Right"/> <see langword="as"/> <see cref="System.Threading.Tasks.Task"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsRight"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <see cref="OfRight(System.Threading.Tasks.Task)"/>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///     </list>
+/// </remarks>
 partial record SuperTask :
     global::System.IComparable,
     global::System.IComparable<object>,
@@ -2721,10 +3308,10 @@ partial record SuperTask :
     System.IAsyncResult,
     System.IDisposable
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private byte _discriminator;
 
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private object? _reference;
 
     /// <summary>
@@ -2732,7 +3319,7 @@ partial record SuperTask :
     /// </summary>
     /// <param name="left">The variant.</param>
     /// <param name="x">The discriminator.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     private SuperTask(System.Threading.Tasks.Task left, byte x)
     {
@@ -2743,7 +3330,7 @@ partial record SuperTask :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SuperTask"/> is the variant <see cref="Left"/> of type <see cref="System.Threading.Tasks.Task"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsLeft
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -2756,7 +3343,7 @@ partial record SuperTask :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SuperTask"/> is the variant <see cref="Right"/> of type <see cref="System.Threading.Tasks.Task"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsRight
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -2769,7 +3356,7 @@ partial record SuperTask :
     /// <summary>
     /// Gets the <see cref="System.Threading.Tasks.Task"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.Threading.Tasks.Task? Left
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -2786,7 +3373,7 @@ partial record SuperTask :
     /// <summary>
     /// Gets the <see cref="System.Threading.Tasks.Task"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.Threading.Tasks.Task? Right
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -2805,7 +3392,7 @@ partial record SuperTask :
     /// </summary>
     /// <param name="left">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="left"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.SuperTask OfLeft(System.Threading.Tasks.Task left)
@@ -2816,7 +3403,7 @@ partial record SuperTask :
     /// </summary>
     /// <param name="right">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="right"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.SuperTask OfRight(System.Threading.Tasks.Task right)
@@ -2831,7 +3418,7 @@ partial record SuperTask :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >(Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? left, Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? right)
@@ -2852,7 +3439,7 @@ partial record SuperTask :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >=(Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? left, Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? right)
@@ -2867,7 +3454,7 @@ partial record SuperTask :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <(Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? left, Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? right)
@@ -2882,35 +3469,35 @@ partial record SuperTask :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <=(Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? left, Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? right)
         => right >= left;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public virtual bool Equals(Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? other)
         => this == other;
 
     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public int CompareTo(object? obj)
         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Generated.Tests.SuperTask x ? CompareTo(x) : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public int CompareTo(Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? other)
         => other is null ? 1 : Equals(other) ? 0 : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override int GetHashCode()
@@ -2923,7 +3510,7 @@ partial record SuperTask :
         });
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override string ToString()
@@ -2940,7 +3527,7 @@ partial record SuperTask :
     /// <param name="onLeft">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SuperTask"/> record with the variant <see cref="Left"/> of type <see cref="System.Threading.Tasks.Task"/> is held.</param>
     /// <param name="onRight">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.SuperTask"/> record with the variant <see cref="Right"/> of type <see cref="System.Threading.Tasks.Task"/> is held.</param>
     /// <returns>Itself.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Emik.SourceGenerators.Choices.Generated.Tests.SuperTask? Map(
@@ -2969,7 +3556,7 @@ partial record SuperTask :
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public TMappingResult Map<TMappingResult>(
@@ -2985,7 +3572,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ConfigureAwait(bool)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Runtime.CompilerServices.ConfiguredTaskAwaitable ConfigureAwait(bool continueOnCapturedContext)
         => _discriminator switch
@@ -2996,7 +3583,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ConfigureAwait(System.Threading.Tasks.ConfigureAwaitOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Runtime.CompilerServices.ConfiguredTaskAwaitable ConfigureAwait(global::System.Threading.Tasks.ConfigureAwaitOptions options)
         => _discriminator switch
@@ -3007,7 +3594,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state)
         => _discriminator switch
@@ -3018,7 +3605,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?, System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state, global::System.Threading.CancellationToken cancellationToken)
         => _discriminator switch
@@ -3029,7 +3616,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?, System.Threading.CancellationToken, System.Threading.Tasks.TaskContinuationOptions, System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state, global::System.Threading.CancellationToken cancellationToken, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions, global::System.Threading.Tasks.TaskScheduler scheduler)
         => _discriminator switch
@@ -3040,7 +3627,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?, System.Threading.Tasks.TaskContinuationOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions)
         => _discriminator switch
@@ -3051,7 +3638,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?, System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state, global::System.Threading.Tasks.TaskScheduler scheduler)
         => _discriminator switch
@@ -3062,7 +3649,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task})"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction)
         => _discriminator switch
@@ -3073,7 +3660,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task}, System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction, global::System.Threading.CancellationToken cancellationToken)
         => _discriminator switch
@@ -3084,7 +3671,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task}, System.Threading.CancellationToken, System.Threading.Tasks.TaskContinuationOptions, System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction, global::System.Threading.CancellationToken cancellationToken, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions, global::System.Threading.Tasks.TaskScheduler scheduler)
         => _discriminator switch
@@ -3095,7 +3682,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task}, System.Threading.Tasks.TaskContinuationOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions)
         => _discriminator switch
@@ -3106,7 +3693,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task}, System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction, global::System.Threading.Tasks.TaskScheduler scheduler)
         => _discriminator switch
@@ -3117,7 +3704,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state)
         => _discriminator switch
@@ -3128,7 +3715,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?, System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state, global::System.Threading.CancellationToken cancellationToken)
         => _discriminator switch
@@ -3139,7 +3726,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?, System.Threading.CancellationToken, System.Threading.Tasks.TaskContinuationOptions, System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state, global::System.Threading.CancellationToken cancellationToken, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions, global::System.Threading.Tasks.TaskScheduler scheduler)
         => _discriminator switch
@@ -3150,7 +3737,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?, System.Threading.Tasks.TaskContinuationOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions)
         => _discriminator switch
@@ -3161,7 +3748,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?, System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state, global::System.Threading.Tasks.TaskScheduler scheduler)
         => _discriminator switch
@@ -3172,7 +3759,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult})"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction)
         => _discriminator switch
@@ -3183,7 +3770,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult}, System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction, global::System.Threading.CancellationToken cancellationToken)
         => _discriminator switch
@@ -3194,7 +3781,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult}, System.Threading.CancellationToken, System.Threading.Tasks.TaskContinuationOptions, System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction, global::System.Threading.CancellationToken cancellationToken, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions, global::System.Threading.Tasks.TaskScheduler scheduler)
         => _discriminator switch
@@ -3205,7 +3792,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult}, System.Threading.Tasks.TaskContinuationOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions)
         => _discriminator switch
@@ -3216,7 +3803,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult}, System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction, global::System.Threading.Tasks.TaskScheduler scheduler)
         => _discriminator switch
@@ -3227,7 +3814,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Dispose()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void Dispose()
     {
@@ -3244,7 +3831,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.GetAwaiter()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Runtime.CompilerServices.TaskAwaiter GetAwaiter()
         => _discriminator switch
@@ -3255,7 +3842,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.RunSynchronously()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void RunSynchronously()
     {
@@ -3272,7 +3859,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.RunSynchronously(System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void RunSynchronously(global::System.Threading.Tasks.TaskScheduler scheduler)
     {
@@ -3289,7 +3876,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Start()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void Start()
     {
@@ -3306,7 +3893,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Start(System.Threading.Tasks.TaskScheduler)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void Start(global::System.Threading.Tasks.TaskScheduler scheduler)
     {
@@ -3323,7 +3910,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void Wait()
     {
@@ -3340,7 +3927,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(int)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool Wait(int millisecondsTimeout)
         => _discriminator switch
@@ -3351,7 +3938,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(int, System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool Wait(int millisecondsTimeout, global::System.Threading.CancellationToken cancellationToken)
         => _discriminator switch
@@ -3362,7 +3949,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void Wait(global::System.Threading.CancellationToken cancellationToken)
     {
@@ -3379,7 +3966,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(System.TimeSpan)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool Wait(global::System.TimeSpan timeout)
         => _discriminator switch
@@ -3390,7 +3977,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(System.TimeSpan, System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool Wait(global::System.TimeSpan timeout, global::System.Threading.CancellationToken cancellationToken)
         => _discriminator switch
@@ -3401,7 +3988,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task WaitAsync(global::System.Threading.CancellationToken cancellationToken)
         => _discriminator switch
@@ -3412,7 +3999,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout)
         => _discriminator switch
@@ -3423,7 +4010,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan, System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout, global::System.Threading.CancellationToken cancellationToken)
         => _discriminator switch
@@ -3434,7 +4021,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan, System.TimeProvider)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout, global::System.TimeProvider timeProvider)
         => _discriminator switch
@@ -3445,7 +4032,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan, System.TimeProvider, System.Threading.CancellationToken)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout, global::System.TimeProvider timeProvider, global::System.Threading.CancellationToken cancellationToken)
         => _discriminator switch
@@ -3456,7 +4043,7 @@ partial record SuperTask :
         };
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.AsyncState"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public object? AsyncState
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3469,7 +4056,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.CreationOptions"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.Threading.Tasks.TaskCreationOptions CreationOptions
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3482,7 +4069,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Exception"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.AggregateException? Exception
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3495,7 +4082,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Id"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public int Id
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3508,7 +4095,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.IsCanceled"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsCanceled
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3521,7 +4108,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.IsCompleted"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsCompleted
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3534,7 +4121,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.IsCompletedSuccessfully"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsCompletedSuccessfully
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3547,7 +4134,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.IsFaulted"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Exception")]
     public bool IsFaulted
     {
@@ -3561,7 +4148,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.Threading.Tasks.Task.Status"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.Threading.Tasks.TaskStatus Status
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3574,7 +4161,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.IAsyncResult.AsyncWaitHandle"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public System.Threading.WaitHandle AsyncWaitHandle
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3587,7 +4174,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="System.IAsyncResult.CompletedSynchronously"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool CompletedSynchronously
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -3600,7 +4187,7 @@ partial record SuperTask :
     }
 
     /// <inheritdoc cref="object.GetType()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Type GetUnderlyingType()
         => _discriminator switch
@@ -3633,6 +4220,98 @@ partial class KMModule
 // ReSharper disable once CheckNamespace
 #nullable enable
 #pragma warning disable
+/// <inheritdoc cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule"/>
+/// <remarks>
+///     <para>
+///         The type <see cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule"/>
+///         is an immutable disjoint union representing the following variants:
+///     </para>
+///     <list type="table">
+///         <listheader>
+///             <term>
+///                 <c>Name</c> <see langword="as"/> <c>Type</c>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             Predicate
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             Factories
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </listheader>
+///         <item>
+///             <term>
+///                 <see cref="Regular"/> <see langword="as"/> <see cref="KMBombModule"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsRegular"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfRegular(KMBombModule)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule(KMBombModule)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(KMBombModule)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///         <item>
+///             <term>
+///                 <see cref="Needy"/> <see langword="as"/> <see cref="KMNeedyModule"/>
+///                 <list type="bullet">
+///                     <item>
+///                         <description>
+///                             <see cref="IsNeedy"/>
+///                         </description>
+///                     </item>
+///                     <item>
+///                         <description>
+///                             <list type="number">
+///                                 <item>
+///                                     <description>
+///                                         <see cref="OfNeedy(KMNeedyModule)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule(KMNeedyModule)"/>
+///                                     </description>
+///                                 </item>
+///                                 <item>
+///                                     <description>
+///                                         <see cref="op_Implicit(KMNeedyModule)"/>
+///                                     </description>
+///                                 </item>
+///                             </list>
+///                         </description>
+///                     </item>
+///                 </list>
+///             </term>
+///         </item>
+///     </list>
+/// </remarks>
 partial class KMModule :
     global::System.IComparable,
     global::System.IComparable<object>,
@@ -3643,7 +4322,7 @@ partial class KMModule :
     global::System.IEquatable<object>,
     global::System.IEquatable<global::Emik.SourceGenerators.Choices.Generated.Tests.KMModule>
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private byte Discriminator
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -3659,14 +4338,14 @@ partial class KMModule :
         set { }
     }
 
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     private readonly object? _reference;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule"/> class with the variant <see cref="Regular"/> of type <see cref="KMBombModule"/>.
     /// </summary>
     /// <param name="regular">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public KMModule(KMBombModule regular)
     {
@@ -3678,7 +4357,7 @@ partial class KMModule :
     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule"/> class with the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/>.
     /// </summary>
     /// <param name="needy">The variant.</param>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public KMModule(KMNeedyModule needy)
     {
@@ -3689,7 +4368,7 @@ partial class KMModule :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule"/> is the variant <see cref="Regular"/> of type <see cref="KMBombModule"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsRegular
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -3702,7 +4381,7 @@ partial class KMModule :
     /// <summary>
     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule"/> is the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/>.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool IsNeedy
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -3715,7 +4394,7 @@ partial class KMModule :
     /// <summary>
     /// Gets the <see cref="KMBombModule"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public KMBombModule? Regular
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -3726,7 +4405,7 @@ partial class KMModule :
     /// <summary>
     /// Gets the <see cref="KMNeedyModule"/> variant.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public KMNeedyModule? Needy
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -3739,7 +4418,7 @@ partial class KMModule :
     /// </summary>
     /// <param name="regular">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="regular"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.KMModule(KMBombModule regular)
@@ -3750,7 +4429,7 @@ partial class KMModule :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator KMBombModule?(global::Emik.SourceGenerators.Choices.Generated.Tests.KMModule x)
@@ -3761,7 +4440,7 @@ partial class KMModule :
     /// </summary>
     /// <param name="needy">The parameter to pass onto the constructor.</param>
     /// <returns>The union containing the parameter <paramref name="needy"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static implicit operator global::Emik.SourceGenerators.Choices.Generated.Tests.KMModule(KMNeedyModule needy)
@@ -3772,7 +4451,7 @@ partial class KMModule :
     /// </summary>
     /// <param name="x">The union to access its property.</param>
     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static explicit operator KMNeedyModule?(global::Emik.SourceGenerators.Choices.Generated.Tests.KMModule x)
@@ -3783,7 +4462,7 @@ partial class KMModule :
     /// </summary>
     /// <param name="regular">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="regular"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.KMModule OfRegular(KMBombModule regular)
@@ -3794,7 +4473,7 @@ partial class KMModule :
     /// </summary>
     /// <param name="needy">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="needy"/>.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static global::Emik.SourceGenerators.Choices.Generated.Tests.KMModule OfNeedy(KMNeedyModule needy)
@@ -3809,7 +4488,7 @@ partial class KMModule :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator ==(Emik.SourceGenerators.Choices.Generated.Tests.KMModule? left, Emik.SourceGenerators.Choices.Generated.Tests.KMModule? right)
@@ -3830,7 +4509,7 @@ partial class KMModule :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is unequal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator !=(Emik.SourceGenerators.Choices.Generated.Tests.KMModule? left, Emik.SourceGenerators.Choices.Generated.Tests.KMModule? right)
@@ -3845,7 +4524,7 @@ partial class KMModule :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >(Emik.SourceGenerators.Choices.Generated.Tests.KMModule? left, Emik.SourceGenerators.Choices.Generated.Tests.KMModule? right)
@@ -3866,7 +4545,7 @@ partial class KMModule :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is greater than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator >=(Emik.SourceGenerators.Choices.Generated.Tests.KMModule? left, Emik.SourceGenerators.Choices.Generated.Tests.KMModule? right)
@@ -3881,7 +4560,7 @@ partial class KMModule :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <(Emik.SourceGenerators.Choices.Generated.Tests.KMModule? left, Emik.SourceGenerators.Choices.Generated.Tests.KMModule? right)
@@ -3896,42 +4575,42 @@ partial class KMModule :
     /// The value determining whether the parameter <paramref name="left"/>
     /// is less than or equal to the parameter <paramref name="right"/>.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public static bool operator <=(Emik.SourceGenerators.Choices.Generated.Tests.KMModule? left, Emik.SourceGenerators.Choices.Generated.Tests.KMModule? right)
         => right >= left;
 
     /// <inheritdoc cref="object.Equals(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override bool Equals(object? obj)
         => obj is global::Emik.SourceGenerators.Choices.Generated.Tests.KMModule x && Equals(x);
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool Equals(Emik.SourceGenerators.Choices.Generated.Tests.KMModule? other)
         => this == other;
 
     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public int CompareTo(object? obj)
         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Generated.Tests.KMModule x ? CompareTo(x) : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public int CompareTo(Emik.SourceGenerators.Choices.Generated.Tests.KMModule? other)
         => other is null ? 1 : Equals(other) ? 0 : -1;
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override int GetHashCode()
@@ -3944,7 +4623,7 @@ partial class KMModule :
         });
 
     /// <inheritdoc />
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public override string ToString()
@@ -3961,7 +4640,7 @@ partial class KMModule :
     /// <param name="onRegular">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule"/> class with the variant <see cref="Regular"/> of type <see cref="KMBombModule"/> is held.</param>
     /// <param name="onNeedy">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Generated.Tests.KMModule"/> class with the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/> is held.</param>
     /// <returns>Itself.</returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public Emik.SourceGenerators.Choices.Generated.Tests.KMModule? Map(
@@ -3990,7 +4669,7 @@ partial class KMModule :
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public TMappingResult Map<TMappingResult>(
@@ -4006,7 +4685,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="KMBombModule.ModuleType"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public string ModuleType
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4019,7 +4698,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="KMBombModule.ModuleDisplayName"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public string ModuleDisplayName
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4032,7 +4711,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="KMBombModule.RequiresTimerVisibility"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool RequiresTimerVisibility
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4045,7 +4724,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="KMBombModule.HandlePass()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void HandlePass()
     {
@@ -4062,7 +4741,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="KMBombModule.HandleStrike()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void HandleStrike()
     {
@@ -4079,7 +4758,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="KMBombModule.GetRuleGenerationSeed()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public int GetRuleGenerationSeed()
         => Discriminator switch
@@ -4090,7 +4769,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="object.GetType()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public System.Type GetUnderlyingType()
         => Discriminator switch
@@ -4101,7 +4780,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Object.GetInstanceID()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [System.Security.SecuritySafeCriticalAttribute]
     public int GetInstanceID()
@@ -4113,7 +4792,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Object.name"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public string name
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4126,7 +4805,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Object.hideFlags"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public UnityEngine.HideFlags hideFlags
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4139,7 +4818,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponent(System.Type)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
     public UnityEngine.Component GetComponent(global::System.Type type)
@@ -4151,7 +4830,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponent{T}()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [System.Security.SecuritySafeCriticalAttribute]
     public T GetComponent<T>()
@@ -4163,7 +4842,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponent(string)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public UnityEngine.Component GetComponent(string type)
         => Discriminator switch
@@ -4174,7 +4853,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren(System.Type, bool)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
     public UnityEngine.Component GetComponentInChildren(global::System.Type t, bool includeInactive)
@@ -4186,7 +4865,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren(System.Type)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
     public UnityEngine.Component GetComponentInChildren(global::System.Type t)
@@ -4198,7 +4877,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren{T}()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public T GetComponentInChildren<T>()
@@ -4210,7 +4889,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren{T}(bool)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public T GetComponentInChildren<T>([UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
         => Discriminator switch
@@ -4221,7 +4900,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren(System.Type)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public UnityEngine.Component[] GetComponentsInChildren(global::System.Type t)
@@ -4233,7 +4912,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren(System.Type, bool)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public UnityEngine.Component[] GetComponentsInChildren(global::System.Type t, [UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
         => Discriminator switch
@@ -4244,7 +4923,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(bool)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public T[] GetComponentsInChildren<T>(bool includeInactive)
         => Discriminator switch
@@ -4255,7 +4934,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(bool, System.Collections.Generic.List{T})"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void GetComponentsInChildren<T>(bool includeInactive, global::System.Collections.Generic.List<T> result)
     {
@@ -4272,7 +4951,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public T[] GetComponentsInChildren<T>()
         => Discriminator switch
@@ -4283,7 +4962,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(System.Collections.Generic.List{T})"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void GetComponentsInChildren<T>(global::System.Collections.Generic.List<T> results)
     {
@@ -4300,7 +4979,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentInParent(System.Type)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
     public UnityEngine.Component GetComponentInParent(global::System.Type t)
@@ -4312,7 +4991,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentInParent{T}()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public T GetComponentInParent<T>()
         => Discriminator switch
@@ -4323,7 +5002,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent(System.Type)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public UnityEngine.Component[] GetComponentsInParent(global::System.Type t)
@@ -4335,7 +5014,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent(System.Type, bool)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public UnityEngine.Component[] GetComponentsInParent(global::System.Type t, [UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
         => Discriminator switch
@@ -4346,7 +5025,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}(bool)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public T[] GetComponentsInParent<T>(bool includeInactive)
         => Discriminator switch
@@ -4357,7 +5036,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}(bool, System.Collections.Generic.List{T})"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void GetComponentsInParent<T>(bool includeInactive, global::System.Collections.Generic.List<T> results)
     {
@@ -4374,7 +5053,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public T[] GetComponentsInParent<T>()
         => Discriminator switch
@@ -4385,7 +5064,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponents(System.Type)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public UnityEngine.Component[] GetComponents(global::System.Type type)
         => Discriminator switch
@@ -4396,7 +5075,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponents(System.Type, System.Collections.Generic.List{UnityEngine.Component})"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void GetComponents(global::System.Type type, global::System.Collections.Generic.List<global::UnityEngine.Component> results)
     {
@@ -4413,7 +5092,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponents{T}(System.Collections.Generic.List{T})"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void GetComponents<T>(global::System.Collections.Generic.List<T> results)
     {
@@ -4430,7 +5109,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.GetComponents{T}()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public T[] GetComponents<T>()
         => Discriminator switch
@@ -4441,7 +5120,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.CompareTag(string)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool CompareTag(string tag)
         => Discriminator switch
@@ -4452,7 +5131,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, object, UnityEngine.SendMessageOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void SendMessageUpwards(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
     {
@@ -4469,7 +5148,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public void SendMessageUpwards(string methodName, object value)
@@ -4487,7 +5166,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public void SendMessageUpwards(string methodName)
@@ -4505,7 +5184,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, UnityEngine.SendMessageOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void SendMessageUpwards(string methodName, global::UnityEngine.SendMessageOptions options)
     {
@@ -4522,7 +5201,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, object, UnityEngine.SendMessageOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void SendMessage(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
     {
@@ -4539,7 +5218,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public void SendMessage(string methodName, object value)
@@ -4557,7 +5236,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.SendMessage(string)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public void SendMessage(string methodName)
@@ -4575,7 +5254,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, UnityEngine.SendMessageOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void SendMessage(string methodName, global::UnityEngine.SendMessageOptions options)
     {
@@ -4592,7 +5271,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, object, UnityEngine.SendMessageOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void BroadcastMessage(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object parameter, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
     {
@@ -4609,7 +5288,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public void BroadcastMessage(string methodName, object parameter)
@@ -4627,7 +5306,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public void BroadcastMessage(string methodName)
@@ -4645,7 +5324,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, UnityEngine.SendMessageOptions)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void BroadcastMessage(string methodName, global::UnityEngine.SendMessageOptions options)
     {
@@ -4662,7 +5341,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.transform"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public UnityEngine.Transform transform
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4675,7 +5354,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.gameObject"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public UnityEngine.GameObject gameObject
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4688,7 +5367,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.tag"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public string tag
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4701,7 +5380,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.rigidbody"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property rigidbody has been deprecated. Use GetComponent<Rigidbody>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component rigidbody
     {
@@ -4715,7 +5394,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.rigidbody2D"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property rigidbody2D has been deprecated. Use GetComponent<Rigidbody2D>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component rigidbody2D
     {
@@ -4729,7 +5408,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.camera"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property camera has been deprecated. Use GetComponent<Camera>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component camera
     {
@@ -4743,7 +5422,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.light"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property light has been deprecated. Use GetComponent<Light>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component light
     {
@@ -4757,7 +5436,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.animation"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property animation has been deprecated. Use GetComponent<Animation>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component animation
     {
@@ -4771,7 +5450,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.constantForce"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property constantForce has been deprecated. Use GetComponent<ConstantForce>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component constantForce
     {
@@ -4785,7 +5464,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.renderer"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property renderer has been deprecated. Use GetComponent<Renderer>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component renderer
     {
@@ -4799,7 +5478,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.audio"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property audio has been deprecated. Use GetComponent<AudioSource>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component audio
     {
@@ -4813,7 +5492,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.guiText"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property guiText has been deprecated. Use GetComponent<GUIText>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component guiText
     {
@@ -4827,7 +5506,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.networkView"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property networkView has been deprecated. Use GetComponent<NetworkView>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component networkView
     {
@@ -4841,7 +5520,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.guiElement"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property guiElement has been deprecated. Use GetComponent<GUIElement>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component guiElement
     {
@@ -4855,7 +5534,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.guiTexture"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property guiTexture has been deprecated. Use GetComponent<GUITexture>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component guiTexture
     {
@@ -4869,7 +5548,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.collider"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property collider has been deprecated. Use GetComponent<Collider>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component collider
     {
@@ -4883,7 +5562,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.collider2D"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property collider2D has been deprecated. Use GetComponent<Collider2D>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component collider2D
     {
@@ -4897,7 +5576,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.hingeJoint"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property hingeJoint has been deprecated. Use GetComponent<HingeJoint>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component hingeJoint
     {
@@ -4911,7 +5590,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.particleEmitter"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property particleEmitter has been deprecated. Use GetComponent<ParticleEmitter>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component particleEmitter
     {
@@ -4925,7 +5604,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Component.particleSystem"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [System.ObsoleteAttribute("Property particleSystem has been deprecated. Use GetComponent<ParticleSystem>() instead. (UnityUpgradable)", true)]
     public UnityEngine.Component particleSystem
     {
@@ -4939,7 +5618,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Behaviour.enabled"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool enabled
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4952,7 +5631,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.Behaviour.isActiveAndEnabled"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool isActiveAndEnabled
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -4965,7 +5644,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.Invoke(string, float)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void Invoke(string methodName, float time)
     {
@@ -4982,7 +5661,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.InvokeRepeating(string, float, float)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void InvokeRepeating(string methodName, float time, float repeatRate)
     {
@@ -4999,7 +5678,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.CancelInvoke()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void CancelInvoke()
     {
@@ -5016,7 +5695,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.CancelInvoke(string)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void CancelInvoke(string methodName)
     {
@@ -5033,7 +5712,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.IsInvoking(string)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool IsInvoking(string methodName)
         => Discriminator switch
@@ -5044,7 +5723,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.IsInvoking()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public bool IsInvoking()
         => Discriminator switch
@@ -5055,7 +5734,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(System.Collections.IEnumerator)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public UnityEngine.Coroutine StartCoroutine(global::System.Collections.IEnumerator routine)
         => Discriminator switch
@@ -5066,7 +5745,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine_Auto(System.Collections.IEnumerator)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [System.ObsoleteAttribute("StartCoroutine_Auto has been deprecated. Use StartCoroutine instead (UnityUpgradable) -> StartCoroutine([mscorlib] System.Collections.IEnumerator)", false)]
     public UnityEngine.Coroutine StartCoroutine_Auto(global::System.Collections.IEnumerator routine)
@@ -5078,7 +5757,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(string, object)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public UnityEngine.Coroutine StartCoroutine(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value)
         => Discriminator switch
@@ -5089,7 +5768,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(string)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     [UnityEngine.Internal.ExcludeFromDocsAttribute]
     public UnityEngine.Coroutine StartCoroutine(string methodName)
@@ -5101,7 +5780,7 @@ partial class KMModule :
         };
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(string)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void StopCoroutine(string methodName)
     {
@@ -5118,7 +5797,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(System.Collections.IEnumerator)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void StopCoroutine(global::System.Collections.IEnumerator routine)
     {
@@ -5135,7 +5814,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(UnityEngine.Coroutine)"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void StopCoroutine(global::UnityEngine.Coroutine routine)
     {
@@ -5152,7 +5831,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopAllCoroutines()"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     [global::System.Runtime.CompilerServices.MethodImpl(256)]
     public void StopAllCoroutines()
     {
@@ -5169,7 +5848,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.useGUILayout"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool useGUILayout
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
@@ -5182,7 +5861,7 @@ partial class KMModule :
     }
 
     /// <inheritdoc cref="UnityEngine.MonoBehaviour.runInEditMode"/>
-    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.1.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
     public bool runInEditMode
     {
         [global::System.Runtime.CompilerServices.MethodImpl(256)]
