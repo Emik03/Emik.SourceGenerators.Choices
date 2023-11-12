@@ -110,7 +110,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                                     ///                             <list type="number">
                                     ///                                 <item>
                                     ///                                     <description>
-                                    ///                                         <see cref="Of{PropertyName(x)}({XmlEscape(x.Type)})"/>
+                                    ///                                         <see cref="Of{PropertyName(x)}({XmlEscape(x.Type, true)})"/>
                                     ///                                     </description>
                                     ///                                 </item>
                                     ///                                 <item>
