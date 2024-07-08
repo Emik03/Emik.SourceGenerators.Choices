@@ -699,8 +699,8 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
 
     [Pure]
     int Inheritance((FieldOrProperty Field, int Index) tuple) =>
-        Rest.Count( // ReSharper disable once NullableWarningSuppressionIsUsed
-            x => tuple.Field.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, TypeSymbolComparer.Default!) ||
+        Rest.Count(
+            x => tuple.Field.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, TypeSymbolComparer.Default) ||
                 tuple.Field.Type.AllInterfaces.Contains(x.Type, TypeSymbolComparer.Default)
         );
 

@@ -278,6 +278,7 @@ sealed partial record Scaffolder
             '\0' => @"\0",
             '\a' => @"\a",
             '\b' => @"\b",
+            '\e' => @"\e",
             '\f' => @"\f",
             '\n' => @"\n",
             '\r' => @"\r",

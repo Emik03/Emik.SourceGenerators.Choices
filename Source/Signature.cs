@@ -105,7 +105,7 @@ readonly record struct Signature(
 
     [Pure]
     public bool Equivalent(in Signature other) =>
-        Name.AsSpan().SplitOn('.').Last().SequenceEqual(other.Name.AsSpan().SplitOn('.').Last()) &&
+        Name.AsSpan().SplitOn('.').Last.SequenceEqual(other.Name.AsSpan().SplitOn('.').Last) &&
         SameType(Type, other.Type) &&
         Parameters.GuardedSequenceEqual(other.Parameters, SameType) &&
         TypeParameters.GuardedSequenceEqual(other.TypeParameters, Complies);
@@ -135,7 +135,7 @@ readonly record struct Signature(
 
         unchecked
         {
-            hash = hash * Prime ^ Name.AsSpan().SplitOn('.').Last().GetDjb2HashCode();
+            hash = hash * Prime ^ Name.AsSpan().SplitOn('.').Last.GetDjb2HashCode();
             hash = hash * Prime ^ TypeSymbolComparer.GetHashCode(Type);
             hash = hash * Prime ^ Parameters.Length;
             return hash * Prime ^ TypeParameters.Length;
@@ -239,7 +239,7 @@ readonly record struct Signature(
                     return smalls.First.Skip(i).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtract(x, count));
             }
 
-        return Enumerable.Empty<Extract>();
+        return [];
     }
 
     [Pure]
@@ -260,8 +260,5 @@ readonly record struct Signature(
 
     [Pure]
     static HashSet<Signature> ToSelf(IEnumerable<FieldOrProperty>? except, IAssemblySymbol assembly) =>
-        (except ?? Enumerable.Empty<FieldOrProperty>())
-       .Select(x => From(x.Type, assembly))
-       .Filter()
-       .ToSet(s_signatures);
+        except.OrEmpty().Select(x => From(x.Type, assembly)).Filter().ToSet(s_signatures);
 }
