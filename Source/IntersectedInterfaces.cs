@@ -2,7 +2,7 @@
 namespace Emik.SourceGenerators.Choices;
 
 // ReSharper disable NullableWarningSuppressionIsUsed
-sealed record IntersectedInterfaces(SmallList<FieldOrProperty> Symbols, bool IsReadOnly)
+sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsReadOnly)
 {
     [Pure] // ReSharper disable once ReturnTypeCanBeEnumerable.Global
     public HashSet<INamedTypeSymbol> Set =>
@@ -42,7 +42,7 @@ sealed record IntersectedInterfaces(SmallList<FieldOrProperty> Symbols, bool IsR
                 _ => ImmutableArray<IParameterSymbol>.Empty,
             };
 
-        bool IsEqual(FieldOrProperty union) =>
+        bool IsEqual(MemberSymbol union) =>
             union.Type.AllInterfaces.Contains(first, NamedTypeSymbolComparer.Default);
 
         bool CanReturnTypeBeIncluded(ISymbol symbol) =>
@@ -64,14 +64,14 @@ sealed record IntersectedInterfaces(SmallList<FieldOrProperty> Symbols, bool IsR
            .Select(x => (Extract)(x, Signature.Kind(x), interfaceDeclarations));
     }
 
-    HashSet<INamedTypeSymbol> Intersect(HashSet<INamedTypeSymbol> acc, FieldOrProperty next)
+    HashSet<INamedTypeSymbol> Intersect(HashSet<INamedTypeSymbol> acc, MemberSymbol next)
     {
         acc.IntersectWith(UnimplementedInterfaces(next));
         return acc;
     }
 
     [Pure]
-    IEnumerable<INamedTypeSymbol> UnimplementedInterfaces(FieldOrProperty next) =>
+    IEnumerable<INamedTypeSymbol> UnimplementedInterfaces(MemberSymbol next) =>
         next
            .Type
            .AllInterfaces

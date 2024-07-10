@@ -16,6 +16,20 @@ public sealed class AttributeGenerator() : FixedGenerator(
           internal class ChoiceAttribute : global::System.Attribute
           {
               /// <summary>
+              /// Indicates that the type is mutable, but only within the type.
+              /// </summary>
+              internal static class Private
+              {
+              }
+
+              /// <summary>
+              /// Indicates that the type is publicly mutable.
+              /// </summary>
+              internal static class Public
+              {
+              }
+
+              /// <summary>
               /// Initializes a new instance of the <see cref="ChoiceAttribute"/> class.
               /// </summary>
               internal ChoiceAttribute()
@@ -23,7 +37,7 @@ public sealed class AttributeGenerator() : FixedGenerator(
                   Set = null;
                   IsPubliclyMutable = null;
               }
-      
+
               /// <summary>
               /// Initializes a new instance of the <see cref="ChoiceAttribute"/> class.
               /// </summary>
@@ -33,7 +47,7 @@ public sealed class AttributeGenerator() : FixedGenerator(
                   Set = set;
                   IsPubliclyMutable = null;
               }
-      
+
               /// <summary>
               /// Initializes a new instance of the <see cref="ChoiceAttribute"/> class.
               /// </summary>
@@ -43,7 +57,7 @@ public sealed class AttributeGenerator() : FixedGenerator(
                   Set = null;
                   IsPubliclyMutable = isPubliclyMutable;
               }
-      
+
               /// <summary>
               /// Initializes a new instance of the <see cref="ChoiceAttribute"/> class.
               /// </summary>
@@ -54,7 +68,7 @@ public sealed class AttributeGenerator() : FixedGenerator(
                   Set = set;
                   IsPubliclyMutable = isPubliclyMutable;
               }
-              
+
               /// <summary>
               /// Initializes a new instance of the <see cref="ChoiceAttribute"/> class.
               /// </summary>
@@ -65,16 +79,37 @@ public sealed class AttributeGenerator() : FixedGenerator(
                   IsPubliclyMutable = isPubliclyMutable;
                   Set = set;
               }
-      
+
               /// <summary>
               /// When specified, determines whether the type is mutable publicly.
               /// </summary>
               internal bool? IsPubliclyMutable { get; }
-              
+
               /// <summary>
               /// When specified, gets the set of fields that define the annotated union.
               /// </summary>
               internal Type? Set { get; }
+          }
+
+          /// <summary>
+          /// Provides IntelliSense when a dot is typed after <c>Choice</c> and not <c>ChoiceAttribute</c>.
+          /// </summary>
+          {{Annotation}}
+          internal static class Choice
+          {
+              /// <summary>
+              /// Indicates that the type is mutable, but only within the type.
+              /// </summary>
+              internal static class Private
+              {
+              }
+
+              /// <summary>
+              /// Indicates that the type is publicly mutable.
+              /// </summary>
+              internal static class Public
+              {
+              }
           }
       }
       """

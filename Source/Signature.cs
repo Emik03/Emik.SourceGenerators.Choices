@@ -31,16 +31,16 @@ readonly record struct Signature(
         ) { }
 
     public static IEnumerable<Extract> FindForwarders(
-        in SmallList<FieldOrProperty> symbols,
+        in SmallList<MemberSymbol> symbols,
         INamedTypeSymbol named,
-        ISet<FieldOrProperty>? except = null
+        ISet<MemberSymbol>? except = null
     )
     {
         var assembly = named.ContainingAssembly;
 
         bool IsValid(Extract next) =>
             From(next.Symbol, assembly) is not null &&
-            (except is null || !FieldOrProperty.TryCreate(next.Symbol, out var x) || !except.Contains(x));
+            (except is null || !MemberSymbol.DeconstructFrom(next.Symbol) || !except.Contains(x));
 
         var signatures = ToSelf(except, assembly);
         var forwarders = Add(symbols, assembly, signatures);

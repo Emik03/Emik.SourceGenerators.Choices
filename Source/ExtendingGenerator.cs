@@ -8,10 +8,10 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     const int MinimumFields = 2;
 
     static readonly IEqualityComparer<Fold> s_folds =
-        Equating((Fold x, Fold y) => Same(x, y) && NamedTypeSymbolComparer.Equal(x.SymbolSet, y.SymbolSet), Hash);
+        Equating<Fold>((x, y) => Same(x, y) && NamedTypeSymbolComparer.Equal(x.SymbolSet, y.SymbolSet), Hash);
 
     static readonly IEqualityComparer<Raw> s_raws =
-        Equating((Raw x, Raw y) => Same(x, y) && SameMembers(x.Fields, y.Fields), Hash);
+        Equating<Raw>((x, y) => Same(x, y) && SameMembers(x.Fields, y.Fields), Hash);
 
     [Pure]
     public static GeneratedSource? Transform(in Fold fold) =>
@@ -20,6 +20,9 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             : null;
 
     /// <inheritdoc />
+    // ReSharper disable once ArrangeAttributes
+    // [Choice.A<int>.B<int>]
+    // [Choice(typeof((int A, int B)))]
     void IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext context)
     {
         var provider = context
@@ -33,8 +36,78 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
            .WithTrackingName(nameof(Raw))
            .Where(HasSufficientFields);
 
+        var a = context
+           .SyntaxProvider
+           .CreateSyntaxProvider(IsHeavilyNested, DiscoverTypeParameters);
+
         context.RegisterSourceOutput(provider, Generate);
     }
+
+    static Raw? DiscoverTypeParameters(GeneratorSyntaxContext context, CancellationToken token)
+    {
+        if (context.Node is not AttributeSyntax attribute ||
+            attribute.TypeDeclaration() is not { } typeDeclaration ||
+            context.SemanticModel.GetSymbolInfo(typeDeclaration, token).Symbol is not INamedTypeSymbol named)
+            return null;
+
+        SmallList<MemberSymbol> fields = [];
+        bool? mutablePublicly = null;
+
+        for (var name = attribute.Name; name is QualifiedNameSyntax qualifiedName; name = qualifiedName.Left)
+        {
+            if (qualifiedName.Right is IdentifierNameSyntax rightIdentifier)
+                switch (rightIdentifier.Identifier.Text)
+                {
+                    case nameof(Accessibility.Private):
+                        mutablePublicly = false;
+                        break;
+                    case nameof(Accessibility.Public):
+                        mutablePublicly = true;
+                        break;
+                    default: return null;
+                }
+
+            if (qualifiedName.Left is IdentifierNameSyntax leftIdentifier)
+                if (leftIdentifier.Identifier.Text is "Choice")
+                    break;
+                else
+                    return null;
+
+            if (mutablePublicly is not null ||
+                qualifiedName.Right is not GenericNameSyntax genericName ||
+                genericName.TypeArgumentList.Arguments is not [var typeArgument] ||
+                context.SemanticModel.GetSymbolInfo(typeArgument, token).Symbol is not ITypeSymbol type)
+                return null;
+
+            fields.Add(new(type, genericName.Identifier.Text));
+        }
+
+        return (named, fields, mutablePublicly);
+    }
+
+    static bool IsHeavilyNested(SyntaxNode node, CancellationToken _) =>
+        // Guarantees that at the minimum it involves: [Rest.Property<T1>.Property<T2>]
+        node is AttributeSyntax
+        {
+            Name: QualifiedNameSyntax
+            {
+                Left: QualifiedNameSyntax
+                {
+                    Left: IdentifierNameSyntax { Identifier.Text: "Choice" } or
+                    QualifiedNameSyntax
+                    {
+                        Left: IdentifierNameSyntax { Identifier.Text: "Choice" } or QualifiedNameSyntax,
+                        Right: IdentifierNameSyntax
+                        {
+                            Identifier.Text: nameof(Accessibility.Private) or nameof(Accessibility.Public),
+                        } or
+                        GenericNameSyntax,
+                    },
+                    Right: GenericNameSyntax,
+                },
+                Right: GenericNameSyntax,
+            },
+        };
 
     static void Generate(SourceProductionContext context, Raw x) => AddSource(context, Scaffolder.From(x).Result);
 
@@ -43,22 +116,14 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         x is ({ IsTupleType: false }, null or { IsTupleType: true, TupleElements.Length: >= MinimumFields }, _);
 
     [Pure]
-    static bool HasSufficientFields((INamedTypeSymbol, SmallList<FieldOrProperty>, bool?) x) =>
-        x is (_, { Count: >= MinimumFields }, _);
+    static bool HasSufficientFields(Raw x) => x is (_, { Count: >= MinimumFields }, _);
 
     [Pure]
-    static bool IsExtendable(SyntaxNode node, CancellationToken token)
-    {
-        if (node is not TypeDeclarationSyntax { AttributeLists.Count: >= 1 } type || type is InterfaceDeclarationSyntax)
-            return false;
-
-        // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
-        foreach (var modifier in type.Modifiers)
-            if (modifier.IsKind(SyntaxKind.PartialKeyword))
-                return true;
-
-        return false;
-    }
+    static bool IsExtendable(SyntaxNode node, CancellationToken token) =>
+        node is TypeDeclarationSyntax { AttributeLists.Count: >= 1, Modifiers: var modifiers } and
+            not InterfaceDeclarationSyntax and
+            not DelegateDeclarationSyntax &&
+        modifiers.Any(SyntaxKind.PartialKeyword);
 
     [Pure]
     static bool Same<T>(
@@ -70,7 +135,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         SameMetadataNames(x.Named, y.Named);
 
     [Pure]
-    static bool SameMembers(in SmallList<FieldOrProperty> xs, in SmallList<FieldOrProperty> ys)
+    static bool SameMembers(in SmallList<MemberSymbol> xs, in SmallList<MemberSymbol> ys)
     {
         if (xs.Count != ys.Count)
             return false;
@@ -130,21 +195,22 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     }
 
     [Pure]
-    static Fold Target(GeneratorAttributeSyntaxContext context, CancellationToken _)
+    static Fold Target(GeneratorAttributeSyntaxContext context, CancellationToken token)
     {
         bool? mutablePublicly = null;
         INamedTypeSymbol? symbolSet = null;
 
         foreach (var arg in context.Attributes[0].ConstructorArguments)
-            switch (arg.Value)
+        {
+            token.ThrowIfCancellationRequested();
+
+            _ = arg.Value switch
             {
-                case bool x:
-                    mutablePublicly = x;
-                    break;
-                case INamedTypeSymbol x:
-                    symbolSet = x;
-                    break;
-            }
+                bool x => mutablePublicly = x,
+                INamedTypeSymbol x => (symbolSet = x) is var _,
+                _ => false,
+            };
+        }
 
         return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, mutablePublicly);
     }

@@ -87,7 +87,7 @@ sealed partial record Scaffolder
 
             var member = symbol is IPropertySymbol { Parameters: not [] } ? "" : $".{symbol.GetFullyQualifiedName()}";
 
-            string Case(FieldOrProperty x, int i)
+            string Case(MemberSymbol x, int i)
             {
                 var instance = IsEmpty(x) ? CSharp($"default({x.Type})") : Prefix(x);
 
