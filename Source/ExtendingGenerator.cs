@@ -58,8 +58,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     [Pure]
     static bool IsExtendable(SyntaxNode x, CancellationToken _ = default) =>
         x is TypeDeclarationSyntax { AttributeLists.Count: >= 1, Modifiers: var modifiers } and
-            not InterfaceDeclarationSyntax and
-            not DelegateDeclarationSyntax &&
+            not InterfaceDeclarationSyntax &&
         modifiers.Any(SyntaxKind.PartialKeyword);
 
     [Pure]
