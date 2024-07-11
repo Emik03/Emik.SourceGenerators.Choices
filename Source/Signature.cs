@@ -40,7 +40,7 @@ readonly record struct Signature(
 
         bool IsValid(Extract next) =>
             From(next.Symbol, assembly) is not null &&
-            (except is null || !MemberSymbol.DeconstructFrom(next.Symbol) || !except.Contains(x));
+            (except is null || MemberSymbol.DeconstructFrom(next.Symbol) is not { } x || !except.Contains(x));
 
         var signatures = ToSelf(except, assembly);
         var forwarders = Add(symbols, assembly, signatures);
@@ -53,7 +53,7 @@ readonly record struct Signature(
     }
 
     [Pure]
-    public static RefKind Kind(in FieldOrProperty x) => Kind(x.Symbol);
+    public static RefKind Kind(in MemberSymbol x) => Kind(x.Symbol);
 
     [Pure]
     public static RefKind Kind(in ISymbol x) =>
@@ -111,7 +111,7 @@ readonly record struct Signature(
         TypeParameters.GuardedSequenceEqual(other.TypeParameters, Complies);
 
     [Pure]
-    public bool IsIn(in FieldOrProperty union, IAssemblySymbol assembly, out string? interfaceDeclaration)
+    public bool IsIn(in MemberSymbol union, IAssemblySymbol assembly, out string? interfaceDeclaration)
     {
         foreach (var member in union.Type.GetMembers())
             if (From(member, assembly) is { } signature && Equivalent(signature))
@@ -143,7 +143,7 @@ readonly record struct Signature(
     }
 
     void Next(
-        in SmallList<FieldOrProperty> symbols,
+        in SmallList<MemberSymbol> symbols,
         HashSet<Extract> set,
         HashSet<Signature> exists,
         IAssemblySymbol assembly,
@@ -205,7 +205,7 @@ readonly record struct Signature(
 
     [Pure]
     static HashSet<Extract> Add(
-        in SmallList<FieldOrProperty> symbols,
+        in SmallList<MemberSymbol> symbols,
         IAssemblySymbol assembly,
         HashSet<Signature> exists
     )
@@ -220,7 +220,7 @@ readonly record struct Signature(
     }
 
     [Pure]
-    static IEnumerable<Extract> FindCommonBaseTypes(in SmallList<FieldOrProperty> symbols)
+    static IEnumerable<Extract> FindCommonBaseTypes(in SmallList<MemberSymbol> symbols)
     {
         var smalls = symbols
            .Select(x => x.Type.BaseType.FindPathToNull(x => x.BaseType).Reverse().ToListLazily())
@@ -259,6 +259,7 @@ readonly record struct Signature(
         left is RefKind.Ref || right is RefKind.Ref ? RefKind.Ref : RefKind.RefReadOnly;
 
     [Pure]
-    static HashSet<Signature> ToSelf(IEnumerable<FieldOrProperty>? except, IAssemblySymbol assembly) =>
+    static HashSet<Signature> ToSelf(IEnumerable<MemberSymbol>? except, IAssemblySymbol assembly) =>
         except.OrEmpty().Select(x => From(x.Type, assembly)).Filter().ToSet(s_signatures);
 }
+
