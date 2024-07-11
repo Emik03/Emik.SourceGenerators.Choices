@@ -272,7 +272,7 @@ sealed partial record Scaffolder(
                                  .Conjoin("\n            ")}}
                               _ => {{Throw}},
                           });
-                      
+
                       /// <summary>
                       /// Determines whether the left-hand side is unequal to the right.
                       /// </summary>
@@ -317,8 +317,8 @@ sealed partial record Scaffolder(
             ? ""
             : CSharp(
                 $"""
-                 
-                 
+
+
                      /// <inheritdoc cref="object.Equals(object)"/>
                      {Annotation}
                      {Pure}
@@ -380,7 +380,7 @@ sealed partial record Scaffolder(
                              .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       });
-              
+
                   /// <summary>
                   /// Determines whether the left-hand side is greater than or equal to the right.
                   /// </summary>
@@ -395,7 +395,7 @@ sealed partial record Scaffolder(
                   {{AggressiveInlining}}
                   public static bool operator >=({{NullableName}} left, {{NullableName}} right)
                       => left == right || left > right;
-              
+
                   /// <summary>
                   /// Determines whether the left-hand side is less than the right.
                   /// </summary>
@@ -410,7 +410,7 @@ sealed partial record Scaffolder(
                   {{AggressiveInlining}}
                   public static bool operator <({{NullableName}} left, {{NullableName}} right)
                       => right > left;
-              
+
                   /// <summary>
                   /// Determines whether the left-hand side is less than or equal to the right.
                   /// </summary>
@@ -425,28 +425,28 @@ sealed partial record Scaffolder(
                   {{AggressiveInlining}}
                   public static bool operator <=({{NullableName}} left, {{NullableName}} right)
                       => right >= left;{{DeclareObjectEquals}}
-              
+
                   /// <inheritdoc />
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
                   public {{VirtualIfNonSealedRecordClass}}{{ReadOnlyIfStruct}}bool Equals({{NullableName}} other)
                       => this == other;
-              
+
                   /// <inheritdoc cref="IComparable.CompareTo(object)"/>
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}int CompareTo(object? obj)
                       => {{(Named.IsRefLikeType ? "-1" : $"obj is null ? 1 : obj is {Name} x ? CompareTo(x) : -1")}};
-              
+
                   /// <inheritdoc />
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}int CompareTo({{NullableName}} other)
                       =>{{(Named.IsReferenceType ? " other is null ? 1 :" : "")}} Equals(other) ? 0 : -1;
-              
+
                   /// <inheritdoc />
                   {{Annotation}}
                   {{Pure}}
@@ -463,7 +463,7 @@ sealed partial record Scaffolder(
                              .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       });
-              
+
                   /// <inheritdoc />
                   {{Annotation}}
                   {{Pure}}
