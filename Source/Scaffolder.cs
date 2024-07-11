@@ -149,7 +149,7 @@ sealed partial record Scaffolder(
               }}{{(Named.TypeArguments is [] ? "" : $"<{Named.TypeArguments.Conjoin()}>")
               }}{{DeclareInterfaces}}
               {
-              {{DeclarePolyfillingAttributes
+              {{DeclarePolyfillAttributes
               }}{{DeclareExplicitStruct
               }}{{Symbols.Select(DeclareDelegate).Conjoin("")
               }}{{DeclareDiscriminator}}
@@ -168,6 +168,29 @@ sealed partial record Scaffolder(
               }
               """
         );
+
+    [Pure]
+    string DeclarePolyfillAttributes =>
+        PolyfillAttributes
+            ? CSharp(
+                $"""
+                    {Annotation}
+                 {(MutablePublicly switch
+                 {
+                             true => nameof(Accessibility.Public),
+                             false => nameof(Accessibility.Private),
+                             null => null,
+                 }).YieldValued()
+                .Concat(Members.Select(x => x.Name))
+                .Prepend("Choice")
+                .Reverse()
+                .Index()
+                .Aggregate("", DeclareNestedClass)}
+
+
+                 """
+            )
+            : "";
 
     string DeclareInterfaces =>
         Named.IsRefLikeType
@@ -1012,6 +1035,17 @@ sealed partial record Scaffolder(
             x.Type.IsRefLikeType || IsEmpty(x)
                 ? hasGenericReturn ? $"<{ResultGeneric}>" : ""
                 : hasGenericReturn ? $"<{x.Type}, {ResultGeneric}>" : $"<{x.Type}>")}";
+
+    [Pure]
+    string DeclareNestedClass(string x, (int Index, string Item) y) =>
+        CSharp(
+            $$"""
+                  private {{(y.Index is 0 ? "sealed" : "static")}} class {{
+                  y.Item}}{{(y.Index is 0 ? " : global::System.Attribute" : "")}}
+                  {{{(y.Index == Members.Count + (MutablePublicly is not null).ToByte() ? "" : "\n        ")}}{{x}}
+                  }
+              """
+        );
 
     [Pure]
     string DeclareFieldWithExplicitOffset(MemberSymbol x) =>
