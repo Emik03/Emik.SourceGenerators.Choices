@@ -22,9 +22,6 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             : null;
 
     /// <inheritdoc />
-    // ReSharper disable once ArrangeAttributes
-    // [Choice.A<int>.B<int>]
-    // [Choice(typeof((int A, int B)))]
     void IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext context)
     {
         var dot = context.SyntaxProvider.CreateSyntaxProvider(IsHeavilyNested, DiscoverTypeParameters);
