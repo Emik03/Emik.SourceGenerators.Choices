@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices;
 
-sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<MemberSymbol> Symbols, bool? MutablePublicly)
+sealed partial record Scaffolder(
+    INamedTypeSymbol Named,
+    SmallList<MemberSymbol> Symbols,
+    bool? MutablePublicly,
+    bool PolyfillAttributes
+)
 {
     const int MinimumBoxedSize = 2;
     const int MinimumExplicitStructSize = 2;
@@ -144,7 +149,8 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<MemberSymbol>
               }}{{(Named.TypeArguments is [] ? "" : $"<{Named.TypeArguments.Conjoin()}>")
               }}{{DeclareInterfaces}}
               {
-              {{DeclareExplicitStruct
+              {{DeclarePolyfillingAttributes
+              }}{{DeclareExplicitStruct
               }}{{Symbols.Select(DeclareDelegate).Conjoin("")
               }}{{DeclareDiscriminator}}
 
@@ -454,7 +460,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<MemberSymbol>
             $$"""
 
 
-                  /// <summary>
+              {{DeclareUnderlyingValue}}    /// <summary>
                   /// Invokes the callback based on current variance.
                   /// </summary>
                   /// {{Symbols
@@ -510,6 +516,35 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<MemberSymbol>
               """
         );
 
+    public string DeclareUnderlyingValue =>
+        Members.All(x => x.Type is not { TypeKind: TypeKind.Pointer } and not { IsRefLikeType: true }) &&
+        FindCommonBaseType is { } common
+            ? CSharp(
+                $$"""
+                      /// <summary>
+                      /// Gets the underlying value.
+                      /// </summary>
+                      /// <returns>
+                      /// The underlying value from this instance.
+                      /// </returns>
+                      {{Annotation}}
+                      {{Pure}}
+                      {{AggressiveInlining}}
+                      public {{ReadOnlyIfStruct}}{{common}} GetUnderlyingValue()
+                          => {{Discriminator}}
+                          switch
+                          {
+                              {{Symbols
+                                 .Select((x, i) => $"{i} => {PropertyName(x)},")
+                                 .Conjoin("\n            ")}}
+                              _ => {{Throw}},
+                          };
+
+
+                  """
+            )
+            : "";
+
     [Pure]
     string Discriminator =>
         _discriminator ??= Reference.Count != Symbols.Count ||
@@ -541,6 +576,17 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<MemberSymbol>
     HashSet<MemberSymbol> Members { get; } = Named.GetMembers().Select(MemberSymbol.DeconstructFrom).Filter().ToSet();
 
     [Pure]
+    ISymbol? FindCommonBaseType =>
+        Members
+           .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
+           .Aggregate(IntersectWith)
+           .OrderBy(x => x.SpecialType is SpecialType.System_Object)
+           .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
+           .ThenBy(x => x.IsInterface())
+           .ThenByDescending(x => Inheritance(x).Count())
+           .FirstOrDefault();
+
+    [Pure]
     SmallList<MemberSymbol> Reference { get; } = Symbols.Omit(IsUnmanaged).Where(IsReference).ToSmallList();
 
     [Pure]
@@ -564,9 +610,6 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<MemberSymbol>
             fields[^1].Type is INamedTypeSymbol { IsTupleType: true, IsValueType: true, TupleElements: var tuple }
                 ? fields.Take(TupleGenericLimit - 1).Select(x => new MemberSymbol(x)).Concat(Decouple(tuple))
                 : fields.Select(x => new MemberSymbol(x))).ToSmallList();
-
-    [Pure]
-    public static Scaffolder From(Raw x) => new(x.Named, x.Fields, x.MutablePublicly);
 
     [Pure]
     public static SmallList<MemberSymbol> Instances(INamespaceOrTypeSymbol x) =>
@@ -828,7 +871,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<MemberSymbol>
                      /// <param name="{ParameterName(x)}">The referenced value.</param>
                      {Annotation}
                      public delegate void {PropertyName(x)}Handler({x.Type} {ParameterName(x)});
-                 
+
                      /// <summary>
                      /// Explicit mapper delegate for {Describe(x)} due to it being a by-ref like type.
                      /// </summary>
@@ -1032,4 +1075,14 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<MemberSymbol>
                   $"{nameof({{PropertyName(x)}})}({{{PropertyName(x)}}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
                   """
             );
+
+    [Pure]
+    static IEnumerable<ITypeSymbol> Inheritance(ITypeSymbol x) =>
+        x.FindPathToNull(x => x.BaseType).Concat(x.AllInterfaces);
+
+    static HashSet<ITypeSymbol> IntersectWith(HashSet<ITypeSymbol> x, HashSet<ITypeSymbol> y)
+    {
+        x.IntersectWith(y);
+        return x;
+    }
 }
