@@ -557,7 +557,9 @@ sealed partial record Scaffolder(
                       {AggressiveInlining}
                       public {ReadOnlyIfStruct}{common} GetUnderlyingValue()
                           => {(Symbols.Count == Reference.Count
-                                    ? $"({common}){ReferenceField}!"
+                                    ? $"{(common.SpecialType is SpecialType.System_Object
+                                            ? ""
+                                            : $"({common})")}{ReferenceField}!"
                                     : CSharp(
                                         $$"""
                                         {{Discriminator}}
