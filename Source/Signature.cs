@@ -56,12 +56,13 @@ readonly record struct Signature(
     public static RefKind Kind(in MemberSymbol x) => Kind(x.Symbol);
 
     [Pure]
-    public static RefKind Kind(in ISymbol x) =>
+    public static RefKind Kind(in ISymbol? x) =>
         x switch
         {
             IFieldSymbol { RefKind: var ret } => ret,
             IMethodSymbol { RefKind: var ret } => ret,
             IPropertySymbol { RefKind: var ret } => ret,
+            null => RefKind.None,
             _ => throw Unreachable,
         };
 

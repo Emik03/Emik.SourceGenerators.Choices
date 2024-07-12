@@ -48,4 +48,12 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
             IPropertySymbol property => PropertySymbolComparer.Default.GetHashCode(property) * 2,
             _ => TypeSymbolComparer.GetHashCode(Type) ^ StringComparer.Ordinal.GetHashCode(Name),
         };
+
+    public override string ToString() =>
+        Symbol switch
+        {
+            IFieldSymbol => $"{Type} {Name};",
+            IPropertySymbol => $"{Type} {Name} {{ get; }}",
+            _ => $"{Name}<{Type}>",
+        };
 }

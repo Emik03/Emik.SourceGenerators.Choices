@@ -26,24 +26,20 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     {
         var dot = context.SyntaxProvider.CreateSyntaxProvider(IsHeavilyNested, DiscoverTypeParameters);
         var org = context.SyntaxProvider.ForAttributeWithMetadataName(Of<AttributeGenerator>(), IsExtendable, Target);
-        Register(context, [dot, org]);
+        Register(context, dot);
+        Register(context, org);
     }
 
     static void Generate(SourceProductionContext context, Raw raw) => AddSource(context, ((Scaffolder)raw).Result);
 
     static void Register(
         in IncrementalGeneratorInitializationContext context,
-        scoped in ReadOnlySpan<IncrementalValuesProvider<Raw>> providers
-    )
-    {
-        foreach (var provider in providers)
-            context.RegisterSourceOutput(
-                provider.WithComparer(RawEqualityComparer.Instance)
-                   .WithTrackingName(nameof(Raw))
-                   .Where(HasSufficientFields),
-                Generate
-            );
-    }
+        in IncrementalValuesProvider<Raw> values
+    ) =>
+        context.RegisterSourceOutput(
+            values.WithComparer(RawEqualityComparer.Instance).WithTrackingName(nameof(Raw)).Where(HasSufficientFields),
+            Generate
+        );
 
     [Pure]
     static bool HasAnnotatedCorrectly(Fold x) =>
@@ -104,7 +100,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     {
         if (context.Node is not AttributeSyntax attribute ||
             attribute.TypeDeclaration() is not { } typeDeclaration ||
-            context.SemanticModel.GetSymbolInfo(typeDeclaration, token).Symbol is not INamedTypeSymbol named)
+            context.SemanticModel.GetDeclaredSymbol(typeDeclaration, token) is not { } named)
             return default;
 
         SmallList<MemberSymbol> fields = [];
@@ -112,6 +108,8 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 
         for (var name = attribute.Name; name is QualifiedNameSyntax qualifiedName; name = qualifiedName.Left)
         {
+            token.ThrowIfCancellationRequested();
+
             if (qualifiedName.Right is IdentifierNameSyntax rightIdentifier)
                 switch (rightIdentifier.Identifier.Text)
                 {
@@ -139,6 +137,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             fields.Add(new(type, genericName.Identifier.Text));
         }
 
+        fields.Reverse();
         return (named, fields, mutablePublicly, true);
     }
 

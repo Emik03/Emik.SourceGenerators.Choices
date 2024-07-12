@@ -174,14 +174,14 @@ sealed partial record Scaffolder(
         PolyfillAttributes
             ? CSharp(
                 $"""
-                    {Annotation}
+                     {Annotation}
                  {(MutablePublicly switch
                  {
-                             true => nameof(Accessibility.Public),
-                             false => nameof(Accessibility.Private),
-                             null => null,
+                     true => nameof(Accessibility.Public),
+                     false => nameof(Accessibility.Private),
+                     null => null,
                  }).YieldValued()
-                .Concat(Members.Select(x => x.Name))
+                .Concat(Symbols.Select(x => x.Name))
                 .Prepend("Choice")
                 .Reverse()
                 .Index()
@@ -459,7 +459,7 @@ sealed partial record Scaffolder(
                              .Select((x, i) => $"{i} => {
                                  (IsEmpty(x) || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(GetHashCode)))
                                      ? "0"
-                                     : $"{PropertyName(x)}{NullableSuppression(x)}.GetHashCode()")},")
+                                     : $"{PrefixCast(x)}.GetHashCode()")},")
                              .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       });
@@ -503,7 +503,8 @@ sealed partial record Scaffolder(
                       switch ({{Discriminator}})
                       {
                           {{Symbols
-                              .Select((x, i) => $"case {i}:\n                on{PropertyName(x)}?.Invoke({(IsEmpty(x) ? "" : PropertyName(x))}{NullableSuppression(x)});\n                return this;")
+                              .Select((x, i) => $"case {i}:\n                on{PropertyName(x)
+                              }?.Invoke({(IsEmpty(x) ? "" : PrefixCast(x))});\n                return this;")
                               .Conjoin("\n            ")}}
                           default: {{Throw}};
                       }
@@ -532,7 +533,7 @@ sealed partial record Scaffolder(
                       switch
                       {
                           {{Symbols
-                              .Select((x, i) => $"{i} => on{PropertyName(x)}({(IsEmpty(x) ? "" : PropertyName(x))}{NullableSuppression(x)}),")
+                              .Select((x, i) => $"{i} => on{PropertyName(x)}({(IsEmpty(x) ? "" : PrefixCast(x))}),")
                               .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       };
@@ -540,7 +541,6 @@ sealed partial record Scaffolder(
         );
 
     public string DeclareUnderlyingValue =>
-        Members.All(x => x.Type is not { TypeKind: TypeKind.Pointer } and not { IsRefLikeType: true }) &&
         FindCommonBaseType is { } common
             ? CSharp(
                 $$"""
@@ -557,9 +557,7 @@ sealed partial record Scaffolder(
                           => {{Discriminator}}
                           switch
                           {
-                              {{Symbols
-                                 .Select((x, i) => $"{i} => {PropertyName(x)},")
-                                 .Conjoin("\n            ")}}
+                              {{Symbols.Select((x, i) => $"{i} => {PrefixCast(x)},").Conjoin("\n            ")}}
                               _ => {{Throw}},
                           };
 
@@ -600,13 +598,16 @@ sealed partial record Scaffolder(
 
     [Pure]
     ISymbol? FindCommonBaseType =>
-        Members
+        Symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, Symbols.First.Type)) ? Symbols.First.Type :
+        Symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? null : Symbols
            .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
            .Aggregate(IntersectWith)
            .OrderBy(x => x.SpecialType is SpecialType.System_Object)
            .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
            .ThenBy(x => x.IsInterface())
            .ThenByDescending(x => Inheritance(x).Count())
+           .ThenByDescending(IsStandardLibrary)
+           .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal)
            .FirstOrDefault();
 
     [Pure]
@@ -684,6 +685,16 @@ sealed partial record Scaffolder(
         x.Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         x.Type.IsUnmanagedPrimitive() ||
         x.Type.GetMembers().Any(x => IsOperator(x, "op_Equality"));
+
+    [Pure]
+    static bool IsStandardLibrary(ITypeSymbol x)
+    {
+        for (var name = x.ContainingNamespace; name.ContainingNamespace is { } containingName; name = containingName)
+            if (name is { Name: nameof(System) } && containingName.IsGlobalNamespace)
+                return true;
+
+        return false;
+    }
 
     [Pure]
     static bool IsReference(MemberSymbol x) => x.Type.IsReferenceType;
@@ -772,8 +783,8 @@ sealed partial record Scaffolder(
     [Pure]
     string Comparison(MemberSymbol x) =>
         IsEmpty(x) ? CSharp("true") :
-        IsOperatorComparable(x) ? CSharp($"left.{PropertyName(x)} > right.{PropertyName(x)}") :
-        IsInterfaceComparable(x) ? CSharp($"left.{PropertyName(x)}{NullableSuppression(x)}.CompareTo(right.{PropertyName(x)}) > 0") :
+        IsOperatorComparable(x) ? CSharp($"left.{PrefixCast(x)} > right.{PrefixCast(x)}") :
+        IsInterfaceComparable(x) ? CSharp($"left.{PrefixCast(x)}{NullableSuppression(x)}.CompareTo(right.{PrefixCast(x)}) > 0") :
         CSharp("false");
 
     [Pure]
@@ -1037,15 +1048,22 @@ sealed partial record Scaffolder(
                 : hasGenericReturn ? $"<{x.Type}, {ResultGeneric}>" : $"<{x.Type}>")}";
 
     [Pure]
-    string DeclareNestedClass(string x, (int Index, string Item) y) =>
-        CSharp(
+    string DeclareNestedClass(string x, (int Index, string Item) y)
+    {
+        var choiceIndex = Symbols.Count + (MutablePublicly is not null).ToByte();
+        var isChoiceClass = y.Index == choiceIndex;
+        var isVariantClass = !isChoiceClass && y.Index != choiceIndex - 1;
+
+        return CSharp(
             $$"""
-                  private {{(y.Index is 0 ? "sealed" : "static")}} class {{
-                  y.Item}}{{(y.Index is 0 ? " : global::System.Attribute" : "")}}
-                  {{{(y.Index == Members.Count + (MutablePublicly is not null).ToByte() ? "" : "\n        ")}}{{x}}
+                  {{(isChoiceClass ? "private" : "internal")}} {{(y.Index is 0 ? "sealed" : "static")
+                  }} class {{y.Item}}{{(isVariantClass ? $"<T{y.Item}Discard>" : "")
+                  }}{{(y.Index is 0 ? " : global::System.Attribute" : "")}}
+                  {{{(y.Index is 0 ? "" : $"\n{x.SplitLines().Select(x => $"    {x}").Conjoin("\n")}")}}
                   }
               """
         );
+    }
 
     [Pure]
     string DeclareFieldWithExplicitOffset(MemberSymbol x) =>
@@ -1063,8 +1081,8 @@ sealed partial record Scaffolder(
     [Pure]
     string Equality(MemberSymbol x) =>
         IsEmpty(x) ? CSharp("true") :
-        IsOperatorEquatable(x) ? CSharp($"left.{PropertyName(x)} == right.{PropertyName(x)}") :
-        IsInterfaceEquatable(x) ? CSharp($"left.{PropertyName(x)}{NullableSuppression(x)}.Equals(right.{PropertyName(x)})") :
+        IsOperatorEquatable(x) ? CSharp($"left.{PrefixCast(x)} == right.{PrefixCast(x)}") :
+        IsInterfaceEquatable(x) ? CSharp($"left.{PrefixCast(x)}{NullableSuppression(x)}.Equals(right.{PrefixCast(x)})") :
         CSharp("false");
 
     [Pure]
@@ -1081,6 +1099,12 @@ sealed partial record Scaffolder(
                  """
             )
             : "";
+
+    [Pure]
+    string PrefixCast(MemberSymbol x) =>
+        IsEmpty(x) ? CSharp($"default({x.Type})") :
+        Prefix(x) is not ReferenceField and var prefix ? $"{prefix}{NullableSuppression(x)}" :
+        $"(({x.Type}){ReferenceField}{NullableSuppression(x)})";
 
     [Pure]
     string Prefix(MemberSymbol x) =>
@@ -1106,7 +1130,7 @@ sealed partial record Scaffolder(
             ? $"\"{PropertyName(x)}\""
             : CSharp(
                 $$"""
-                  $"{nameof({{PropertyName(x)}})}({{{PropertyName(x)}}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
+                  $"{nameof({{PropertyName(x)}})}({{{PrefixCast(x)}}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
                   """
             );
 
