@@ -541,7 +541,7 @@ sealed partial record Scaffolder(
         );
 
     public string DeclareUnderlyingValue =>
-        Signature.FindCommonBaseType(Symbols) is { } common
+        Signature.FindCommonBaseTypes(Symbols).FirstOrDefault() is { } common
             ? CSharp(
                 $$"""
                       /// <summary>

@@ -52,18 +52,21 @@ readonly record struct Signature(
         return forwarders.Where(IsValid);
     }
 
-    public static ISymbol? FindCommonBaseType(SmallList<MemberSymbol> symbols) =>
-        symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, symbols.First.Type)) ? symbols.First.Type :
-        symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? null : symbols
-           .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
-           .Aggregate(IntersectWith)
-           .OrderBy(x => x.SpecialType is SpecialType.System_Object)
-           .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
-           .ThenBy(x => x.IsInterface())
-           .ThenByDescending(x => Inheritance(x).Count())
-           .ThenByDescending(IsStandardLibrary)
-           .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal)
-           .FirstOrDefault();
+    public static IEnumerable<Extract> FindCommonBaseMembers(SmallList<MemberSymbol> symbols) =>
+        FindCommonBaseTypes(symbols).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtract(x, symbols.Count));
+
+    public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(SmallList<MemberSymbol> symbols) =>
+        symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, symbols.First.Type)) ? symbols.First.Type.Yield() :
+            symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ?
+                default(Once<ITypeSymbol>) : symbols
+                   .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
+                   .Aggregate(IntersectWith)
+                   .OrderBy(x => x.SpecialType is SpecialType.System_Object)
+                   .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
+                   .ThenBy(x => x.IsInterface())
+                   .ThenByDescending(x => Inheritance(x).Count())
+                   .ThenByDescending(IsStandardLibrary)
+                   .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal);
 
     [Pure]
     public static RefKind Kind(in MemberSymbol x) => Kind(x.Symbol);
@@ -250,29 +253,6 @@ readonly record struct Signature(
     }
 
     [Pure]
-    static IEnumerable<Extract> FindCommonBaseMembers(in SmallList<MemberSymbol> symbols)
-    {
-        var smalls = symbols
-           .Select(x => x.Type.BaseType.FindPathToNull(x => x.BaseType).Reverse().ToListLazily())
-           .ToSmallList();
-
-        var min = smalls.Min(x => x.Count);
-        var count = symbols.Count;
-
-        for (var i = 0; i < min; i++)
-            for (var j = 1; j < smalls.Count; j++)
-            {
-                if (!SameType(smalls.First[i], smalls[j][i]))
-                    break;
-
-                if (j == smalls.Count - 1)
-                    return smalls.First.Skip(i).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtract(x, count));
-            }
-
-        return [];
-    }
-
-    [Pure]
     static IEnumerable<Extract> GeneratedMethods(Extract symbol) =>
         (symbol switch
         {
@@ -296,3 +276,4 @@ readonly record struct Signature(
     static HashSet<Signature> ToSelf(IEnumerable<MemberSymbol>? except, IAssemblySymbol assembly) =>
         except.OrEmpty().Select(x => From(x.Type, assembly)).Filter().ToSet(s_signatures);
 }
+
