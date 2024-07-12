@@ -245,7 +245,7 @@ sealed partial record Scaffolder(
         );
 
     [Pure]
-    public string DeclareEqualityOperators =>
+    string DeclareEqualityOperators =>
         Named.IsRecord
             ? ""
             : CSharp(
@@ -478,7 +478,7 @@ sealed partial record Scaffolder(
         );
 
     [Pure]
-    public string DeclareMappers =>
+    string DeclareMappers =>
         CSharp(
             $$"""
 
@@ -542,26 +542,33 @@ sealed partial record Scaffolder(
               """
         );
 
-    public string DeclareUnderlyingValue =>
+    string DeclareUnderlyingValue =>
         Signature.FindCommonBaseTypes(Symbols).FirstOrDefault() is { } common
             ? CSharp(
-                $$"""
+                $"""
                       /// <summary>
                       /// Gets the underlying value.
                       /// </summary>
                       /// <returns>
                       /// The underlying value from this instance.
                       /// </returns>
-                      {{Annotation}}
-                      {{Pure}}
-                      {{AggressiveInlining}}
-                      public {{ReadOnlyIfStruct}}{{common}} GetUnderlyingValue()
-                          => {{Discriminator}}
-                          switch
-                          {
-                              {{Symbols.Select((x, i) => $"{i} => {PrefixCast(x)},").Conjoin("\n            ")}}
-                              _ => {{Throw}},
-                          };
+                      {Annotation}
+                      {Pure}
+                      {AggressiveInlining}
+                      public {ReadOnlyIfStruct}{common} GetUnderlyingValue()
+                          => {(Symbols.Count == Reference.Count
+                                    ? PrefixCast(Symbols[0])
+                                    : CSharp(
+                                        $$"""
+                                        {{Discriminator}}
+                                        switch
+                                        {
+                                            {{Symbols
+                                               .Select((x, i) => $"{i} => {PrefixCast(x)},")
+                                               .Conjoin("\n            ")}}
+                                            _ => {{Throw}},
+                                        }
+                                """))};
                   """
             )
             : "";
