@@ -5,7 +5,7 @@ namespace Emik.SourceGenerators.Choices;
 [Generator]
 public sealed class ExtendingGenerator : IIncrementalGenerator
 {
-    const int MinimumFields = 2;
+    const int MinimumMembers = 2;
 
     /// <summary>Executes this source generation based on given input.</summary>
     /// <remarks><para>
@@ -46,45 +46,83 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         params MemberSymbol[] members
     ) =>
         named is { IsTupleType: false } &&
-        members.Length >= MinimumFields &&
+        members.Length >= MinimumMembers &&
         (named, members.ToSmallList(), publiclyMutable, polyfillAttributes) is var raw &&
-        HasSufficientFields(raw)
+        HasSufficientMembers(raw)
             ? ((Scaffolder)raw).Result
             : null;
 
     /// <inheritdoc />
     void IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var dot = context.SyntaxProvider.CreateSyntaxProvider(IsHeavilyNested, DiscoverTypeParameters);
-        var org = context.SyntaxProvider.ForAttributeWithMetadataName(Of<AttributeGenerator>(), IsExtendable, Target);
+        var dot = context.SyntaxProvider.CreateSyntaxProvider(IsHeavilyNested, DiscoverDotDeclaration);
+        var org = context.SyntaxProvider.ForAttributeWithMetadataName(Of<AttributeGenerator>(), IsExtendable, DiscoverMembers);
         Register(context, dot);
         Register(context, org);
     }
 
+    /// <summary>Creates the generated source to the <see cref="SourceProductionContext"/>.</summary>
+    /// <param name="context">The context to register source code.</param>
+    /// <param name="raw">The values to base the source generation from.</param>
     static void Generate(SourceProductionContext context, Raw raw) => AddSource(context, ((Scaffolder)raw).Result);
 
+    /// <summary>
+    /// Registers the provider to the generator, which also includes
+    /// injecting the <see cref="RawEqualityComparer"/> and explicit filter.
+    /// </summary>
+    /// <param name="context">The context to register source code.</param>
+    /// <param name="values">The provider for generating source code.</param>
     static void Register(
         in IncrementalGeneratorInitializationContext context,
         in IncrementalValuesProvider<Raw> values
     ) =>
         context.RegisterSourceOutput(
-            values.WithComparer(RawEqualityComparer.Instance).WithTrackingName(nameof(Raw)).Where(HasSufficientFields),
+            values.WithComparer(RawEqualityComparer.Instance).WithTrackingName(nameof(Raw)).Where(HasSufficientMembers),
             Generate
         );
 
+    /// <summary>Determines whether the parameter <paramref name="x"/> is annotated correctly.</summary>
+    /// <param name="x">The parameter to check.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/>
+    /// is annotated correctly; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
     static bool HasAnnotatedCorrectly(Fold x) =>
-        x is ({ IsTupleType: false }, null or { IsTupleType: true, TupleElements.Length: >= MinimumFields }, _);
+        x is ({ IsTupleType: false }, null or { IsTupleType: true, TupleElements.Length: >= MinimumMembers }, _);
 
+    /// <summary>Determines whether the parameter <paramref name="x"/> has sufficient members.</summary>
+    /// <param name="x">The parameter to check.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/>
+    /// has sufficient members; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
-    static bool HasSufficientFields(Raw x) => x is ({ IsStatic: false }, { Count: >= MinimumFields }, _, _);
+    static bool HasSufficientMembers(Raw x) => x is ({ IsStatic: false }, { Count: >= MinimumMembers }, _, _);
 
+    /// <summary>Determines whether the parameter <paramref name="x"/> is extendable.</summary>
+    /// <param name="x">The parameter to check.</param>
+    /// <param name="_">The cancellation token, which is unused.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/>
+    /// is extendable; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
     static bool IsExtendable(SyntaxNode x, CancellationToken _ = default) =>
         x is TypeDeclarationSyntax { AttributeLists.Count: >= 1, Modifiers: var modifiers } and
             not InterfaceDeclarationSyntax &&
         modifiers.Any(SyntaxKind.PartialKeyword);
 
+    /// <summary>
+    /// Determines whether the parameter <paramref name="x"/> is heavily nested.
+    /// This refers to whether it is a candidate in dot-declaration syntax.
+    /// </summary>
+    /// <param name="x">The parameter to check.</param>
+    /// <param name="_">The cancellation token, which is unused.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/> is
+    /// a candidate in dot-declaration syntax; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
     static bool IsHeavilyNested(SyntaxNode x, CancellationToken _ = default) =>
         // Guarantees that at the minimum it involves: [Rest.Property<T1>.Property<T2>]
@@ -110,24 +148,14 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             },
         };
 
-    [Pure]
-    static Raw DiscoverFields(Fold x, CancellationToken _ = default)
-    {
-        var (type, named, mutablePublicly) = x;
-
-        var fields = named switch
-        {
-            { IsTupleType: true, TupleElements: { Length: > 1 } e } => Scaffolder.Decouple(e),
-            null => Scaffolder.Instances(type),
-            _ when Scaffolder.IsSystemTuple(named) => Scaffolder.Instances(named),
-            _ => default,
-        };
-
-        return (type, fields, mutablePublicly, false);
-    }
-
+    /// <summary>Extracts the members from the node's <see cref="AttributeSyntax"/>.</summary>
+    /// <param name="context">The syntax context.</param>
+    /// <param name="token">
+    /// The cancellation token used for cancelling the iteration over <see cref="QuailifiedNameSyntax"/> instances.
+    /// </param>
+    /// <returns>The extracted result, or <see langword="default"/> if the input is invalid.</returns>
     // ReSharper disable once CognitiveComplexity
-    static Raw DiscoverTypeParameters(GeneratorSyntaxContext context, CancellationToken token)
+    static Raw DiscoverDotDeclaration(GeneratorSyntaxContext context, CancellationToken token)
     {
         if (context.Node is not AttributeSyntax attribute ||
             attribute.TypeDeclaration() is not { } typeDeclaration ||
@@ -173,9 +201,29 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         return (named, fields, mutablePublicly, true);
     }
 
+    /// <summary>Extracts the members from the node.</summary>
+    /// <param name="context">The context to check the node from.</param>
+    /// <param name="token">The cancellation token used for interrupting the iteration of constructor arguments.</param>
+    /// <returns>The extracted result, or <see langword="default"/> if the input is invalid.</returns>
     [Pure]
-    static Raw Target(GeneratorAttributeSyntaxContext context, CancellationToken token)
+    static Raw DiscoverMembers(GeneratorAttributeSyntaxContext context, CancellationToken token)
     {
+        [Pure]
+        static Raw Extract(Fold x)
+        {
+            var (type, named, mutablePublicly) = x;
+
+            var fields = named switch
+            {
+                { IsTupleType: true, TupleElements: { Length: > 1 } e } => Scaffolder.Decouple(e),
+                null => Scaffolder.Instances(type),
+                _ when Scaffolder.IsSystemTuple(named) => Scaffolder.Instances(named),
+                _ => default,
+            };
+
+            return (type, fields, mutablePublicly, false);
+        }
+
         bool? mutablePublicly = null;
         INamedTypeSymbol? symbolSet = null;
 
@@ -191,9 +239,8 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             };
         }
 
-        return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, mutablePublicly) is var fold &&
-            HasAnnotatedCorrectly(fold)
-                ? DiscoverFields(fold, token)
+        return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, mutablePublicly) is var fold && HasAnnotatedCorrectly(fold)
+                ? Extract(fold)
                 : default;
     }
 }
