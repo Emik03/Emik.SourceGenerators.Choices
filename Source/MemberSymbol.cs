@@ -18,8 +18,18 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         : this(property.Type, property.Name, property) { }
 
     /// <summary>Gets a value indicating whether the member is static.</summary>
+    [Pure]
     public bool IsStatic => Symbol is { IsStatic: true };
 
+    /// <summary>Compares two <see cref="ITypeSymbol"/> instances.</summary>
+    /// <remarks><para>
+    /// As opposed to <see cref="TypeSymbolComparer.Equal"/>, this method also checks for the members
+    /// of <see cref="ITypeSymbol"/> instances if they are declared in source, since both instances
+    /// could have the same metadata name but come from different iterations of source code.
+    /// </para></remarks>
+    /// <param name="x">The first <see cref="ITypeSymbol"/> to compare.</param>
+    /// <param name="y">The second <see cref="ITypeSymbol"/> to compare.</param>
+    /// <returns>Whether the two <see cref="ITypeSymbol"/> instances are equal.</returns>
     [Pure]
     public static bool Equal(ITypeSymbol? x, ITypeSymbol? y)
     {
@@ -47,6 +57,10 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         return x is null ? y is null : ReferenceEquals(x, y) || y is not null && DifferentReferences(x, y);
     }
 
+    /// <summary>Hashes an <see cref="ITypeSymbol"/> instance.</summary>
+    /// <remarks><para>See remarks in <see cref="Equal"/> for more details.</para></remarks>
+    /// <param name="x">The <see cref="ITypeSymbol"/> to hash.</param>
+    /// <returns>The computed hash code.</returns>
     [Pure]
     public static int Hash(ITypeSymbol? x) =>
         x is null
@@ -82,6 +96,13 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         Name == other.Name &&
         Equal(Type, other.Type);
 
+    /// <summary>Checks for deep equality between two <see cref="MemberSymbol"/> instances.</summary>
+    /// <remarks><para>See remarks in <see cref="Equal"/> for more details.</para></remarks>
+    /// <param name="other">The other <see cref="MemberSymbol"/> to compare.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the two <see cref="MemberSymbol"/>
+    /// instances are equal; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
     public bool DeepEquals(MemberSymbol other) => Name == other.Name && Equal(Type, other.Type);
 
@@ -94,6 +115,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
             _ => TypeSymbolComparer.GetHashCode(Type) ^ StringComparer.Ordinal.GetHashCode(Name),
         };
 
+    /// <inheritdoc />
     public override string ToString() =>
         Symbol switch
         {
