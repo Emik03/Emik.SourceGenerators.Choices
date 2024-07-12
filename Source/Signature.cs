@@ -276,4 +276,3 @@ readonly record struct Signature(
     static HashSet<Signature> ToSelf(IEnumerable<MemberSymbol>? except, IAssemblySymbol assembly) =>
         except.OrEmpty().Select(x => From(x.Type, assembly)).Filter().ToSet(s_signatures);
 }
-
