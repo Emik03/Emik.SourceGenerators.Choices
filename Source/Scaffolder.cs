@@ -578,7 +578,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string Discriminator =>
-        _discriminator ??= Reference.Count != Symbols.Count ||
+        _discriminator ??= Symbols.Count != Reference.Count ||
             Symbols.Any(Members.Contains) ||
             Symbols.Select(x => x.Type).GroupDuplicates(TypeSymbolComparer.Default).Any()
                 ? DiscriminatorField
@@ -683,7 +683,10 @@ sealed partial record Scaffolder(
         x.Type.GetMembers().Any(x => IsOperator(x, "op_Equality"));
 
     [Pure]
-    static bool IsReference(MemberSymbol x) => x.Type.IsReferenceType;
+    static bool IsReference(MemberSymbol x) =>
+        x.Type is ITypeParameterSymbol { HasReferenceTypeConstraint: var constraint, ConstraintTypes: var types }
+            ? constraint || types is []
+            : x.Type.IsReferenceType;
 
     [Pure]
     static bool IsSingleSelf(ISymbol x, string expect) =>

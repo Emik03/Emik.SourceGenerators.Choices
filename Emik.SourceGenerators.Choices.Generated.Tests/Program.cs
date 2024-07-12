@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MPL-2.0
 using Emik.SourceGenerators.Choices.Generated.Tests;
 
-var a = DotKMModule.OfOther(new());
-var b = a.GetUnderlyingValue();
+Fruit fruit = 3;
 
-Console.WriteLine(b);
+[Choice.Apple<byte>.Pear<int>.Orange<BindingFlags>]
+sealed partial class Fruit;

@@ -33,28 +33,38 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public static bool Equal(ITypeSymbol? x, ITypeSymbol? y)
     {
+        static bool Generic(ITypeParameterSymbol x, ITypeParameterSymbol y) =>
+            x.ConstraintTypes.Length == y.ConstraintTypes.Length &&
+            x.MetadataName == y.MetadataName &&
+            NamespaceSymbolComparer.Equal(x.ContainingNamespace, y.ContainingNamespace);
+
         // Type symbols in source may vary in subtle but breaking ways.
         // We need to extensively make sure that everything remains the same.
         static bool ColdPath(ITypeSymbol x, ITypeSymbol y) =>
-            x.SpecialType is not SpecialType.None
-                ? x.SpecialType == y.SpecialType
-                : x.TypeKind == y.TypeKind &&
-                // We skip properties covered by SpecialType, TypeKind, in NamedTypeSymbolComparer, or always false.
-                x.DeclaredAccessibility == y.DeclaredAccessibility &&
-                x.IsRefLikeType == y.IsRefLikeType &&
-                x.IsUnmanagedType == y.IsUnmanagedType &&
-                x.IsReadOnly == y.IsReadOnly &&
-                x.IsRecord == y.IsRecord &&
-                TypeSymbolComparer.Equal(x, y) &&
-                Equal(x.BaseType, y.BaseType) &&
-                x.AllInterfaces.SequenceEqual(y.AllInterfaces, Equal) &&
-                x.GetMembers().SequenceEqual(y.GetMembers(), SymbolComparer.Default);
+            x is ITypeParameterSymbol genericX && y is ITypeParameterSymbol genericY ? Generic(genericX, genericY) :
+            x.SpecialType is not SpecialType.None ? x.SpecialType == y.SpecialType : x.TypeKind == y.TypeKind &&
+            // We skip properties covered by SpecialType, TypeKind, in NamedTypeSymbolComparer, or always false.
+            x.DeclaredAccessibility == y.DeclaredAccessibility &&
+            x.IsRefLikeType == y.IsRefLikeType &&
+            x.IsUnmanagedType == y.IsUnmanagedType &&
+            x.IsReadOnly == y.IsReadOnly &&
+            x.IsRecord == y.IsRecord &&
+            TypeSymbolComparer.Equal(x, y) &&
+            Equal(x.BaseType, y.BaseType) &&
+            x.AllInterfaces.SequenceEqual(y.AllInterfaces, Equal) &&
+            x.GetMembers().SequenceEqual(y.GetMembers(), SymbolComparer.Default);
 
         // A metadata name check is enough to determine if two type symbols are equal assuming they're compiled.
         static bool DifferentReferences(ITypeSymbol x, ITypeSymbol y) =>
             !x.IsInSource() ? !y.IsInSource() && TypeSymbolComparer.Equal(x, y) : y.IsInSource() && ColdPath(x, y);
 
-        return x is null ? y is null : ReferenceEquals(x, y) || y is not null && DifferentReferences(x, y);
+        var stopwatch = Stopwatch.StartNew();
+        var ret = x is null ? y is null : ReferenceEquals(x, y) || y is not null && DifferentReferences(x, y);
+
+        if (ret)
+            File.WriteAllText("/dev/pts/0", $"\n{x?.Name,14} vs {y?.Name,14} took {stopwatch.ToConciseString(),7}");
+
+        return ret;
     }
 
     /// <summary>Hashes an <see cref="ITypeSymbol"/> instance.</summary>
