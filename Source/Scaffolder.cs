@@ -483,7 +483,7 @@ sealed partial record Scaffolder(
             $$"""
 
 
-              {{DeclareUnderlyingValue}}    /// <summary>
+                  /// <summary>
                   /// Invokes the callback based on current variance.
                   /// </summary>
                   /// {{Symbols
@@ -537,6 +537,8 @@ sealed partial record Scaffolder(
                               .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       };
+
+              {{DeclareUnderlyingValue}}
               """
         );
 
@@ -560,8 +562,6 @@ sealed partial record Scaffolder(
                               {{Symbols.Select((x, i) => $"{i} => {PrefixCast(x)},").Conjoin("\n            ")}}
                               _ => {{Throw}},
                           };
-
-
                   """
             )
             : "";
