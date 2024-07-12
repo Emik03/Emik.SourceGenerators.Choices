@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices;
-#pragma warning disable MA0051
+
 // ReSharper disable SuggestBaseTypeForParameter
 /// <summary>Represents the signature of a member.</summary>
 /// <param name="Name">The name of the member.</param>
@@ -53,34 +53,8 @@ readonly record struct Signature(
     )
     {
         [Pure]
-        static Extract AsDirectExtractWithPrefix(ISymbol x, int count, string? element = null) =>
-            (x, Kind(x), Enumerable.Repeat(element, count).ToSmallList());
-
-        [Pure]
-        static HashSet<Extract> Add(
-            in SmallList<MemberSymbol> symbols,
-            IAssemblySymbol assembly,
-            HashSet<Signature> exists
-        )
-        {
-            HashSet<Extract> set = new(s_extracts);
-
-            foreach (var member in symbols.First.Type.GetMembers())
-                if (From(member, assembly) is { } signature)
-                    signature.Next(symbols, set, exists, assembly, member);
-
-            return set;
-        }
-
-        static HashSet<ITypeSymbol> IntersectWith(HashSet<ITypeSymbol> x, HashSet<ITypeSymbol> y)
-        {
-            x.IntersectWith(y);
-            return x;
-        }
-
-        [Pure]
         static IEnumerable<Extract> FindCommonBaseMembers(SmallList<MemberSymbol> symbols) =>
-            FindCommonBaseTypes(symbols).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtractWithPrefix(x, symbols.Count));
+            FindCommonBaseTypes(symbols).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtract(x, symbols.Count));
 
         [Pure]
         static IEnumerable<Extract> GeneratedMethods(Extract symbol) =>
@@ -91,26 +65,7 @@ readonly record struct Signature(
                 _ => default,
             })
            .Filter()
-           .Select(AsDirectExtractWithPrefix);
-
-        [Pure]
-        static IEnumerable<ITypeSymbol> FindCommonBaseTypes(SmallList<MemberSymbol> symbols) =>
-            symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, symbols.First.Type)) ?
-                symbols.First.Type.Yield() :
-                symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ?
-                    default(Once<ITypeSymbol>) : symbols
-                       .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
-                       .Aggregate(IntersectWith)
-                       .OrderBy(x => x.SpecialType is SpecialType.System_Object)
-                       .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
-                       .ThenBy(x => x.IsInterface())
-                       .ThenByDescending(x => Inheritance(x).Count())
-                       .ThenByDescending(IsStandardLibrary)
-                       .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal);
-
-        [Pure]
-        static IEnumerable<ITypeSymbol> Inheritance(ITypeSymbol x) =>
-            x.FindPathToNull(x => x.BaseType).Concat(x.AllInterfaces);
+           .Select(AsDirectExtract);
 
         [Pure]
         static HashSet<Signature> ToSelf(IEnumerable<MemberSymbol>? except, IAssemblySymbol assembly) =>
@@ -131,6 +86,24 @@ readonly record struct Signature(
 
         return forwarders.Where(IsValid);
     }
+
+    /// <summary>Finds all common base types for the set of <see cref="MemberSymbol"/> instances.</summary>
+    /// <param name="symbols">The set of <see cref="MemberSymbol"/> instances.</param>
+    /// <returns>All common base types in descending order of specificity.</returns>
+    [Pure]
+    public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(SmallList<MemberSymbol> symbols) =>
+        symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, symbols.First.Type)) ?
+            symbols.First.Type.Yield() :
+            symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ?
+                default(Once<ITypeSymbol>) : symbols
+                   .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
+                   .Aggregate(IntersectWith)
+                   .OrderBy(x => x.SpecialType is SpecialType.System_Object)
+                   .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
+                   .ThenBy(x => x.IsInterface())
+                   .ThenByDescending(x => Inheritance(x).Count())
+                   .ThenByDescending(IsStandardLibrary)
+                   .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal);
 
     /// <summary>Gets the <see cref="RefKind"/> of the <see cref="ISymbol"/>.</summary>
     /// <param name="x">The <see cref="ISymbol"/> to get the <see cref="RefKind"/> of.</param>
@@ -252,43 +225,6 @@ readonly record struct Signature(
         }
     }
 
-    /// <summary>Steps through the next <see cref="ISymbol"/>.</summary>
-    /// <param name="symbols">The set of symbols to compare.</param>
-    /// <param name="set">The set of extracted signatures.</param>
-    /// <param name="exists">The set of existing signatures.</param>
-    /// <param name="assembly">The <see cref="IAssemblySymbol"/> to provide accessibility context.</param>
-    /// <param name="member">The next <see cref="ISymbol"/> to process.</param>
-    void Next(
-        in SmallList<MemberSymbol> symbols,
-        HashSet<Extract> set,
-        HashSet<Signature> exists,
-        IAssemblySymbol assembly,
-        ISymbol member
-    )
-    {
-        [Pure]
-        static RefKind Min(RefKind left, RefKind right) =>
-            left is RefKind.None || right is RefKind.None ? RefKind.None :
-            left is RefKind.Ref || right is RefKind.Ref ? RefKind.Ref : RefKind.RefReadOnly;
-
-        SmallList<string?> small = InterfaceDeclaration(member);
-        var kind = Kind(symbols.First.Symbol);
-
-        for (var i = 1; i < symbols.Count; i++)
-        {
-            var current = symbols[i];
-
-            if (!IsIn(current, assembly, out var interfaceDeclaration))
-                break;
-
-            kind = Min(kind, Kind(current.Symbol));
-            small.Add(interfaceDeclaration);
-
-            if (i == symbols.Count - 1 && !exists.Contains(this))
-                set.Add((member, kind, small));
-        }
-    }
-
     /// <summary>Determines if any base type of <paramref name="x"/> is <paramref name="y"/>.</summary>
     /// <param name="x">The <see cref="ITypeSymbol"/> to check all base types of.</param>
     /// <param name="y">The <see cref="ITypeSymbol"/> to compare against.</param>
@@ -372,4 +308,88 @@ readonly record struct Signature(
     /// <returns>The <see cref="Extract"/> of the parameter <paramref name="x"/>.</returns>
     [Pure]
     static Extract AsDirectExtract(ISymbol x) => (x, Kind(x), default);
+
+    /// <summary>Converts the <see cref="ISymbol"/> to the <see cref="Extract"/>.</summary>
+    /// <param name="x">The <see cref="ISymbol"/> to convert.</param>
+    /// <param name="count">The number of symbols.</param>
+    /// <param name="element">The interface prefix.</param>
+    /// <returns>The <see cref="Extract"/> of the parameter <paramref name="x"/>.</returns>
+    [Pure]
+    static Extract AsDirectExtract(ISymbol x, int count, string? element = null) =>
+        (x, Kind(x), Enumerable.Repeat(element, count).ToSmallList());
+
+    /// <summary>Gets the set of <see cref="Extract"/> from the <paramref name="symbols"/>.</summary>
+    /// <param name="symbols">The list of symbols.</param>
+    /// <param name="assembly">The <see cref="IAssemblySymbol"/> to provide accessibility context.</param>
+    /// <param name="exists">The set of signatures that already exist.</param>
+    /// <returns>The set of <see cref="Extract"/> from the parameter <paramref name="symbols"/>.</returns>
+    [Pure]
+    static HashSet<Extract> Add(
+        in SmallList<MemberSymbol> symbols,
+        IAssemblySymbol assembly,
+        HashSet<Signature> exists
+    )
+    {
+        HashSet<Extract> set = new(s_extracts);
+
+        foreach (var member in symbols.First.Type.GetMembers())
+            if (From(member, assembly) is { } signature)
+                signature.Next(symbols, set, exists, assembly, member);
+
+        return set;
+    }
+
+    /// <summary>Intersects the first set of <see cref="ITypeSymbol"/> instances with the second.</summary>
+    /// <param name="x">The first set of <see cref="ITypeSymbol"/> instances to mutate.</param>
+    /// <param name="y">The second set of <see cref="ITypeSymbol"/> instances to enumerate.</param>
+    /// <returns>The parameter <paramref name="x"/> after being intersected with <paramref name="y"/>.</returns>
+    static HashSet<ITypeSymbol> IntersectWith(HashSet<ITypeSymbol> x, HashSet<ITypeSymbol> y)
+    {
+        x.IntersectWith(y);
+        return x;
+    }
+
+    /// <summary>Gets all of the base types and interfaces at all levels, including itself.</summary>
+    /// <param name="x">The <see cref="ITypeSymbol"/> to get the types of.</param>
+    /// <returns>The enumeration of all base types and interfaces of the parameter <paramref name="x"/>.</returns>
+    [Pure]
+    static IEnumerable<ITypeSymbol> Inheritance(ITypeSymbol x) =>
+        x.FindPathToNull(x => x.BaseType).Concat(x.AllInterfaces);
+
+    /// <summary>Steps through the next <see cref="ISymbol"/>.</summary>
+    /// <param name="symbols">The set of symbols to compare.</param>
+    /// <param name="set">The set of extracted signatures.</param>
+    /// <param name="exists">The set of existing signatures.</param>
+    /// <param name="assembly">The <see cref="IAssemblySymbol"/> to provide accessibility context.</param>
+    /// <param name="member">The next <see cref="ISymbol"/> to process.</param>
+    void Next(
+        in SmallList<MemberSymbol> symbols,
+        HashSet<Extract> set,
+        HashSet<Signature> exists,
+        IAssemblySymbol assembly,
+        ISymbol member
+    )
+    {
+        [Pure]
+        static RefKind Min(RefKind left, RefKind right) =>
+            left is RefKind.None || right is RefKind.None ? RefKind.None :
+            left is RefKind.Ref || right is RefKind.Ref ? RefKind.Ref : RefKind.RefReadOnly;
+
+        SmallList<string?> small = InterfaceDeclaration(member);
+        var kind = Kind(symbols.First.Symbol);
+
+        for (var i = 1; i < symbols.Count; i++)
+        {
+            var current = symbols[i];
+
+            if (!IsIn(current, assembly, out var interfaceDeclaration))
+                break;
+
+            kind = Min(kind, Kind(current.Symbol));
+            small.Add(interfaceDeclaration);
+
+            if (i == symbols.Count - 1 && !exists.Contains(this))
+                set.Add((member, kind, small));
+        }
+    }
 }
