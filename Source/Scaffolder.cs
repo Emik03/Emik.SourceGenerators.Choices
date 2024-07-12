@@ -541,7 +541,7 @@ sealed partial record Scaffolder(
         );
 
     public string DeclareUnderlyingValue =>
-        FindCommonBaseType is { } common
+        Signature.FindCommonBaseType(Symbols) is { } common
             ? CSharp(
                 $$"""
                       /// <summary>
@@ -595,20 +595,6 @@ sealed partial record Scaffolder(
 
     [Pure]
     HashSet<MemberSymbol> Members { get; } = Named.GetMembers().Select(MemberSymbol.DeconstructFrom).Filter().ToSet();
-
-    [Pure]
-    ISymbol? FindCommonBaseType =>
-        Symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, Symbols.First.Type)) ? Symbols.First.Type :
-        Symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? null : Symbols
-           .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
-           .Aggregate(IntersectWith)
-           .OrderBy(x => x.SpecialType is SpecialType.System_Object)
-           .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
-           .ThenBy(x => x.IsInterface())
-           .ThenByDescending(x => Inheritance(x).Count())
-           .ThenByDescending(IsStandardLibrary)
-           .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal)
-           .FirstOrDefault();
 
     [Pure]
     SmallList<MemberSymbol> Reference { get; } = Symbols.Omit(IsUnmanaged).Where(IsReference).ToSmallList();
@@ -685,16 +671,6 @@ sealed partial record Scaffolder(
         x.Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         x.Type.IsUnmanagedPrimitive() ||
         x.Type.GetMembers().Any(x => IsOperator(x, "op_Equality"));
-
-    [Pure]
-    static bool IsStandardLibrary(ITypeSymbol x)
-    {
-        for (var name = x.ContainingNamespace; name.ContainingNamespace is { } containingName; name = containingName)
-            if (name is { Name: nameof(System) } && containingName.IsGlobalNamespace)
-                return true;
-
-        return false;
-    }
 
     [Pure]
     static bool IsReference(MemberSymbol x) => x.Type.IsReferenceType;
@@ -1133,14 +1109,4 @@ sealed partial record Scaffolder(
                   $"{nameof({{PropertyName(x)}})}({{{PrefixCast(x)}}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
                   """
             );
-
-    [Pure]
-    static IEnumerable<ITypeSymbol> Inheritance(ITypeSymbol x) =>
-        x.FindPathToNull(x => x.BaseType).Concat(x.AllInterfaces);
-
-    static HashSet<ITypeSymbol> IntersectWith(HashSet<ITypeSymbol> x, HashSet<ITypeSymbol> y)
-    {
-        x.IntersectWith(y);
-        return x;
-    }
 }

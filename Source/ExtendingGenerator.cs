@@ -122,7 +122,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
                     default: return default;
                 }
 
-            if (qualifiedName.Left is IdentifierNameSyntax leftIdentifier)
+            if (qualifiedName is { Left: IdentifierNameSyntax leftIdentifier, Right: not GenericNameSyntax })
                 if (leftIdentifier.Identifier.Text is "Choice")
                     break;
                 else
@@ -131,7 +131,8 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             if (mutablePublicly is not null ||
                 qualifiedName.Right is not GenericNameSyntax genericName ||
                 genericName.TypeArgumentList.Arguments is not [var typeArgument] ||
-                context.SemanticModel.GetSymbolInfo(typeArgument, token).Symbol is not ITypeSymbol type)
+                (context.SemanticModel.GetDeclaredSymbolSafe(typeArgument, token) ??
+                    context.SemanticModel.GetSymbolSafe(typeArgument, token)) is not ITypeSymbol type)
                 return default;
 
             fields.Add(new(type, genericName.Identifier.Text));

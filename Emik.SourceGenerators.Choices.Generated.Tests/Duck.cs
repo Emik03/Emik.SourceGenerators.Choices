@@ -35,5 +35,5 @@ partial class KMModule
     readonly byte _discriminator;
 }
 
-[Choice.Public.Regular<KMBombModule>.Needy<KMNeedyModule>]
+[Choice.Regular<KMBombModule>.Needy<KMNeedyModule>.Other<Component>]
 partial class DotKMModule;

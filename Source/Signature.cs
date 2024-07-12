@@ -46,11 +46,24 @@ readonly record struct Signature(
         var forwarders = Add(symbols, assembly, signatures);
 
         forwarders.UnionWith(new IntersectedInterfaces(symbols, named.IsReadOnly).Members);
-        forwarders.UnionWith(FindCommonBaseTypes(symbols));
+        forwarders.UnionWith(FindCommonBaseMembers(symbols));
         forwarders.ExceptWith(forwarders.SelectMany(GeneratedMethods).Filter());
 
         return forwarders.Where(IsValid);
     }
+
+    public static ISymbol? FindCommonBaseType(SmallList<MemberSymbol> symbols) =>
+        symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, symbols.First.Type)) ? symbols.First.Type :
+        symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? null : symbols
+           .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
+           .Aggregate(IntersectWith)
+           .OrderBy(x => x.SpecialType is SpecialType.System_Object)
+           .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
+           .ThenBy(x => x.IsInterface())
+           .ThenByDescending(x => Inheritance(x).Count())
+           .ThenByDescending(IsStandardLibrary)
+           .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal)
+           .FirstOrDefault();
 
     [Pure]
     public static RefKind Kind(in MemberSymbol x) => Kind(x.Symbol);
@@ -185,6 +198,16 @@ readonly record struct Signature(
         x.ReferenceTypeConstraintNullableAnnotation == y.ReferenceTypeConstraintNullableAnnotation;
 
     [Pure]
+    static bool IsStandardLibrary(ITypeSymbol x)
+    {
+        for (var name = x.ContainingNamespace; name.ContainingNamespace is { } containingName; name = containingName)
+            if (name is { Name: nameof(System) } && containingName.IsGlobalNamespace)
+                return true;
+
+        return false;
+    }
+
+    [Pure]
     static bool SameType(IParameterSymbol left, IParameterSymbol right) => SameType(left.Type, right.Type);
 
     [Pure]
@@ -220,8 +243,14 @@ readonly record struct Signature(
         return set;
     }
 
+    static HashSet<ITypeSymbol> IntersectWith(HashSet<ITypeSymbol> x, HashSet<ITypeSymbol> y)
+    {
+        x.IntersectWith(y);
+        return x;
+    }
+
     [Pure]
-    static IEnumerable<Extract> FindCommonBaseTypes(in SmallList<MemberSymbol> symbols)
+    static IEnumerable<Extract> FindCommonBaseMembers(in SmallList<MemberSymbol> symbols)
     {
         var smalls = symbols
            .Select(x => x.Type.BaseType.FindPathToNull(x => x.BaseType).Reverse().ToListLazily())
@@ -253,6 +282,10 @@ readonly record struct Signature(
         })
        .Filter()
        .Select(AsDirectExtract);
+
+    [Pure]
+    static IEnumerable<ITypeSymbol> Inheritance(ITypeSymbol x) =>
+        x.FindPathToNull(x => x.BaseType).Concat(x.AllInterfaces);
 
     [Pure]
     static RefKind Min(RefKind left, RefKind right) =>
