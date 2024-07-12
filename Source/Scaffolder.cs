@@ -1028,7 +1028,7 @@ sealed partial record Scaffolder(
     {
         var choiceIndex = Symbols.Count + (MutablePublicly is not null).ToByte();
         var isChoiceClass = y.Index == choiceIndex;
-        var isVariantClass = !isChoiceClass && y.Index != choiceIndex - 1;
+        var isVariantClass = !isChoiceClass && (MutablePublicly is null || y.Index != choiceIndex - 1);
 
         return CSharp(
             $$"""
