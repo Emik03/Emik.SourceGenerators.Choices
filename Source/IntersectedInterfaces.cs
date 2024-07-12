@@ -58,10 +58,7 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
 
         var interfaceDeclarations = interfaces.Select(x => $"{x}").ItemCanBeNull().ToSmallList();
 
-        return first
-           .GetMembers()
-           .Where(CanBeIncluded)
-           .Select(x => (Extract)(x, Signature.Kind(x), interfaceDeclarations));
+        return first.GetMembers().Where(CanBeIncluded).Select(x => (x, Signature.Kind(x), interfaceDeclarations));
     }
 
     HashSet<INamedTypeSymbol> Intersect(HashSet<INamedTypeSymbol> acc, MemberSymbol next)

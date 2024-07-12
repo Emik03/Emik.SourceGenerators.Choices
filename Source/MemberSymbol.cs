@@ -20,6 +20,46 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <summary>Gets a value indicating whether the member is static.</summary>
     public bool IsStatic => Symbol is { IsStatic: true };
 
+    [Pure]
+    public static bool Equal(ITypeSymbol? x, ITypeSymbol? y)
+    {
+        // Type symbols in source may vary in subtle but breaking ways.
+        // We need to extensively make sure that everything remains the same.
+        static bool ColdPath(ITypeSymbol x, ITypeSymbol y) =>
+            x.SpecialType is not SpecialType.None
+                ? x.SpecialType == y.SpecialType
+                : x.TypeKind == y.TypeKind &&
+                // We skip properties covered by SpecialType, TypeKind, in NamedTypeSymbolComparer, or always false.
+                x.DeclaredAccessibility == y.DeclaredAccessibility &&
+                x.IsRefLikeType == y.IsRefLikeType &&
+                x.IsUnmanagedType == y.IsUnmanagedType &&
+                x.IsReadOnly == y.IsReadOnly &&
+                x.IsRecord == y.IsRecord &&
+                TypeSymbolComparer.Equal(x, y) &&
+                Equal(x.BaseType, y.BaseType) &&
+                x.AllInterfaces.SequenceEqual(y.AllInterfaces, Equal) &&
+                x.GetMembers().SequenceEqual(y.GetMembers(), SymbolComparer.Default);
+
+        // A metadata name check is enough to determine if two type symbols are equal assuming they're compiled.
+        static bool DifferentReferences(ITypeSymbol x, ITypeSymbol y) =>
+            !x.IsInSource() ? !y.IsInSource() && TypeSymbolComparer.Equal(x, y) : y.IsInSource() && ColdPath(x, y);
+
+        return x is null ? y is null : ReferenceEquals(x, y) || y is not null && DifferentReferences(x, y);
+    }
+
+    [Pure]
+    public static int Hash(ITypeSymbol? x) =>
+        x is null
+            ? -1
+            : unchecked((int)x.SpecialType * Primes.Int16[^1] ^
+                (int)x.TypeKind * Primes.Int16[^2] ^
+                (int)x.DeclaredAccessibility * Primes.Int16[^3] ^
+                x.IsRefLikeType.ToByte() * Primes.Int16[^4] ^
+                x.IsUnmanagedType.ToByte() * Primes.Int16[^5] ^
+                x.IsReadOnly.ToByte() * Primes.Int16[^6] ^
+                x.IsRecord.ToByte() * Primes.Int16[^7] ^
+                TypeSymbolComparer.GetHashCode(x) * Primes.Int16[^8]);
+
     /// <summary>Creates a new instance of the <see cref="MemberSymbol"/> struct from the underlying symbol.</summary>
     /// <param name="symbol">The <see cref="ISymbol"/> to create the <see cref="MemberSymbol"/> from.</param>
     /// <returns>The new <see cref="MemberSymbol"/> instance.</returns>
@@ -35,10 +75,15 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     public bool Equals(MemberSymbol other) =>
         Symbol switch
         {
-            IFieldSymbol field => FieldSymbolComparer.Equal(field, other.Symbol as IFieldSymbol),
-            IPropertySymbol property => PropertySymbolComparer.Equal(property, other.Symbol as IPropertySymbol),
-            _ => TypeSymbolComparer.Equal(Type, other.Type) && Name == other.Name,
-        };
+            IFieldSymbol => other.Symbol is IFieldSymbol,
+            IPropertySymbol => other.Symbol is IPropertySymbol,
+            _ => other.Symbol is not IFieldSymbol and not IPropertySymbol,
+        } &&
+        Name == other.Name &&
+        Equal(Type, other.Type);
+
+    [Pure]
+    public bool DeepEquals(MemberSymbol other) => Name == other.Name && Equal(Type, other.Type);
 
     /// <inheritdoc />
     public override int GetHashCode() =>
