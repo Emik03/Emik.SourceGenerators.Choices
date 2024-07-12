@@ -10,10 +10,7 @@ sealed class RawEqualityComparer : IEqualityComparer<Raw>
     [Pure]
     public bool Equals(Raw x, Raw y)
     {
-        if (x.MutablePublicly != y.MutablePublicly)
-            return false;
-
-        if (x.Fields.Count != y.Fields.Count)
+        if (x.MutablePublicly != y.MutablePublicly || x.Fields.Count != y.Fields.Count)
             return false;
 
         // ReSharper disable once LoopCanBeConvertedToQuery
@@ -30,7 +27,17 @@ sealed class RawEqualityComparer : IEqualityComparer<Raw>
                 return false;
 
         return true;
-        // return Same(x, y) && SameMembers(x.Fields, y.Fields);
+    }
+
+    [Pure]
+    public int GetHashCode(Raw x)
+    {
+        var hash = BetterHashCode(x.MutablePublicly) ^ BetterHashCode(x.Named);
+
+        for (var i = 0; i < x.Fields.Count; i++)
+            hash ^= x.Fields[i].GetHashCode() * Primes.Index(i);
+
+        return hash;
     }
 
     [Pure]
@@ -72,15 +79,4 @@ sealed class RawEqualityComparer : IEqualityComparer<Raw>
         x.IsReadOnly.ToByte() * Primes.Int16[^6] ^
         x.IsRecord.ToByte() * Primes.Int16[^7] ^
         TypeSymbolComparer.GetHashCode(x) * Primes.Int16[^8];
-
-    [Pure]
-    public int GetHashCode(Raw x)
-    {
-        var hash = BetterHashCode(x.MutablePublicly) ^ BetterHashCode(x.Named);
-
-        for (var i = 0; i < x.Fields.Count; i++)
-            hash ^= x.Fields[i].GetHashCode() * Primes.Index(i);
-
-        return hash;
-    }
 }
