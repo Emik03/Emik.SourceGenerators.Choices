@@ -557,7 +557,7 @@ sealed partial record Scaffolder(
                       {AggressiveInlining}
                       public {ReadOnlyIfStruct}{common} GetUnderlyingValue()
                           => {(Symbols.Count == Reference.Count
-                                    ? PrefixCast(Symbols[0])
+                                    ? $"({common}){ReferenceField}!"
                                     : CSharp(
                                         $$"""
                                         {{Discriminator}}
@@ -568,7 +568,8 @@ sealed partial record Scaffolder(
                                                .Conjoin("\n            ")}}
                                             _ => {{Throw}},
                                         }
-                                """))};
+                                        """
+                                    ))};
                   """
             )
             : "";
