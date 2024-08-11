@@ -58,13 +58,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         static bool DifferentReferences(ITypeSymbol x, ITypeSymbol y) =>
             !x.IsInSource() ? !y.IsInSource() && TypeSymbolComparer.Equal(x, y) : y.IsInSource() && ColdPath(x, y);
 
-        var stopwatch = Stopwatch.StartNew();
-        var ret = x is null ? y is null : ReferenceEquals(x, y) || y is not null && DifferentReferences(x, y);
-
-        if (ret)
-            File.WriteAllText("/dev/pts/0", $"\n{x?.Name,14} vs {y?.Name,14} took {stopwatch.ToConciseString(),7}");
-
-        return ret;
+        return x is null ? y is null : ReferenceEquals(x, y) || y is not null && DifferentReferences(x, y);
     }
 
     /// <summary>Hashes an <see cref="ITypeSymbol"/> instance.</summary>
