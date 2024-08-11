@@ -34,3 +34,9 @@ partial class KMModule
 {
     readonly byte _discriminator;
 }
+
+[Choice.Regular<KMBombModule>.Needy<KMNeedyModule>.Other<Component>]
+partial class DotKMModule;
+
+[Choice.Apple<byte>.Pear<int>.Orange<BindingFlags>]
+sealed partial class DotFruit;

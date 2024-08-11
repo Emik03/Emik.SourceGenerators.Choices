@@ -1,24 +1,35 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices;
 
-sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProperty> Symbols, bool? MutablePublicly)
+sealed partial record Scaffolder(
+    INamedTypeSymbol Named,
+    SmallList<MemberSymbol> Symbols,
+    bool? MutablePublicly,
+    bool PolyfillAttributes
+)
 {
-    const int MinimumBoxedSize = 2, MinimumExplicitStructSize = 2, TupleGenericLimit = 8;
+    const int MinimumBoxedSize = 2;
+    const int MinimumExplicitStructSize = 2;
+    const int TupleGenericLimit = 8;
 
-    [StringSyntax("C#")]
-    const string
-        Action = "global::System.Action",
-        AggressiveInlining = "[global::System.Runtime.CompilerServices.MethodImpl(256)]",
-        DiscriminatorField = "_discriminator",
-        DiscriminatorProperty = "Discriminator",
-        Func = "global::System.Func",
-        Pure = "[global::System.Diagnostics.Contracts.PureAttribute]",
-        ReadOnly = "readonly ",
-        ReferenceField = "_reference",
-        ResultGeneric = "TMappingResult",
-        Suppression = "#pragma warning disable\n",
-        Throw = "throw new global::System.InvalidOperationException()",
-        UnmanagedField = "_unmanaged";
+    const string Action = "global::System.Action";
+    const string AggressiveInlining = "[global::System.Runtime.CompilerServices.MethodImpl(256)]";
+    const string DiscriminatorField = "_discriminator";
+    const string DiscriminatorProperty = "Discriminator";
+    const string Func = "global::System.Func";
+    const string Pure = "[global::System.Diagnostics.Contracts.PureAttribute]";
+    const string ReadOnly = "readonly ";
+    const string ReferenceField = "_reference";
+    const string ResultGeneric = "TMappingResult";
+    const string Suppression = "#pragma warning disable\n";
+    const string Throw = "throw new global::System.InvalidOperationException()";
+    const string UnmanagedField = "_unmanaged";
+
+    static readonly ConcurrentDictionary<string, int> s_nameCounter = new(StringComparer.Ordinal);
+
+    [ValueRange(Primes.Min, Primes.MaxInt16)]
+    readonly short _hash =
+        Primes.Index(s_nameCounter.GetOrAdd(Named.GetFullyQualifiedName(), _ => s_nameCounter.Count + 1));
 
     string? _discriminator, _source;
 
@@ -138,7 +149,8 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
               }}{{(Named.TypeArguments is [] ? "" : $"<{Named.TypeArguments.Conjoin()}>")
               }}{{DeclareInterfaces}}
               {
-              {{DeclareExplicitStruct
+              {{DeclarePolyfillAttributes
+              }}{{DeclareExplicitStruct
               }}{{Symbols.Select(DeclareDelegate).Conjoin("")
               }}{{DeclareDiscriminator}}
 
@@ -156,6 +168,29 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
               }
               """
         );
+
+    [Pure]
+    string DeclarePolyfillAttributes =>
+        PolyfillAttributes
+            ? CSharp(
+                $"""
+                     {Annotation}
+                 {(MutablePublicly switch
+                 {
+                     true => nameof(Accessibility.Public),
+                     false => nameof(Accessibility.Private),
+                     null => null,
+                 }).YieldValued()
+                .Concat(Symbols.Select(x => x.Name))
+                .Prepend("Choice")
+                .Reverse()
+                .Index()
+                .Aggregate("", DeclareNestedClass)}
+
+
+                 """
+            )
+            : "";
 
     string DeclareInterfaces =>
         Named.IsRefLikeType
@@ -210,7 +245,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         );
 
     [Pure]
-    public string DeclareEqualityOperators =>
+    string DeclareEqualityOperators =>
         Named.IsRecord
             ? ""
             : CSharp(
@@ -237,7 +272,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                                  .Conjoin("\n            ")}}
                               _ => {{Throw}},
                           });
-                      
+
                       /// <summary>
                       /// Determines whether the left-hand side is unequal to the right.
                       /// </summary>
@@ -282,8 +317,8 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             ? ""
             : CSharp(
                 $"""
-                 
-                 
+
+
                      /// <inheritdoc cref="object.Equals(object)"/>
                      {Annotation}
                      {Pure}
@@ -345,7 +380,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                              .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       });
-              
+
                   /// <summary>
                   /// Determines whether the left-hand side is greater than or equal to the right.
                   /// </summary>
@@ -360,7 +395,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                   {{AggressiveInlining}}
                   public static bool operator >=({{NullableName}} left, {{NullableName}} right)
                       => left == right || left > right;
-              
+
                   /// <summary>
                   /// Determines whether the left-hand side is less than the right.
                   /// </summary>
@@ -375,7 +410,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                   {{AggressiveInlining}}
                   public static bool operator <({{NullableName}} left, {{NullableName}} right)
                       => right > left;
-              
+
                   /// <summary>
                   /// Determines whether the left-hand side is less than or equal to the right.
                   /// </summary>
@@ -390,45 +425,45 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                   {{AggressiveInlining}}
                   public static bool operator <=({{NullableName}} left, {{NullableName}} right)
                       => right >= left;{{DeclareObjectEquals}}
-              
+
                   /// <inheritdoc />
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
                   public {{VirtualIfNonSealedRecordClass}}{{ReadOnlyIfStruct}}bool Equals({{NullableName}} other)
                       => this == other;
-              
+
                   /// <inheritdoc cref="IComparable.CompareTo(object)"/>
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}int CompareTo(object? obj)
                       => {{(Named.IsRefLikeType ? "-1" : $"obj is null ? 1 : obj is {Name} x ? CompareTo(x) : -1")}};
-              
+
                   /// <inheritdoc />
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}int CompareTo({{NullableName}} other)
                       =>{{(Named.IsReferenceType ? " other is null ? 1 :" : "")}} Equals(other) ? 0 : -1;
-              
+
                   /// <inheritdoc />
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}override int GetHashCode()
-                      => unchecked({{Discriminator}} * {{Primes.ElementAt(Xor(Name.GetDjb2HashCode()))}}) ^
+                      => unchecked({{Discriminator}} * {{_hash}}) ^
                       ({{Discriminator}} switch
                       {
                           {{Symbols
                              .Select((x, i) => $"{i} => {
                                  (IsEmpty(x) || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(GetHashCode)))
                                      ? "0"
-                                     : $"{PropertyName(x)}{NullableSuppression(x)}.GetHashCode()")},")
+                                     : $"{PrefixCast(x)}.GetHashCode()")},")
                              .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       });
-              
+
                   /// <inheritdoc />
                   {{Annotation}}
                   {{Pure}}
@@ -443,7 +478,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         );
 
     [Pure]
-    public string DeclareMappers =>
+    string DeclareMappers =>
         CSharp(
             $$"""
 
@@ -468,7 +503,8 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                       switch ({{Discriminator}})
                       {
                           {{Symbols
-                              .Select((x, i) => $"case {i}:\n                on{PropertyName(x)}?.Invoke({(IsEmpty(x) ? "" : PropertyName(x))}{NullableSuppression(x)});\n                return this;")
+                              .Select((x, i) => $"case {i}:\n                on{PropertyName(x)
+                              }?.Invoke({(IsEmpty(x) ? "" : PrefixCast(x))});\n                return this;")
                               .Conjoin("\n            ")}}
                           default: {{Throw}};
                       }
@@ -497,16 +533,52 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                       switch
                       {
                           {{Symbols
-                              .Select((x, i) => $"{i} => on{PropertyName(x)}({(IsEmpty(x) ? "" : PropertyName(x))}{NullableSuppression(x)}),")
+                              .Select((x, i) => $"{i} => on{PropertyName(x)}({(IsEmpty(x) ? "" : PrefixCast(x))}),")
                               .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       };
+
+              {{DeclareUnderlyingValue}}
               """
         );
 
+    string DeclareUnderlyingValue =>
+        Signature.FindCommonBaseTypes(Symbols).FirstOrDefault() is { } common
+            ? CSharp(
+                $"""
+                      /// <summary>
+                      /// Gets the underlying value.
+                      /// </summary>
+                      /// <returns>
+                      /// The underlying value from this instance.
+                      /// </returns>
+                      {Annotation}
+                      {Pure}
+                      {AggressiveInlining}
+                      public {ReadOnlyIfStruct}{common} GetUnderlyingValue()
+                          => {(Symbols.Count == Reference.Count
+                                    ? $"{(common.SpecialType is SpecialType.System_Object
+                                            ? ""
+                                            : $"({common})")}{ReferenceField}!"
+                                    : CSharp(
+                                        $$"""
+                                        {{Discriminator}}
+                                        switch
+                                        {
+                                            {{Symbols
+                                               .Select((x, i) => $"{i} => {PrefixCast(x)},")
+                                               .Conjoin("\n            ")}}
+                                            _ => {{Throw}},
+                                        }
+                                        """
+                                    ))};
+                  """
+            )
+            : "";
+
     [Pure]
     string Discriminator =>
-        _discriminator ??= Reference.Count != Symbols.Count ||
+        _discriminator ??= Symbols.Count != Reference.Count ||
             Symbols.Any(Members.Contains) ||
             Symbols.Select(x => x.Type).GroupDuplicates(TypeSymbolComparer.Default).Any()
                 ? DiscriminatorField
@@ -532,20 +604,16 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     string XmlName { get; } = XmlTypeName(Named);
 
     [Pure]
-    HashSet<FieldOrProperty> Members { get; } = Named
-       .GetMembers()
-       .Select(x => FieldOrProperty.TryCreate(x, out var res) ? res : (FieldOrProperty?)null)
-       .Filter()
-       .ToSet();
+    HashSet<MemberSymbol> Members { get; } = Named.GetMembers().Select(MemberSymbol.DeconstructFrom).Filter().ToSet();
 
     [Pure]
-    SmallList<FieldOrProperty> Reference { get; } = Symbols.Omit(IsUnmanaged).Where(IsReference).ToSmallList();
+    SmallList<MemberSymbol> Reference { get; } = Symbols.Omit(IsUnmanaged).Where(IsReference).ToSmallList();
 
     [Pure]
-    SmallList<FieldOrProperty> Rest { get; } = Symbols.Omit(IsUnmanaged).Omit(IsReference).ToSmallList();
+    SmallList<MemberSymbol> Rest { get; } = Symbols.Omit(IsUnmanaged).Omit(IsReference).ToSmallList();
 
     [Pure]
-    SmallList<FieldOrProperty> Unmanaged { get; } = Symbols.Where(IsUnmanaged).Omit(IsEmpty).ToSmallList();
+    SmallList<MemberSymbol> Unmanaged { get; } = Symbols.Where(IsUnmanaged).Omit(IsEmpty).ToSmallList();
 
     [Pure]
     public static bool IsSystemTuple([NotNullWhen(true)] ITypeSymbol? symbol) =>
@@ -557,25 +625,22 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         };
 
     [Pure]
-    public static SmallList<FieldOrProperty> Decouple(ImmutableArray<IFieldSymbol> fields) =>
+    public static SmallList<MemberSymbol> Decouple(ImmutableArray<IFieldSymbol> fields) =>
         (fields.Length is TupleGenericLimit &&
             fields[^1].Type is INamedTypeSymbol { IsTupleType: true, IsValueType: true, TupleElements: var tuple }
-                ? fields.Take(TupleGenericLimit - 1).Select(x => new FieldOrProperty(x)).Concat(Decouple(tuple))
-                : fields.Select(x => new FieldOrProperty(x))).ToSmallList();
+                ? fields.Take(TupleGenericLimit - 1).Select(x => new MemberSymbol(x)).Concat(Decouple(tuple))
+                : fields.Select(x => new MemberSymbol(x))).ToSmallList();
 
     [Pure]
-    public static Scaffolder From(Raw x) => new(x.Named, x.Fields, x.MutablePublicly);
-
-    [Pure]
-    public static SmallList<FieldOrProperty> Instances(INamespaceOrTypeSymbol x) =>
+    public static SmallList<MemberSymbol> Instances(INamespaceOrTypeSymbol x) =>
         x.GetMembers()
-           .Select(x => FieldOrProperty.TryCreate(x, out var res) ? res : (FieldOrProperty?)null)
+           .Select(MemberSymbol.DeconstructFrom)
            .Filter()
            .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] })
            .ToSmallList();
 
     [Pure]
-    static bool IsEmpty(FieldOrProperty x) =>
+    static bool IsEmpty(MemberSymbol x) =>
         x.Type is { BaseType.SpecialType: not SpecialType.System_Enum, IsValueType: true } type &&
         !type.IsUnmanagedPrimitive() &&
         type.GetMembers().All(IsEmpty);
@@ -587,15 +652,15 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             not IMethodSymbol { MethodKind: MethodKind.Constructor, Parameters: not [] };
 
     [Pure]
-    static bool IsInterfaceComparable(FieldOrProperty x) =>
+    static bool IsInterfaceComparable(MemberSymbol x) =>
         x.Type.GetMembers().Any(x => IsSingleSelf(x, nameof(IComparable.CompareTo)));
 
     [Pure]
-    static bool IsInterfaceEquatable(FieldOrProperty x) =>
+    static bool IsInterfaceEquatable(MemberSymbol x) =>
         x.Type.GetMembers().Any(x => IsSingleSelf(x, nameof(Equals)));
 
     [Pure]
-    static bool IsOperatorComparable(FieldOrProperty x) =>
+    static bool IsOperatorComparable(MemberSymbol x) =>
         x.Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         x.Type.IsUnmanagedPrimitive() ||
         x.Type.GetMembers().Any(x => IsOperator(x, "op_GreaterThan"));
@@ -612,13 +677,16 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         expect == name;
 
     [Pure]
-    static bool IsOperatorEquatable(FieldOrProperty x) =>
+    static bool IsOperatorEquatable(MemberSymbol x) =>
         x.Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         x.Type.IsUnmanagedPrimitive() ||
         x.Type.GetMembers().Any(x => IsOperator(x, "op_Equality"));
 
     [Pure]
-    static bool IsReference(FieldOrProperty x) => x.Type.IsReferenceType;
+    static bool IsReference(MemberSymbol x) =>
+        x.Type is ITypeParameterSymbol { HasReferenceTypeConstraint: var constraint, ConstraintTypes: var types }
+            ? constraint || types is []
+            : x.Type.IsReferenceType;
 
     [Pure]
     static bool IsSingleSelf(ISymbol x, string expect) =>
@@ -633,7 +701,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         NamedTypeSymbolComparer.Equal(type, other);
 
     [Pure]
-    static bool IsUnmanaged(FieldOrProperty x) => x.Type.IsUnmanagedType && x.Type is not ITypeParameterSymbol;
+    static bool IsUnmanaged(MemberSymbol x) => x.Type.IsUnmanagedType && x.Type is not ITypeParameterSymbol;
 
     [Pure]
     static bool IsUnoriginalMethod(ISymbol x, string name) =>
@@ -646,18 +714,15 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         } ||
         methodName != name;
 
-    [Pure]
-    static ushort Xor(int i) => (ushort)((ushort)(i >> sizeof(ushort) * BitsInByte) ^ (ushort)i);
-
     [MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
     static string CSharp([StringSyntax("C#")] string x) => x;
 
     [Pure]
-    static string NullableAnnotated(FieldOrProperty x) =>
+    static string NullableAnnotated(MemberSymbol x) =>
         $"{x.Type.WithNullableAnnotation(NullableAnnotation.Annotated)}";
 
     [Pure]
-    static string NullableSuppression(FieldOrProperty x) => x.Type.IsValueType ? "" : "!";
+    static string NullableSuppression(MemberSymbol x) => x.Type.IsValueType ? "" : "!";
 
     [Pure]
     static string WrapNamespace(string acc, ISymbol next) =>
@@ -688,31 +753,31 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     }
 
     [Pure]
-    bool HasConflict(FieldOrProperty x) => Symbols.Where(y => TypeSymbolComparer.Equal(x.Type, y.Type)).Skip(1).Any();
+    bool HasConflict(MemberSymbol x) => Symbols.Where(y => TypeSymbolComparer.Equal(x.Type, y.Type)).Skip(1).Any();
 
     [Pure]
-    bool IsNoninitial(FieldOrProperty x) =>
+    bool IsNoninitial(MemberSymbol x) =>
         Symbols.Where(y => TypeSymbolComparer.Equal(x.Type, y.Type)).Skip(1).Contains(x);
 
     [Pure]
-    bool SkipOperator(FieldOrProperty x) => x.Type.BaseType is null || HasConflict(x) || IsNoninitial(x);
+    bool SkipOperator(MemberSymbol x) => x.Type.BaseType is null || HasConflict(x) || IsNoninitial(x);
 
     [Pure]
-    int Inheritance((FieldOrProperty Field, int Index) tuple) =>
+    int Inheritance((MemberSymbol Field, int Index) tuple) =>
         Rest.Count(
             x => tuple.Field.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, TypeSymbolComparer.Default) ||
                 tuple.Field.Type.AllInterfaces.Contains(x.Type, TypeSymbolComparer.Default)
         );
 
     [Pure]
-    string Comparison(FieldOrProperty x) =>
+    string Comparison(MemberSymbol x) =>
         IsEmpty(x) ? CSharp("true") :
-        IsOperatorComparable(x) ? CSharp($"left.{PropertyName(x)} > right.{PropertyName(x)}") :
-        IsInterfaceComparable(x) ? CSharp($"left.{PropertyName(x)}{NullableSuppression(x)}.CompareTo(right.{PropertyName(x)}) > 0") :
+        IsOperatorComparable(x) ? CSharp($"left.{PrefixCast(x)} > right.{PrefixCast(x)}") :
+        IsInterfaceComparable(x) ? CSharp($"left.{PrefixCast(x)}{NullableSuppression(x)}.CompareTo(right.{PrefixCast(x)}) > 0") :
         CSharp("false");
 
     [Pure]
-    string DeclareAlternativeConstructor(FieldOrProperty x, bool conflict) =>
+    string DeclareAlternativeConstructor(MemberSymbol x, bool conflict) =>
         !conflict &&
         x.Type switch
         {
@@ -742,7 +807,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             : "";
 
     [Pure]
-    string DeclareAlternativeFactory(FieldOrProperty x, string discriminator)
+    string DeclareAlternativeFactory(MemberSymbol x, string discriminator)
     {
         var parameters = x.Type switch
         {
@@ -776,7 +841,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     }
 
     [Pure]
-    string DeclareCheck(FieldOrProperty x, int i) =>
+    string DeclareCheck(MemberSymbol x, int i) =>
         CSharp(
             $$"""
                   /// <summary>
@@ -797,7 +862,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         );
 
     [Pure]
-    string DeclareConstructor(FieldOrProperty x, int i) =>
+    string DeclareConstructor(MemberSymbol x, int i) =>
         HasConflict(x) is var conflict && conflict && IsNoninitial(x)
             ? ""
             : CSharp(
@@ -819,7 +884,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             );
 
     [Pure]
-    string DeclareDelegate(FieldOrProperty x) =>
+    string DeclareDelegate(MemberSymbol x) =>
         x.Type.IsRefLikeType && !IsEmpty(x)
             ? CSharp(
                 $"""
@@ -829,7 +894,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
                      /// <param name="{ParameterName(x)}">The referenced value.</param>
                      {Annotation}
                      public delegate void {PropertyName(x)}Handler({x.Type} {ParameterName(x)});
-                 
+
                      /// <summary>
                      /// Explicit mapper delegate for {Describe(x)} due to it being a by-ref like type.
                      /// </summary>
@@ -845,7 +910,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             : "";
 
     [Pure]
-    string DeclareExplicitOperator(FieldOrProperty x) =>
+    string DeclareExplicitOperator(MemberSymbol x) =>
         IsEmpty(x)
             ? ""
             : CSharp(
@@ -866,7 +931,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             );
 
     [Pure]
-    string DeclareFactory(FieldOrProperty x, int i)
+    string DeclareFactory(MemberSymbol x, int i)
     {
         var discriminator = HasConflict(x) ? $", {i}" : "";
         var fallback = IsEmpty(x) ? " = default" : "";
@@ -890,7 +955,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     }
 
     [Pure]
-    string DeclareField(FieldOrProperty x) =>
+    string DeclareField(MemberSymbol x) =>
         Members.Contains(x)
             ? ""
             : CSharp(
@@ -902,7 +967,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             );
 
     [Pure]
-    string DeclareOperators(FieldOrProperty x) =>
+    string DeclareOperators(MemberSymbol x) =>
         SkipOperator(x)
             ? ""
             : CSharp(
@@ -923,7 +988,7 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             );
 
     [Pure]
-    string DeclareProperty(FieldOrProperty x, int i)
+    string DeclareProperty(MemberSymbol x, int i)
     {
         if (IsEmpty(x))
             return "";
@@ -965,14 +1030,33 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
     }
 
     [Pure]
-    string DelegateTypeName(FieldOrProperty x, bool hasGenericReturn) =>
+    string DelegateTypeName(MemberSymbol x, bool hasGenericReturn) =>
         $"{(x.Type.IsRefLikeType && !IsEmpty(x) ? $"{PropertyName(x)}Handler" : hasGenericReturn ? Func : Action)}{(
             x.Type.IsRefLikeType || IsEmpty(x)
                 ? hasGenericReturn ? $"<{ResultGeneric}>" : ""
                 : hasGenericReturn ? $"<{x.Type}, {ResultGeneric}>" : $"<{x.Type}>")}";
 
     [Pure]
-    string DeclareFieldWithExplicitOffset(FieldOrProperty x) =>
+    string DeclareNestedClass(string x, (int Index, string Item) y)
+    {
+        var choiceIndex = Symbols.Count + (MutablePublicly is not null).ToByte();
+        var isChoiceClass = y.Index == choiceIndex;
+        var isVariantClass = !isChoiceClass && (MutablePublicly is null || y.Index != choiceIndex - 1);
+
+        return CSharp(
+            $$"""
+                  [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+                  {{(isChoiceClass ? "private" : "internal")}} {{(y.Index is 0 ? "sealed" : "static")
+                  }} class {{y.Item}}{{(isVariantClass ? $"<T{y.Item}Discard>" : "")
+                  }}{{(y.Index is 0 ? " : global::System.Attribute" : "")}}
+                  {{{(y.Index is 0 ? "" : $"\n{x.SplitLines().Select(x => $"    {x}").Conjoin("\n")}")}}
+                  }
+              """
+        );
+    }
+
+    [Pure]
+    string DeclareFieldWithExplicitOffset(MemberSymbol x) =>
         CSharp(
             $"""
                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
@@ -981,22 +1065,22 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
         );
 
     [Pure]
-    string Describe(FieldOrProperty x) =>
+    string Describe(MemberSymbol x) =>
         $"the {XmlName} {Named.Keyword()} with the variant {See(x)} of type {XmlTypeName(x.Type)}";
 
     [Pure]
-    string Equality(FieldOrProperty x) =>
+    string Equality(MemberSymbol x) =>
         IsEmpty(x) ? CSharp("true") :
-        IsOperatorEquatable(x) ? CSharp($"left.{PropertyName(x)} == right.{PropertyName(x)}") :
-        IsInterfaceEquatable(x) ? CSharp($"left.{PropertyName(x)}{NullableSuppression(x)}.Equals(right.{PropertyName(x)})") :
+        IsOperatorEquatable(x) ? CSharp($"left.{PrefixCast(x)} == right.{PrefixCast(x)}") :
+        IsInterfaceEquatable(x) ? CSharp($"left.{PrefixCast(x)}{NullableSuppression(x)}.Equals(right.{PrefixCast(x)})") :
         CSharp("false");
 
     [Pure]
-    string FieldName(FieldOrProperty x) =>
+    string FieldName(MemberSymbol x) =>
         Members.Contains(x) ? x.Name : $"_{x.Name.Nth(0)?.ToLower()}{x.Name.Nth(1..)}";
 
     [Pure]
-    string Opposite(FieldOrProperty x) =>
+    string Opposite(MemberSymbol x) =>
         Symbols.TrySingle(y => x != y, out var other)
             ? CSharp(
                 $"""
@@ -1007,30 +1091,36 @@ sealed partial record Scaffolder(INamedTypeSymbol Named, SmallList<FieldOrProper
             : "";
 
     [Pure]
-    string Prefix(FieldOrProperty x) =>
+    string PrefixCast(MemberSymbol x) =>
+        IsEmpty(x) ? CSharp($"default({x.Type})") :
+        Prefix(x) is not ReferenceField and var prefix ? $"{prefix}{NullableSuppression(x)}" :
+        $"(({x.Type}){ReferenceField}{NullableSuppression(x)})";
+
+    [Pure]
+    string Prefix(MemberSymbol x) =>
         Members.Contains(x) ? x.Name :
         CanOverlapUnmanagedMemorySpace && Unmanaged.Contains(x) ? $"{UnmanagedField}.{FieldName(x)}" :
         CanOverlapReferenceMemorySpace && Reference.Contains(x) ? ReferenceField : FieldName(x);
 
     [Pure]
-    string ParameterName(FieldOrProperty x) => $"{FieldName(x).Nth(1..)}";
+    string ParameterName(MemberSymbol x) => $"{FieldName(x).Nth(1..)}";
 
     [Pure]
-    string PropertyName(FieldOrProperty x) =>
+    string PropertyName(MemberSymbol x) =>
         Members.Contains(x) && x.Name.TrimStart('_') is var trim
             ? $"{trim.Nth(0)?.ToUpper()}{trim.Nth(1..)}"
             : x.Name;
 
     [Pure]
-    string See(FieldOrProperty x) => IsEmpty(x) ? PropertyName(x) : $"<see cref=\"{PropertyName(x)}\"/>";
+    string See(MemberSymbol x) => IsEmpty(x) ? PropertyName(x) : $"<see cref=\"{PropertyName(x)}\"/>";
 
     [Pure]
-    string ToStringCase(FieldOrProperty x) =>
+    string ToStringCase(MemberSymbol x) =>
         IsEmpty(x) || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(ToString)))
             ? $"\"{PropertyName(x)}\""
             : CSharp(
                 $$"""
-                  $"{nameof({{PropertyName(x)}})}({{{PropertyName(x)}}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
+                  $"{nameof({{PropertyName(x)}})}({{{PrefixCast(x)}}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
                   """
             );
 }

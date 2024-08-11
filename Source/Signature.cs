@@ -2,6 +2,11 @@
 namespace Emik.SourceGenerators.Choices;
 
 // ReSharper disable SuggestBaseTypeForParameter
+/// <summary>Represents the signature of a member.</summary>
+/// <param name="Name">The name of the member.</param>
+/// <param name="Parameters">The parameters of the member, for indexers and methods.</param>
+/// <param name="Type">The return type of the member.</param>
+/// <param name="TypeParameters">The type parameters of the member, for methods.</param>
 readonly record struct Signature(
     string Name,
     ImmutableArray<IParameterSymbol> Parameters,
@@ -9,6 +14,7 @@ readonly record struct Signature(
     ImmutableArray<ITypeParameterSymbol> TypeParameters
 )
 {
+    /// <summary>The default <see cref="IEqualityComparer{T}"/> for <see cref="Extract"/> instances.</summary>
     static readonly IEqualityComparer<Extract> s_extracts =
         Equating<Extract>(
             (x, y) => From(x.Symbol) is var l &&
@@ -16,8 +22,13 @@ readonly record struct Signature(
                 (l is null ? r is null : r is not null && l.Value.Equivalent(r.Value))
         );
 
+    /// <summary>The default <see cref="IEqualityComparer{T}"/> for <see cref="Signature"/> instances.</summary>
     static readonly IEqualityComparer<Signature> s_signatures = Equating<Signature>((x, y) => x.Equivalent(y));
 
+    /// <summary>Initializes a new instance of the <see cref="Signature"/> struct.</summary>
+    /// <param name="symbol">The symbol of the member.</param>
+    /// <param name="parameters">The parameters of the member.</param>
+    /// <param name="typeParameters">The type parameters of the member.</param>
     public Signature(
         ISymbol symbol,
         ImmutableArray<IParameterSymbol> parameters = default,
@@ -30,41 +41,90 @@ readonly record struct Signature(
             typeParameters.OrEmpty()
         ) { }
 
+    /// <summary>Extracts the forwarders from the set of <see cref="MemberSymbol"/> instances.</summary>
+    /// <param name="symbols">The set of <see cref="MemberSymbol"/> instances.</param>
+    /// <param name="named">The type that contains the members.</param>
+    /// <param name="except">The set of <see cref="MemberSymbol"/> instances to exclude.</param>
+    /// <returns>The set of forwarders.</returns>
     public static IEnumerable<Extract> FindForwarders(
-        in SmallList<FieldOrProperty> symbols,
+        in SmallList<MemberSymbol> symbols,
         INamedTypeSymbol named,
-        ISet<FieldOrProperty>? except = null
+        ISet<MemberSymbol>? except = null
     )
     {
+        [Pure]
+        static IEnumerable<Extract> FindCommonBaseMembers(SmallList<MemberSymbol> symbols) =>
+            FindCommonBaseTypes(symbols).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtract(x, symbols.Count));
+
+        [Pure]
+        static IEnumerable<Extract> GeneratedMethods(Extract symbol) =>
+            (symbol switch
+            {
+                (IEventSymbol x, _, _) => SmallList.Create(x.AddMethod, x.RaiseMethod, x.RemoveMethod),
+                (IPropertySymbol x, _, _) => SmallList.Create(x.GetMethod, x.SetMethod),
+                _ => default,
+            })
+           .Filter()
+           .Select(AsDirectExtract);
+
+        [Pure]
+        static HashSet<Signature> ToSelf(IEnumerable<MemberSymbol>? except, IAssemblySymbol assembly) =>
+            except.OrEmpty().Select(x => From(x.Type, assembly)).Filter().ToSet(s_signatures);
+
         var assembly = named.ContainingAssembly;
 
         bool IsValid(Extract next) =>
             From(next.Symbol, assembly) is not null &&
-            (except is null || !FieldOrProperty.TryCreate(next.Symbol, out var x) || !except.Contains(x));
+            (except is null || MemberSymbol.DeconstructFrom(next.Symbol) is not { } x || !except.Contains(x));
 
         var signatures = ToSelf(except, assembly);
         var forwarders = Add(symbols, assembly, signatures);
 
         forwarders.UnionWith(new IntersectedInterfaces(symbols, named.IsReadOnly).Members);
-        forwarders.UnionWith(FindCommonBaseTypes(symbols));
+        forwarders.UnionWith(FindCommonBaseMembers(symbols));
         forwarders.ExceptWith(forwarders.SelectMany(GeneratedMethods).Filter());
 
         return forwarders.Where(IsValid);
     }
 
+    /// <summary>Finds all common base types for the set of <see cref="MemberSymbol"/> instances.</summary>
+    /// <param name="symbols">The set of <see cref="MemberSymbol"/> instances.</param>
+    /// <returns>All common base types in descending order of specificity.</returns>
     [Pure]
-    public static RefKind Kind(in FieldOrProperty x) => Kind(x.Symbol);
+    public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(SmallList<MemberSymbol> symbols) =>
+        symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, symbols.First.Type)) ?
+            symbols.First.Type.Yield() :
+            symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ?
+                default(Once<ITypeSymbol>) : symbols
+                   .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
+                   .Aggregate(IntersectWith)
+                   .OrderBy(x => x.SpecialType is SpecialType.System_Object)
+                   .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
+                   .ThenBy(x => x.IsInterface())
+                   .ThenByDescending(x => Inheritance(x).Count())
+                   .ThenByDescending(IsStandardLibrary)
+                   .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal);
 
+    /// <summary>Gets the <see cref="RefKind"/> of the <see cref="ISymbol"/>.</summary>
+    /// <param name="x">The <see cref="ISymbol"/> to get the <see cref="RefKind"/> of.</param>
+    /// <returns>The <see cref="RefKind"/> of the <see cref="ISymbol"/>.</returns>
     [Pure]
-    public static RefKind Kind(in ISymbol x) =>
+    public static RefKind Kind(in ISymbol? x) =>
         x switch
         {
             IFieldSymbol { RefKind: var ret } => ret,
             IMethodSymbol { RefKind: var ret } => ret,
             IPropertySymbol { RefKind: var ret } => ret,
+            null => RefKind.None,
             _ => throw Unreachable,
         };
 
+    /// <summary>Gets the <see cref="Signature"/> of the <see cref="ISymbol"/>.</summary>
+    /// <param name="symbol">The <see cref="ISymbol"/> to get the <see cref="Signature"/> of.</param>
+    /// <returns>
+    /// The <see cref="Signature"/> of the <see cref="ISymbol"/>, or <see langword="null"/>
+    /// if the <see cref="ISymbol"/> lacks a signature.
+    /// </returns>
     [Pure]
     public static Signature? From(ISymbol symbol) =>
         symbol switch
@@ -99,10 +159,25 @@ readonly record struct Signature(
             _ => null,
         };
 
+    /// <summary>Gets the <see cref="Signature"/> of the <see cref="ISymbol"/>.</summary>
+    /// <param name="symbol">The <see cref="ISymbol"/> to get the <see cref="Signature"/> of.</param>
+    /// <param name="assembly">
+    /// The <see cref="IAssemblySymbol"/> to check accessibility of the <see cref="ISymbol"/> for.
+    /// </param>
+    /// <returns>
+    /// The <see cref="Signature"/> of the <see cref="ISymbol"/>, or <see langword="null"/>
+    /// if the <see cref="ISymbol"/> lacks a signature.
+    /// </returns>
     [Pure]
     public static Signature? From(ISymbol symbol, IAssemblySymbol assembly) =>
         symbol.CanBeAccessedFrom(assembly) ? From(symbol) : null;
 
+    /// <summary>Checks if two <see cref="Signature"/>s are equivalent.</summary>
+    /// <param name="other">The other <see cref="Signature"/> to compare.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the two <see cref="Signature"/>
+    /// instances are equivalent; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
     public bool Equivalent(in Signature other) =>
         Name.AsSpan().SplitOn('.').Last.SequenceEqual(other.Name.AsSpan().SplitOn('.').Last) &&
@@ -110,10 +185,17 @@ readonly record struct Signature(
         Parameters.GuardedSequenceEqual(other.Parameters, SameType) &&
         TypeParameters.GuardedSequenceEqual(other.TypeParameters, Complies);
 
+    /// <summary>Checks if a <see cref="MemberSymbol"/> is in an <see cref="IAssemblySymbol"/>.</summary>
+    /// <param name="symbol">The <see cref="MemberSymbol"/> to check.</param>
+    /// <param name="assembly">The <see cref="IAssemblySymbol"/> to provide accessibility context.</param>
+    /// <param name="interfaceDeclaration">The interface declaration of the <see cref="MemberSymbol"/>.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if an equivalent signature was found; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
-    public bool IsIn(in FieldOrProperty union, IAssemblySymbol assembly, out string? interfaceDeclaration)
+    public bool IsIn(in MemberSymbol symbol, IAssemblySymbol assembly, out string? interfaceDeclaration)
     {
-        foreach (var member in union.Type.GetMembers())
+        foreach (var member in symbol.Type.GetMembers())
             if (From(member, assembly) is { } signature && Equivalent(signature))
             {
                 interfaceDeclaration = InterfaceDeclaration(member);
@@ -124,6 +206,7 @@ readonly record struct Signature(
         return false;
     }
 
+    /// <inheritdoc />
     [Pure]
     public override int GetHashCode()
     {
@@ -142,36 +225,33 @@ readonly record struct Signature(
         }
     }
 
-    void Next(
-        in SmallList<FieldOrProperty> symbols,
-        HashSet<Extract> set,
-        HashSet<Signature> exists,
-        IAssemblySymbol assembly,
-        ISymbol member
-    )
+    /// <summary>Determines if any base type of <paramref name="x"/> is <paramref name="y"/>.</summary>
+    /// <param name="x">The <see cref="ITypeSymbol"/> to check all base types of.</param>
+    /// <param name="y">The <see cref="ITypeSymbol"/> to compare against.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if any base type of <paramref name="x"/>
+    /// is <paramref name="y"/>; otherwise, <see langword="false"/>.
+    /// </returns>
+    [Pure]
+    static bool AnyBaseType(ITypeSymbol? x, ITypeSymbol y)
     {
-        SmallList<string?> small = InterfaceDeclaration(member);
-        var kind = Kind(symbols.First);
+        for (; x is not null; x = x.BaseType)
+            if (TypeSymbolComparer.Equal(x, y))
+                return true;
 
-        for (var i = 1; i < symbols.Count; i++)
-        {
-            var current = symbols[i];
-
-            if (!IsIn(current, assembly, out var interfaceDeclaration))
-                break;
-
-            kind = Min(kind, Kind(current));
-            small.Add(interfaceDeclaration);
-
-            if (i == symbols.Count - 1 && !exists.Contains(this))
-                set.Add((member, kind, small));
-        }
+        return false;
     }
 
-    [Pure]
-    static bool AnyBaseType(ITypeSymbol x, ITypeSymbol y) =>
-        x.FindSmallPathToNull(x => x.BaseType).Any(x => TypeSymbolComparer.Equal(x, y));
-
+    /// <summary>
+    /// Determines whether the <see cref="ITypeParameterSymbol"/> will always comply
+    /// with the constraints of the other <see cref="ITypeParameterSymbol"/>.
+    /// </summary>
+    /// <param name="x">The <see cref="ITypeParameterSymbol"/> to check.</param>
+    /// <param name="y">The <see cref="ITypeParameterSymbol"/> to compare against.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/> complies
+    /// with the constraints of <paramref name="y"/>; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
     static bool Complies(ITypeParameterSymbol x, ITypeParameterSymbol y) =>
         (x.HasConstructorConstraint || !y.HasConstructorConstraint) &&
@@ -183,9 +263,33 @@ readonly record struct Signature(
         x.ConstraintTypes.GuardedSequenceEqual(y.ConstraintTypes, AnyBaseType) &&
         x.ReferenceTypeConstraintNullableAnnotation == y.ReferenceTypeConstraintNullableAnnotation;
 
+    /// <summary>Determines if <paramref name="x"/> is a standard library type.</summary>
+    /// <param name="x">The <see cref="ITypeSymbol"/> to check.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/>
+    /// comes from the <see cref="System"/> namespace.
+    /// </returns>
+    [Pure]
+    static bool IsStandardLibrary(ITypeSymbol x)
+    {
+        for (var name = x.ContainingNamespace; name.ContainingNamespace is { } containingName; name = containingName)
+            if (name is { Name: nameof(System) } && containingName.IsGlobalNamespace)
+                return true;
+
+        return false;
+    }
+
+    /// <summary>Determines if both parameters represent the same type.</summary>
+    /// <param name="left">The left-hand side.</param>
+    /// <param name="right">The right-hand side.</param>
+    /// <returns>The value <see langword="true"/> if both instances have the same type.</returns>
     [Pure]
     static bool SameType(IParameterSymbol left, IParameterSymbol right) => SameType(left.Type, right.Type);
 
+    /// <summary>Determines if both types represent the same type.</summary>
+    /// <param name="left">The left-hand side.</param>
+    /// <param name="right">The right-hand side.</param>
+    /// <returns>The value <see langword="true"/> if both instances have the same type.</returns>
     [Pure]
     static bool SameType(ITypeSymbol left, ITypeSymbol right) =>
         TypeSymbolComparer.Equal(left, right) &&
@@ -193,19 +297,35 @@ readonly record struct Signature(
         left.ContainingType is null == right.ContainingType is null &&
         (left.ContainingType is null || SameType(left.ContainingType, right.ContainingType));
 
+    /// <summary>Gets the interface prefix for the member of the given <paramref name="x"/>.</summary>
+    /// <param name="x">The symbol to extract.</param>
+    /// <returns>The interface prefix of the parameter <paramref name="x"/>.</returns>
     [Pure]
     static string? InterfaceDeclaration(ISymbol x) => x.Name.LastIndexOf('.') is not -1 and var i ? x.Name[..i] : null;
 
+    /// <summary>Converts the <see cref="ISymbol"/> to the <see cref="Extract"/>.</summary>
+    /// <param name="x">The <see cref="ISymbol"/> to convert.</param>
+    /// <returns>The <see cref="Extract"/> of the parameter <paramref name="x"/>.</returns>
     [Pure]
     static Extract AsDirectExtract(ISymbol x) => (x, Kind(x), default);
 
+    /// <summary>Converts the <see cref="ISymbol"/> to the <see cref="Extract"/>.</summary>
+    /// <param name="x">The <see cref="ISymbol"/> to convert.</param>
+    /// <param name="count">The number of symbols.</param>
+    /// <param name="element">The interface prefix.</param>
+    /// <returns>The <see cref="Extract"/> of the parameter <paramref name="x"/>.</returns>
     [Pure]
     static Extract AsDirectExtract(ISymbol x, int count, string? element = null) =>
         (x, Kind(x), Enumerable.Repeat(element, count).ToSmallList());
 
+    /// <summary>Gets the set of <see cref="Extract"/> from the <paramref name="symbols"/>.</summary>
+    /// <param name="symbols">The list of symbols.</param>
+    /// <param name="assembly">The <see cref="IAssemblySymbol"/> to provide accessibility context.</param>
+    /// <param name="exists">The set of signatures that already exist.</param>
+    /// <returns>The set of <see cref="Extract"/> from the parameter <paramref name="symbols"/>.</returns>
     [Pure]
     static HashSet<Extract> Add(
-        in SmallList<FieldOrProperty> symbols,
+        in SmallList<MemberSymbol> symbols,
         IAssemblySymbol assembly,
         HashSet<Signature> exists
     )
@@ -219,46 +339,57 @@ readonly record struct Signature(
         return set;
     }
 
-    [Pure]
-    static IEnumerable<Extract> FindCommonBaseTypes(in SmallList<FieldOrProperty> symbols)
+    /// <summary>Intersects the first set of <see cref="ITypeSymbol"/> instances with the second.</summary>
+    /// <param name="x">The first set of <see cref="ITypeSymbol"/> instances to mutate.</param>
+    /// <param name="y">The second set of <see cref="ITypeSymbol"/> instances to enumerate.</param>
+    /// <returns>The parameter <paramref name="x"/> after being intersected with <paramref name="y"/>.</returns>
+    static HashSet<ITypeSymbol> IntersectWith(HashSet<ITypeSymbol> x, HashSet<ITypeSymbol> y)
     {
-        var smalls = symbols
-           .Select(x => x.Type.BaseType.FindPathToNull(x => x.BaseType).Reverse().ToListLazily())
-           .ToSmallList();
-
-        var min = smalls.Min(x => x.Count);
-        var count = symbols.Count;
-
-        for (var i = 0; i < min; i++)
-            for (var j = 1; j < smalls.Count; j++)
-            {
-                if (!SameType(smalls.First[i], smalls[j][i]))
-                    break;
-
-                if (j == smalls.Count - 1)
-                    return smalls.First.Skip(i).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtract(x, count));
-            }
-
-        return [];
+        x.IntersectWith(y);
+        return x;
     }
 
+    /// <summary>Gets all of the base types and interfaces at all levels, including itself.</summary>
+    /// <param name="x">The <see cref="ITypeSymbol"/> to get the types of.</param>
+    /// <returns>The enumeration of all base types and interfaces of the parameter <paramref name="x"/>.</returns>
     [Pure]
-    static IEnumerable<Extract> GeneratedMethods(Extract symbol) =>
-        (symbol switch
+    static IEnumerable<ITypeSymbol> Inheritance(ITypeSymbol x) =>
+        x.FindPathToNull(x => x.BaseType).Concat(x.AllInterfaces);
+
+    /// <summary>Steps through the next <see cref="ISymbol"/>.</summary>
+    /// <param name="symbols">The set of symbols to compare.</param>
+    /// <param name="set">The set of extracted signatures.</param>
+    /// <param name="exists">The set of existing signatures.</param>
+    /// <param name="assembly">The <see cref="IAssemblySymbol"/> to provide accessibility context.</param>
+    /// <param name="member">The next <see cref="ISymbol"/> to process.</param>
+    void Next(
+        in SmallList<MemberSymbol> symbols,
+        HashSet<Extract> set,
+        HashSet<Signature> exists,
+        IAssemblySymbol assembly,
+        ISymbol member
+    )
+    {
+        [Pure]
+        static RefKind Min(RefKind left, RefKind right) =>
+            left is RefKind.None || right is RefKind.None ? RefKind.None :
+            left is RefKind.Ref || right is RefKind.Ref ? RefKind.Ref : RefKind.RefReadOnly;
+
+        SmallList<string?> small = InterfaceDeclaration(member);
+        var kind = Kind(symbols.First.Symbol);
+
+        for (var i = 1; i < symbols.Count; i++)
         {
-            (IEventSymbol x, _, _) => SmallList.Create(x.AddMethod, x.RaiseMethod, x.RemoveMethod),
-            (IPropertySymbol x, _, _) => SmallList.Create(x.GetMethod, x.SetMethod),
-            _ => default,
-        })
-       .Filter()
-       .Select(AsDirectExtract);
+            var current = symbols[i];
 
-    [Pure]
-    static RefKind Min(RefKind left, RefKind right) =>
-        left is RefKind.None || right is RefKind.None ? RefKind.None :
-        left is RefKind.Ref || right is RefKind.Ref ? RefKind.Ref : RefKind.RefReadOnly;
+            if (!IsIn(current, assembly, out var interfaceDeclaration))
+                break;
 
-    [Pure]
-    static HashSet<Signature> ToSelf(IEnumerable<FieldOrProperty>? except, IAssemblySymbol assembly) =>
-        except.OrEmpty().Select(x => From(x.Type, assembly)).Filter().ToSet(s_signatures);
+            kind = Min(kind, Kind(current.Symbol));
+            small.Add(interfaceDeclaration);
+
+            if (i == symbols.Count - 1 && !exists.Contains(this))
+                set.Add((member, kind, small));
+        }
+    }
 }

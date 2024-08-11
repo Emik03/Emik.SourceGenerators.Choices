@@ -1,151 +1,246 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices;
 
-/// <summary>The source generator that implements implicit operators.</summary>
+/// <summary>The source generator responsible for generating disjoint union functionality to annotated types.</summary>
 [Generator]
 public sealed class ExtendingGenerator : IIncrementalGenerator
 {
-    const int MinimumFields = 2;
+    const int MinimumMembers = 2;
 
-    static readonly IEqualityComparer<Fold> s_folds =
-        Equating((Fold x, Fold y) => Same(x, y) && NamedTypeSymbolComparer.Equal(x.SymbolSet, y.SymbolSet), Hash);
-
-    static readonly IEqualityComparer<Raw> s_raws =
-        Equating((Raw x, Raw y) => Same(x, y) && SameMembers(x.Fields, y.Fields), Hash);
-
+    /// <summary>Executes this source generation based on given input.</summary>
+    /// <remarks><para>
+    /// This API is unused within the library, but can be used by other libraries that reference
+    /// this library to integrate this source generator however they wish. Do note that the API
+    /// is subject to change, but the general premise of the function will remain the same.
+    /// </para></remarks>
+    /// <param name="named">The type to generate for.</param>
+    /// <param name="publiclyMutable">
+    /// If <see langword="null"/>, the fields and properties generated will be immutable.
+    /// If <see langword="false"/>, the fields and properties generated will be mutable, but only from within the type.
+    /// If <see langword="true"/>, the fields and properties generated will be publicly mutable.
+    /// </param>
+    /// <param name="polyfillAttributes">
+    /// Determines whether to generate private attributes required to make dot-declaration
+    /// syntax work. Set this to <see langword="true"/> if you have annotated the parameter
+    /// <paramref name="named"/> using the dot-declaration feature; nested class attributes such as
+    /// <c>[Choice.Public.Foo&lt;Bar&gt;.Baz&lt;Qux&gt;]</c> versus <c>[Choice(true, typeof((Bar Foo, Qux Baz)))]</c>.
+    /// </param>
+    /// <param name="members">
+    /// The variants of the parameter <paramref name="named"/>. Variants created from a <see cref="IFieldSymbol"/> or
+    /// <see cref="IPropertySymbol"/> will not create the respective members in the source generation, since this
+    /// indicates that the member already exists, and would cause a compiler error if a second member was generated.
+    /// </param>
+    /// <returns>
+    /// The generated source. This contains the hint name, which indicates the name of the file, and the source,
+    /// representing the contents of said file. This function will return <see langword="null"/> under a few
+    /// circumstances. This includes the parameter <paramref name="named"/> being <see langword="null"/>, being a tuple
+    /// type regardless of if it is a polyfill or not, not being annotated with <c>[Choice]</c> or annotated correctly,
+    /// not being fully <see langword="partial"/> which includes any types that contain the parameter
+    /// <paramref name="named"/>, the parameter <see cref="members"/> being less than 2 elements long.
+    /// </returns>
     [Pure]
-    public static GeneratedSource? Transform(in Fold fold) =>
-        HasAnnotatedCorrectly(fold) && DiscoverFields(fold) is var raw && HasSufficientFields(raw)
-            ? Scaffolder.From(raw).Result
+    public static GeneratedSource? Transform(
+        INamedTypeSymbol? named,
+        bool? publiclyMutable = null,
+        bool polyfillAttributes = false,
+        params MemberSymbol[] members
+    ) =>
+        named is { IsTupleType: false } &&
+        members.Length >= MinimumMembers &&
+        (named, members.ToSmallList(), publiclyMutable, polyfillAttributes) is var raw &&
+        HasSufficientMembers(raw)
+            ? ((Scaffolder)raw).Result
             : null;
 
     /// <inheritdoc />
     void IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var provider = context
-           .SyntaxProvider
-           .ForAttributeWithMetadataName(Of<AttributeGenerator>(), IsExtendable, Target)
-           .WithComparer(s_folds)
-           .WithTrackingName(nameof(Fold))
-           .Where(HasAnnotatedCorrectly)
-           .Select(DiscoverFields)
-           .WithComparer(s_raws)
-           .WithTrackingName(nameof(Raw))
-           .Where(HasSufficientFields);
-
-        context.RegisterSourceOutput(provider, Generate);
+        var dot = context.SyntaxProvider.CreateSyntaxProvider(IsHeavilyNested, DiscoverDotDeclaration);
+        var org = context.SyntaxProvider.ForAttributeWithMetadataName(Of<AttributeGenerator>(), IsExtendable, DiscoverMembers);
+        Register(context, dot);
+        Register(context, org);
     }
 
-    static void Generate(SourceProductionContext context, Raw x) => AddSource(context, Scaffolder.From(x).Result);
+    /// <summary>Creates the generated source to the <see cref="SourceProductionContext"/>.</summary>
+    /// <param name="context">The context to register source code.</param>
+    /// <param name="raw">The values to base the source generation from.</param>
+    static void Generate(SourceProductionContext context, Raw raw) => AddSource(context, ((Scaffolder)raw).Result);
 
+    /// <summary>
+    /// Registers the provider to the generator, which also includes
+    /// injecting the <see cref="RawEqualityComparer"/> and explicit filter.
+    /// </summary>
+    /// <param name="context">The context to register source code.</param>
+    /// <param name="values">The provider for generating source code.</param>
+    static void Register(
+        in IncrementalGeneratorInitializationContext context,
+        in IncrementalValuesProvider<Raw> values
+    ) =>
+        context.RegisterSourceOutput(
+            values.WithComparer(RawEqualityComparer.Instance).WithTrackingName(nameof(Raw)).Where(HasSufficientMembers),
+            Generate
+        );
+
+    /// <summary>Determines whether the parameter <paramref name="x"/> is annotated correctly.</summary>
+    /// <param name="x">The parameter to check.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/>
+    /// is annotated correctly; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
     static bool HasAnnotatedCorrectly(Fold x) =>
-        x is ({ IsTupleType: false }, null or { IsTupleType: true, TupleElements.Length: >= MinimumFields }, _);
+        x is ({ IsTupleType: false }, null or { IsTupleType: true, TupleElements.Length: >= MinimumMembers }, _);
 
+    /// <summary>Determines whether the parameter <paramref name="x"/> has sufficient members.</summary>
+    /// <param name="x">The parameter to check.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/>
+    /// has sufficient members; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
-    static bool HasSufficientFields((INamedTypeSymbol, SmallList<FieldOrProperty>, bool?) x) =>
-        x is (_, { Count: >= MinimumFields }, _);
+    static bool HasSufficientMembers(Raw x) => x is ({ IsStatic: false }, { Count: >= MinimumMembers }, _, _);
 
+    /// <summary>Determines whether the parameter <paramref name="x"/> is extendable.</summary>
+    /// <param name="x">The parameter to check.</param>
+    /// <param name="_">The cancellation token, which is unused.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/>
+    /// is extendable; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
-    static bool IsExtendable(SyntaxNode node, CancellationToken token)
-    {
-        if (node is not TypeDeclarationSyntax { AttributeLists.Count: >= 1 } type || type is InterfaceDeclarationSyntax)
-            return false;
+    static bool IsExtendable(SyntaxNode x, CancellationToken _ = default) =>
+        x is TypeDeclarationSyntax { AttributeLists.Count: >= 1, Modifiers: var modifiers } and
+            not InterfaceDeclarationSyntax &&
+        modifiers.Any(SyntaxKind.PartialKeyword);
 
-        // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
-        foreach (var modifier in type.Modifiers)
-            if (modifier.IsKind(SyntaxKind.PartialKeyword))
-                return true;
-
-        return false;
-    }
-
+    /// <summary>
+    /// Determines whether the parameter <paramref name="x"/> is heavily nested.
+    /// This refers to whether it is a candidate in dot-declaration syntax.
+    /// </summary>
+    /// <param name="x">The parameter to check.</param>
+    /// <param name="_">The cancellation token, which is unused.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="x"/> is
+    /// a candidate in dot-declaration syntax; otherwise, <see langword="false"/>.
+    /// </returns>
     [Pure]
-    static bool Same<T>(
-        in (INamedTypeSymbol Named, T _, bool? MutablePublicly) x,
-        in (INamedTypeSymbol Named, T _, bool? MutablePublicly) y
-    ) =>
-        x.MutablePublicly == y.MutablePublicly &&
-        x.Named.Keyword() == y.Named.Keyword() &&
-        SameMetadataNames(x.Named, y.Named);
-
-    [Pure]
-    static bool SameMembers(in SmallList<FieldOrProperty> xs, in SmallList<FieldOrProperty> ys)
-    {
-        if (xs.Count != ys.Count)
-            return false;
-
-        for (var i = 0; i < xs.Count; i++)
-            if (!xs[i].Equals(ys[i]))
-                return false;
-
-        return true;
-    }
-
-    [Pure]
-    static bool SameMetadataNames(ISymbol? x, ISymbol? y)
-    {
-        if (ReferenceEquals(x, y))
-            return true;
-
-        for (; x is not null; x = x.ContainingSymbol, y = y.ContainingSymbol)
-            if (y is null || x.MetadataName != y.MetadataName)
-                return false;
-
-        return y is null;
-    }
-
-    // Rust knows the best memory layout. Therefore, this is guaranteed to be the blazingly fastest implementation.
-    // [src/main.rs:4] unsafe { mem::transmute::<Option<bool>, u8>(Some(false)) } = 0
-    // [src/main.rs:5] unsafe { mem::transmute::<Option<bool>, u8>(Some(true)) } = 1
-    // [src/main.rs:6] unsafe { mem::transmute::<Option<bool>, u8>(None) } = 2
-    [Pure]
-    static int BetterHashCode(bool? x) =>
-        x switch
+    static bool IsHeavilyNested(SyntaxNode x, CancellationToken _ = default) =>
+        // Guarantees that at the minimum it involves: [Rest.Property<T1>.Property<T2>]
+        x is AttributeSyntax
         {
-            false => 0,
-            true => 1,
-            null => 2,
+            Name: QualifiedNameSyntax
+            {
+                Left: QualifiedNameSyntax
+                {
+                    Left: IdentifierNameSyntax { Identifier.Text: "Choice" } or
+                    QualifiedNameSyntax
+                    {
+                        Left: IdentifierNameSyntax { Identifier.Text: "Choice" } or QualifiedNameSyntax,
+                        Right: IdentifierNameSyntax
+                        {
+                            Identifier.Text: nameof(Accessibility.Private) or nameof(Accessibility.Public),
+                        } or
+                        GenericNameSyntax,
+                    },
+                    Right: GenericNameSyntax,
+                },
+                Right: GenericNameSyntax,
+            },
         };
 
-    [Pure]
-    static int Hash<T>((INamedTypeSymbol Named, T _, bool? MutablePublicly) x) =>
-        (BetterHashCode(x.MutablePublicly) * 42061 ^ StringComparer.Ordinal.GetHashCode(x.Named.MetadataName)) * 42071 ^
-        StringComparer.Ordinal.GetHashCode(x.Named.Keyword());
-
-    [Pure]
-    static Raw DiscoverFields(Fold x, CancellationToken _ = default)
+    /// <summary>Extracts the members from the node's <see cref="AttributeSyntax"/>.</summary>
+    /// <param name="context">The syntax context.</param>
+    /// <param name="token">
+    /// The cancellation token used for cancelling the iteration over <see cref="QuailifiedNameSyntax"/> instances.
+    /// </param>
+    /// <returns>The extracted result, or <see langword="default"/> if the input is invalid.</returns>
+    // ReSharper disable once CognitiveComplexity
+    static Raw DiscoverDotDeclaration(GeneratorSyntaxContext context, CancellationToken token)
     {
-        var (type, named, mutablePublicly) = x;
+        if (context.Node is not AttributeSyntax attribute ||
+            attribute.TypeDeclaration() is not { } typeDeclaration ||
+            context.SemanticModel.GetDeclaredSymbol(typeDeclaration, token) is not { } named)
+            return default;
 
-        var fields = named switch
+        SmallList<MemberSymbol> fields = [];
+        bool? mutablePublicly = null;
+
+        for (var name = attribute.Name; name is QualifiedNameSyntax qualifiedName; name = qualifiedName.Left)
         {
-            { IsTupleType: true, TupleElements: { Length: > 1 } e } => Scaffolder.Decouple(e),
-            null => Scaffolder.Instances(type),
-            _ when Scaffolder.IsSystemTuple(named) => Scaffolder.Instances(named),
-            _ => default,
-        };
+            token.ThrowIfCancellationRequested();
 
-        return (type, fields, mutablePublicly);
+            if (qualifiedName.Right is IdentifierNameSyntax rightIdentifier)
+                switch (rightIdentifier.Identifier.Text)
+                {
+                    case nameof(Accessibility.Private):
+                        mutablePublicly = false;
+                        break;
+                    case nameof(Accessibility.Public):
+                        mutablePublicly = true;
+                        break;
+                    default: return default;
+                }
+
+            if (qualifiedName is { Left: IdentifierNameSyntax leftIdentifier, Right: not GenericNameSyntax })
+                if (leftIdentifier.Identifier.Text is "Choice")
+                    break;
+                else
+                    return default;
+
+            if (mutablePublicly is not null ||
+                qualifiedName.Right is not GenericNameSyntax genericName ||
+                genericName.TypeArgumentList.Arguments is not [var typeArgument] ||
+                (context.SemanticModel.GetDeclaredSymbolSafe(typeArgument, token) ??
+                    context.SemanticModel.GetSymbolSafe(typeArgument, token)) is not ITypeSymbol type)
+                return default;
+
+            fields.Add(new(type, genericName.Identifier.Text));
+        }
+
+        fields.Reverse();
+        return (named, fields, mutablePublicly, true);
     }
 
+    /// <summary>Extracts the members from the node.</summary>
+    /// <param name="context">The context to check the node from.</param>
+    /// <param name="token">The cancellation token used for interrupting the iteration of constructor arguments.</param>
+    /// <returns>The extracted result, or <see langword="default"/> if the input is invalid.</returns>
     [Pure]
-    static Fold Target(GeneratorAttributeSyntaxContext context, CancellationToken _)
+    static Raw DiscoverMembers(GeneratorAttributeSyntaxContext context, CancellationToken token)
     {
+        [Pure]
+        static Raw Extract(Fold x)
+        {
+            var (type, named, mutablePublicly) = x;
+
+            var fields = named switch
+            {
+                { IsTupleType: true, TupleElements: { Length: > 1 } e } => Scaffolder.Decouple(e),
+                null => Scaffolder.Instances(type),
+                _ when Scaffolder.IsSystemTuple(named) => Scaffolder.Instances(named),
+                _ => default,
+            };
+
+            return (type, fields, mutablePublicly, false);
+        }
+
         bool? mutablePublicly = null;
         INamedTypeSymbol? symbolSet = null;
 
         foreach (var arg in context.Attributes[0].ConstructorArguments)
-            switch (arg.Value)
-            {
-                case bool x:
-                    mutablePublicly = x;
-                    break;
-                case INamedTypeSymbol x:
-                    symbolSet = x;
-                    break;
-            }
+        {
+            token.ThrowIfCancellationRequested();
 
-        return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, mutablePublicly);
+            _ = arg.Value switch
+            {
+                bool x => mutablePublicly = x,
+                INamedTypeSymbol x => (symbolSet = x) is var _,
+                _ => false,
+            };
+        }
+
+        return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, mutablePublicly) is var fold && HasAnnotatedCorrectly(fold)
+                ? Extract(fold)
+                : default;
     }
 }

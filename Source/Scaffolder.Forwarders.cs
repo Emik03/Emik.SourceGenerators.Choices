@@ -4,7 +4,7 @@ namespace Emik.SourceGenerators.Choices;
 sealed partial record Scaffolder
 {
     [Pure]
-    public string DeclareForwarders =>
+    string DeclareForwarders =>
         Signature.FindForwarders(Symbols, Named, Members).Select(DeclareForwarder).Conjoin("");
 
     [Pure]
@@ -87,7 +87,7 @@ sealed partial record Scaffolder
 
             var member = symbol is IPropertySymbol { Parameters: not [] } ? "" : $".{symbol.GetFullyQualifiedName()}";
 
-            string Case(FieldOrProperty x, int i)
+            string Case(MemberSymbol x, int i)
             {
                 var instance = IsEmpty(x) ? CSharp($"default({x.Type})") : Prefix(x);
 
@@ -118,7 +118,7 @@ sealed partial record Scaffolder
             var arrow = isSwitchCase
                 ? CSharp(
                     $$"""
-                      
+
                               switch ({{Discriminator}})
                               {
 
