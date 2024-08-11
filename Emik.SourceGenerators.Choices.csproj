@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <FileVersion>1.3</FileVersion>
+        <CopyrightSince>2023</CopyrightSince>
         <NoWarn>$(NoWarn);SA1600;IDE0130</NoWarn>
         <TargetFramework>netstandard2.0</TargetFramework>
         <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
