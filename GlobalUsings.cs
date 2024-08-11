@@ -10,5 +10,3 @@ global using Raw = (Microsoft.CodeAnalysis.INamedTypeSymbol Named,
     Emik.Morsels.SmallList<Emik.SourceGenerators.Choices.MemberSymbol> Fields,
     bool? MutablePublicly,
     bool PolyfillAttributes);
-
-[assembly: NullGuard(ValidationFlags.None)]
