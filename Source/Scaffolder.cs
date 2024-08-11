@@ -1045,6 +1045,7 @@ sealed partial record Scaffolder(
 
         return CSharp(
             $$"""
+                  [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
                   {{(isChoiceClass ? "private" : "internal")}} {{(y.Index is 0 ? "sealed" : "static")
                   }} class {{y.Item}}{{(isVariantClass ? $"<T{y.Item}Discard>" : "")
                   }}{{(y.Index is 0 ? " : global::System.Attribute" : "")}}

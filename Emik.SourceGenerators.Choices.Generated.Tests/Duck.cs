@@ -38,11 +38,5 @@ partial class KMModule
 [Choice.Regular<KMBombModule>.Needy<KMNeedyModule>.Other<Component>]
 partial class DotKMModule;
 
-[Choice]
-partial class E<T>
-    where T : Delegate
-{
-    T _a;
-
-    T _c;
-}
+[Choice.Apple<byte>.Pear<int>.Orange<BindingFlags>]
+sealed partial class DotFruit;
