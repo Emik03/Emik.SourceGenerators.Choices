@@ -89,11 +89,11 @@ sealed partial record Scaffolder
 
             string Case(MemberSymbol x, int i)
             {
-                var instance = IsEmpty(x) ? CSharp($"default({x.Type})") : Prefix(x);
+                var instance = x.IsEmpty ? CSharp($"default({x.Type})") : Prefix(x);
 
-                var cast = interfacesDeclared[i] is { } to ? $"(({to}){instance}{NullableSuppression(x)})" :
-                    instance is ReferenceField ? $"(({x.Type}){ReferenceField}{NullableSuppression(x)})" :
-                    $"{instance}{NullableSuppression(x)}";
+                var cast = interfacesDeclared[i] is { } to ? $"(({to}){instance}{x.NullableSuppression})" :
+                    instance is ReferenceField ? $"(({x.Type}){ReferenceField}{x.NullableSuppression})" :
+                    $"{instance}{x.NullableSuppression}";
 
                 if (isSwitchCase)
                     return CSharp(

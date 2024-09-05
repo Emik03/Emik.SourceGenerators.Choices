@@ -94,16 +94,15 @@ readonly record struct Signature(
     public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(SmallList<MemberSymbol> symbols) =>
         symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, symbols.First.Type)) ?
             symbols.First.Type.Yield() :
-            symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ?
-                default(Once<ITypeSymbol>) : symbols
-                   .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
-                   .Aggregate(IntersectWith)
-                   .OrderBy(x => x.SpecialType is SpecialType.System_Object)
-                   .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
-                   .ThenBy(x => x.IsInterface())
-                   .ThenByDescending(x => Inheritance(x).Count())
-                   .ThenByDescending(IsStandardLibrary)
-                   .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal);
+            symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? [] : symbols
+               .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
+               .Aggregate(IntersectWith)
+               .OrderBy(x => x.SpecialType is SpecialType.System_Object)
+               .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
+               .ThenBy(x => x.IsInterface())
+               .ThenByDescending(x => Inheritance(x).Count())
+               .ThenByDescending(IsStandardLibrary)
+               .ThenBy(x => x.GetFullyQualifiedMetadataName(), StringComparer.Ordinal);
 
     /// <summary>Gets the <see cref="RefKind"/> of the <see cref="ISymbol"/>.</summary>
     /// <param name="x">The <see cref="ISymbol"/> to get the <see cref="RefKind"/> of.</param>
@@ -349,7 +348,7 @@ readonly record struct Signature(
         return x;
     }
 
-    /// <summary>Gets all of the base types and interfaces at all levels, including itself.</summary>
+    /// <summary>Gets all the base types and interfaces at all levels, including itself.</summary>
     /// <param name="x">The <see cref="ITypeSymbol"/> to get the types of.</param>
     /// <returns>The enumeration of all base types and interfaces of the parameter <paramref name="x"/>.</returns>
     [Pure]

@@ -8,22 +8,22 @@ sealed partial record Scaffolder(
     bool PolyfillAttributes
 )
 {
-    const int MinimumBoxedSize = 2;
-    const int MinimumExplicitStructSize = 2;
-    const int TupleGenericLimit = 8;
+    const int MinimumBoxedSize = 2, MinimumExplicitStructSize = 2, TupleGenericLimit = 8;
 
-    const string Action = "global::System.Action";
-    const string AggressiveInlining = "[global::System.Runtime.CompilerServices.MethodImpl(256)]";
-    const string DiscriminatorField = "_discriminator";
-    const string DiscriminatorProperty = "Discriminator";
-    const string Func = "global::System.Func";
-    const string Pure = "[global::System.Diagnostics.Contracts.PureAttribute]";
-    const string ReadOnly = "readonly ";
-    const string ReferenceField = "_reference";
-    const string ResultGeneric = "TMappingResult";
-    const string Suppression = "#pragma warning disable\n";
-    const string Throw = "throw new global::System.InvalidOperationException()";
-    const string UnmanagedField = "_unmanaged";
+    [StringSyntax("C#")]
+    const string
+        Action = "global::System.Action",
+        AggressiveInlining = "[global::System.Runtime.CompilerServices.MethodImpl(256)]",
+        DiscriminatorField = "_discriminator",
+        DiscriminatorProperty = "Discriminator",
+        Func = "global::System.Func",
+        Pure = "[global::System.Diagnostics.Contracts.PureAttribute]",
+        ReadOnly = "readonly ",
+        ReferenceField = "_reference",
+        ResultGeneric = "TMappingResult",
+        Suppression = "#pragma warning disable\n",
+        Throw = "throw new global::System.InvalidOperationException()",
+        UnmanagedField = "_unmanaged";
 
     static readonly ConcurrentDictionary<string, int> s_nameCounter = new(StringComparer.Ordinal);
 
@@ -228,7 +228,7 @@ sealed partial record Scaffolder(
                           {{Symbols
                              .Select((x, i) => (x, i))
                              .OrderByDescending(Inheritance)
-                             .Select(x => $"{(IsEmpty(x.x) ? "null" : x.x.Type)} => {x.i},")
+                             .Select(x => $"{(x.x.IsEmpty ? "null" : x.x.Type)} => {x.i},")
                              .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       };
@@ -334,7 +334,7 @@ sealed partial record Scaffolder(
             ? CSharp(
                 $"""
                      {Annotation}
-                     private {PrivatelyReadOnly}object? {ReferenceField};
+                     private {PrivatelyReadOnly}{new MemberSymbol(Common, "").NullableAnnotated} {ReferenceField};
 
 
                  """
@@ -457,7 +457,7 @@ sealed partial record Scaffolder(
                       {
                           {{Symbols
                              .Select((x, i) => $"{i} => {
-                                 (IsEmpty(x) || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(GetHashCode)))
+                                 (x.IsEmpty || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(GetHashCode)))
                                      ? "0"
                                      : $"{PrefixCast(x)}.GetHashCode()")},")
                              .Conjoin("\n            ")}}
@@ -504,7 +504,7 @@ sealed partial record Scaffolder(
                       {
                           {{Symbols
                               .Select((x, i) => $"case {i}:\n                on{PropertyName(x)
-                              }?.Invoke({(IsEmpty(x) ? "" : PrefixCast(x))});\n                return this;")
+                              }?.Invoke({(x.IsEmpty ? "" : PrefixCast(x))});\n                return this;")
                               .Conjoin("\n            ")}}
                           default: {{Throw}};
                       }
@@ -533,7 +533,7 @@ sealed partial record Scaffolder(
                       switch
                       {
                           {{Symbols
-                              .Select((x, i) => $"{i} => on{PropertyName(x)}({(IsEmpty(x) ? "" : PrefixCast(x))}),")
+                              .Select((x, i) => $"{i} => on{PropertyName(x)}({(x.IsEmpty ? "" : PrefixCast(x))}),")
                               .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       };
@@ -543,38 +543,38 @@ sealed partial record Scaffolder(
         );
 
     string DeclareUnderlyingValue =>
-        Signature.FindCommonBaseTypes(Symbols).FirstOrDefault() is { } common
-            ? CSharp(
+        Common is null
+            ? ""
+            : CSharp(
                 $"""
-                      /// <summary>
-                      /// Gets the underlying value.
-                      /// </summary>
-                      /// <returns>
-                      /// The underlying value from this instance.
-                      /// </returns>
-                      {Annotation}
-                      {Pure}
-                      {AggressiveInlining}
-                      public {ReadOnlyIfStruct}{common} GetUnderlyingValue()
-                          => {(Symbols.Count == Reference.Count
-                                    ? $"{(common.SpecialType is SpecialType.System_Object
-                                            ? ""
-                                            : $"({common})")}{ReferenceField}!"
-                                    : CSharp(
-                                        $$"""
-                                        {{Discriminator}}
-                                        switch
-                                        {
-                                            {{Symbols
-                                               .Select((x, i) => $"{i} => {PrefixCast(x)},")
-                                               .Conjoin("\n            ")}}
-                                            _ => {{Throw}},
-                                        }
-                                        """
-                                    ))};
-                  """
-            )
-            : "";
+                     /// <summary>
+                     /// Gets the underlying value.
+                     /// </summary>
+                     /// <returns>
+                     /// The underlying value from this instance.
+                     /// </returns>
+                     {Annotation}
+                     {Pure}
+                     {AggressiveInlining}
+                     public {ReadOnlyIfStruct}{Common} GetUnderlyingValue()
+                         => {(Symbols.Count == Reference.Count
+                             ? $"{(Common.SpecialType is SpecialType.System_Object
+                                 ? ""
+                                 : $"({Common})")}{ReferenceField}!"
+                             : CSharp(
+                                 $$"""
+                                   {{Discriminator}}
+                                   switch
+                                   {
+                                       {{Symbols
+                                          .Select((x, i) => $"{i} => {PrefixCast(x)},")
+                                          .Conjoin("\n            ")}}
+                                       _ => {{Throw}},
+                                   }
+                                   """
+                             ))};
+                 """
+            );
 
     [Pure]
     string Discriminator =>
@@ -591,7 +591,7 @@ sealed partial record Scaffolder(
     string Name { get; } = Named.GetFullyQualifiedName();
 
     [Pure]
-    string NullableName { get; } = $"{Named.WithNullableAnnotation(NullableAnnotation.Annotated)}";
+    string NullableName { get; } = new MemberSymbol(Named, "").NullableAnnotated;
 
     [Pure]
     string Source =>
@@ -607,15 +607,20 @@ sealed partial record Scaffolder(
     HashSet<MemberSymbol> Members { get; } = Named.GetMembers().Select(MemberSymbol.From).Filter().ToSet();
 
     [Pure]
+    ITypeSymbol? Common { get; } = Signature
+       .FindCommonBaseTypes(Symbols.Except(SingleEmpty(Symbols)).ToSmallList())
+       .FirstOrDefault();
+
+    [Pure]
     SmallList<MemberSymbol> Reference { get; } =
-        Symbols.Omit(IsUnmanaged).Where(IsReference).Concat(SingleEmpty(Symbols)).ToSmallList();
+        Symbols.Omit(x => x.IsUnmanaged).Where(x => x.IsReference).Concat(SingleEmpty(Symbols)).ToSmallList();
 
     [Pure]
     SmallList<MemberSymbol> Rest { get; } =
-        Symbols.Omit(IsUnmanaged).Omit(IsReference).Except(SingleEmpty(Symbols)).ToSmallList();
+        Symbols.Omit(x => x.IsUnmanaged).Omit(x => x.IsReference).Except(SingleEmpty(Symbols)).ToSmallList();
 
     [Pure]
-    SmallList<MemberSymbol> Unmanaged { get; } = Symbols.Where(IsUnmanaged).Omit(IsEmpty).ToSmallList();
+    SmallList<MemberSymbol> Unmanaged { get; } = Symbols.Where(x => x.IsUnmanaged).Omit(x => x.IsEmpty).ToSmallList();
 
     [Pure]
     public static bool IsSystemTuple([NotNullWhen(true)] ITypeSymbol? symbol) =>
@@ -641,85 +646,8 @@ sealed partial record Scaffolder(
         x.GetMembers()
            .Select(MemberSymbol.From)
            .Filter()
-           .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] } || IsEq(x))
+           .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] } || x.IsEq)
            .ToSmallList();
-
-    [Pure]
-    static bool IsEmpty(MemberSymbol x) =>
-        x.Type is { BaseType.SpecialType: not SpecialType.System_Enum, IsValueType: true } type &&
-        !type.IsUnmanagedPrimitive() &&
-        type.GetMembers().All(IsEmpty);
-
-    [Pure]
-    static bool IsEmpty(ISymbol x) =>
-        x is { IsStatic: true } or
-            not IFieldSymbol and
-            not IMethodSymbol { MethodKind: MethodKind.Constructor, Parameters: not [] };
-
-    [Pure]
-    static bool IsEq(MemberSymbol x) =>
-        x.Symbol is IPropertySymbol
-        {
-            ContainingType.IsRecord: true,
-            Name: "EqualityContract",
-            Type:
-            {
-                ContainingNamespace: { ContainingNamespace.IsGlobalNamespace: true, Name: nameof(System) },
-                Name: nameof(Type),
-            },
-        };
-
-    [Pure]
-    static bool IsInterfaceComparable(MemberSymbol x) =>
-        x.Type.GetMembers().Any(x => IsSingleSelf(x, nameof(IComparable.CompareTo)));
-
-    [Pure]
-    static bool IsInterfaceEquatable(MemberSymbol x) =>
-        x.Type.GetMembers().Any(x => IsSingleSelf(x, nameof(Equals)));
-
-    [Pure]
-    static bool IsOperatorComparable(MemberSymbol x) =>
-        x.Type.BaseType?.SpecialType is SpecialType.System_Enum ||
-        x.Type.IsUnmanagedPrimitive() ||
-        x.Type.GetMembers().Any(x => IsOperator(x, "op_GreaterThan"));
-
-    [Pure]
-    static bool IsOperator(ISymbol symbol, string expect) =>
-        symbol is IMethodSymbol
-        {
-            IsStatic: true,
-            Name: var name,
-            DeclaredAccessibility: Accessibility.Public,
-            MethodKind: MethodKind.BuiltinOperator,
-        } &&
-        expect == name;
-
-    [Pure]
-    static bool IsOperatorEquatable(MemberSymbol x) =>
-        x.Type.BaseType?.SpecialType is SpecialType.System_Enum ||
-        x.Type.IsUnmanagedPrimitive() ||
-        x.Type.GetMembers().Any(x => IsOperator(x, "op_Equality"));
-
-    [Pure]
-    static bool IsReference(MemberSymbol x) =>
-        x.Type is ITypeParameterSymbol { HasReferenceTypeConstraint: var constraint, ConstraintTypes: var types }
-            ? constraint || types is []
-            : x.Type.IsReferenceType;
-
-    [Pure]
-    static bool IsSingleSelf(ISymbol x, string expect) =>
-        x is IMethodSymbol
-        {
-            Name: var name,
-            IsStatic: false,
-            ContainingType: { } type,
-            Parameters: [{ Type: INamedTypeSymbol other }],
-        } &&
-        expect == name &&
-        NamedTypeSymbolComparer.Equal(type, other);
-
-    [Pure]
-    static bool IsUnmanaged(MemberSymbol x) => x.Type.IsUnmanagedType && x.Type is not ITypeParameterSymbol;
 
     [Pure]
     static bool IsUnoriginalMethod(ISymbol x, string name) =>
@@ -734,13 +662,6 @@ sealed partial record Scaffolder(
 
     [MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
     static string CSharp([StringSyntax("C#")] string x) => x;
-
-    [Pure]
-    static string NullableAnnotated(MemberSymbol x) =>
-        $"{x.Type.WithNullableAnnotation(NullableAnnotation.Annotated)}";
-
-    [Pure]
-    static string NullableSuppression(MemberSymbol x) => x.Type.IsValueType ? "" : "!";
 
     [Pure]
     static string WrapNamespace(string acc, ISymbol next) =>
@@ -777,7 +698,7 @@ sealed partial record Scaffolder(
 
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (var symbol in symbols)
-            if (IsEmpty(symbol))
+            if (symbol.IsEmpty)
                 if (single.Type is null)
                     single = symbol;
                 else
@@ -805,13 +726,10 @@ sealed partial record Scaffolder(
 
     [Pure]
     string Comparison(MemberSymbol x) =>
-        IsEmpty(x) ? CSharp("true") :
-            IsOperatorComparable(x) ? CSharp($"{PrefixCast(x, "left.")} > {PrefixCast(x, "right.")}") :
-                IsInterfaceComparable(x) ?
-                    CSharp(
-                        $"{PrefixCast(x, "left.")}.CompareTo({PrefixCast(x, "right.")}) > 0"
-                    ) :
-                    CSharp("false");
+        x.IsEmpty ? CSharp("true") :
+        x.IsOperatorComparable ? CSharp($"{PrefixCast(x, "left.")} > {PrefixCast(x, "right.")}") :
+        x.IsInterfaceComparable ? CSharp($"{PrefixCast(x, "left.")}.CompareTo({PrefixCast(x, "right.")}) > 0") :
+        CSharp("false");
 
     [Pure]
     string DeclareAlternativeConstructor(MemberSymbol x, bool conflict) =>
@@ -887,7 +805,7 @@ sealed partial record Scaffolder(
                   {{Annotation}}
                   public {{ReadOnlyIfStruct}}bool Is{{PropertyName(x)}}
                   {
-                      {{Pure}}{{(IsEmpty(x)
+                      {{Pure}}{{(x.IsEmpty
                           ? Opposite(x)
                           : CSharp($"\n        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, \"{PropertyName(x)}\")]{Opposite(x)}"))}}
                       {{AggressiveInlining}}
@@ -911,9 +829,9 @@ sealed partial record Scaffolder(
                           (conflict ? "\n    /// <param name=\"x\">The discriminator.</param>" : "")}}
                       {{Annotation}}
                       {{AggressiveInlining}}
-                      {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{ParameterName(x)}}{{(conflict ? ", byte x" : IsEmpty(x) ? " = default" : "")}})
+                      {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{ParameterName(x)}}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")}})
                       {
-                          {{Discriminator}} = {{(conflict ? "x" : i)}};{{(IsEmpty(x) ? "" : CSharp($"\n        {Prefix(x)} = {ParameterName(x)};"))}}
+                          {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : CSharp($"\n        {Prefix(x)} = {ParameterName(x)};"))}}
                       }
 
                   {{DeclareAlternativeConstructor(x, conflict)}}
@@ -922,7 +840,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareDelegate(MemberSymbol x) =>
-        x.Type.IsRefLikeType && !IsEmpty(x)
+        x.Type.IsRefLikeType && !x.IsEmpty
             ? CSharp(
                 $"""
                      /// <summary>
@@ -948,7 +866,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareExplicitOperator(MemberSymbol x) =>
-        IsEmpty(x)
+        x.IsEmpty
             ? ""
             : CSharp(
                 $"""
@@ -960,7 +878,7 @@ sealed partial record Scaffolder(
                      {Annotation}
                      {Pure}
                      {AggressiveInlining}
-                     public static explicit operator {NullableAnnotated(x)}({Name} x)
+                     public static explicit operator {x.NullableAnnotated}({Name} x)
                          => x.{PropertyName(x)};
 
 
@@ -971,7 +889,7 @@ sealed partial record Scaffolder(
     string DeclareFactory(MemberSymbol x, int i)
     {
         var discriminator = HasConflict(x) ? $", {i}" : "";
-        var fallback = IsEmpty(x) ? " = default" : "";
+        var fallback = x.IsEmpty ? " = default" : "";
 
         return CSharp(
             $"""
@@ -993,11 +911,11 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareField(MemberSymbol x) =>
-        IsEmpty(x) || Members.Contains(x)
+        x.IsEmpty || Members.Contains(x)
             ? ""
             : CSharp(
                 $"""
-                     private {PrivatelyReadOnly}{NullableAnnotated(x)} {FieldName(x)};
+                     private {PrivatelyReadOnly}{x.NullableAnnotated} {FieldName(x)};
 
 
                  """
@@ -1027,12 +945,12 @@ sealed partial record Scaffolder(
     [Pure]
     string DeclareProperty(MemberSymbol x, int i)
     {
-        if (IsEmpty(x))
+        if (x.IsEmpty)
             return "";
 
         var prefix = Prefix(x);
         var cast = prefix is ReferenceField ? $"({x.Type})" : "";
-        var suppression = prefix is ReferenceField ? NullableSuppression(x) : "";
+        var suppression = prefix is ReferenceField ? x.NullableSuppression : "";
 
         var setter = MutablePublicly is null
             ? ""
@@ -1054,7 +972,7 @@ sealed partial record Scaffolder(
                   /// Gets{{(MutablePublicly is true ? " or sets" : "")}} the {{XmlTypeName(x.Type)}} variant.
                   /// </summary>
                   {{Annotation}}
-                  public {{ReadOnlyIfImmutableStruct}}{{NullableAnnotated(x)}} {{PropertyName(x)}}
+                  public {{ReadOnlyIfImmutableStruct}}{{x.NullableAnnotated}} {{PropertyName(x)}}
                   {
                       {{Pure}}
                       {{AggressiveInlining}}
@@ -1068,8 +986,8 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DelegateTypeName(MemberSymbol x, bool hasGenericReturn) =>
-        $"{(x.Type.IsRefLikeType && !IsEmpty(x) ? $"{PropertyName(x)}Handler" : hasGenericReturn ? Func : Action)}{(
-            x.Type.IsRefLikeType || IsEmpty(x)
+        $"{(x.Type.IsRefLikeType && !x.IsEmpty ? $"{PropertyName(x)}Handler" : hasGenericReturn ? Func : Action)}{(
+            x.Type.IsRefLikeType || x.IsEmpty
                 ? hasGenericReturn ? $"<{ResultGeneric}>" : ""
                 : hasGenericReturn ? $"<{x.Type}, {ResultGeneric}>" : $"<{x.Type}>")}";
 
@@ -1107,11 +1025,10 @@ sealed partial record Scaffolder(
 
     [Pure]
     string Equality(MemberSymbol x) =>
-        IsEmpty(x) ? CSharp("true") :
-            IsOperatorEquatable(x) ? CSharp($"{PrefixCast(x, "left.")} == {PrefixCast(x, "right.")}") :
-                IsInterfaceEquatable(x) ?
-                    CSharp($"{PrefixCast(x, "left.")}.Equals({PrefixCast(x, "right.")})") :
-                    CSharp("false");
+        x.IsEmpty ? CSharp("true") :
+        x.IsOperatorEquatable ? CSharp($"{PrefixCast(x, "left.")} == {PrefixCast(x, "right.")}") :
+        x.IsInterfaceEquatable ? CSharp($"{PrefixCast(x, "left.")}.Equals({PrefixCast(x, "right.")})") :
+        CSharp("false");
 
     [Pure]
     string FieldName(MemberSymbol x) =>
@@ -1119,7 +1036,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string Opposite(MemberSymbol x) =>
-        Symbols.TrySingle(y => x != y, out var other) && !IsEmpty(other)
+        Symbols.TrySingle(y => x != y, out var other) && !other.IsEmpty
             ? CSharp(
                 $"""
 
@@ -1130,9 +1047,9 @@ sealed partial record Scaffolder(
 
     [Pure]
     string PrefixCast(MemberSymbol x, string memberAccess = "") =>
-        IsEmpty(x) ? CSharp($"default({x.Type})") :
-        Prefix(x) is not ReferenceField and var prefix ? $"{memberAccess}{prefix}{NullableSuppression(x)}" :
-        $"(({x.Type}){memberAccess}{ReferenceField}{NullableSuppression(x)})";
+        x.IsEmpty ? CSharp($"default({x.Type})") :
+        Prefix(x) is not ReferenceField and var prefix ? $"{memberAccess}{prefix}{x.NullableSuppression}" :
+        $"(({x.Type}){memberAccess}{ReferenceField}{x.NullableSuppression})";
 
     [Pure]
     string Prefix(MemberSymbol x) =>
@@ -1150,11 +1067,11 @@ sealed partial record Scaffolder(
             : x.Name;
 
     [Pure]
-    string See(MemberSymbol x) => IsEmpty(x) ? PropertyName(x) : $"<see cref=\"{PropertyName(x)}\"/>";
+    string See(MemberSymbol x) => x.IsEmpty ? PropertyName(x) : $"<see cref=\"{PropertyName(x)}\"/>";
 
     [Pure]
     string ToStringCase(MemberSymbol x) =>
-        IsEmpty(x) || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(ToString)))
+        x.IsEmpty || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(ToString)))
             ? $"\"{PropertyName(x)}\""
             : CSharp(
                 $$"""
