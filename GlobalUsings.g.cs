@@ -43,6 +43,7 @@ global using global::System.Data.SqlTypes;
 global using global::System.Diagnostics;
 global using global::System.Diagnostics.CodeAnalysis;
 global using global::System.Diagnostics.Contracts;
+global using global::System.Diagnostics.Metrics;
 global using global::System.Diagnostics.SymbolStore;
 global using global::System.Diagnostics.Tracing;
 global using global::System.Drawing;
@@ -77,6 +78,7 @@ global using global::System.Reflection.PortableExecutable;
 global using global::System.Resources;
 global using global::System.Runtime;
 global using global::System.Runtime.CompilerServices;
+global using global::System.Runtime.CompilerServices2;
 global using global::System.Runtime.ConstrainedExecution;
 global using global::System.Runtime.ExceptionServices;
 global using global::System.Runtime.InteropServices;
@@ -134,10 +136,25 @@ global using global::CommunityToolkit.HighPerformance.Memory;
 global using global::CommunityToolkit.HighPerformance.Memory.Internals;
 global using global::CommunityToolkit.HighPerformance.Memory.Views;
 global using global::CommunityToolkit.HighPerformance.Streams;
+global using global::DotNetProjectFile;
+global using global::DotNetProjectFile.Analyzers;
+global using global::DotNetProjectFile.Analyzers.Helpers;
+global using global::DotNetProjectFile.Analyzers.MsBuild;
+global using global::DotNetProjectFile.Analyzers.Resx;
+global using global::DotNetProjectFile.Caching;
+global using global::DotNetProjectFile.CodeAnalysis;
+global using global::DotNetProjectFile.Conversion;
+global using global::DotNetProjectFile.Diagnostics;
+global using global::DotNetProjectFile.IO;
+global using global::DotNetProjectFile.MsBuild;
+global using global::DotNetProjectFile.MsBuild.Conversion;
+global using global::DotNetProjectFile.NuGet;
+global using global::DotNetProjectFile.Resx;
+global using global::DotNetProjectFile.Xml;
 global using global::Emik;
 global using global::Emik.Morsels;
 global using global::Emik.SourceGenerators;
-global using global::Emik.SourceGenerators.Unions;
+global using global::Emik.SourceGenerators.Choices;
 global using global::Fody;
 global using global::FxResources;
 global using global::FxResources.System;
@@ -148,6 +165,8 @@ global using global::FxResources.System.Composition.Convention;
 global using global::FxResources.System.Composition.Hosting;
 global using global::FxResources.System.Composition.Runtime;
 global using global::FxResources.System.Composition.TypedParts;
+global using global::FxResources.System.Diagnostics;
+global using global::FxResources.System.Diagnostics.DiagnosticSource;
 global using global::FxResources.System.IO;
 global using global::FxResources.System.IO.Pipelines;
 global using global::FxResources.System.Memory;
@@ -355,6 +374,37 @@ global using global::Roslyn.Utilities;
 global using global::Scifa;
 global using global::Scifa.CheckedExceptions;
 global using global::Scifa.CheckedExceptions.Attributes;
+global using global::Serilog;
+global using global::Serilog.Capturing;
+global using global::Serilog.Configuration;
+global using global::Serilog.Context;
+global using global::Serilog.Core;
+global using global::Serilog.Core.Enrichers;
+global using global::Serilog.Core.Filters;
+global using global::Serilog.Core.Pipeline;
+global using global::Serilog.Core.Sinks;
+global using global::Serilog.Core.Sinks.Batching;
+global using global::Serilog.Data;
+global using global::Serilog.Debugging;
+global using global::Serilog.Events;
+global using global::Serilog.Filters;
+global using global::Serilog.Formatting;
+global using global::Serilog.Formatting.Compact;
+global using global::Serilog.Formatting.Display;
+global using global::Serilog.Formatting.Json;
+global using global::Serilog.Parsing;
+global using global::Serilog.Policies;
+global using global::Serilog.Rendering;
+global using global::Serilog.Settings;
+global using global::Serilog.Settings.KeyValuePairs;
+global using global::Serilog.Sinks;
+global using global::Serilog.Sinks.File;
+global using global::Serilog.Sinks.SystemConsole;
+global using global::Serilog.Sinks.SystemConsole.Formatting;
+global using global::Serilog.Sinks.SystemConsole.Output;
+global using global::Serilog.Sinks.SystemConsole.Platform;
+global using global::Serilog.Sinks.SystemConsole.Rendering;
+global using global::Serilog.Sinks.SystemConsole.Themes;
 global using global::Substitute;
 global using global::UnitGenerator;
 global using global::Virtuosity;
@@ -444,6 +494,8 @@ namespace System.Diagnostics.CodeAnalysis { }
 
 namespace System.Diagnostics.Contracts { }
 
+namespace System.Diagnostics.Metrics { }
+
 namespace System.Diagnostics.SymbolStore { }
 
 namespace System.Diagnostics.Tracing { }
@@ -511,6 +563,8 @@ namespace System.Resources { }
 namespace System.Runtime { }
 
 namespace System.Runtime.CompilerServices { }
+
+namespace System.Runtime.CompilerServices2 { }
 
 namespace System.Runtime.ConstrainedExecution { }
 
@@ -626,13 +680,43 @@ namespace CommunityToolkit.HighPerformance.Memory.Views { }
 
 namespace CommunityToolkit.HighPerformance.Streams { }
 
+namespace DotNetProjectFile { }
+
+namespace DotNetProjectFile.Analyzers { }
+
+namespace DotNetProjectFile.Analyzers.Helpers { }
+
+namespace DotNetProjectFile.Analyzers.MsBuild { }
+
+namespace DotNetProjectFile.Analyzers.Resx { }
+
+namespace DotNetProjectFile.Caching { }
+
+namespace DotNetProjectFile.CodeAnalysis { }
+
+namespace DotNetProjectFile.Conversion { }
+
+namespace DotNetProjectFile.Diagnostics { }
+
+namespace DotNetProjectFile.IO { }
+
+namespace DotNetProjectFile.MsBuild { }
+
+namespace DotNetProjectFile.MsBuild.Conversion { }
+
+namespace DotNetProjectFile.NuGet { }
+
+namespace DotNetProjectFile.Resx { }
+
+namespace DotNetProjectFile.Xml { }
+
 namespace Emik { }
 
 namespace Emik.Morsels { }
 
 namespace Emik.SourceGenerators { }
 
-namespace Emik.SourceGenerators.Unions { }
+namespace Emik.SourceGenerators.Choices { }
 
 namespace Fody { }
 
@@ -653,6 +737,10 @@ namespace FxResources.System.Composition.Hosting { }
 namespace FxResources.System.Composition.Runtime { }
 
 namespace FxResources.System.Composition.TypedParts { }
+
+namespace FxResources.System.Diagnostics { }
+
+namespace FxResources.System.Diagnostics.DiagnosticSource { }
 
 namespace FxResources.System.IO { }
 
@@ -1067,6 +1155,68 @@ namespace Scifa { }
 namespace Scifa.CheckedExceptions { }
 
 namespace Scifa.CheckedExceptions.Attributes { }
+
+namespace Serilog { }
+
+namespace Serilog.Capturing { }
+
+namespace Serilog.Configuration { }
+
+namespace Serilog.Context { }
+
+namespace Serilog.Core { }
+
+namespace Serilog.Core.Enrichers { }
+
+namespace Serilog.Core.Filters { }
+
+namespace Serilog.Core.Pipeline { }
+
+namespace Serilog.Core.Sinks { }
+
+namespace Serilog.Core.Sinks.Batching { }
+
+namespace Serilog.Data { }
+
+namespace Serilog.Debugging { }
+
+namespace Serilog.Events { }
+
+namespace Serilog.Filters { }
+
+namespace Serilog.Formatting { }
+
+namespace Serilog.Formatting.Compact { }
+
+namespace Serilog.Formatting.Display { }
+
+namespace Serilog.Formatting.Json { }
+
+namespace Serilog.Parsing { }
+
+namespace Serilog.Policies { }
+
+namespace Serilog.Rendering { }
+
+namespace Serilog.Settings { }
+
+namespace Serilog.Settings.KeyValuePairs { }
+
+namespace Serilog.Sinks { }
+
+namespace Serilog.Sinks.File { }
+
+namespace Serilog.Sinks.SystemConsole { }
+
+namespace Serilog.Sinks.SystemConsole.Formatting { }
+
+namespace Serilog.Sinks.SystemConsole.Output { }
+
+namespace Serilog.Sinks.SystemConsole.Platform { }
+
+namespace Serilog.Sinks.SystemConsole.Rendering { }
+
+namespace Serilog.Sinks.SystemConsole.Themes { }
 
 namespace Substitute { }
 
