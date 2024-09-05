@@ -770,7 +770,7 @@ sealed partial record Scaffolder(
                 else
                     return [];
 
-        return single;
+        return single.Symbol is null ? [] : single;
     }
 
     [Pure]
