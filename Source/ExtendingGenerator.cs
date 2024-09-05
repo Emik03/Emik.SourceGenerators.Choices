@@ -56,7 +56,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     void IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext context)
     {
         var dot = context.SyntaxProvider.CreateSyntaxProvider(IsHeavilyNested, DiscoverDotDeclaration);
-        var org = context.SyntaxProvider.ForAttributeWithMetadataName(Of<AttributeGenerator>(), IsExtendable, DiscoverMembers);
+        var org = context.SyntaxProvider.ForAttributeWithMetadataName(Of<AttributeGenerator>(), IsExtendable, Discover);
         Register(context, dot);
         Register(context, org);
     }
@@ -206,7 +206,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// <param name="token">The cancellation token used for interrupting the iteration of constructor arguments.</param>
     /// <returns>The extracted result, or <see langword="default"/> if the input is invalid.</returns>
     [Pure]
-    static Raw DiscoverMembers(GeneratorAttributeSyntaxContext context, CancellationToken token)
+    static Raw Discover(GeneratorAttributeSyntaxContext context, CancellationToken token)
     {
         [Pure]
         static Raw Extract(Fold x)
