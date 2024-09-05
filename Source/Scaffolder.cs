@@ -625,6 +625,9 @@ sealed partial record Scaffolder(
         };
 
     [Pure]
+    public static Scaffolder From(Raw raw) => new(raw.Named, raw.Fields, raw.MutablePublicly, raw.PolyfillAttributes);
+
+    [Pure]
     public static SmallList<MemberSymbol> Decouple(ImmutableArray<IFieldSymbol> fields) =>
         (fields.Length is TupleGenericLimit &&
             fields[^1].Type is INamedTypeSymbol { IsTupleType: true, IsValueType: true, TupleElements: var tuple }

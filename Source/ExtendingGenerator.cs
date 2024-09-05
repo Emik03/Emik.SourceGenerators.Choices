@@ -49,7 +49,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         members.Length >= MinimumMembers &&
         (named, members.ToSmallList(), publiclyMutable, polyfillAttributes) is var raw &&
         HasSufficientMembers(raw)
-            ? ((Scaffolder)raw).Result
+            ? Scaffolder.From(raw).Result
             : null;
 
     /// <inheritdoc />
@@ -64,7 +64,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// <summary>Creates the generated source to the <see cref="SourceProductionContext"/>.</summary>
     /// <param name="context">The context to register source code.</param>
     /// <param name="raw">The values to base the source generation from.</param>
-    static void Generate(SourceProductionContext context, Raw raw) => AddSource(context, ((Scaffolder)raw).Result);
+    static void Generate(SourceProductionContext context, Raw raw) => AddSource(context, Scaffolder.From(raw).Result);
 
     /// <summary>
     /// Registers the provider to the generator, which also includes
