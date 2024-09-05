@@ -228,7 +228,7 @@ sealed partial record Scaffolder(
                           {{Symbols
                              .Select((x, i) => (x, i))
                              .OrderByDescending(Inheritance)
-                             .Select(x => $"{x.x.Type} => {x.i},")
+                             .Select(x => $"{(IsEmpty(x.x.Type) ? "null" : x.x.Type)} => {x.i},")
                              .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       };
@@ -607,10 +607,12 @@ sealed partial record Scaffolder(
     HashSet<MemberSymbol> Members { get; } = Named.GetMembers().Select(MemberSymbol.DeconstructFrom).Filter().ToSet();
 
     [Pure]
-    SmallList<MemberSymbol> Reference { get; } = Symbols.Omit(IsUnmanaged).Where(IsReference).ToSmallList();
+    SmallList<MemberSymbol> Reference { get; } =
+        Symbols.Omit(IsUnmanaged).Where(IsReference).Concat(SingleEmpty(Symbols)).ToSmallList();
 
     [Pure]
-    SmallList<MemberSymbol> Rest { get; } = Symbols.Omit(IsUnmanaged).Omit(IsReference).ToSmallList();
+    SmallList<MemberSymbol> Rest { get; } =
+        Symbols.Omit(IsUnmanaged).Omit(IsReference).Except(SingleEmpty(Symbols)).ToSmallList();
 
     [Pure]
     SmallList<MemberSymbol> Unmanaged { get; } = Symbols.Where(IsUnmanaged).Omit(IsEmpty).ToSmallList();
@@ -756,6 +758,22 @@ sealed partial record Scaffolder(
     }
 
     [Pure]
+    static SmallList<MemberSymbol> SingleEmpty(SmallList<MemberSymbol> symbols)
+    {
+        MemberSymbol single = default;
+
+        // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
+        foreach (var symbol in symbols)
+            if (IsEmpty(symbol))
+                if (single.Symbol is null)
+                    single = symbol;
+                else
+                    return [];
+
+        return single;
+    }
+
+    [Pure]
     bool HasConflict(MemberSymbol x) => Symbols.Where(y => TypeSymbolComparer.Equal(x.Type, y.Type)).Skip(1).Any();
 
     [Pure]
@@ -775,9 +793,12 @@ sealed partial record Scaffolder(
     [Pure]
     string Comparison(MemberSymbol x) =>
         IsEmpty(x) ? CSharp("true") :
-        IsOperatorComparable(x) ? CSharp($"left.{PrefixCast(x)} > right.{PrefixCast(x)}") :
-        IsInterfaceComparable(x) ? CSharp($"left.{PrefixCast(x)}{NullableSuppression(x)}.CompareTo(right.{PrefixCast(x)}) > 0") :
-        CSharp("false");
+            IsOperatorComparable(x) ? CSharp($"{PrefixCast(x, "left.")} > {PrefixCast(x, "right.")}") :
+                IsInterfaceComparable(x) ?
+                    CSharp(
+                        $"{PrefixCast(x, "left.")}.CompareTo({PrefixCast(x, "right.")}) > 0"
+                    ) :
+                    CSharp("false");
 
     [Pure]
     string DeclareAlternativeConstructor(MemberSymbol x, bool conflict) =>
@@ -959,7 +980,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareField(MemberSymbol x) =>
-        Members.Contains(x)
+        IsEmpty(x) || Members.Contains(x)
             ? ""
             : CSharp(
                 $"""
@@ -1074,9 +1095,10 @@ sealed partial record Scaffolder(
     [Pure]
     string Equality(MemberSymbol x) =>
         IsEmpty(x) ? CSharp("true") :
-        IsOperatorEquatable(x) ? CSharp($"left.{PrefixCast(x)} == right.{PrefixCast(x)}") :
-        IsInterfaceEquatable(x) ? CSharp($"left.{PrefixCast(x)}{NullableSuppression(x)}.Equals(right.{PrefixCast(x)})") :
-        CSharp("false");
+            IsOperatorEquatable(x) ? CSharp($"{PrefixCast(x, "left.")} == {PrefixCast(x, "right.")}") :
+                IsInterfaceEquatable(x) ?
+                    CSharp($"{PrefixCast(x, "left.")}.Equals({PrefixCast(x, "right.")})") :
+                    CSharp("false");
 
     [Pure]
     string FieldName(MemberSymbol x) =>
@@ -1094,10 +1116,10 @@ sealed partial record Scaffolder(
             : "";
 
     [Pure]
-    string PrefixCast(MemberSymbol x) =>
+    string PrefixCast(MemberSymbol x, string memberAccess = "") =>
         IsEmpty(x) ? CSharp($"default({x.Type})") :
-        Prefix(x) is not ReferenceField and var prefix ? $"{prefix}{NullableSuppression(x)}" :
-        $"(({x.Type}){ReferenceField}{NullableSuppression(x)})";
+        Prefix(x) is not ReferenceField and var prefix ? $"{memberAccess}{prefix}{NullableSuppression(x)}" :
+        $"(({x.Type}){memberAccess}{ReferenceField}{NullableSuppression(x)})";
 
     [Pure]
     string Prefix(MemberSymbol x) =>
