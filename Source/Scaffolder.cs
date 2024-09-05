@@ -228,7 +228,7 @@ sealed partial record Scaffolder(
                           {{Symbols
                              .Select((x, i) => (x, i))
                              .OrderByDescending(Inheritance)
-                             .Select(x => $"{(IsEmpty(x.x.Type) ? "null" : x.x.Type)} => {x.i},")
+                             .Select(x => $"{(IsEmpty(x.x) ? "null" : x.x.Type)} => {x.i},")
                              .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       };
@@ -604,7 +604,7 @@ sealed partial record Scaffolder(
     string XmlName { get; } = XmlTypeName(Named);
 
     [Pure]
-    HashSet<MemberSymbol> Members { get; } = Named.GetMembers().Select(MemberSymbol.DeconstructFrom).Filter().ToSet();
+    HashSet<MemberSymbol> Members { get; } = Named.GetMembers().Select(MemberSymbol.From).Filter().ToSet();
 
     [Pure]
     SmallList<MemberSymbol> Reference { get; } =
@@ -639,9 +639,9 @@ sealed partial record Scaffolder(
     [Pure]
     public static SmallList<MemberSymbol> Instances(INamespaceOrTypeSymbol x) =>
         x.GetMembers()
-           .Select(MemberSymbol.DeconstructFrom)
+           .Select(MemberSymbol.From)
            .Filter()
-           .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] })
+           .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] } || IsEq(x))
            .ToSmallList();
 
     [Pure]
@@ -655,6 +655,19 @@ sealed partial record Scaffolder(
         x is { IsStatic: true } or
             not IFieldSymbol and
             not IMethodSymbol { MethodKind: MethodKind.Constructor, Parameters: not [] };
+
+    [Pure]
+    static bool IsEq(MemberSymbol x) =>
+        x.Symbol is IPropertySymbol
+        {
+            ContainingType.IsRecord: true,
+            Name: "EqualityContract",
+            Type:
+            {
+                ContainingNamespace: { ContainingNamespace.IsGlobalNamespace: true, Name: nameof(System) },
+                Name: nameof(Type),
+            },
+        };
 
     [Pure]
     static bool IsInterfaceComparable(MemberSymbol x) =>
@@ -875,7 +888,7 @@ sealed partial record Scaffolder(
                   public {{ReadOnlyIfStruct}}bool Is{{PropertyName(x)}}
                   {
                       {{Pure}}{{(IsEmpty(x)
-                          ? ""
+                          ? Opposite(x)
                           : CSharp($"\n        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, \"{PropertyName(x)}\")]{Opposite(x)}"))}}
                       {{AggressiveInlining}}
                       get => {{Discriminator}} is {{i}};
@@ -1106,7 +1119,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string Opposite(MemberSymbol x) =>
-        Symbols.TrySingle(y => x != y, out var other)
+        Symbols.TrySingle(y => x != y, out var other) && !IsEmpty(other)
             ? CSharp(
                 $"""
 

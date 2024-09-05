@@ -83,7 +83,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <summary>Creates a new instance of the <see cref="MemberSymbol"/> struct from the underlying symbol.</summary>
     /// <param name="symbol">The <see cref="ISymbol"/> to create the <see cref="MemberSymbol"/> from.</param>
     /// <returns>The new <see cref="MemberSymbol"/> instance.</returns>
-    public static MemberSymbol? DeconstructFrom(ISymbol symbol) =>
+    public static MemberSymbol? From(ISymbol symbol) =>
         symbol switch
         {
             IFieldSymbol x => new(x),

@@ -88,7 +88,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// is annotated correctly; otherwise, <see langword="false"/>.
     /// </returns>
     [Pure]
-    static bool HasAnnotatedCorrectly(Fold x) =>
+    static bool AnnotatedGood(Fold x) =>
         x is ({ IsTupleType: false }, null or { IsTupleType: true, TupleElements.Length: >= MinimumMembers }, _);
 
     /// <summary>Determines whether the parameter <paramref name="x"/> has sufficient members.</summary>
@@ -239,7 +239,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             };
         }
 
-        return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, mutablePublicly) is var fold && HasAnnotatedCorrectly(fold)
+        return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, mutablePublicly) is var fold && AnnotatedGood(fold)
                 ? Extract(fold)
                 : default;
     }

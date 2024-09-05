@@ -75,7 +75,7 @@ readonly record struct Signature(
 
         bool IsValid(Extract next) =>
             From(next.Symbol, assembly) is not null &&
-            (except is null || MemberSymbol.DeconstructFrom(next.Symbol) is not { } x || !except.Contains(x));
+            (except is null || MemberSymbol.From(next.Symbol) is not { } x || !except.Contains(x));
 
         var signatures = ToSelf(except, assembly);
         var forwarders = Add(symbols, assembly, signatures);
