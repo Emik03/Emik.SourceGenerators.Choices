@@ -95,7 +95,6 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     public bool Equals(MemberSymbol other) =>
         Symbol switch
         {
-            null => other.Symbol is null,
             IFieldSymbol => other.Symbol is IFieldSymbol,
             IPropertySymbol => other.Symbol is IPropertySymbol,
             _ => other.Symbol is not IFieldSymbol and not IPropertySymbol,
@@ -117,7 +116,6 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     public override int GetHashCode() =>
         Symbol switch
         {
-            null => -1,
             IFieldSymbol field => FieldSymbolComparer.Default.GetHashCode(field) * Prime(),
             IPropertySymbol property => PropertySymbolComparer.Default.GetHashCode(property) * Prime(),
             _ => TypeSymbolComparer.GetHashCode(Type) ^ StringComparer.Ordinal.GetHashCode(Name) * Prime(),

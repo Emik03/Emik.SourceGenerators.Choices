@@ -765,12 +765,12 @@ sealed partial record Scaffolder(
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (var symbol in symbols)
             if (IsEmpty(symbol))
-                if (single.Symbol is null)
+                if (single.Type is null)
                     single = symbol;
                 else
                     return [];
 
-        return single.Symbol is null ? [] : single;
+        return single.Type is null ? [] : single;
     }
 
     [Pure]

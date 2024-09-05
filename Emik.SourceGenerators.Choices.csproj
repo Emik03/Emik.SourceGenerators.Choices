@@ -5,6 +5,7 @@
         <NoWarn>$(NoWarn);SA1600;IDE0130</NoWarn>
         <TargetFramework>netstandard2.0</TargetFramework>
         <DisableDefaultDocumentation>true</DisableDefaultDocumentation>
+        <DefineConstants>$(DefineConstants);FORCE_SERILOG</DefineConstants>
         <RepositoryUrl>https://github.com/Emik03/Emik.SourceGenerators.Choices</RepositoryUrl>
         <Description>Annotate [Choice] to transform your type into a highly performant and flexible disjoint union.</Description>
         <PackageTags>Analyzer Coproduct Delegate Discriminated Disjoint Either Forwarder Functional Generator Infer Inference Interface Monad Monadic Monoid Performant Roslyn Source Union</PackageTags>
