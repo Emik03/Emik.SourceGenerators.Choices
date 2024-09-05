@@ -69,14 +69,16 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     public static int Hash(ITypeSymbol? x) =>
         x is null
             ? -1
-            : unchecked((int)x.SpecialType * Primes.Int16[^1] ^
-                (int)x.TypeKind * Primes.Int16[^2] ^
-                (int)x.DeclaredAccessibility * Primes.Int16[^3] ^
-                x.IsRefLikeType.ToByte() * Primes.Int16[^4] ^
-                x.IsUnmanagedType.ToByte() * Primes.Int16[^5] ^
-                x.IsReadOnly.ToByte() * Primes.Int16[^6] ^
-                x.IsRecord.ToByte() * Primes.Int16[^7] ^
-                TypeSymbolComparer.GetHashCode(x) * Primes.Int16[^8]);
+            : HashCode.Combine(
+                x.SpecialType,
+                x.TypeKind,
+                x.DeclaredAccessibility,
+                x.IsRefLikeType,
+                x.IsUnmanagedType,
+                x.IsReadOnly,
+                x.IsRecord,
+                TypeSymbolComparer.GetHashCode(x)
+            );
 
     /// <summary>Creates a new instance of the <see cref="MemberSymbol"/> struct from the underlying symbol.</summary>
     /// <param name="symbol">The <see cref="ISymbol"/> to create the <see cref="MemberSymbol"/> from.</param>

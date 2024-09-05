@@ -5,7 +5,7 @@ namespace Emik.SourceGenerators.Choices;
 sealed class RawEqualityComparer : IEqualityComparer<Raw>
 {
     /// <summary>Initializes a new instance of the <see cref="RawEqualityComparer"/> class.</summary>
-    private RawEqualityComparer() { }
+    RawEqualityComparer() { }
 
     /// <summary>Gets the singleton instance of the <see cref="RawEqualityComparer"/> class.</summary>
     public static RawEqualityComparer Instance { get; } = new();
