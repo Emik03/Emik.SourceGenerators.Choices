@@ -42,7 +42,7 @@ public sealed class AttributeGenerator() : FixedGenerator(
               /// Initializes a new instance of the <see cref="ChoiceAttribute"/> class.
               /// </summary>
               /// <param name="set">The type of fields that define the annotated union.</param>
-              internal ChoiceAttribute(Type set)
+              internal ChoiceAttribute(global::System.Type set)
               {
                   Set = set;
                   IsPubliclyMutable = null;
@@ -63,7 +63,7 @@ public sealed class AttributeGenerator() : FixedGenerator(
               /// </summary>
               /// <param name="set">The type of fields that define the annotated union.</param>
               /// <param name="isPubliclyMutable">Determines if mutability is private or public.</param>
-              internal ChoiceAttribute(Type set, bool isPubliclyMutable)
+              internal ChoiceAttribute(global::System.Type set, bool isPubliclyMutable)
               {
                   Set = set;
                   IsPubliclyMutable = isPubliclyMutable;
@@ -74,7 +74,7 @@ public sealed class AttributeGenerator() : FixedGenerator(
               /// </summary>
               /// <param name="isPubliclyMutable">Determines if mutability is private or public.</param>
               /// <param name="set">The type of fields that define the annotated union.</param>
-              internal ChoiceAttribute(bool isPubliclyMutable, Type set)
+              internal ChoiceAttribute(bool isPubliclyMutable, global::System.Type set)
               {
                   IsPubliclyMutable = isPubliclyMutable;
                   Set = set;
@@ -88,7 +88,7 @@ public sealed class AttributeGenerator() : FixedGenerator(
               /// <summary>
               /// When specified, gets the set of fields that define the annotated union.
               /// </summary>
-              internal Type? Set { get; }
+              internal global::System.Type? Set { get; }
           }
 
           /// <summary>
