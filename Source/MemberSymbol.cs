@@ -62,9 +62,9 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <summary>Gets a value indicating whether the type is a reference type.</summary>
     [Pure]
     public bool IsReference =>
-        Type is ITypeParameterSymbol { HasReferenceTypeConstraint: var constraint, ConstraintTypes: var types }
-            ? constraint || types is []
-            : Type.IsReferenceType;
+        Type is { IsReferenceType: true } or
+            ITypeParameterSymbol { ConstraintTypes: not [] } or
+            ITypeParameterSymbol { HasReferenceTypeConstraint: true };
 
     /// <summary>Gets a value indicating whether the member is static.</summary>
     [Pure]
