@@ -1046,7 +1046,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string PrefixCast(MemberSymbol x, string memberAccess = "") =>
-        x.IsEmpty ? CSharp($"default({x.Type})") :
+        x.IsEmpty ? SingleEmpty(Symbols).Contains(x) ? CSharp("default") : CSharp($"default({x.Type})") :
         Prefix(x) is not ReferenceField and var prefix ? $"{memberAccess}{prefix}{x.NullableSuppression}" :
         $"(({x.Type}){memberAccess}{ReferenceField}{x.NullableSuppression})";
 

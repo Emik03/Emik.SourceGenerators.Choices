@@ -107,7 +107,9 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
     {
         [Pure]
         INamedTypeSymbol? FindComparableInterface(ImmutableArray<INamedTypeSymbol> all) =>
-            all.FirstOrDefault(x => NamedTypeSymbolComparer.Equal(x.OriginalDefinition, interfaceFromFirst.OriginalDefinition));
+            all.FirstOrDefault(
+                x => NamedTypeSymbolComparer.Equal(x.OriginalDefinition, interfaceFromFirst.OriginalDefinition)
+            );
 
         return Symbols
            .Skip(1)
