@@ -721,7 +721,8 @@ sealed partial record Scaffolder(
         Symbols.Where(y => TypeSymbolComparer.Equal(x.Type, y.Type)).Skip(1).Contains(x);
 
     [Pure]
-    bool SkipOperator(MemberSymbol x) => x.Type.BaseType is null || HasConflict(x) || IsNoninitial(x);
+    bool SkipOperator(MemberSymbol x) =>
+        x.Type is not ITypeParameterSymbol and { BaseType: null } || HasConflict(x) || IsNoninitial(x);
 
     [Pure]
     int Inheritance((int Index, MemberSymbol Item) tuple) =>
@@ -941,7 +942,7 @@ sealed partial record Scaffolder(
                      {Annotation}
                      {Pure}
                      {AggressiveInlining}
-                     public static implicit operator {Name}({x.Type} {ParameterName(x)})
+                     public static implicit operator {Name}({x.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)} {ParameterName(x)})
                          => new {Name}({ParameterName(x)});
 
                  {DeclareExplicitOperator(x)}
