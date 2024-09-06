@@ -226,11 +226,10 @@ sealed partial record Scaffolder(
                       get => {{ReferenceField}} switch
                       {
                           {{Symbols
-                             .Select((x, i) => (x, i))
+                             .Index()
                              .OrderByDescending(Inheritance)
-                             .Select(x => $"{(x.x.IsEmpty ? "null" : x.x.Type)} => {x.i},")
-                             .Conjoin("\n            ")}}
-                          _ => {{Throw}},
+                             .Select(x => $"{(x.Item.IsEmpty ? "null" : x.Item.Type)} => {x.Index},")
+                             .Conjoin("\n            ")}}{{(Symbols.Any(x => x.IsEmpty) ? "" : $"\n_ => {Throw},")}}
                       };
                       {{Pure}}
                       {{AggressiveInlining}}
@@ -677,7 +676,7 @@ sealed partial record Scaffolder(
     [Pure]
     static string XmlEscape(ISymbol x, bool allowTypeSubstitution = false) =>
         (x is INamedTypeSymbol { IsTupleType: true, TypeArguments: { Length: > 1 } args }
-            ? $"{nameof(System)}.{nameof(ValueTuple)}{{{args.Select((_, i) => $"T{i + 1}").Conjoin()}}}"
+            ? $"{nameof(System)}.{nameof(ValueTuple)}{{{args.Length.For(i => $"T{i + 1}").Conjoin()}}}"
             : $"{(allowTypeSubstitution ? x : x.OriginalDefinition)}")
        .Replace('<', '{')
        .Replace('>', '}')
@@ -718,10 +717,10 @@ sealed partial record Scaffolder(
     bool SkipOperator(MemberSymbol x) => x.Type.BaseType is null || HasConflict(x) || IsNoninitial(x);
 
     [Pure]
-    int Inheritance((MemberSymbol Field, int Index) tuple) =>
+    int Inheritance((int Index, MemberSymbol Item) tuple) =>
         Rest.Count(
-            x => tuple.Field.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, TypeSymbolComparer.Default) ||
-                tuple.Field.Type.AllInterfaces.Contains(x.Type, TypeSymbolComparer.Default)
+            x => tuple.Item.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, TypeSymbolComparer.Default) ||
+                tuple.Item.Type.AllInterfaces.Contains(x.Type, TypeSymbolComparer.Default)
         );
 
     [Pure]
