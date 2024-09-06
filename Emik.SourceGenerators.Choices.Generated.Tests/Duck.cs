@@ -40,3 +40,12 @@ partial class DotKMModule;
 
 [Choice.Apple<byte>.Pear<int>.Orange<BindingFlags>]
 sealed partial class DotFruit;
+
+[Choice]
+readonly partial struct Option<T>
+    where T : class
+{
+    readonly T? _some; // ReSharper disable once UnusedMember.Local
+
+    ValueTuple None => default;
+}

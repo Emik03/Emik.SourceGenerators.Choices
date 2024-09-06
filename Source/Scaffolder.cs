@@ -578,7 +578,7 @@ sealed partial record Scaffolder(
     [Pure]
     string Discriminator =>
         _discriminator ??= Symbols.Count != Reference.Count ||
-            Symbols.Any(Members.Contains) ||
+            Symbols.Omit(x => x.IsEmpty).Any(Members.Contains) ||
             Symbols.Select(x => x.Type).GroupDuplicates(TypeSymbolComparer.Default).Any()
                 ? DiscriminatorField
                 : DiscriminatorProperty;
