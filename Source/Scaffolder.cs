@@ -37,10 +37,15 @@ sealed partial record Scaffolder(
     public GeneratedSource Result => (HintName, Source);
 
     [Pure]
-    bool CanOverlapReferenceMemorySpace => Reference.Omit(Members.Contains).Skip(MinimumBoxedSize - 1).Any();
+    bool CanOverlapReferenceMemorySpace =>
+        CanReserveNull || Reference.Omit(Members.Contains).Skip(MinimumBoxedSize - 1).Any();
 
     [Pure]
     bool CanOverlapUnmanagedMemorySpace => Unmanaged.Omit(Members.Contains).Skip(MinimumExplicitStructSize - 1).Any();
+
+    [Pure]
+    bool CanReserveNull =>
+        Symbols is [{ IsEmpty: true }, { IsReference: true }] or [{ IsReference: true }, { IsEmpty: true }];
 
     [Pure]
     string AutoIfStruct =>
@@ -228,7 +233,9 @@ sealed partial record Scaffolder(
                           {{Symbols
                              .Index()
                              .OrderByDescending(Inheritance)
-                             .Select(x => $"{(x.Item.IsEmpty ? "null" : x.Item.Type)} => {x.Index},")
+                             .Select(x => $"{(x.Item.IsEmpty
+                                 ? "null"
+                                 : x.Item.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated))} => {x.Index},")
                              .Conjoin("\n            ")}}{{(Symbols.Any(x => x.IsEmpty) ? "" : $"\n_ => {Throw},")}}
                       };
                       {{Pure}}
@@ -578,7 +585,7 @@ sealed partial record Scaffolder(
     [Pure]
     string Discriminator =>
         _discriminator ??= Symbols.Count != Reference.Count ||
-            Symbols.Count is not 2 && Symbols.Omit(x => x.IsEmpty).Any(Members.Contains) ||
+            !CanReserveNull && Symbols.Any(Members.Contains) ||
             Symbols.Select(x => x.Type).GroupDuplicates(TypeSymbolComparer.Default).Any()
                 ? DiscriminatorField
                 : DiscriminatorProperty;
