@@ -27,6 +27,24 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
            .Where(x => x.Count == Symbols.Count)
            .SelectMany(DelegateImplementors);
 
+    /// <summary>
+    /// Determines if <paramref name="symbol"/> is an
+    /// <see cref="IComparable"/> or <see cref="IEquatable{T}"/> interface.
+    /// </summary>
+    /// <param name="symbol">The <see cref="INamedTypeSymbol"/> to check.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if <paramref name="symbol"/> is an <see cref="IComparable"/>
+    /// or <see cref="IEquatable{T}"/> interface; otherwise, <see langword="false"/>.
+    /// </returns>
+    [Pure]
+    static bool IsImplementedInterface([NotNullWhen(true)] INamedTypeSymbol? symbol) =>
+        symbol is
+        {
+            Name: nameof(IComparable) or nameof(IEquatable<int>),
+            TypeArguments: [] or [{ SpecialType: SpecialType.System_Object }],
+            ContainingNamespace: { ContainingNamespace.IsGlobalNamespace: true, Name: nameof(System) },
+        };
+
     /// <summary>Extracts the members that are in common with every member of <see cref="Symbols"/>.</summary>
     /// <param name="interfaces">The interfaces to try.</param>
     /// <returns>The members that are in common with every member of <see cref="Symbols"/>.</returns>
@@ -81,42 +99,23 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
     /// <param name="next">The next member.</param>
     /// <returns>The set of interfaces that are contenders for type forwarding.</returns>
     [Pure]
-    IEnumerable<INamedTypeSymbol> UnimplementedInterfaces(MemberSymbol next)
-    {
-        [Pure]
-        static bool IsImplementedInterface([NotNullWhen(true)] INamedTypeSymbol? x) =>
-            x is
-            {
-                Name: nameof(IComparable) or nameof(IEquatable<int>),
-                TypeArguments: [] or [{ SpecialType: SpecialType.System_Object }],
-                ContainingNamespace: { ContainingNamespace.IsGlobalNamespace: true, Name: nameof(System) },
-            };
-
-        return next
+    IEnumerable<INamedTypeSymbol> UnimplementedInterfaces(MemberSymbol next) =>
+        next
            .Type
            .AllInterfaces
            .Omit(IsImplementedInterface)
            .Omit(x => x.GetMembers().Any(x => IsReadOnly && x is IEventSymbol || x.IsStatic));
-    }
 
     /// <summary>Creates the list of original definitions of <paramref name="interfaceFromFirst"/>.</summary>
     /// <param name="interfaceFromFirst">The first member.</param>
     /// <returns>The list of original definitions of <paramref name="interfaceFromFirst"/>.</returns>
     [Pure]
-    SmallList<INamedTypeSymbol> GroupOriginalDefinitions(INamedTypeSymbol interfaceFromFirst)
-    {
-        [Pure]
-        INamedTypeSymbol? FindComparableInterface(ImmutableArray<INamedTypeSymbol> all) =>
-            all.FirstOrDefault(
-                x => NamedTypeSymbolComparer.Equal(x.OriginalDefinition, interfaceFromFirst.OriginalDefinition)
-            );
-
-        return Symbols
+    SmallList<INamedTypeSymbol> GroupOriginalDefinitions(INamedTypeSymbol interfaceFromFirst) =>
+        Symbols
            .Skip(1)
            .Select(x => x.Type.AllInterfaces)
-           .Select(FindComparableInterface)
+           .Select(x => x.FirstOrDefault(x => NamedTypeSymbolComparer.Equal(x, interfaceFromFirst)))
            .Filter()
            .Prepend(interfaceFromFirst)
            .ToSmallList();
-    }
 }
