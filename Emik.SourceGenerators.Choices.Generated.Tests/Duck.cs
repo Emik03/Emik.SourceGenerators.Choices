@@ -53,3 +53,6 @@ readonly partial struct Option<T>
 
     ValueTuple None => default;
 }
+
+[Choice.Public.Utf8<Span<byte>>.Utf16<Span<char>>]
+ref partial struct SpanEncodingsDot;

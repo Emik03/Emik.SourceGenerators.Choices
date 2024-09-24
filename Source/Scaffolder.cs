@@ -186,8 +186,9 @@ sealed partial record Scaffolder(
                      false => nameof(Accessibility.Private),
                      null => null,
                  }).YieldValued()
-                .Concat(Symbols.Select(x => x.Name))
-                .Prepend("Choice")
+                .Select(x => (false, x))
+                .Concat(Symbols.Select(x => (x.Type.IsRefLikeType, x.Name)))
+                .Prepend((false, "Choice"))
                 .Reverse()
                 .Index()
                 .Aggregate("", DeclareNestedClass)}
@@ -999,7 +1000,7 @@ sealed partial record Scaffolder(
                 : hasGenericReturn ? $"<{x.Type}, {ResultGeneric}>" : $"<{x.Type}>")}";
 
     [Pure]
-    string DeclareNestedClass(string x, (int Index, string Item) y)
+    string DeclareNestedClass(string x, (int Index, (bool IsRefLikeType, string Name) Item) y)
     {
         var choiceIndex = Symbols.Count + (MutablePublicly is not null).ToByte();
         var isChoiceClass = y.Index == choiceIndex;
@@ -1009,8 +1010,9 @@ sealed partial record Scaffolder(
             $$"""
                   [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
                   {{(isChoiceClass ? "private" : "internal")}} {{(y.Index is 0 ? "sealed" : "static")
-                  }} class {{y.Item}}{{(isVariantClass ? $"<T{y.Item}Discard>" : "")
-                  }}{{(y.Index is 0 ? " : global::System.Attribute" : "")}}
+                  }} class {{y.Item.Name}}{{(isVariantClass ? $"<T{y.Item.Name}Discard>" : "")
+                  }}{{(y.Index is 0 ? " : global::System.Attribute" : "")
+                  }}{{(y.Item.IsRefLikeType ? $"\n    where T{y.Item.Name}Discard : allows ref struct" : "")}}
                   {{{(y.Index is 0 ? "" : $"\n{x.SplitLines().Select(x => $"    {x}").Conjoin("\n")}")}}
                   }
               """
