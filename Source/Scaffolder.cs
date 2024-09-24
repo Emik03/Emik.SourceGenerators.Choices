@@ -952,7 +952,7 @@ sealed partial record Scaffolder(
     [Pure]
     string DeclareProperty(MemberSymbol x, int i)
     {
-        if (x.IsEmpty)
+        if (x is { IsEmpty: true } or { Symbol: IPropertySymbol })
             return "";
 
         var prefix = Prefix(x);

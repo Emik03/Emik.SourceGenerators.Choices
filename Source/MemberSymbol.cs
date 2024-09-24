@@ -84,7 +84,9 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
 
     /// <summary>Gets the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.</summary>
     [Pure]
-    public string ParameterName => $"{Name.Nth(0)?.ToLower()}{Name.AsSpan().Nth(1..)}";
+    public string ParameterName =>
+        $"{Name.Nth((Symbol is IFieldSymbol).ToByte())?.ToLower()}{
+            Name.AsSpan().Nth((Symbol is IFieldSymbol).ToByte()..)}";
 
     /// <summary>Compares two <see cref="ITypeSymbol"/> instances.</summary>
     /// <remarks><para>
