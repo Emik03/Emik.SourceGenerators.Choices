@@ -86,7 +86,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public string ParameterName =>
         $"{Name.Nth((Symbol is IFieldSymbol).ToByte())?.ToLower()}{
-            Name.AsSpan().Nth((Symbol is IFieldSymbol).ToByte()..)}";
+            Name.AsSpan().Nth(((Symbol is IFieldSymbol).ToByte() + 1)..)}";
 
     /// <summary>Compares two <see cref="ITypeSymbol"/> instances.</summary>
     /// <remarks><para>

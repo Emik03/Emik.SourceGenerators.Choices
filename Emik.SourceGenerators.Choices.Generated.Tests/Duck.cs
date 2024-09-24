@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices.Generated.Tests;
 #pragma warning disable 169, IDE0044, MA0008, MA0094
+using Attribute = System.Attribute;
+using Component = UnityEngine.Component;
+using Task = System.Threading.Tasks.Task;
+
 [Choice]
 readonly partial record struct Result<TOk, TErr>
 {
