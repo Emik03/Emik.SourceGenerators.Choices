@@ -3,7 +3,6 @@
         <FileVersion>1.3.3</FileVersion>
         <CopyrightSince>2023</CopyrightSince>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <DisableDefaultDocumentation>true</DisableDefaultDocumentation>
         <RepositoryUrl>https://github.com/Emik03/Emik.SourceGenerators.Choices</RepositoryUrl>
         <Description>Annotate [Choice] to transform your type into a highly performant and flexible disjoint union.</Description>
         <PackageTags>Analyzer Coproduct Delegate Discriminated Disjoint Either Forwarder Functional Generator Infer Inference Interface Monad Monadic Monoid Performant Roslyn Source Union</PackageTags>

@@ -82,6 +82,10 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public string NullableSuppression => Type.IsValueType ? "" : "!";
 
+    /// <summary>Gets the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.</summary>
+    [Pure]
+    public string ParameterName => $"{Name.Nth(0)?.ToLower()}{Name.AsSpan().Nth(1..)}";
+
     /// <summary>Compares two <see cref="ITypeSymbol"/> instances.</summary>
     /// <remarks><para>
     /// As opposed to <see cref="TypeSymbolComparer.Equal"/>, this method also checks for the members
@@ -195,8 +199,8 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     public static MemberSymbol? From(ISymbol symbol) =>
         symbol switch
         {
-            IFieldSymbol x => new(x),
-            IPropertySymbol x => new(x),
+            IFieldSymbol { CanBeReferencedByName: true } x => new(x),
+            IPropertySymbol { CanBeReferencedByName: true } x => new(x),
             _ => null,
         };
 

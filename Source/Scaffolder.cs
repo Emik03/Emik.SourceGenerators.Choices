@@ -754,14 +754,14 @@ sealed partial record Scaffolder(
                       /// Initializes a new instance of {{Describe(x)}}.
                       /// </summary>
                   {{parameters
-                     .Select(x => $"    /// <param name=\"{ParameterName(x)}\">The {ParameterName(x)} item within the variant.</param>")
+                     .Select(x => $"    /// <param name=\"{x.ParameterName}\">The {x.ParameterName} item within the variant.</param>")
                      .Conjoin("\n")}}
                       {{Annotation}}
                       {{Pure}}
                       {{AggressiveInlining}}
-                      public {{Named.Name}}({{parameters.Select(x => $"{x.Type} {ParameterName(x)}").Conjoin()}})
+                      public {{Named.Name}}({{parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()}})
                           : this({{(isValue ? nameof(ValueTuple) : nameof(Tuple))}}.{{nameof(Tuple.Create)}}({{
-                              parameters.Select(ParameterName).Conjoin()}})) { }
+                              parameters.Select(x => x.ParameterName).Conjoin()}})) { }
 
 
                   """
@@ -787,15 +787,15 @@ sealed partial record Scaffolder(
                  /// Creates a new instance of {Describe(x)}.
                  /// </summary>
              {parameters
-                .Select(x => $"    /// <param name=\"{ParameterName(x)}\">The {ParameterName(x)} item within the value to pass into the type.</param>")
+                .Select(x => $"    /// <param name=\"{x.ParameterName}\">The {x.ParameterName} item within the value to pass into the type.</param>")
                 .Conjoin("\n")
              }
                  /// <returns>The union containing the parameters.</returns>
                  {Annotation}
                  {Pure}
                  {AggressiveInlining}
-                 public static {Name} Of{PropertyName(x)}({parameters.Select(x => $"{x.Type} {ParameterName(x)}").Conjoin()})
-                     => new {Name}({parameters.Select(ParameterName).Conjoin()}{discriminator});
+                 public static {Name} Of{PropertyName(x)}({parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()})
+                     => new {Name}({parameters.Select(x => x.ParameterName).Conjoin()}{discriminator});
 
 
              """
@@ -832,13 +832,13 @@ sealed partial record Scaffolder(
                       /// <summary>
                       /// Initializes a new instance of {{Describe(x)}}.
                       /// </summary>
-                      /// <param name="{{ParameterName(x)}}">The variant.</param>{{
+                      /// <param name="{{x.ParameterName}}">The variant.</param>{{
                           (conflict ? "\n    /// <param name=\"x\">The discriminator.</param>" : "")}}
                       {{Annotation}}
                       {{AggressiveInlining}}
-                      {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{ParameterName(x)}}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")}})
+                      {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{x.ParameterName}}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")}})
                       {
-                          {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : CSharp($"\n        {Prefix(x)} = {ParameterName(x)};"))}}
+                          {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : CSharp($"\n        {Prefix(x)} = {x.ParameterName};"))}}
                       }
 
                   {{DeclareAlternativeConstructor(x, conflict)}}
@@ -853,18 +853,18 @@ sealed partial record Scaffolder(
                      /// <summary>
                      /// Explicit side effect delegate for {Describe(x)} due to it being a by-ref like type.
                      /// </summary>
-                     /// <param name="{ParameterName(x)}">The referenced value.</param>
+                     /// <param name="{x.ParameterName}">The referenced value.</param>
                      {Annotation}
-                     public delegate void {PropertyName(x)}Handler({x.Type} {ParameterName(x)});
+                     public delegate void {PropertyName(x)}Handler({x.Type} {x.ParameterName});
 
                      /// <summary>
                      /// Explicit mapper delegate for {Describe(x)} due to it being a by-ref like type.
                      /// </summary>
                      /// <typeparam name="{ResultGeneric}">The type of value to return.</typeparam>
-                     /// <param name="{ParameterName(x)}">The referenced value.</param>
+                     /// <param name="{x.ParameterName}">The referenced value.</param>
                      /// <returns>The result of the mapping.</returns>
                      {Annotation}
-                     public delegate {ResultGeneric} {PropertyName(x)}Handler<out {ResultGeneric}>({x.Type} {ParameterName(x)});
+                     public delegate {ResultGeneric} {PropertyName(x)}Handler<out {ResultGeneric}>({x.Type} {x.ParameterName});
 
 
                  """
@@ -903,13 +903,13 @@ sealed partial record Scaffolder(
                  /// <summary>
                  /// Creates a new instance of {Describe(x)}.
                  /// </summary>
-                 /// <param name="{ParameterName(x)}">The value to pass into the type.</param>
-                 /// <returns>The union containing the parameter <paramref name="{ParameterName(x)}"/>.</returns>
+                 /// <param name="{x.ParameterName}">The value to pass into the type.</param>
+                 /// <returns>The union containing the parameter <paramref name="{x.ParameterName}"/>.</returns>
                  {Annotation}
                  {Pure}
                  {AggressiveInlining}
-                 public static {Name} Of{PropertyName(x)}({x.Type} {ParameterName(x)}{fallback})
-                     => new {Name}({ParameterName(x)}{discriminator});
+                 public static {Name} Of{PropertyName(x)}({x.Type} {x.ParameterName}{fallback})
+                     => new {Name}({x.ParameterName}{discriminator});
 
              {DeclareAlternativeFactory(x, discriminator)}
              """
@@ -937,13 +937,13 @@ sealed partial record Scaffolder(
                      /// <summary>
                      /// Implicitly converts the {XmlTypeName(x.Type)} parameter to the union.
                      /// </summary>
-                     /// <param name="{ParameterName(x)}">The parameter to pass onto the constructor.</param>
-                     /// <returns>The union containing the parameter <paramref name="{ParameterName(x)}"/>.</returns>
+                     /// <param name="{x.ParameterName}">The parameter to pass onto the constructor.</param>
+                     /// <returns>The union containing the parameter <paramref name="{x.ParameterName}"/>.</returns>
                      {Annotation}
                      {Pure}
                      {AggressiveInlining}
-                     public static implicit operator {Name}({x.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)} {ParameterName(x)})
-                         => new {Name}({ParameterName(x)});
+                     public static implicit operator {Name}({x.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)} {x.ParameterName})
+                         => new {Name}({x.ParameterName});
 
                  {DeclareExplicitOperator(x)}
                  """
@@ -1039,7 +1039,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string FieldName(MemberSymbol x) =>
-        Members.Contains(x) ? x.Name : $"_{x.Name.Nth(0)?.ToLower()}{x.Name.Nth(1..)}";
+        Members.Contains(x) ? x.Name : $"_{x.Name.Nth(0)?.ToLower()}{x.Name.AsSpan().Nth(1..)}";
 
     [Pure]
     string Opposite(MemberSymbol x) =>
@@ -1065,12 +1065,9 @@ sealed partial record Scaffolder(
         CanOverlapReferenceMemorySpace && Reference.Contains(x) ? ReferenceField : FieldName(x);
 
     [Pure]
-    string ParameterName(MemberSymbol x) => $"{FieldName(x).Nth(1..)}";
-
-    [Pure]
     string PropertyName(MemberSymbol x) =>
         Members.Contains(x) && x.Name.TrimStart('_') is var trim
-            ? $"{trim.Nth(0)?.ToUpper()}{trim.Nth(1..)}"
+            ? $"{trim.Nth(0)?.ToUpper()}{trim.AsSpan().Nth(1..)}"
             : x.Name;
 
     [Pure]

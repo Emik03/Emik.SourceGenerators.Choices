@@ -45,7 +45,7 @@ sealed partial class DotFruit;
 readonly partial struct Option<T>
     where T : class
 {
-    readonly T? _some; // ReSharper disable once UnusedMember.Local
+    public T? Some { get; } // ReSharper disable once UnusedMember.Local
 
     ValueTuple None => default;
 }
