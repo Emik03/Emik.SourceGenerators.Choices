@@ -309,7 +309,7 @@ sealed partial record Scaffolder
            .Select(
                 (x, i) => x is null || Symbols[i].Type.IsReferenceType
                     ? ((string, string)?)null
-                    : (See(Symbols[i]), x.Replace('<', '{').Replace('>', '}'))
+                    : (Symbols[i].XmlName, x.Replace('<', '{').Replace('>', '}'))
             )
            .Filter()
            .Select(x => $"""{x.Item1} as <see cref="{x.Item2}"/>""")

@@ -8,19 +8,19 @@ sealed partial record Scaffolder(
     bool PolyfillAttributes
 )
 {
+    [StringSyntax("C#")]
+    public const string ResultGeneric = "TMappingResult";
+
     const int MinimumBoxedSize = 2, MinimumExplicitStructSize = 2, TupleGenericLimit = 8;
 
     [StringSyntax("C#")]
     const string
-        Action = "global::System.Action",
         AggressiveInlining = "[global::System.Runtime.CompilerServices.MethodImpl(256)]",
         DiscriminatorField = "_discriminator",
         DiscriminatorProperty = "Discriminator",
-        Func = "global::System.Func",
         Pure = "[global::System.Diagnostics.Contracts.PureAttribute]",
         ReadOnly = "readonly ",
         ReferenceField = "_reference",
-        ResultGeneric = "TMappingResult",
         Suppression = "#pragma warning disable\n",
         Throw = "throw new global::System.InvalidOperationException()",
         UnmanagedField = "_unmanaged";
@@ -109,24 +109,24 @@ sealed partial record Scaffolder(
                           $"""
                            ///         <item>
                            ///             <term>
-                           ///                 {See(x)} <see langword="as"/> {XmlTypeName(x.Type)}
+                           ///                 {x.XmlName} <see langword="as"/> {XmlTypeName(x.Type)}
                            ///                 <list type="bullet">
                            ///                     <item>
                            ///                         <description>
-                           ///                             <see cref="Is{PropertyName(x)}"/>
+                           ///                             <see cref="Is{x.PropertyName}"/>
                            ///                         </description>
                            ///                     </item>
                            ///                     <item>
                            ///                         <description>
                            {(SkipOperator(x) ?
                                CSharp(
-                                   $"""///                             <see cref="Of{PropertyName(x)}({XmlEscape(x.Type)})"/>"""
+                                   $"""///                             <see cref="Of{x.PropertyName}({XmlEscape(x.Type)})"/>"""
                                ) : CSharp(
                                    $"""
                                     ///                             <list type="number">
                                     ///                                 <item>
                                     ///                                     <description>
-                                    ///                                         <see cref="Of{PropertyName(x)}({XmlEscape(x.Type, true)})"/>
+                                    ///                                         <see cref="Of{x.PropertyName}({XmlEscape(x.Type, true)})"/>
                                     ///                                     </description>
                                     ///                                 </item>
                                     ///                                 <item>
@@ -311,7 +311,7 @@ sealed partial record Scaffolder(
                       [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                       partial struct Unmanaged
                       {
-                  {{Unmanaged.Select(DeclareFieldWithExplicitOffset).Conjoin("\n\n")}}
+                  {{Unmanaged.Select(x => x.UnmanagedFieldDeclaration).Conjoin("\n\n")}}
                       }
 
 
@@ -494,7 +494,7 @@ sealed partial record Scaffolder(
                   /// Invokes the callback based on current variance.
                   /// </summary>
                   /// {{Symbols
-                     .Select(x => $"""<param name="on{PropertyName(x)}">The callback to use when the contract of {Describe(x)} is held.</param>""")
+                     .Select(x => $"""<param name="on{x.PropertyName}">The callback to use when the contract of {Describe(x)} is held.</param>""")
                      .Conjoin("\n    /// ")
                   }}
                   /// <returns>Itself.</returns>
@@ -503,14 +503,14 @@ sealed partial record Scaffolder(
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}{{NullableName}} Map(
                       {{Symbols
-                          .Select(x => $"{DelegateTypeName(x, false)}? on{PropertyName(x)} = null")
+                          .Select(x => $"{x.DelegateTypeName(false)}? on{x.PropertyName} = null")
                           .Conjoin(",\n        ")}}
                   )
                   {
                       switch ({{Discriminator}})
                       {
                           {{Symbols
-                              .Select((x, i) => $"case {i}:\n                on{PropertyName(x)
+                              .Select((x, i) => $"case {i}:\n                on{x.PropertyName
                               }?.Invoke({(x.IsEmpty ? "" : PrefixCast(x))});\n                return this;")
                               .Conjoin("\n            ")}}
                           default: {{Throw}};
@@ -522,7 +522,7 @@ sealed partial record Scaffolder(
                   /// </summary>
                   /// <typeparam name="{{ResultGeneric}}">The resulting type from the mapping.</typeparam>
               {{Symbols
-                      .Select(x => $"""    /// <param name="on{PropertyName(x)}">The callback to use when the contract of {Describe(x)} is held.</param>""")
+                      .Select(x => $"""    /// <param name="on{x.PropertyName}">The callback to use when the contract of {Describe(x)} is held.</param>""")
                       .Conjoin("\n")
               }}
                   /// <returns>
@@ -532,15 +532,13 @@ sealed partial record Scaffolder(
                   {{Pure}}
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}{{ResultGeneric}} Map<{{ResultGeneric}}>(
-                      {{Symbols
-                          .Select(x => $"{DelegateTypeName(x, true)} on{PropertyName(x)}")
-                          .Conjoin(",\n        ")}}
+                      {{Symbols.Select(x => $"{x.DelegateTypeName(true)} on{x.PropertyName}").Conjoin(",\n        ")}}
                   )
                       => {{Discriminator}}
                       switch
                       {
                           {{Symbols
-                              .Select((x, i) => $"{i} => on{PropertyName(x)}({(x.IsEmpty ? "" : PrefixCast(x))}),")
+                              .Select((x, i) => $"{i} => on{x.PropertyName}({(x.IsEmpty ? "" : PrefixCast(x))}),")
                               .Conjoin("\n            ")}}
                           _ => {{Throw}},
                       };
@@ -795,7 +793,7 @@ sealed partial record Scaffolder(
                  {Annotation}
                  {Pure}
                  {AggressiveInlining}
-                 public static {Name} Of{PropertyName(x)}({parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()})
+                 public static {Name} Of{x.PropertyName}({parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()})
                      => new {Name}({parameters.Select(x => x.ParameterName).Conjoin()}{discriminator});
 
 
@@ -808,14 +806,14 @@ sealed partial record Scaffolder(
         CSharp(
             $$"""
                   /// <summary>
-                  /// Gets the value determining if the {{XmlName}} is the variant {{See(x)}} of type {{XmlTypeName(x.Type)}}.
+                  /// Gets the value determining if the {{XmlName}} is the variant {{x.XmlName}} of type {{XmlTypeName(x.Type)}}.
                   /// </summary>
                   {{Annotation}}
-                  public {{ReadOnlyIfStruct}}bool Is{{PropertyName(x)}}
+                  public {{ReadOnlyIfStruct}}bool Is{{x.PropertyName}}
                   {
                       {{Pure}}{{(x.IsEmpty
                           ? Opposite(x)
-                          : CSharp($"\n        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, \"{PropertyName(x)}\")]{Opposite(x)}"))}}
+                          : CSharp($"\n        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, \"{x.PropertyName}\")]{Opposite(x)}"))}}
                       {{AggressiveInlining}}
                       get => {{Discriminator}} is {{i}};
                   }
@@ -856,7 +854,7 @@ sealed partial record Scaffolder(
                      /// </summary>
                      /// <param name="{x.ParameterName}">The referenced value.</param>
                      {Annotation}
-                     public delegate void {PropertyName(x)}Handler({x.Type} {x.ParameterName});
+                     public delegate void {x.PropertyName}Handler({x.Type} {x.ParameterName});
 
                      /// <summary>
                      /// Explicit mapper delegate for {Describe(x)} due to it being a by-ref like type.
@@ -865,7 +863,7 @@ sealed partial record Scaffolder(
                      /// <param name="{x.ParameterName}">The referenced value.</param>
                      /// <returns>The result of the mapping.</returns>
                      {Annotation}
-                     public delegate {ResultGeneric} {PropertyName(x)}Handler<out {ResultGeneric}>({x.Type} {x.ParameterName});
+                     public delegate {ResultGeneric} {x.PropertyName}Handler<out {ResultGeneric}>({x.Type} {x.ParameterName});
 
 
                  """
@@ -887,7 +885,7 @@ sealed partial record Scaffolder(
                      {Pure}
                      {AggressiveInlining}
                      public static explicit operator {x.NullableAnnotated}({Name} x)
-                         => x.{PropertyName(x)};
+                         => x.{x.PropertyName};
 
 
                  """
@@ -909,7 +907,7 @@ sealed partial record Scaffolder(
                  {Annotation}
                  {Pure}
                  {AggressiveInlining}
-                 public static {Name} Of{PropertyName(x)}({x.Type} {x.ParameterName}{fallback})
+                 public static {Name} Of{x.PropertyName}({x.Type} {x.ParameterName}{fallback})
                      => new {Name}({x.ParameterName}{discriminator});
 
              {DeclareAlternativeFactory(x, discriminator)}
@@ -923,7 +921,7 @@ sealed partial record Scaffolder(
             ? ""
             : CSharp(
                 $"""
-                     private {PrivatelyReadOnly}{x.NullableAnnotated} {FieldName(x)};
+                     private {PrivatelyReadOnly}{x.NullableAnnotated} {x.FieldName};
 
 
                  """
@@ -980,7 +978,7 @@ sealed partial record Scaffolder(
                   /// Gets{{(MutablePublicly is true ? " or sets" : "")}} the {{XmlTypeName(x.Type)}} variant.
                   /// </summary>
                   {{Annotation}}
-                  public {{ReadOnlyIfImmutableStruct}}{{x.NullableAnnotated}} {{PropertyName(x)}}
+                  public {{ReadOnlyIfImmutableStruct}}{{x.NullableAnnotated}} {{x.PropertyName}}
                   {
                       {{Pure}}
                       {{AggressiveInlining}}
@@ -991,13 +989,6 @@ sealed partial record Scaffolder(
               """
         );
     }
-
-    [Pure]
-    string DelegateTypeName(MemberSymbol x, bool hasGenericReturn) =>
-        $"{(x.Type.IsRefLikeType && !x.IsEmpty ? $"{PropertyName(x)}Handler" : hasGenericReturn ? Func : Action)}{(
-            x.Type.IsRefLikeType || x.IsEmpty
-                ? hasGenericReturn ? $"<{ResultGeneric}>" : ""
-                : hasGenericReturn ? $"<{x.Type}, {ResultGeneric}>" : $"<{x.Type}>")}";
 
     [Pure]
     string DeclareNestedClass(string x, (int Index, (bool IsRefLikeType, string Name) Item) y)
@@ -1020,17 +1011,8 @@ sealed partial record Scaffolder(
     }
 
     [Pure]
-    string DeclareFieldWithExplicitOffset(MemberSymbol x) =>
-        CSharp(
-            $"""
-                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-                     internal {x.Type} {FieldName(x)};
-             """
-        );
-
-    [Pure]
     string Describe(MemberSymbol x) =>
-        $"the {XmlName} {Named.Keyword()} with the variant {See(x)} of type {XmlTypeName(x.Type)}";
+        $"the {XmlName} {Named.Keyword()} with the variant {x.XmlName} of type {XmlTypeName(x.Type)}";
 
     [Pure]
     string Equality(MemberSymbol x) =>
@@ -1040,16 +1022,12 @@ sealed partial record Scaffolder(
         CSharp("false");
 
     [Pure]
-    string FieldName(MemberSymbol x) =>
-        Members.Contains(x) ? x.Name : $"_{x.Name.Nth(0)?.ToLower()}{x.Name.AsSpan().Nth(1..)}";
-
-    [Pure]
     string Opposite(MemberSymbol x) =>
         Symbols.TrySingle(y => x != y, out var other) && !other.IsEmpty
             ? CSharp(
                 $"""
 
-                         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(false, "{PropertyName(other)}")]
+                         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(false, "{other.PropertyName}")]
                  """
             )
             : "";
@@ -1063,25 +1041,16 @@ sealed partial record Scaffolder(
     [Pure]
     string Prefix(MemberSymbol x) =>
         Members.Contains(x) ? x.Name :
-        CanOverlapUnmanagedMemorySpace && Unmanaged.Contains(x) ? $"{UnmanagedField}.{FieldName(x)}" :
-        CanOverlapReferenceMemorySpace && Reference.Contains(x) ? ReferenceField : FieldName(x);
-
-    [Pure]
-    string PropertyName(MemberSymbol x) =>
-        Members.Contains(x) && x.Name.TrimStart('_') is var trim
-            ? $"{trim.Nth(0)?.ToUpper()}{trim.AsSpan().Nth(1..)}"
-            : x.Name;
-
-    [Pure]
-    string See(MemberSymbol x) => x.IsEmpty ? PropertyName(x) : $"<see cref=\"{PropertyName(x)}\"/>";
+        CanOverlapUnmanagedMemorySpace && Unmanaged.Contains(x) ? $"{UnmanagedField}.{x.FieldName}" :
+        CanOverlapReferenceMemorySpace && Reference.Contains(x) ? ReferenceField : x.FieldName;
 
     [Pure]
     string ToStringCase(MemberSymbol x) =>
         x.IsEmpty || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(ToString)))
-            ? $"\"{PropertyName(x)}\""
+            ? $"\"{x.PropertyName}\""
             : CSharp(
                 $$"""
-                  $"{nameof({{PropertyName(x)}})}({{{PrefixCast(x)}}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
+                  $"{nameof({{x.PropertyName}})}({{{PrefixCast(x)}}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
                   """
             );
 }

@@ -7,6 +7,11 @@ namespace Emik.SourceGenerators.Choices;
 /// <param name="Symbol">The underlying symbol, if any.</param>
 public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbol? Symbol = null)
 {
+    [StringSyntax("C#")]
+    const string
+        Action = "global::System.Action",
+        Func = "global::System.Func";
+
     /// <summary>Initializes a new instance of the <see cref="MemberSymbol"/> struct.</summary>
     /// <param name="field">The field.</param>
     public MemberSymbol(IFieldSymbol field)
@@ -82,10 +87,40 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public string NullableSuppression => Type.IsValueType ? "" : "!";
 
+    [Pure]
+    public string UnmanagedFieldDeclaration =>
+        $"""
+                 [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
+                 internal {Type} {FieldName};
+         """;
+
+    /// <summary>Gets the name of the field that corresponds to this <see cref="MemberSymbol"/>.</summary>
+    [Pure]
+    public string FieldName => $"_{ParameterName}";
+
     /// <summary>Gets the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.</summary>
     [Pure]
-    public string ParameterName =>
-        $"{Name.Nth((Name is ['_', ..]).ToByte())?.ToLower()}{Name.AsSpan().Nth(((Name is ['_', ..]).ToByte() + 1)..)}";
+    public string ParameterName => $"{FirstCharName?.ToLower()}{RestName}";
+
+    /// <summary>Gets the name of the property that corresponds to this <see cref="MemberSymbol"/>.</summary>
+    [Pure]
+    public string PropertyName => $"{FirstCharName?.ToUpper()}{RestName}";
+
+    /// <summary>Gets the XML name that corresponds to this <see cref="MemberSymbol"/>.</summary>
+    [Pure]
+    public string XmlName => IsEmpty ? $"<c>{PropertyName}</c>" : $"<see cref=\"{PropertyName}\"/>";
+
+    /// <summary>
+    /// Gets the first character of the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.
+    /// </summary>
+    [Pure]
+    char? FirstCharName => Name.Nth((Name is ['_', ..]).ToByte());
+
+    /// <summary>
+    /// Gets the rest of the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.
+    /// </summary>
+    [Pure]
+    ReadOnlySpan<char> RestName => Name.AsSpan().Nth(((Name is ['_', ..]).ToByte() + 1)..);
 
     /// <summary>Compares two <see cref="ITypeSymbol"/> instances.</summary>
     /// <remarks><para>
@@ -193,6 +228,18 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     public static bool IsSymbolEmpty(ISymbol x) =>
         x is { IsStatic: true } or
             not IFieldSymbol and not IMethodSymbol { MethodKind: MethodKind.Constructor, Parameters: not [] };
+
+    /// <summary>Gets the name of the delegate type.</summary>
+    /// <param name="hasGenericReturn">
+    /// The value <see langword="true"/> if the delegate has a generic return type; otherwise, <see langword="false"/>.
+    /// </param>
+    /// <returns>The name of the delegate type.</returns>
+    [Pure]
+    public string DelegateTypeName(bool hasGenericReturn) =>
+        $"{(Type.IsRefLikeType && !IsEmpty ? $"{PropertyName}Handler" : hasGenericReturn ? Func : Action)}{(
+            Type.IsRefLikeType || IsEmpty
+                ? hasGenericReturn ? $"<{Scaffolder.ResultGeneric}>" : ""
+                : hasGenericReturn ? $"<{Type}, {Scaffolder.ResultGeneric}>" : $"<{Type}>")}";
 
     /// <summary>Creates a new instance of the <see cref="MemberSymbol"/> struct from the underlying symbol.</summary>
     /// <param name="symbol">The <see cref="ISymbol"/> to create the <see cref="MemberSymbol"/> from.</param>

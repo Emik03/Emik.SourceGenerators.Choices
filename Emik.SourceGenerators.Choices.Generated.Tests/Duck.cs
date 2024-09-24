@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices.Generated.Tests;
 #pragma warning disable 169, IDE0044, MA0008, MA0094
+extern alias unity;
 using Attribute = System.Attribute;
 using Component = UnityEngine.Component;
 using Task = System.Threading.Tasks.Task;
+using UsedImplicitlyAttribute = unity::JetBrains.Annotations.UsedImplicitlyAttribute;
 
 [Choice]
 readonly partial record struct Result<TOk, TErr>
@@ -56,3 +58,25 @@ readonly partial struct Option<T>
 
 [Choice.Public.Utf8<Span<byte>>.Utf16<Span<char>>]
 ref partial struct SpanEncodingsDot;
+
+[Choice]
+public partial class Color
+{
+    sealed class OrRef<[UsedImplicitly] T>;
+
+    OrRef<int>[]? _rgba;
+
+    OrRef<Number>[]? _gradient;
+}
+
+public partial class A(int i, int j)
+{
+
+}
+
+public partial class A
+{
+    int _i = i;
+
+    int _j = j;
+}
