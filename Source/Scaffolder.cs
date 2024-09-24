@@ -684,9 +684,11 @@ sealed partial record Scaffolder(
         (x is INamedTypeSymbol { IsTupleType: true, TypeArguments: { Length: > 1 } args }
             ? $"{nameof(System)}.{nameof(ValueTuple)}{{{args.Length.For(i => $"T{i + 1}").Conjoin()}}}"
             : $"{(allowTypeSubstitution ? x : x.OriginalDefinition)}")
+       .ToBuilder()
        .Replace('<', '{')
        .Replace('>', '}')
-       .Replace("scoped ", "");
+       .Replace("scoped ", "")
+       .ToString();
 
     [Pure]
     static string XmlTypeName(ISymbol x, string tag = "see")
