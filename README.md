@@ -1092,7 +1092,7 @@ partial class Number :
     /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Number"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
-    [global::System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit)]
+    [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
     partial struct Unmanaged
     {
         [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
@@ -1725,7 +1725,7 @@ partial struct Enums :
     /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Generated.Tests.Enums"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.2.0.0")]
-    [global::System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit)]
+    [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
     partial struct Unmanaged
     {
         [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
@@ -6716,7 +6716,7 @@ namespace Emik
                         /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Generated.Tests.DotFruit"/>.
                         /// </summary>
                         [global::System.CodeDom.Compiler.GeneratedCode("Emik.SourceGenerators.Choices", "1.3.0.0")]
-                        [global::System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit)]
+                        [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                         partial struct Unmanaged
                         {
                             [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]

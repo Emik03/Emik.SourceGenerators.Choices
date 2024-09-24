@@ -307,7 +307,7 @@ sealed partial record Scaffolder(
                       /// Compact representation of all unmanaged memory within the union {{XmlName}}.
                       /// </summary>
                       {{Annotation}}
-                      [global::System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit)]
+                      [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                       partial struct Unmanaged
                       {
                   {{Unmanaged.Select(DeclareFieldWithExplicitOffset).Conjoin("\n\n")}}
