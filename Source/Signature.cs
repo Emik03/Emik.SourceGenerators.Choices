@@ -82,7 +82,7 @@ readonly record struct Signature(
 
         forwarders.UnionWith(new IntersectedInterfaces(symbols, named.IsReadOnly).Members);
         forwarders.UnionWith(FindCommonBaseMembers(symbols));
-        forwarders.ExceptWith(forwarders.SelectMany(GeneratedMethods).Filter());
+        forwarders.ExceptWith(forwarders.ToArray().SelectMany(GeneratedMethods).Filter());
 
         return forwarders.Where(IsValid);
     }
