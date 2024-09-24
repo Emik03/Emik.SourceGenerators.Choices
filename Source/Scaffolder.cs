@@ -499,7 +499,6 @@ sealed partial record Scaffolder(
                   }}
                   /// <returns>Itself.</returns>
                   {{Annotation}}
-                  {{Pure}}
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}{{NullableName}} Map(
                       {{Symbols
@@ -529,7 +528,6 @@ sealed partial record Scaffolder(
                   /// The resulting value from one of the parameters based on the current state of the object.
                   /// </returns>
                   {{Annotation}}
-                  {{Pure}}
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}{{ResultGeneric}} Map<{{ResultGeneric}}>(
                       {{Symbols.Select(x => $"{x.DelegateTypeName(true)} on{x.PropertyName}").Conjoin(",\n        ")}}
