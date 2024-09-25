@@ -64,3 +64,17 @@ partial class Color(Color.OrRef<int>[]? rgba, Color.OrRef<Number>[]? gradient)
 {
     public sealed class OrRef<[UsedImplicitly] T>;
 }
+
+[Choice
+    .And<BinaryCondition>
+    .Or<BinaryCondition>
+    .Included<InclusionCondition>
+    .Excluded<InclusionCondition>]
+#pragma warning disable RCS1225
+partial class ConditionDescription
+#pragma warning restore RCS1225
+{
+    public record struct BinaryCondition(ConditionDescription Left, ConditionDescription Right);
+
+    public record struct InclusionCondition(Color.OrRef<JsonElement> Left, Color.OrRef<Color.OrRef<JsonElement>[]> Right);
+}
