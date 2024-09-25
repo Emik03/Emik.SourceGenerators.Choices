@@ -88,16 +88,6 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// is annotated correctly; otherwise, <see langword="false"/>.
     /// </returns>
     [Pure]
-    static bool AnnotatedGood(Fold x) =>
-        x is ({ IsTupleType: false }, null or { IsTupleType: true, TupleElements.Length: >= MinimumMembers }, _);
-
-    /// <summary>Determines whether the parameter <paramref name="x"/> has sufficient members.</summary>
-    /// <param name="x">The parameter to check.</param>
-    /// <returns>
-    /// The value <see langword="true"/> if the parameter <paramref name="x"/>
-    /// has sufficient members; otherwise, <see langword="false"/>.
-    /// </returns>
-    [Pure]
     static bool HasSufficientMembers(Raw x) => x is ({ IsStatic: false }, { Count: >= MinimumMembers }, _, _);
 
     /// <summary>Determines whether the parameter <paramref name="x"/> is extendable.</summary>
@@ -111,7 +101,8 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     static bool IsExtendable(SyntaxNode x, CancellationToken _ = default) =>
         x is TypeDeclarationSyntax { AttributeLists.Count: >= 1, Modifiers: var modifiers } and
             not InterfaceDeclarationSyntax &&
-        modifiers.Any(SyntaxKind.PartialKeyword);
+        modifiers.Any(SyntaxKind.PartialKeyword) &&
+        !modifiers.Any(SyntaxKind.StaticKeyword);
 
     /// <summary>
     /// Determines whether the parameter <paramref name="x"/> is heavily nested.
@@ -159,7 +150,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     {
         if (context.Node is not AttributeSyntax attribute ||
             attribute.TypeDeclaration() is not { } typeDeclaration ||
-            context.SemanticModel.GetDeclaredSymbol(typeDeclaration, token) is not { } named)
+            context.SemanticModel.GetDeclaredSymbol(typeDeclaration, token) is not { IsStatic: false } named)
             return default;
 
         SmallList<MemberSymbol> fields = [];
@@ -208,22 +199,6 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     [Pure]
     static Raw Discover(GeneratorAttributeSyntaxContext context, CancellationToken token)
     {
-        [Pure]
-        static Raw Extract(Fold x)
-        {
-            var (type, named, mutablePublicly) = x;
-
-            var fields = named switch
-            {
-                { IsTupleType: true, TupleElements: { Length: > 1 } e } => Scaffolder.Decouple(e),
-                null => Scaffolder.Instances(type),
-                _ when Scaffolder.IsSystemTuple(named) => Scaffolder.Instances(named),
-                _ => default,
-            };
-
-            return (type, fields, mutablePublicly, false);
-        }
-
         bool? mutablePublicly = null;
         INamedTypeSymbol? symbolSet = null;
 
@@ -239,8 +214,31 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             };
         }
 
-        return ((INamedTypeSymbol)context.TargetSymbol, symbolSet, mutablePublicly) is var fold && AnnotatedGood(fold)
-                ? Extract(fold)
-                : default;
+        if (context.TargetSymbol is not INamedTypeSymbol { IsTupleType: false } target ||
+            symbolSet is not null and not { IsTupleType: true, TupleElements.Length: >= MinimumMembers })
+            return default;
+
+        var primaryConstructorParameters = target
+           .DeclaringSyntaxReferences
+           .SelectMany(x => x.GetSyntax(token).DescendantNodes())
+           .OfType<ParameterListSyntax>()
+           .Filter()
+           .FirstOrDefault()
+          ?.Parameters
+           .Select(x => context.SemanticModel.GetDeclaredSymbol(x, token))
+           .Filter()
+           .Select(x => new MemberSymbol(x))
+           .ToSmallList();
+
+        var fields = symbolSet switch
+        {
+            { IsTupleType: true, TupleElements: { Length: > 1 } e } => Scaffolder.Decouple(e),
+            _ when Scaffolder.IsSystemTuple(symbolSet) => Scaffolder.Instances(symbolSet),
+            null when primaryConstructorParameters is { } p => p,
+            null => Scaffolder.Instances(target),
+            _ => default,
+        };
+
+        return (target, fields, mutablePublicly, false).Debug();
     }
 }

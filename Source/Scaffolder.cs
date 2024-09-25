@@ -18,12 +18,14 @@ sealed partial record Scaffolder(
         AggressiveInlining = "[global::System.Runtime.CompilerServices.MethodImpl(256)]",
         DiscriminatorField = "_discriminator",
         DiscriminatorProperty = "Discriminator",
+        HideFromEditor =
+            "[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]",
         Pure = "[global::System.Diagnostics.Contracts.PureAttribute]",
         ReadOnly = "readonly ",
         ReferenceField = "_reference",
         Suppression = "#pragma warning disable\n",
-        Throw = "throw new global::System.InvalidOperationException()",
-        UnmanagedField = "_unmanaged";
+        UnmanagedField = "_unmanaged",
+        UsedImplicitly = nameof(UsedImplicitly);
 
     static readonly ConcurrentDictionary<string, int> s_nameCounter = new(StringComparer.Ordinal);
 
@@ -46,6 +48,9 @@ sealed partial record Scaffolder(
     [Pure]
     bool CanReserveNull =>
         Symbols is [{ IsEmpty: true }, { IsReference: true }] or [{ IsReference: true }, { IsEmpty: true }];
+
+    [Pure]
+    bool UsesPrimaryConstructor => Symbols is [{ Symbol: IParameterSymbol }, ..];
 
     [Pure]
     string AutoIfStruct =>
@@ -165,6 +170,7 @@ sealed partial record Scaffolder(
               }}{{Symbols.Select(DeclareConstructor).Conjoin("")
               }}{{Symbols.Select(DeclareCheck).Conjoin("")
               }}{{Symbols.Select(DeclareProperty).Conjoin("")
+              }}{{DeclareImplicitlyUsingParametersProperty
               }}{{Symbols.Select(DeclareOperators).Conjoin("")
               }}{{Symbols.Select(DeclareFactory).Conjoin("")
               }}{{DeclareInterfaceImplementations
@@ -198,6 +204,21 @@ sealed partial record Scaffolder(
             )
             : "";
 
+    [Pure]
+    public string DeclareImplicitlyUsingParametersProperty =>
+        UsesPrimaryConstructor && Members.All(x => x.Name is not UsedImplicitly)
+            ? CSharp(
+                $"""
+                         /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
+                         {HideFromEditor}
+                         bool {UsedImplicitly} => ({Symbols.Select(x => x.ParameterName).Conjoin()}) is var _;
+
+
+                 """
+            )
+            : "";
+
+    [Pure]
     string DeclareInterfaces =>
         Named.IsRefLikeType
             ? ""
@@ -234,14 +255,14 @@ sealed partial record Scaffolder(
                           {{Symbols
                              .Index()
                              .OrderByDescending(Inheritance)
-                             .Select(x => $"{(x.Item.IsEmpty
-                                 ? "null"
-                                 : x.Item.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated))} => {x.Index},")
-                             .Conjoin("\n            ")}}{{(Symbols.Any(x => x.IsEmpty) ? "" : $"\n_ => {Throw},")}}
+                             .Select(x => $"{(x.Index == Symbols.Count - 1 ? "_" :
+                                 x.Item.IsEmpty ? "null" :
+                                 x.Item.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated))} => {x.Index},")
+                             .Conjoin("\n            ")}}
                       };
                       {{Pure}}
                       {{AggressiveInlining}}
-                      set { }
+                      set { /* Intentionally left blank. */ }
                   }
               """
         ) : CSharp(
@@ -275,9 +296,8 @@ sealed partial record Scaffolder(
                           switch
                           {
                               {{Symbols
-                                 .Select((x, i) => $"{i} => {Equality(x)},")
+                                 .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {Equality(x)},")
                                  .Conjoin("\n            ")}}
-                              _ => {{Throw}},
                           });
 
                       /// <summary>
@@ -383,9 +403,8 @@ sealed partial record Scaffolder(
                       switch
                       {
                           {{Symbols
-                             .Select((x, i) => $"{i} => {Comparison(x)},")
+                             .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {Comparison(x)},")
                              .Conjoin("\n            ")}}
-                          _ => {{Throw}},
                       });
 
                   /// <summary>
@@ -463,12 +482,11 @@ sealed partial record Scaffolder(
                       ({{Discriminator}} switch
                       {
                           {{Symbols
-                             .Select((x, i) => $"{i} => {
+                             .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {
                                  (x.IsEmpty || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(GetHashCode)))
                                      ? "0"
                                      : $"{PrefixCast(x)}.GetHashCode()")},")
                              .Conjoin("\n            ")}}
-                          _ => {{Throw}},
                       });
 
                   /// <inheritdoc />
@@ -478,8 +496,7 @@ sealed partial record Scaffolder(
                   public {{ReadOnlyIfStruct}}override string ToString()
                       => {{Discriminator}} switch
                       {
-                          {{Symbols.Select((x, i) => $"{i} => {ToStringCase(x)},").Conjoin("\n            ")}}
-                          _ => {{Throw}},
+                          {{Symbols.Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {ToStringCase(x)},").Conjoin("\n            ")}}
                       };
               """
         );
@@ -509,10 +526,9 @@ sealed partial record Scaffolder(
                       switch ({{Discriminator}})
                       {
                           {{Symbols
-                              .Select((x, i) => $"case {i}:\n                on{x.PropertyName
+                              .Select((x, i) => $"{(i == Symbols.Count - 1 ? "default" : $"case {i}")}:\n                on{x.PropertyName
                               }?.Invoke({(x.IsEmpty ? "" : PrefixCast(x))});\n                return this;")
                               .Conjoin("\n            ")}}
-                          default: {{Throw}};
                       }
                   }
 
@@ -536,9 +552,8 @@ sealed partial record Scaffolder(
                       switch
                       {
                           {{Symbols
-                              .Select((x, i) => $"{i} => on{x.PropertyName}({(x.IsEmpty ? "" : PrefixCast(x))}),")
+                              .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => on{x.PropertyName}({(x.IsEmpty ? "" : PrefixCast(x))}),")
                               .Conjoin("\n            ")}}
-                          _ => {{Throw}},
                       };
 
               {{DeclareUnderlyingValue}}
@@ -570,9 +585,8 @@ sealed partial record Scaffolder(
                                    switch
                                    {
                                        {{Symbols
-                                          .Select((x, i) => $"{i} => {PrefixCast(x)},")
+                                          .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {PrefixCast(x)},")
                                           .Conjoin("\n            ")}}
-                                       _ => {{Throw}},
                                    }
                                    """
                              ))};
@@ -835,7 +849,10 @@ sealed partial record Scaffolder(
                           (conflict ? "\n    /// <param name=\"x\">The discriminator.</param>" : "")}}
                       {{Annotation}}
                       {{AggressiveInlining}}
-                      {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{x.ParameterName}}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")}})
+                      {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{x.ParameterName}}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")}}){{
+                          (UsesPrimaryConstructor ? $"\n    : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
+                          }{x.ParameterName}{(Symbols.Count - i - 1).For(i => $", default({Symbols[i].Type})").Conjoin("")
+                          })" : "")}}
                       {
                           {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : CSharp($"\n        {Prefix(x)} = {x.ParameterName};"))}}
                       }
@@ -999,7 +1016,7 @@ sealed partial record Scaffolder(
 
         return CSharp(
             $$"""
-                  [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+                  {{HideFromEditor}}
                   {{(isChoiceClass ? "private" : "internal")}} {{(y.Index is 0 ? "sealed" : "static")
                   }} class {{y.Item.Name}}{{(isVariantClass ? $"<T{y.Item.Name}Discard>" : "")
                   }}{{(y.Index is 0 ? " : global::System.Attribute" : "")

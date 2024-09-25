@@ -18,6 +18,11 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         : this(field.Type, field.Name, field) { }
 
     /// <summary>Initializes a new instance of the <see cref="MemberSymbol"/> struct.</summary>
+    /// <param name="parameter">The parameter.</param>
+    public MemberSymbol(IParameterSymbol parameter)
+        : this(parameter.Type, parameter.Name, parameter) { }
+
+    /// <summary>Initializes a new instance of the <see cref="MemberSymbol"/> struct.</summary>
     /// <param name="property">The property.</param>
     public MemberSymbol(IPropertySymbol property)
         : this(property.Type, property.Name, property) { }
@@ -169,7 +174,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public static int Hash(ITypeSymbol? x) =>
         x is null
-            ? -1
+            ? Prime()
             : HashCode.Combine(
                 x.SpecialType,
                 x.TypeKind,
@@ -249,6 +254,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         {
             IFieldSymbol { CanBeReferencedByName: true } x => new(x),
             IPropertySymbol { CanBeReferencedByName: true } x => new(x),
+            IParameterSymbol { CanBeReferencedByName: true } x => new(x),
             _ => null,
         };
 
@@ -268,7 +274,8 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         {
             IFieldSymbol => other.Symbol is IFieldSymbol,
             IPropertySymbol => other.Symbol is IPropertySymbol,
-            _ => other.Symbol is not IFieldSymbol and not IPropertySymbol,
+            IParameterSymbol => other.Symbol is IParameterSymbol,
+            _ => other.Symbol is not IFieldSymbol and not IParameterSymbol and not IPropertySymbol,
         } &&
         Name == other.Name &&
         Equal(Type, other.Type);
@@ -279,6 +286,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         {
             IFieldSymbol field => FieldSymbolComparer.Default.GetHashCode(field) * Prime(),
             IPropertySymbol property => PropertySymbolComparer.Default.GetHashCode(property) * Prime(),
+            IParameterSymbol parameter => ParameterSymbolComparer.Default.GetHashCode(parameter) * Prime(),
             _ => TypeSymbolComparer.GetHashCode(Type) ^ StringComparer.Ordinal.GetHashCode(Name) * Prime(),
         };
 
@@ -287,6 +295,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         Symbol switch
         {
             IFieldSymbol => $"{Type} {Name};",
+            IParameterSymbol => $"{Type} {Name}",
             IPropertySymbol => $"{Type} {Name} {{ get; }}",
             _ => $"{Name}<{Type}>",
         };

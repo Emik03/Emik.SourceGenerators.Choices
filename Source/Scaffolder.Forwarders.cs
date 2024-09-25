@@ -98,7 +98,7 @@ sealed partial record Scaffolder
                 if (isSwitchCase)
                     return CSharp(
                         $"""
-                                 case {i}:
+                                 {(i == Symbols.Count - 1 ? $"case {i}" : "default")}:
                                          {cast}{member}
                          """
                     );
@@ -110,7 +110,9 @@ sealed partial record Scaffolder
                     ? CSharp($"typeof({x.Type})")
                     : $"{kind.KeywordInReturn()}{cast}{member}";
 
-                return CSharp($"        {i} => {value}{(!isTypeKnown && isGetType ? "()" : "")}");
+                return CSharp(
+                    $"        {(i == Symbols.Count - 1 ? "_" : i)} => {value}{(!isTypeKnown && isGetType ? "()" : "")}"
+                );
             }
 
             var discard = suffix is "" ? "" : "_ = ";
@@ -137,12 +139,7 @@ sealed partial record Scaffolder
 
             builder.Append(prefix).Append(arrow);
             Symbols.Select(Case).Lazily(AppendCase).Enumerate();
-
-            return builder.Append(
-                isSwitchCase
-                    ? CSharp("            default: throw new global::System.InvalidOperationException();\n        }")
-                    : CSharp("            _ => throw new global::System.InvalidOperationException(),\n        };")
-            );
+            return builder.Append(isSwitchCase ? CSharp("        }") : CSharp("        };"));
         }
 
         if (Named is { IsValueType: true } &&
@@ -306,13 +303,9 @@ sealed partial record Scaffolder
     [Pure]
     string Remarks(ref SmallList<string?> interfaces) =>
         interfaces
-           .Select(
-                (x, i) => x is null || Symbols[i].Type.IsReferenceType
-                    ? ((string, string)?)null
-                    : (Symbols[i].XmlName, x.Replace('<', '{').Replace('>', '}'))
-            )
+           .Select(XmlMemberTypeNames)
            .Filter()
-           .Select(x => $"""{x.Item1} as <see cref="{x.Item2}"/>""")
+           .Select(x => $"""{x.Member} as <see cref="{x.Type}"/>""")
            .ToSmallList() is [_, ..] boxes
             ? CSharp(
                 $"""
@@ -324,4 +317,10 @@ sealed partial record Scaffolder
                  """
             )
             : "";
+
+    [Pure]
+    (string Member, string Type)? XmlMemberTypeNames(string? x, int i) =>
+        x is null || Symbols[i].Type.IsReferenceType
+            ? null
+            : (Symbols[i].XmlName, x.Replace('<', '{').Replace('>', '}'));
 }

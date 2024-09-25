@@ -113,6 +113,7 @@ readonly record struct Signature(
             IFieldSymbol { RefKind: var ret } => ret,
             IMethodSymbol { RefKind: var ret } => ret,
             IPropertySymbol { RefKind: var ret } => ret,
+            IParameterSymbol { RefKind: var ret } => ret,
             null => RefKind.None,
             _ => throw Unreachable,
         };
