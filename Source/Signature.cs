@@ -62,7 +62,7 @@ readonly record struct Signature(
             {
                 (IEventSymbol x, _, _) => ImmutableArray.Create(x.AddMethod, x.RaiseMethod, x.RemoveMethod),
                 (IPropertySymbol x, _, _) => ImmutableArray.Create(x.GetMethod, x.SetMethod),
-                _ => default,
+                _ => ImmutableArray<IMethodSymbol?>.Empty,
             })
            .Filter()
            .Select(AsDirectExtract);

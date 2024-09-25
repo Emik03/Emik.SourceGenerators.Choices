@@ -751,8 +751,7 @@ sealed partial record Scaffolder(
             INamedTypeSymbol { IsTupleType: true, TupleElements: { Length: > 1 } e } => (true, true, Decouple(e)),
             INamedTypeSymbol type when MemberSymbol.IsSystemTuple(type) => (true, false, Instances(type)),
             _ => default,
-        } is (true, var isValue, var enumerable) &&
-        enumerable.ToSmallList() is var parameters
+        } is (true, var isValue, { IsDefault: false } parameters)
             ? CSharp(
                 $$"""
                       /// <summary>
@@ -779,7 +778,7 @@ sealed partial record Scaffolder(
         {
             INamedTypeSymbol { IsTupleType: true, TupleElements: var e, TypeArguments.Length: > 1 } => Decouple(e),
             INamedTypeSymbol t when MemberSymbol.IsSystemTuple(t) => Instances(t),
-            _ => default,
+            _ => ImmutableArray<MemberSymbol>.Empty,
         } is not [] and var parameters
             ? CSharp(
                 $"""
