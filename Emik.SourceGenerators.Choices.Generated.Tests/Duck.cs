@@ -59,24 +59,8 @@ readonly partial struct Option<T>
 [Choice.Public.Utf8<Span<byte>>.Utf16<Span<char>>]
 ref partial struct SpanEncodingsDot;
 
-[Choice]
-public partial class Color
+[Choice] // ReSharper disable ParameterTypeCanBeEnumerable.Local
+partial class Color(Color.OrRef<int>[]? rgba, Color.OrRef<Number>[]? gradient)
 {
-    sealed class OrRef<[UsedImplicitly] T>;
-
-    OrRef<int>[]? _rgba;
-
-    OrRef<Number>[]? _gradient;
-}
-
-public partial class A(int i, int j)
-{
-
-}
-
-public partial class A
-{
-    int _i = i;
-
-    int _j = j;
+    public sealed class OrRef<[UsedImplicitly] T>;
 }

@@ -211,7 +211,7 @@ sealed partial record Scaffolder(
                 $"""
                          /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
                          {HideFromEditor}
-                         bool {UsedImplicitly} => ({Symbols.Select(x => x.ParameterName).Conjoin()}) is var _;
+                         bool {UsedImplicitly} => {Symbols.Select(x => $"{x.ParameterName} is var _").Conjoin(" && ")};
 
 
                  """
@@ -850,7 +850,7 @@ sealed partial record Scaffolder(
                       {{Annotation}}
                       {{AggressiveInlining}}
                       {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{x.ParameterName}}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")}}){{
-                          (UsesPrimaryConstructor ? $"\n    : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
+                          (UsesPrimaryConstructor ? $"\n        : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
                           }{x.ParameterName}{(Symbols.Count - i - 1).For(i => $", default({Symbols[i].Type})").Conjoin("")
                           })" : "")}}
                       {
