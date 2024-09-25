@@ -127,39 +127,19 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     ReadOnlySpan<char> RestName => Name.AsSpan().Nth(((Name is ['_', ..]).ToByte() + 1)..);
 
-    /// <summary>Compares two <see cref="ITypeSymbol"/> instances.</summary>
+    /// <summary>Compares two <see cref="INamespaceOrTypeSymbol"/> instances.</summary>
     /// <remarks><para>
     /// As opposed to <see cref="RoslynComparer.Instance"/>, this method also checks for the members
-    /// of <see cref="ITypeSymbol"/> instances if they are declared in source, since both instances
+    /// of <see cref="INamespaceOrTypeSymbol"/> instances if they are declared in source, since both instances
     /// could have the same metadata name but come from different iterations of source code.
     /// </para></remarks>
-    /// <param name="x">The first <see cref="ITypeSymbol"/> to compare.</param>
-    /// <param name="y">The second <see cref="ITypeSymbol"/> to compare.</param>
-    /// <returns>Whether the two <see cref="ITypeSymbol"/> instances are equal.</returns>
+    /// <param name="x">The first <see cref="INamespaceOrTypeSymbol"/> to compare.</param>
+    /// <param name="y">The second <see cref="INamespaceOrTypeSymbol"/> to compare.</param>
+    /// <returns>Whether the two <see cref="INamespaceOrTypeSymbol"/> instances are equal.</returns>
     [Pure]
-    public static bool Equal(ITypeSymbol? x, ITypeSymbol? y)
-    {
-        // A metadata name check is enough to determine if two type symbols are equal assuming they're compiled.
-        static bool DifferentReferences(ITypeSymbol x, ITypeSymbol y) =>
-            !x.IsInSource() ? !y.IsInSource() && RoslynComparer.Eq(x, y) : y.IsInSource() && ColdPath(x, y);
-
-        // Type symbols in source may vary in subtle but breaking ways.
-        // We need to extensively make sure that everything remains the same.
-        static bool ColdPath(ITypeSymbol x, ITypeSymbol y) =>
-            x is ITypeParameterSymbol genericX && y is ITypeParameterSymbol genericY ? Generic(genericX, genericY) :
-            x.SpecialType is not SpecialType.None ? x.SpecialType == y.SpecialType : x.TypeKind == y.TypeKind &&
-            RoslynComparer.Eq(x, y) &&
-            Equal(x.BaseType, y.BaseType) &&
-            x.AllInterfaces.SequenceEqual(y.AllInterfaces, Equal) &&
-            x.GetMembers().SequenceEqual(y.GetMembers(), RoslynComparer.Instance);
-
-        static bool Generic(ITypeParameterSymbol x, ITypeParameterSymbol y) =>
-            x.ConstraintTypes.Length == y.ConstraintTypes.Length &&
-            x.MetadataName == y.MetadataName &&
-            RoslynComparer.Eq(x.ContainingNamespace, y.ContainingNamespace);
-
-        return x is null ? y is null : ReferenceEquals(x, y) || y is not null && DifferentReferences(x, y);
-    }
+    public static bool Equal(INamespaceOrTypeSymbol? x, INamespaceOrTypeSymbol? y) =>
+        ReferenceEquals(x, y) ||
+        x is not null && y is not null && (SourcedEquals(x, y) || UnsourcedEquals(x, y));
 
     /// <summary>Determines if the <see cref="ISymbol"/> is an operator.</summary>
     /// <param name="symbol">The <see cref="ISymbol"/> to check.</param>
@@ -224,6 +204,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <summary>Creates a new instance of the <see cref="MemberSymbol"/> struct from the underlying symbol.</summary>
     /// <param name="symbol">The <see cref="ISymbol"/> to create the <see cref="MemberSymbol"/> from.</param>
     /// <returns>The new <see cref="MemberSymbol"/> instance.</returns>
+    [Pure]
     public static MemberSymbol? From(ISymbol symbol) =>
         symbol switch
         {
@@ -233,29 +214,13 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
             _ => null,
         };
 
-    /// <summary>Checks for deep equality between two <see cref="MemberSymbol"/> instances.</summary>
-    /// <remarks><para>See remarks in <see cref="Equal"/> for more details.</para></remarks>
-    /// <param name="other">The other <see cref="MemberSymbol"/> to compare.</param>
-    /// <returns>
-    /// The value <see langword="true"/> if the two <see cref="MemberSymbol"/>
-    /// instances are equal; otherwise, <see langword="false"/>.
-    /// </returns>
+    /// <inheritdoc />
     [Pure]
-    public bool DeepEquals(MemberSymbol other) => Name == other.Name && Equal(Type, other.Type);
-
-    /// <inheritdoc />
     public bool Equals(MemberSymbol other) =>
-        Symbol switch
-        {
-            IFieldSymbol => other.Symbol is IFieldSymbol,
-            IPropertySymbol => other.Symbol is IPropertySymbol,
-            IParameterSymbol => other.Symbol is IParameterSymbol,
-            _ => other.Symbol is not IFieldSymbol and not IParameterSymbol and not IPropertySymbol,
-        } &&
-        Name == other.Name &&
-        Equal(Type, other.Type);
+        Symbol?.Kind == other.Symbol?.Kind && Name == other.Name && Equal(Type, other.Type);
 
     /// <inheritdoc />
+    [Pure]
     public override int GetHashCode() =>
         Symbol switch
         {
@@ -266,6 +231,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         };
 
     /// <inheritdoc />
+    [Pure]
     public override string ToString() =>
         Symbol switch
         {
@@ -274,4 +240,20 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
             IPropertySymbol => $"{Type} {Name} {{ get; }}",
             _ => $"{Name}<{Type}>",
         };
+
+    /// <summary>Determines if both symbols are equal and in source.</summary>
+    /// <param name="x">The first <see cref="INamespaceOrTypeSymbol"/> to compare.</param>
+    /// <param name="y">The second <see cref="INamespaceOrTypeSymbol"/> to compare.</param>
+    /// <returns>Whether the two <see cref="INamespaceOrTypeSymbol"/> instances are equal.</returns>
+    static bool SourcedEquals(INamespaceOrTypeSymbol x, INamespaceOrTypeSymbol y) =>
+        y.IsInSource() &&
+        RoslynComparer.Eq(x, y) &&
+        x.GetMembers().GuardedSequenceEqual(y.GetMembers(), RoslynComparer.Instance) &&
+        x.GetTypeMembers().GuardedSequenceEqual(y.GetTypeMembers(), RoslynComparer.Instance);
+
+    /// <summary>Determines if both symbols are equal but both not in source.</summary>
+    /// <param name="x">The first <see cref="INamespaceOrTypeSymbol"/> to compare.</param>
+    /// <param name="y">The second <see cref="INamespaceOrTypeSymbol"/> to compare.</param>
+    /// <returns>Whether the two <see cref="INamespaceOrTypeSymbol"/> instances are equal.</returns>
+    static bool UnsourcedEquals(ISymbol x, ISymbol y) => !y.IsInSource() && RoslynComparer.Eq(x, y);
 }
