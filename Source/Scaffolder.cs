@@ -597,7 +597,7 @@ sealed partial record Scaffolder(
     string Discriminator =>
         _discriminator ??= Symbols.Count != Reference.Count ||
             !CanReserveNull && Symbols.Any(Members.Contains) ||
-            Symbols.Select(x => x.Type).GroupDuplicates(TypeSymbolComparer.Default).Any()
+            Symbols.Select(x => x.Type).GroupDuplicates(RoslynComparer.Instance).Any()
                 ? DiscriminatorField
                 : DiscriminatorProperty;
 
@@ -727,11 +727,10 @@ sealed partial record Scaffolder(
     }
 
     [Pure]
-    bool HasConflict(MemberSymbol x) => Symbols.Where(y => TypeSymbolComparer.Equal(x.Type, y.Type)).Skip(1).Any();
+    bool HasConflict(MemberSymbol x) => Symbols.Where(y => RoslynComparer.Eq(x.Type, y.Type)).Skip(1).Any();
 
     [Pure]
-    bool IsNoninitial(MemberSymbol x) =>
-        Symbols.Where(y => TypeSymbolComparer.Equal(x.Type, y.Type)).Skip(1).Contains(x);
+    bool IsNoninitial(MemberSymbol x) => Symbols.Where(y => RoslynComparer.Eq(x.Type, y.Type)).Skip(1).Contains(x);
 
     [Pure]
     bool SkipOperator(MemberSymbol x) =>
@@ -740,8 +739,8 @@ sealed partial record Scaffolder(
     [Pure]
     int Inheritance((int Index, MemberSymbol Item) tuple) =>
         Rest.Count(
-            x => tuple.Item.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, TypeSymbolComparer.Default) ||
-                tuple.Item.Type.AllInterfaces.Contains(x.Type, TypeSymbolComparer.Default)
+            x => tuple.Item.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, RoslynComparer.Instance) ||
+                tuple.Item.Type.AllInterfaces.Contains(x.Type, RoslynComparer.Instance)
         );
 
     [Pure]

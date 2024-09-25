@@ -92,9 +92,9 @@ readonly record struct Signature(
     /// <returns>All common base types in descending order of specificity.</returns>
     [Pure]
     public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(SmallList<MemberSymbol> symbols) =>
-        symbols.Skip(1).All(x => TypeSymbolComparer.Equal(x.Type, symbols.First.Type)) ? [symbols.First.Type] :
+        symbols.Skip(1).All(x => RoslynComparer.Eq(x.Type, symbols.First.Type)) ? [symbols.First.Type] :
         symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? [] : symbols
-           .Select(x => Inheritance(x.Type).ToSet(TypeSymbolComparer.Default))
+           .Select(x => Inheritance(x.Type).ToSet(RoslynComparer.Instance))
            .Aggregate(IntersectWith)
            .OrderBy(x => x.SpecialType is SpecialType.System_Object)
            .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
@@ -218,7 +218,7 @@ readonly record struct Signature(
         unchecked
         {
             hash = hash * Prime ^ Name.AsSpan().SplitOn('.').Last.GetDjb2HashCode();
-            hash = hash * Prime ^ TypeSymbolComparer.GetHashCode(Type);
+            hash = hash * Prime ^ RoslynComparer.Hash(Type);
             hash = hash * Prime ^ Parameters.Length;
             return hash * Prime ^ TypeParameters.Length;
         }
@@ -235,7 +235,7 @@ readonly record struct Signature(
     static bool AnyBaseType(ITypeSymbol? x, ITypeSymbol y)
     {
         for (; x is not null; x = x.BaseType)
-            if (TypeSymbolComparer.Equal(x, y))
+            if (RoslynComparer.Eq(x, y))
                 return true;
 
         return false;
@@ -291,8 +291,7 @@ readonly record struct Signature(
     /// <returns>The value <see langword="true"/> if both instances have the same type.</returns>
     [Pure]
     static bool SameType(ITypeSymbol left, ITypeSymbol right) =>
-        TypeSymbolComparer.Equal(left, right) &&
-        TypeSymbolComparer.Equal(left.ToUnderlying(), right.ToUnderlying()) &&
+        RoslynComparer.Eq(left, right) &&
         left.ContainingType is null == right.ContainingType is null &&
         (left.ContainingType is null || SameType(left.ContainingType, right.ContainingType));
 

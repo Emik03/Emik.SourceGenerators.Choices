@@ -129,7 +129,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
 
     /// <summary>Compares two <see cref="ITypeSymbol"/> instances.</summary>
     /// <remarks><para>
-    /// As opposed to <see cref="TypeSymbolComparer.Equal"/>, this method also checks for the members
+    /// As opposed to <see cref="RoslynComparer.Instance"/>, this method also checks for the members
     /// of <see cref="ITypeSymbol"/> instances if they are declared in source, since both instances
     /// could have the same metadata name but come from different iterations of source code.
     /// </para></remarks>
@@ -139,52 +139,27 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public static bool Equal(ITypeSymbol? x, ITypeSymbol? y)
     {
-        static bool Generic(ITypeParameterSymbol x, ITypeParameterSymbol y) =>
-            x.ConstraintTypes.Length == y.ConstraintTypes.Length &&
-            x.MetadataName == y.MetadataName &&
-            NamespaceSymbolComparer.Equal(x.ContainingNamespace, y.ContainingNamespace);
+        // A metadata name check is enough to determine if two type symbols are equal assuming they're compiled.
+        static bool DifferentReferences(ITypeSymbol x, ITypeSymbol y) =>
+            !x.IsInSource() ? !y.IsInSource() && RoslynComparer.Eq(x, y) : y.IsInSource() && ColdPath(x, y);
 
         // Type symbols in source may vary in subtle but breaking ways.
         // We need to extensively make sure that everything remains the same.
         static bool ColdPath(ITypeSymbol x, ITypeSymbol y) =>
             x is ITypeParameterSymbol genericX && y is ITypeParameterSymbol genericY ? Generic(genericX, genericY) :
             x.SpecialType is not SpecialType.None ? x.SpecialType == y.SpecialType : x.TypeKind == y.TypeKind &&
-            // We skip properties covered by SpecialType, TypeKind, in NamedTypeSymbolComparer, or always false.
-            x.DeclaredAccessibility == y.DeclaredAccessibility &&
-            x.IsRefLikeType == y.IsRefLikeType &&
-            x.IsUnmanagedType == y.IsUnmanagedType &&
-            x.IsReadOnly == y.IsReadOnly &&
-            x.IsRecord == y.IsRecord &&
-            TypeSymbolComparer.Equal(x, y) &&
+            RoslynComparer.Eq(x, y) &&
             Equal(x.BaseType, y.BaseType) &&
             x.AllInterfaces.SequenceEqual(y.AllInterfaces, Equal) &&
-            x.GetMembers().SequenceEqual(y.GetMembers(), SymbolComparer.Default);
+            x.GetMembers().SequenceEqual(y.GetMembers(), RoslynComparer.Instance);
 
-        // A metadata name check is enough to determine if two type symbols are equal assuming they're compiled.
-        static bool DifferentReferences(ITypeSymbol x, ITypeSymbol y) =>
-            !x.IsInSource() ? !y.IsInSource() && TypeSymbolComparer.Equal(x, y) : y.IsInSource() && ColdPath(x, y);
+        static bool Generic(ITypeParameterSymbol x, ITypeParameterSymbol y) =>
+            x.ConstraintTypes.Length == y.ConstraintTypes.Length &&
+            x.MetadataName == y.MetadataName &&
+            RoslynComparer.Eq(x.ContainingNamespace, y.ContainingNamespace);
 
         return x is null ? y is null : ReferenceEquals(x, y) || y is not null && DifferentReferences(x, y);
     }
-
-    /// <summary>Hashes an <see cref="ITypeSymbol"/> instance.</summary>
-    /// <remarks><para>See remarks in <see cref="Equal"/> for more details.</para></remarks>
-    /// <param name="x">The <see cref="ITypeSymbol"/> to hash.</param>
-    /// <returns>The computed hash code.</returns>
-    [Pure]
-    public static int Hash(ITypeSymbol? x) =>
-        x is null
-            ? Prime()
-            : HashCode.Combine(
-                x.SpecialType,
-                x.TypeKind,
-                x.DeclaredAccessibility,
-                x.IsRefLikeType,
-                x.IsUnmanagedType,
-                x.IsReadOnly,
-                x.IsRecord,
-                TypeSymbolComparer.GetHashCode(x)
-            );
 
     /// <summary>Determines if the <see cref="ISymbol"/> is an operator.</summary>
     /// <param name="symbol">The <see cref="ISymbol"/> to check.</param>
@@ -221,7 +196,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
             Parameters: [{ Type: INamedTypeSymbol other }],
         } &&
         expect == name &&
-        NamedTypeSymbolComparer.Equal(type, other);
+        RoslynComparer.Eq(type, other);
 
     /// <summary>Determines if the <see cref="ISymbol"/> could fit within a unit type.</summary>
     /// <param name="x">The symbol to check.</param>
@@ -284,10 +259,10 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     public override int GetHashCode() =>
         Symbol switch
         {
-            IFieldSymbol field => FieldSymbolComparer.Default.GetHashCode(field) * Prime(),
-            IPropertySymbol property => PropertySymbolComparer.Default.GetHashCode(property) * Prime(),
-            IParameterSymbol parameter => ParameterSymbolComparer.Default.GetHashCode(parameter) * Prime(),
-            _ => TypeSymbolComparer.GetHashCode(Type) ^ StringComparer.Ordinal.GetHashCode(Name) * Prime(),
+            IFieldSymbol field => RoslynComparer.Hash(field) * Prime(),
+            IPropertySymbol property => RoslynComparer.Hash(property) * Prime(),
+            IParameterSymbol parameter => RoslynComparer.Hash(parameter) * Prime(),
+            _ => RoslynComparer.Hash(Type) ^ StringComparer.Ordinal.GetHashCode(Name) * Prime(),
         };
 
     /// <inheritdoc />

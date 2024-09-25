@@ -64,7 +64,12 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// <summary>Creates the generated source to the <see cref="SourceProductionContext"/>.</summary>
     /// <param name="context">The context to register source code.</param>
     /// <param name="raw">The values to base the source generation from.</param>
-    static void Generate(SourceProductionContext context, Raw raw) => AddSource(context, Scaffolder.From(raw).Result);
+    static void Generate(SourceProductionContext context, Raw raw)
+    {
+        var sw = Stopwatch.StartNew();
+        AddSource(context, Scaffolder.From(raw).Result);
+        sw.Elapsed.ToConciseString().Debug(x => (raw.Named.GetFullyQualifiedMetadataName(), x), stringLength: 400);
+    }
 
     /// <summary>
     /// Registers the provider to the generator, which also includes
@@ -239,6 +244,6 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             _ => default,
         };
 
-        return (target, fields, mutablePublicly, false).Debug();
+        return (target, fields, mutablePublicly, false);
     }
 }

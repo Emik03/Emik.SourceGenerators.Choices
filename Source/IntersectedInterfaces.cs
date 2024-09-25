@@ -12,9 +12,7 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
     /// <summary>Gets the set of interfaces that are in common with every member of <see cref="Symbols"/>.</summary>
     [Pure] // ReSharper disable once ReturnTypeCanBeEnumerable.Global
     public HashSet<INamedTypeSymbol> Set =>
-        Symbols
-           .Skip(1)
-           .Aggregate(UnimplementedInterfaces(Symbols.First).ToSet(NamedTypeSymbolComparer.Default), Intersect);
+        Symbols.Skip(1).Aggregate(UnimplementedInterfaces(Symbols.First).ToSet(RoslynComparer.Instance), Intersect);
 
     /// <summary>Gets the members that are in common with every member of <see cref="Symbols"/>.</summary>
     [Pure]
@@ -61,14 +59,13 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
                 _ => ImmutableArray<IParameterSymbol>.Empty,
             };
 
-        bool IsEqual(MemberSymbol union) =>
-            union.Type.AllInterfaces.Contains(first, NamedTypeSymbolComparer.Default);
+        bool IsEqual(MemberSymbol union) => union.Type.AllInterfaces.Contains(first, RoslynComparer.Instance);
 
         bool CanReturnTypeBeIncluded(ISymbol symbol) =>
-            !first.TypeParameters.Contains(symbol.OriginalDefinition.ToUnderlying(), TypeSymbolComparer.Default!);
+            !first.TypeParameters.Contains(symbol.OriginalDefinition.ToUnderlying(), RoslynComparer.Instance);
 
         bool CanParameterBeIncluded(IParameterSymbol symbol) =>
-            !first.TypeParameters.Contains(symbol.OriginalDefinition.Type, TypeSymbolComparer.Default);
+            !first.TypeParameters.Contains(symbol.OriginalDefinition.Type, RoslynComparer.Instance);
 
         var interfacesEqual = Symbols.All(IsEqual);
 
@@ -114,7 +111,7 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
         Symbols
            .Skip(1)
            .Select(x => x.Type.AllInterfaces)
-           .Select(x => x.FirstOrDefault(x => NamedTypeSymbolComparer.Equal(x, interfaceFromFirst)))
+           .Select(x => x.FirstOrDefault(x => RoslynComparer.Eq(x, interfaceFromFirst)))
            .Filter()
            .Prepend(interfaceFromFirst)
            .ToSmallList();

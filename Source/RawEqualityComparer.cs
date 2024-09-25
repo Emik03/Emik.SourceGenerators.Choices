@@ -23,9 +23,9 @@ sealed class RawEqualityComparer : IEqualityComparer<Raw>
     [Pure]
     public int GetHashCode(Raw x)
     {
-        var hash = x.PolyfillAttributes.GetHashCode() << 2 ^
+        var hash = x.PolyfillAttributes.ToByte() << 2 ^
             BetterHashCode(x.MutablePublicly) ^
-            MemberSymbol.Hash(x.Named);
+            RoslynComparer.Hash(x.Named);
 
         for (var i = 0; i < x.Fields.Count; i++)
             hash ^= unchecked(x.Fields[i].GetHashCode() * Primes.Index(^(i + 1)));
