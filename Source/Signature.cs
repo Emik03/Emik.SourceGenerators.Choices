@@ -92,7 +92,7 @@ readonly record struct Signature(
     /// <returns>All common base types in descending order of specificity.</returns>
     [Pure]
     public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(ImmutableArray<MemberSymbol> symbols) =>
-        symbols.Skip(1).All(x => RoslynComparer.Eq(x.Type, symbols[0].Type)) ? [symbols[0].Type] :
+        symbols.Skip(1).All(symbols[0].TypeEquals) ? [symbols[0].Type] :
         symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? [] : symbols
            .Select(x => Inheritance(x.Type).ToSet(RoslynComparer.Instance))
            .Aggregate(IntersectWith)

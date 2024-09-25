@@ -32,7 +32,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// </summary>
     [Pure]
     public static IEqualityComparer<MemberSymbol> Referential { get; } = Equating<MemberSymbol>(
-        (x, y) => (object)x.Name == x.Name && ReferenceEquals(x.Type, y.Type),
+        (x, y) => x.ReferenceEquals(y),
         x => StringComparer.Ordinal.GetHashCode(x.Name) ^ EqualityComparer<ITypeSymbol>.Default.GetHashCode(x.Type)
     );
 
@@ -242,6 +242,24 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public bool Equals(MemberSymbol other) =>
         Symbol?.Kind == other.Symbol?.Kind && Name == other.Name && Equal(Type, other.Type);
+
+    /// <summary>Compares two <see cref="MemberSymbol"/> instances by its references.</summary>
+    /// <param name="other">The other <see cref="MemberSymbol"/> to compare.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the two <see cref="MemberSymbol"/>
+    /// instances hold the same references; otherwise, <see langword="false"/>.
+    /// </returns>s
+    [Pure]
+    public bool ReferenceEquals(MemberSymbol other) => (object)Name == other.Name && ReferenceEquals(Type, other.Type);
+
+    /// <summary>Compares two <see cref="MemberSymbol"/> instances by <see cref="Type"/>.</summary>
+    /// <param name="other">The other <see cref="MemberSymbol"/> to compare.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the two <see cref="MemberSymbol"/> instances
+    /// have the same <see cref="Type"/>; otherwise, <see langword="false"/>.
+    /// </returns>s
+    [Pure]
+    public bool TypeEquals(MemberSymbol other) => RoslynComparer.Eq(Type, other.Type);
 
     /// <inheritdoc />
     [Pure]

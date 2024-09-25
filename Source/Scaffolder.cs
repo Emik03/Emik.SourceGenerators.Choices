@@ -43,10 +43,11 @@ sealed partial record Scaffolder(
 
     [Pure]
     bool CanOverlapReferenceMemorySpace =>
-        CanReserveNull || Reference.Omit(Members.Contains).Skip(MinimumBoxedSize - 1).Any();
+        CanReserveNull || Reference.Omit(x => Members.Any(x.ReferenceEquals)).Skip(MinimumBoxedSize - 1).Any();
 
     [Pure]
-    bool CanOverlapUnmanagedMemorySpace => Unmanaged.Omit(Members.Contains).Skip(MinimumExplicitStructSize - 1).Any();
+    bool CanOverlapUnmanagedMemorySpace =>
+        Unmanaged.Omit(x => Members.Any(x.ReferenceEquals)).Skip(MinimumExplicitStructSize - 1).Any();
 
     [Pure]
     bool CanReserveNull =>
@@ -599,7 +600,7 @@ sealed partial record Scaffolder(
     [Pure]
     string Discriminator =>
         _discriminator ??= Symbols.Length != Reference.Length ||
-            !CanReserveNull && Symbols.Any(Members.Contains) ||
+            !CanReserveNull && Symbols.Any(x => Members.Any(x.ReferenceEquals)) ||
             Symbols.Select(x => x.Type).GroupDuplicates(RoslynComparer.Instance).Any()
                 ? DiscriminatorField
                 : DiscriminatorProperty;
@@ -719,11 +720,10 @@ sealed partial record Scaffolder(
     }
 
     [Pure]
-    bool HasConflict(MemberSymbol x) =>
-        Symbols.Omit(y => MemberSymbol.Referential.Equals(x, y)).Any(y => RoslynComparer.Eq(x.Type, y.Type));
+    bool HasConflict(MemberSymbol x) => Symbols.Omit(y => MemberSymbol.Referential.Equals(x, y)).Any(x.TypeEquals);
 
     [Pure]
-    bool IsNoninitial(MemberSymbol x) => Symbols.Where(y => RoslynComparer.Eq(x.Type, y.Type)).Skip(1).Contains(x);
+    bool IsNoninitial(MemberSymbol x) => Symbols.Where(x.TypeEquals).Skip(1).Any(x.ReferenceEquals);
 
     [Pure]
     bool SkipOperator(MemberSymbol x) =>
@@ -920,7 +920,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareField(MemberSymbol x) =>
-        x.IsEmpty || Members.Contains(x) || IsNoninitial(x)
+        x.IsEmpty || Members.Any(x.ReferenceEquals) || IsNoninitial(x)
             ? ""
             : CSharp(
                 $"""
@@ -1037,15 +1037,15 @@ sealed partial record Scaffolder(
 
     [Pure]
     string PrefixCast(MemberSymbol x, string memberAccess = "") =>
-        x.IsEmpty ? SingleEmpty(Symbols).Contains(x) ? CSharp("default") : CSharp($"default({x.Type})") :
+        x.IsEmpty ? SingleEmpty(Symbols).Any(x.ReferenceEquals) ? CSharp("default") : CSharp($"default({x.Type})") :
         Prefix(x) is not ReferenceField and var prefix ? $"{memberAccess}{prefix}{x.NullableSuppression}" :
         $"(({x.Type}){memberAccess}{ReferenceField}{x.NullableSuppression})";
 
     [Pure]
     string Prefix(MemberSymbol x) =>
-        Symbols.First(y => RoslynComparer.Eq(x.Type, y.Type)) is var y && Members.Contains(y) ? y.Name :
-        CanOverlapUnmanagedMemorySpace && Unmanaged.Contains(y) ? $"{UnmanagedField}.{y.FieldName}" :
-        CanOverlapReferenceMemorySpace && Reference.Contains(y) ? ReferenceField : y.FieldName;
+        Symbols.First(x.TypeEquals) is var y && Members.Any(y.ReferenceEquals) ? y.Name :
+        CanOverlapUnmanagedMemorySpace && Unmanaged.Any(y.ReferenceEquals) ? $"{UnmanagedField}.{y.FieldName}" :
+        CanOverlapReferenceMemorySpace && Reference.Any(y.ReferenceEquals) ? ReferenceField : y.FieldName;
 
     [Pure]
     string ToStringCase(MemberSymbol x) =>
