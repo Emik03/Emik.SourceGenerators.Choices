@@ -69,7 +69,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     {
         var sw = Stopwatch.StartNew();
         AddSource(context, new Scaffolder(raw).Result);
-        sw.Elapsed.ToConciseString().Debug(x => (raw.Named.GetFullyQualifiedMetadataName(), x));
+        sw.Elapsed.ToConciseString().Debug(x => (raw.Named.GetFullyQualifiedMetadataName(), x), stringLength: 400);
     }
 #else
         =>
