@@ -772,38 +772,33 @@ sealed partial record Scaffolder(
             : "";
 
     [Pure]
-    string DeclareAlternativeFactory(MemberSymbol x, string discriminator)
-    {
-        var parameters = x.Type switch
+    string DeclareAlternativeFactory(MemberSymbol x, string discriminator) =>
+        x.Type switch
         {
             INamedTypeSymbol { IsTupleType: true, TupleElements: var e, TypeArguments.Length: > 1 } => Decouple(e),
             INamedTypeSymbol t when MemberSymbol.IsSystemTuple(t) => Instances(t),
             _ => default,
-        };
-
-        if (parameters is [])
-            return "";
-
-        return CSharp(
-            $"""
-                 /// <summary>
-                 /// Creates a new instance of {Describe(x)}.
-                 /// </summary>
-             {parameters
-                .Select(x => $"    /// <param name=\"{x.ParameterName}\">The {x.ParameterName} item within the value to pass into the type.</param>")
-                .Conjoin("\n")
-             }
-                 /// <returns>The union containing the parameters.</returns>
-                 {Annotation}
-                 {Pure}
-                 {AggressiveInlining}
-                 public static {Name} Of{x.PropertyName}({parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()})
-                     => new {Name}({parameters.Select(x => x.ParameterName).Conjoin()}{discriminator});
+        } is not [] and var parameters
+            ? CSharp(
+                $"""
+                     /// <summary>
+                     /// Creates a new instance of {Describe(x)}.
+                     /// </summary>
+                 {parameters
+                    .Select(x => $"    /// <param name=\"{x.ParameterName}\">The {x.ParameterName} item within the value to pass into the type.</param>")
+                    .Conjoin("\n")
+                 }
+                     /// <returns>The union containing the parameters.</returns>
+                     {Annotation}
+                     {Pure}
+                     {AggressiveInlining}
+                     public static {Name} Of{x.PropertyName}({parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()})
+                         => new {Name}({parameters.Select(x => x.ParameterName).Conjoin()}{discriminator});
 
 
-             """
-        );
-    }
+                 """
+            )
+            : "";
 
     [Pure]
     string DeclareCheck(MemberSymbol x, int i) =>
@@ -902,7 +897,6 @@ sealed partial record Scaffolder(
     string DeclareFactory(MemberSymbol x, int i)
     {
         var discriminator = HasConflict(x) ? $", {i}" : "";
-        var fallback = x.IsEmpty ? " = default" : "";
 
         return CSharp(
             $"""
@@ -914,7 +908,7 @@ sealed partial record Scaffolder(
                  {Annotation}
                  {Pure}
                  {AggressiveInlining}
-                 public static {Name} Of{x.PropertyName}({x.Type} {x.ParameterName}{fallback})
+                 public static {Name} Of{x.PropertyName}({x.Type} {x.ParameterName}{(x.IsEmpty ? " = default" : "")})
                      => new {Name}({x.ParameterName}{discriminator});
 
              {DeclareAlternativeFactory(x, discriminator)}
