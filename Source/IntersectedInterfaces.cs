@@ -7,22 +7,21 @@ namespace Emik.SourceGenerators.Choices;
 /// <param name="Symbols">The set of <see cref="MemberSymbol"/> instances.</param>
 /// <param name="IsReadOnly">Whether the type is immutable, which normally restricts some implementations.</param>
 // ReSharper disable NullableWarningSuppressionIsUsed
-sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsReadOnly)
+sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool IsReadOnly)
 {
     /// <summary>Gets the set of interfaces that are in common with every member of <see cref="Symbols"/>.</summary>
     [Pure] // ReSharper disable once ReturnTypeCanBeEnumerable.Global
     public HashSet<INamedTypeSymbol> Set =>
-        Symbols.Skip(1).Aggregate(UnimplementedInterfaces(Symbols.First).ToSet(RoslynComparer.Instance), Intersect);
+        Symbols.Skip(1).Aggregate(UnimplementedInterfaces(Symbols[0]).ToSet(RoslynComparer.Instance), Intersect);
 
     /// <summary>Gets the members that are in common with every member of <see cref="Symbols"/>.</summary>
     [Pure]
     public IEnumerable<Extract> Members =>
-        Symbols
-           .First
+        Symbols[0]
            .Type
            .AllInterfaces
            .Select(GroupOriginalDefinitions)
-           .Where(x => x.Count == Symbols.Count)
+           .Where(x => x.Length == Symbols.Length)
            .SelectMany(DelegateImplementors);
 
     /// <summary>
@@ -47,9 +46,9 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
     /// <param name="interfaces">The interfaces to try.</param>
     /// <returns>The members that are in common with every member of <see cref="Symbols"/>.</returns>
     [Pure]
-    IEnumerable<Extract> DelegateImplementors(SmallList<INamedTypeSymbol> interfaces)
+    IEnumerable<Extract> DelegateImplementors(ImmutableArray<INamedTypeSymbol> interfaces)
     {
-        var first = interfaces.First;
+        var first = interfaces[0];
 
         static ImmutableArray<IParameterSymbol> Parameters(ISymbol symbol) =>
             symbol switch
@@ -72,7 +71,7 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
         bool CanBeIncluded(ISymbol symbol) =>
             interfacesEqual || CanReturnTypeBeIncluded(symbol) && Parameters(symbol).All(CanParameterBeIncluded);
 
-        var interfaceDeclarations = interfaces.Select(x => $"{x}").ItemCanBeNull().ToSmallList();
+        var interfaceDeclarations = interfaces.Select(x => $"{x}").ItemCanBeNull().ToImmutableArray();
 
         return first.GetMembers().Where(CanBeIncluded).Select(x => (x, Signature.Kind(x), interfaceDeclarations));
     }
@@ -107,12 +106,12 @@ sealed record IntersectedInterfaces(SmallList<MemberSymbol> Symbols, bool IsRead
     /// <param name="interfaceFromFirst">The first member.</param>
     /// <returns>The list of original definitions of <paramref name="interfaceFromFirst"/>.</returns>
     [Pure]
-    SmallList<INamedTypeSymbol> GroupOriginalDefinitions(INamedTypeSymbol interfaceFromFirst) =>
+    ImmutableArray<INamedTypeSymbol> GroupOriginalDefinitions(INamedTypeSymbol interfaceFromFirst) =>
         Symbols
            .Skip(1)
            .Select(x => x.Type.AllInterfaces)
            .Select(x => x.FirstOrDefault(x => RoslynComparer.Eq(x, interfaceFromFirst)))
            .Filter()
            .Prepend(interfaceFromFirst)
-           .ToSmallList();
+           .ToImmutableArray();
 }

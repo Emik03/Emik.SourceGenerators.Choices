@@ -47,7 +47,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     ) =>
         named is { IsTupleType: false } &&
         members.Length >= MinimumMembers &&
-        (named, members.ToSmallList(), publiclyMutable, polyfillAttributes) is var raw &&
+        (named, AsImmutableArray(members), publiclyMutable, polyfillAttributes) is var raw &&
         HasSufficientMembers(raw)
             ? new Scaffolder(raw).Result
             : null;
@@ -88,7 +88,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// is annotated correctly; otherwise, <see langword="false"/>.
     /// </returns>
     [Pure]
-    static bool HasSufficientMembers(Raw x) => x is ({ IsStatic: false }, { Count: >= MinimumMembers }, _, _);
+    static bool HasSufficientMembers(Raw x) => x is ({ IsStatic: false }, { Length: >= MinimumMembers }, _, _);
 
     /// <summary>Determines whether the parameter <paramref name="x"/> is extendable.</summary>
     /// <param name="x">The parameter to check.</param>
@@ -153,7 +153,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             context.SemanticModel.GetDeclaredSymbol(typeDeclaration, token) is not { IsStatic: false } named)
             return default;
 
-        SmallList<MemberSymbol> fields = [];
+        var fields = ImmutableArray.CreateBuilder<MemberSymbol>();
         bool? mutablePublicly = null;
 
         for (var name = attribute.Name; name is QualifiedNameSyntax qualifiedName; name = qualifiedName.Left)
@@ -189,7 +189,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         }
 
         fields.Reverse();
-        return (named, fields, mutablePublicly, true);
+        return (named, fields.ToImmutable(), mutablePublicly, true);
     }
 
     /// <summary>Extracts the members from the node.</summary>
@@ -228,7 +228,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
            .Select(x => context.SemanticModel.GetDeclaredSymbol(x, token))
            .Filter()
            .Select(x => new MemberSymbol(x))
-           .ToSmallList();
+           .ToImmutableArray();
 
         var fields = symbolSet switch
         {

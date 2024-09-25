@@ -27,6 +27,15 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     public MemberSymbol(IPropertySymbol property)
         : this(property.Type, property.Name, property) { }
 
+    /// <summary>
+    /// Gets the <see cref="IEqualityComparer{T}"/> for <see cref="MemberSymbol"/> for referential equality.
+    /// </summary>
+    [Pure]
+    public static IEqualityComparer<MemberSymbol> Referential { get; } = Equating<MemberSymbol>(
+        (x, y) => (object)x.Name == x.Name && ReferenceEquals(x.Type, y.Type),
+        x => StringComparer.Ordinal.GetHashCode(x.Name) ^ EqualityComparer<ITypeSymbol>.Default.GetHashCode(x.Type)
+    );
+
     [Pure]
     public bool IsEmpty =>
         Type is { BaseType.SpecialType: not SpecialType.System_Enum, IsValueType: true } type &&

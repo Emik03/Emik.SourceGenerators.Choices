@@ -3,7 +3,7 @@ namespace Emik.SourceGenerators.Choices;
 
 sealed partial record Scaffolder(
     INamedTypeSymbol Named,
-    SmallList<MemberSymbol> Symbols,
+    ImmutableArray<MemberSymbol> Symbols,
     bool? MutablePublicly,
     bool PolyfillAttributes
 )
@@ -258,7 +258,7 @@ sealed partial record Scaffolder(
                           {{Symbols
                              .Index()
                              .OrderByDescending(Inheritance)
-                             .Select(x => $"{(x.Index == Symbols.Count - 1 ? "_" :
+                             .Select(x => $"{(x.Index == Symbols.Length - 1 ? "_" :
                                  x.Item.IsEmpty ? "null" :
                                  x.Item.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated))} => {x.Index},")
                              .Conjoin("\n            ")}}
@@ -299,7 +299,7 @@ sealed partial record Scaffolder(
                           switch
                           {
                               {{Symbols
-                                 .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {Equality(x)},")
+                                 .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {Equality(x)},")
                                  .Conjoin("\n            ")}}
                           });
 
@@ -406,7 +406,7 @@ sealed partial record Scaffolder(
                       switch
                       {
                           {{Symbols
-                             .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {Comparison(x)},")
+                             .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {Comparison(x)},")
                              .Conjoin("\n            ")}}
                       });
 
@@ -485,7 +485,7 @@ sealed partial record Scaffolder(
                       ({{Discriminator}} switch
                       {
                           {{Symbols
-                             .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {
+                             .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {
                                  (x.IsEmpty || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(GetHashCode)))
                                      ? "0"
                                      : $"{PrefixCast(x)}.GetHashCode()")},")
@@ -499,7 +499,7 @@ sealed partial record Scaffolder(
                   public {{ReadOnlyIfStruct}}override string ToString()
                       => {{Discriminator}} switch
                       {
-                          {{Symbols.Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {ToStringCase(x)},").Conjoin("\n            ")}}
+                          {{Symbols.Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {ToStringCase(x)},").Conjoin("\n            ")}}
                       };
               """
         );
@@ -529,7 +529,7 @@ sealed partial record Scaffolder(
                       switch ({{Discriminator}})
                       {
                           {{Symbols
-                              .Select((x, i) => $"{(i == Symbols.Count - 1 ? "default" : $"case {i}")}:\n                on{x.PropertyName
+                              .Select((x, i) => $"{(i == Symbols.Length - 1 ? "default" : $"case {i}")}:\n                on{x.PropertyName
                               }?.Invoke({(x.IsEmpty ? "" : PrefixCast(x))});\n                return this;")
                               .Conjoin("\n            ")}}
                       }
@@ -555,7 +555,7 @@ sealed partial record Scaffolder(
                       switch
                       {
                           {{Symbols
-                              .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => on{x.PropertyName}({(x.IsEmpty ? "" : PrefixCast(x))}),")
+                              .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => on{x.PropertyName}({(x.IsEmpty ? "" : PrefixCast(x))}),")
                               .Conjoin("\n            ")}}
                       };
 
@@ -578,7 +578,7 @@ sealed partial record Scaffolder(
                      {Pure}
                      {AggressiveInlining}
                      public {ReadOnlyIfStruct}{Common} GetUnderlyingValue()
-                         => {(Symbols.Count == Reference.Count
+                         => {(Symbols.Length == Reference.Length
                              ? $"{(Common.SpecialType is SpecialType.System_Object
                                  ? ""
                                  : $"({Common})")}{ReferenceField}!"
@@ -588,7 +588,7 @@ sealed partial record Scaffolder(
                                    switch
                                    {
                                        {{Symbols
-                                          .Select((x, i) => $"{(i == Symbols.Count - 1 ? "_" : i)} => {PrefixCast(x)},")
+                                          .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {PrefixCast(x)},")
                                           .Conjoin("\n            ")}}
                                    }
                                    """
@@ -598,7 +598,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string Discriminator =>
-        _discriminator ??= Symbols.Count != Reference.Count ||
+        _discriminator ??= Symbols.Length != Reference.Length ||
             !CanReserveNull && Symbols.Any(Members.Contains) ||
             Symbols.Select(x => x.Type).GroupDuplicates(RoslynComparer.Instance).Any()
                 ? DiscriminatorField
@@ -628,34 +628,35 @@ sealed partial record Scaffolder(
 
     [Pure]
     ITypeSymbol? Common { get; } = Signature
-       .FindCommonBaseTypes(Symbols.Except(SingleEmpty(Symbols)).ToSmallList())
+       .FindCommonBaseTypes(Symbols.Except(SingleEmpty(Symbols)).ToImmutableArray())
        .FirstOrDefault();
 
     [Pure]
-    SmallList<MemberSymbol> Reference { get; } =
-        Symbols.Omit(x => x.IsUnmanaged).Where(x => x.IsReference).Concat(SingleEmpty(Symbols)).ToSmallList();
+    ImmutableArray<MemberSymbol> Reference { get; } =
+        Symbols.Omit(x => x.IsUnmanaged).Where(x => x.IsReference).Concat(SingleEmpty(Symbols)).ToImmutableArray();
 
     [Pure]
-    SmallList<MemberSymbol> Rest { get; } =
-        Symbols.Omit(x => x.IsUnmanaged).Omit(x => x.IsReference).Except(SingleEmpty(Symbols)).ToSmallList();
+    ImmutableArray<MemberSymbol> Rest { get; } =
+        Symbols.Omit(x => x.IsUnmanaged).Omit(x => x.IsReference).Except(SingleEmpty(Symbols)).ToImmutableArray();
 
     [Pure]
-    SmallList<MemberSymbol> Unmanaged { get; } = Symbols.Where(x => x.IsUnmanaged).Omit(x => x.IsEmpty).ToSmallList();
+    ImmutableArray<MemberSymbol> Unmanaged { get; } =
+        Symbols.Where(x => x.IsUnmanaged).Omit(x => x.IsEmpty).ToImmutableArray();
 
     [Pure]
-    public static SmallList<MemberSymbol> Decouple(ImmutableArray<IFieldSymbol> fields) =>
+    public static ImmutableArray<MemberSymbol> Decouple(ImmutableArray<IFieldSymbol> fields) =>
         (fields.Length is TupleGenericLimit &&
             fields[^1].Type is INamedTypeSymbol { IsTupleType: true, IsValueType: true, TupleElements: var tuple }
                 ? fields.Take(TupleGenericLimit - 1).Select(x => new MemberSymbol(x)).Concat(Decouple(tuple))
-                : fields.Select(x => new MemberSymbol(x))).ToSmallList();
+                : fields.Select(x => new MemberSymbol(x))).ToImmutableArray();
 
     [Pure]
-    public static SmallList<MemberSymbol> Instances(INamespaceOrTypeSymbol x) =>
+    public static ImmutableArray<MemberSymbol> Instances(INamespaceOrTypeSymbol x) =>
         x.GetMembers()
            .Select(MemberSymbol.From)
            .Filter()
            .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] } || x.IsEq)
-           .ToSmallList();
+           .ToImmutableArray();
 
     [Pure]
     static bool IsUnoriginalMethod(ISymbol x, string name) =>
@@ -702,7 +703,7 @@ sealed partial record Scaffolder(
     }
 
     [Pure]
-    static SmallList<MemberSymbol> SingleEmpty(SmallList<MemberSymbol> symbols)
+    static ImmutableArray<MemberSymbol> SingleEmpty(ImmutableArray<MemberSymbol> symbols)
     {
         MemberSymbol single = default;
 
@@ -712,13 +713,14 @@ sealed partial record Scaffolder(
                 if (single.Type is null)
                     single = symbol;
                 else
-                    return [];
+                    return ImmutableArray<MemberSymbol>.Empty;
 
-        return single.Type is null ? [] : single;
+        return single.Type is null ? ImmutableArray<MemberSymbol>.Empty : ImmutableArray.Create(single);
     }
 
     [Pure]
-    bool HasConflict(MemberSymbol x) => Symbols.Where(y => RoslynComparer.Eq(x.Type, y.Type)).Skip(1).Any();
+    bool HasConflict(MemberSymbol x) =>
+        Symbols.Omit(y => MemberSymbol.Referential.Equals(x, y)).Any(y => RoslynComparer.Eq(x.Type, y.Type));
 
     [Pure]
     bool IsNoninitial(MemberSymbol x) => Symbols.Where(y => RoslynComparer.Eq(x.Type, y.Type)).Skip(1).Contains(x);
@@ -836,7 +838,7 @@ sealed partial record Scaffolder(
                       {{AggressiveInlining}}
                       {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{x.ParameterName}}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")}}){{
                           (UsesPrimaryConstructor ? $"\n        : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
-                          }{x.ParameterName}{(Symbols.Count - i - 1).For(i => $", default({Symbols[i].Type})").Conjoin("")
+                          }{x.ParameterName}{(Symbols.Length - i - 1).For(i => $", default({Symbols[i].Type})").Conjoin("")
                           })" : "")}}
                       {
                           {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : CSharp($"\n        {Prefix(x)} = {x.ParameterName};"))}}
@@ -918,7 +920,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareField(MemberSymbol x) =>
-        x.IsEmpty || Members.Contains(x)
+        x.IsEmpty || Members.Contains(x) || IsNoninitial(x)
             ? ""
             : CSharp(
                 $"""
@@ -994,7 +996,7 @@ sealed partial record Scaffolder(
     [Pure]
     string DeclareNestedClass(string x, (int Index, (bool IsRefLikeType, string Name) Item) y)
     {
-        var choiceIndex = Symbols.Count + (MutablePublicly is not null).ToByte();
+        var choiceIndex = Symbols.Length + (MutablePublicly is not null).ToByte();
         var isChoiceClass = y.Index == choiceIndex;
         var isVariantClass = !isChoiceClass && (MutablePublicly is null || y.Index != choiceIndex - 1);
 
@@ -1041,9 +1043,9 @@ sealed partial record Scaffolder(
 
     [Pure]
     string Prefix(MemberSymbol x) =>
-        Members.Contains(x) ? x.Name :
-        CanOverlapUnmanagedMemorySpace && Unmanaged.Contains(x) ? $"{UnmanagedField}.{x.FieldName}" :
-        CanOverlapReferenceMemorySpace && Reference.Contains(x) ? ReferenceField : x.FieldName;
+        Symbols.First(y => RoslynComparer.Eq(x.Type, y.Type)) is var y && Members.Contains(y) ? y.Name :
+        CanOverlapUnmanagedMemorySpace && Unmanaged.Contains(y) ? $"{UnmanagedField}.{y.FieldName}" :
+        CanOverlapReferenceMemorySpace && Reference.Contains(y) ? ReferenceField : y.FieldName;
 
     [Pure]
     string ToStringCase(MemberSymbol x) =>

@@ -15,7 +15,7 @@ sealed class RawEqualityComparer : IEqualityComparer<Raw>
     public bool Equals(Raw x, Raw y) =>
         x.PolyfillAttributes == y.PolyfillAttributes &&
         x.MutablePublicly == y.MutablePublicly &&
-        x.Fields.Count == y.Fields.Count &&
+        x.Fields.Length == y.Fields.Length &&
         MemberSymbol.Equal(x.Named, y.Named) &&
         x.Fields.Equals(y.Fields);
 
@@ -27,7 +27,7 @@ sealed class RawEqualityComparer : IEqualityComparer<Raw>
             BetterHashCode(x.MutablePublicly) ^
             RoslynComparer.Hash(x.Named);
 
-        for (var i = 0; i < x.Fields.Count; i++)
+        for (var i = 0; i < x.Fields.Length; i++)
             hash ^= unchecked(x.Fields[i].GetHashCode() * Primes.Index(^(i + 1)));
 
         return hash;

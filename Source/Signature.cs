@@ -47,21 +47,21 @@ readonly record struct Signature(
     /// <param name="except">The set of <see cref="MemberSymbol"/> instances to exclude.</param>
     /// <returns>The set of forwarders.</returns>
     public static IEnumerable<Extract> FindForwarders(
-        in SmallList<MemberSymbol> symbols,
+        in ImmutableArray<MemberSymbol> symbols,
         INamedTypeSymbol named,
         ISet<MemberSymbol>? except = null
     )
     {
         [Pure]
-        static IEnumerable<Extract> FindCommonBaseMembers(SmallList<MemberSymbol> symbols) =>
-            FindCommonBaseTypes(symbols).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtract(x, symbols.Count));
+        static IEnumerable<Extract> FindCommonBaseMembers(ImmutableArray<MemberSymbol> s) =>
+            FindCommonBaseTypes(s).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtract(x, s.Length));
 
         [Pure]
         static IEnumerable<Extract> GeneratedMethods(Extract symbol) =>
             (symbol switch
             {
-                (IEventSymbol x, _, _) => SmallList.Create(x.AddMethod, x.RaiseMethod, x.RemoveMethod),
-                (IPropertySymbol x, _, _) => SmallList.Create(x.GetMethod, x.SetMethod),
+                (IEventSymbol x, _, _) => ImmutableArray.Create(x.AddMethod, x.RaiseMethod, x.RemoveMethod),
+                (IPropertySymbol x, _, _) => ImmutableArray.Create(x.GetMethod, x.SetMethod),
                 _ => default,
             })
            .Filter()
@@ -91,8 +91,8 @@ readonly record struct Signature(
     /// <param name="symbols">The set of <see cref="MemberSymbol"/> instances.</param>
     /// <returns>All common base types in descending order of specificity.</returns>
     [Pure]
-    public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(SmallList<MemberSymbol> symbols) =>
-        symbols.Skip(1).All(x => RoslynComparer.Eq(x.Type, symbols.First.Type)) ? [symbols.First.Type] :
+    public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(ImmutableArray<MemberSymbol> symbols) =>
+        symbols.Skip(1).All(x => RoslynComparer.Eq(x.Type, symbols[0].Type)) ? [symbols[0].Type] :
         symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? [] : symbols
            .Select(x => Inheritance(x.Type).ToSet(RoslynComparer.Instance))
            .Aggregate(IntersectWith)
@@ -314,7 +314,7 @@ readonly record struct Signature(
     /// <returns>The <see cref="Extract"/> of the parameter <paramref name="x"/>.</returns>
     [Pure]
     static Extract AsDirectExtract(ISymbol x, int count, string? element = null) =>
-        (x, Kind(x), Enumerable.Repeat(element, count).ToSmallList());
+        (x, Kind(x), Enumerable.Repeat(element, count).ToImmutableArray());
 
     /// <summary>Gets the set of <see cref="Extract"/> from the <paramref name="symbols"/>.</summary>
     /// <param name="symbols">The list of symbols.</param>
@@ -323,14 +323,14 @@ readonly record struct Signature(
     /// <returns>The set of <see cref="Extract"/> from the parameter <paramref name="symbols"/>.</returns>
     [Pure]
     static HashSet<Extract> Add(
-        in SmallList<MemberSymbol> symbols,
+        ImmutableArray<MemberSymbol> symbols,
         IAssemblySymbol assembly,
         HashSet<Signature> exists
     )
     {
         HashSet<Extract> set = new(s_extracts);
 
-        foreach (var member in symbols.First.Type.GetMembers())
+        foreach (var member in symbols[0].Type.GetMembers())
             if (From(member, assembly) is { } signature)
                 signature.Next(symbols, set, exists, assembly, member);
 
@@ -361,7 +361,7 @@ readonly record struct Signature(
     /// <param name="assembly">The <see cref="IAssemblySymbol"/> to provide accessibility context.</param>
     /// <param name="member">The next <see cref="ISymbol"/> to process.</param>
     void Next(
-        in SmallList<MemberSymbol> symbols,
+        ImmutableArray<MemberSymbol> symbols,
         HashSet<Extract> set,
         HashSet<Signature> exists,
         IAssemblySymbol assembly,
@@ -373,10 +373,11 @@ readonly record struct Signature(
             left is RefKind.None || right is RefKind.None ? RefKind.None :
             left is RefKind.Ref || right is RefKind.Ref ? RefKind.Ref : RefKind.RefReadOnly;
 
-        SmallList<string?> small = InterfaceDeclaration(member);
-        var kind = Kind(symbols.First.Symbol);
+        var small = ImmutableArray.CreateBuilder<string?>();
+        small.Add(InterfaceDeclaration(member));
+        var kind = Kind(symbols[0].Symbol);
 
-        for (var i = 1; i < symbols.Count; i++)
+        for (var i = 1; i < symbols.Length; i++)
         {
             var current = symbols[i];
 
@@ -386,8 +387,8 @@ readonly record struct Signature(
             kind = Min(kind, Kind(current.Symbol));
             small.Add(interfaceDeclaration);
 
-            if (i == symbols.Count - 1 && !exists.Contains(this))
-                set.Add((member, kind, small));
+            if (i == symbols.Length - 1 && !exists.Contains(this))
+                set.Add((member, kind, small.ToImmutable()));
         }
     }
 }

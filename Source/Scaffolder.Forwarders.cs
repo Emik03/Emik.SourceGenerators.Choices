@@ -42,7 +42,7 @@ sealed partial record Scaffolder
                 $"""
 
 
-                     /// {XmlTypeName(symbol, "inheritdoc")}{Remarks(ref interfacesDeclared)}
+                     /// {XmlTypeName(symbol, "inheritdoc")}{Remarks(interfacesDeclared)}
                      {Annotation}{(symbol is IMethodSymbol ? $"\n    {AggressiveInlining}" : "")}
                      {attributes}{(attributes is "" ? "" : "    ")}public{' '}
                  """
@@ -98,7 +98,7 @@ sealed partial record Scaffolder
                 if (isSwitchCase)
                     return CSharp(
                         $"""
-                                 {(i == Symbols.Count - 1 ? $"case {i}" : "default")}:
+                                 {(i == Symbols.Length - 1 ? $"case {i}" : "default")}:
                                          {cast}{member}
                          """
                     );
@@ -111,7 +111,7 @@ sealed partial record Scaffolder
                     : $"{kind.KeywordInReturn()}{cast}{member}";
 
                 return CSharp(
-                    $"        {(i == Symbols.Count - 1 ? "_" : i)} => {value}{(!isTypeKnown && isGetType ? "()" : "")}"
+                    $"        {(i == Symbols.Length - 1 ? "_" : i)} => {value}{(!isTypeKnown && isGetType ? "()" : "")}"
                 );
             }
 
@@ -301,7 +301,7 @@ sealed partial record Scaffolder
            .Conjoin("");
 
     [Pure]
-    string Remarks(ref SmallList<string?> interfaces) =>
+    string Remarks(ImmutableArray<string?> interfaces) =>
         interfaces
            .Select(XmlMemberTypeNames)
            .Filter()
