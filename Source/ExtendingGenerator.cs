@@ -64,7 +64,17 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// <summary>Creates the generated source to the <see cref="SourceProductionContext"/>.</summary>
     /// <param name="context">The context to register source code.</param>
     /// <param name="raw">The values to base the source generation from.</param>
-    static void Generate(SourceProductionContext context, Raw raw) => AddSource(context, new Scaffolder(raw).Result);
+    static void Generate(SourceProductionContext context, Raw raw)
+#if LOG_PERFORMANCE
+    {
+        var sw = Stopwatch.StartNew();
+        AddSource(context, new Scaffolder(raw).Result);
+        sw.Elapsed.ToConciseString().Debug(x => (raw.Named.GetFullyQualifiedMetadataName(), x));
+    }
+#else
+        =>
+            AddSource(context, new Scaffolder(raw).Result);
+#endif
 
     /// <summary>
     /// Registers the provider to the generator, which also includes
