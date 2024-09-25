@@ -35,6 +35,9 @@ sealed partial record Scaffolder(
 
     string? _discriminator, _source;
 
+    public Scaffolder(Raw raw)
+        : this(raw.Named, raw.Fields, raw.MutablePublicly, raw.PolyfillAttributes) { }
+
     [Pure]
     public GeneratedSource Result => (HintName, Source);
 
@@ -640,18 +643,6 @@ sealed partial record Scaffolder(
     SmallList<MemberSymbol> Unmanaged { get; } = Symbols.Where(x => x.IsUnmanaged).Omit(x => x.IsEmpty).ToSmallList();
 
     [Pure]
-    public static bool IsSystemTuple([NotNullWhen(true)] ITypeSymbol? symbol) =>
-        symbol is INamedTypeSymbol
-        {
-            Name: nameof(Tuple),
-            TypeArguments.Length: > 1,
-            ContainingNamespace: { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true },
-        };
-
-    [Pure]
-    public static Scaffolder From(Raw raw) => new(raw.Named, raw.Fields, raw.MutablePublicly, raw.PolyfillAttributes);
-
-    [Pure]
     public static SmallList<MemberSymbol> Decouple(ImmutableArray<IFieldSymbol> fields) =>
         (fields.Length is TupleGenericLimit &&
             fields[^1].Type is INamedTypeSymbol { IsTupleType: true, IsValueType: true, TupleElements: var tuple }
@@ -756,7 +747,7 @@ sealed partial record Scaffolder(
         x.Type switch
         {
             INamedTypeSymbol { IsTupleType: true, TupleElements: { Length: > 1 } e } => (true, true, Decouple(e)),
-            INamedTypeSymbol type when IsSystemTuple(type) => (true, false, Instances(type)),
+            INamedTypeSymbol type when MemberSymbol.IsSystemTuple(type) => (true, false, Instances(type)),
             _ => default,
         } is (true, var isValue, var enumerable) &&
         enumerable.ToSmallList() is var parameters
@@ -786,7 +777,7 @@ sealed partial record Scaffolder(
         var parameters = x.Type switch
         {
             INamedTypeSymbol { IsTupleType: true, TupleElements: var e, TypeArguments.Length: > 1 } => Decouple(e),
-            INamedTypeSymbol t when IsSystemTuple(t) => Instances(t),
+            INamedTypeSymbol t when MemberSymbol.IsSystemTuple(t) => Instances(t),
             _ => default,
         };
 

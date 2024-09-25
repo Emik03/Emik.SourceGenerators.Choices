@@ -189,6 +189,21 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         x is { IsStatic: true } or
             not IFieldSymbol and not IMethodSymbol { MethodKind: MethodKind.Constructor, Parameters: not [] };
 
+    /// <summary>Determines if the <see cref="ITypeSymbol"/> is a <see cref="System.Tuple"/>.</summary>
+    /// <param name="symbol">The <see cref="ITypeSymbol"/> to check.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the <see cref="ITypeSymbol"/>
+    /// is a <see cref="System.Tuple"/>; otherwise, <see langword="false"/>.
+    /// </returns>
+    [Pure]
+    public static bool IsSystemTuple([NotNullWhen(true)] ITypeSymbol? symbol) =>
+        symbol is INamedTypeSymbol
+        {
+            Name: nameof(Tuple),
+            TypeArguments.Length: > 1,
+            ContainingNamespace: { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true },
+        };
+
     /// <summary>Gets the name of the delegate type.</summary>
     /// <param name="hasGenericReturn">
     /// The value <see langword="true"/> if the delegate has a generic return type; otherwise, <see langword="false"/>.

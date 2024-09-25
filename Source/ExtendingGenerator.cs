@@ -49,7 +49,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         members.Length >= MinimumMembers &&
         (named, members.ToSmallList(), publiclyMutable, polyfillAttributes) is var raw &&
         HasSufficientMembers(raw)
-            ? Scaffolder.From(raw).Result
+            ? new Scaffolder(raw).Result
             : null;
 
     /// <inheritdoc />
@@ -64,7 +64,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// <summary>Creates the generated source to the <see cref="SourceProductionContext"/>.</summary>
     /// <param name="context">The context to register source code.</param>
     /// <param name="raw">The values to base the source generation from.</param>
-    static void Generate(SourceProductionContext context, Raw raw) => AddSource(context, Scaffolder.From(raw).Result);
+    static void Generate(SourceProductionContext context, Raw raw) => AddSource(context, new Scaffolder(raw).Result);
 
     /// <summary>
     /// Registers the provider to the generator, which also includes
@@ -233,7 +233,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         var fields = symbolSet switch
         {
             { IsTupleType: true, TupleElements: { Length: > 1 } e } => Scaffolder.Decouple(e),
-            _ when Scaffolder.IsSystemTuple(symbolSet) => Scaffolder.Instances(symbolSet),
+            _ when MemberSymbol.IsSystemTuple(symbolSet) => Scaffolder.Instances(symbolSet),
             null when primaryConstructorParameters is { } p => p,
             null => Scaffolder.Instances(target),
             _ => default,
