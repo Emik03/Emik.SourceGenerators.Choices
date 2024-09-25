@@ -313,8 +313,12 @@ readonly record struct Signature(
     /// <param name="element">The interface prefix.</param>
     /// <returns>The <see cref="Extract"/> of the parameter <paramref name="x"/>.</returns>
     [Pure]
-    static Extract AsDirectExtract(ISymbol x, int count, string? element = null) =>
-        (x, Kind(x), Enumerable.Repeat(element, count).ToImmutableArray());
+    static Extract AsDirectExtract(ISymbol x, int count, string? element = null)
+    {
+        var interfaceDeclarations = new string?[count];
+        interfaceDeclarations.AsSpan().Fill(element);
+        return (x, Kind(x), AsImmutableArray(interfaceDeclarations));
+    }
 
     /// <summary>Gets the set of <see cref="Extract"/> from the <paramref name="symbols"/>.</summary>
     /// <param name="symbols">The list of symbols.</param>

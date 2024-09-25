@@ -4,6 +4,7 @@ namespace Emik.SourceGenerators.Choices;
 sealed partial record Scaffolder(
     INamedTypeSymbol Named,
     ImmutableArray<MemberSymbol> Symbols,
+    ImmutableArray<MemberSymbol> SingleEmpty,
     bool? MutablePublicly,
     bool PolyfillAttributes
 )
@@ -34,6 +35,14 @@ sealed partial record Scaffolder(
         Primes.Index(s_nameCounter.GetOrAdd(Named.GetFullyQualifiedName(), _ => s_nameCounter.Count + 1));
 
     string? _discriminator, _source;
+
+    public Scaffolder(
+        INamedTypeSymbol Named,
+        ImmutableArray<MemberSymbol> Symbols,
+        bool? MutablePublicly,
+        bool PolyfillAttributes
+    )
+        : this(Named, Symbols, FindSingleEmpty(Symbols), MutablePublicly, PolyfillAttributes) { }
 
     public Scaffolder(Raw raw)
         : this(raw.Named, raw.Fields, raw.MutablePublicly, raw.PolyfillAttributes) { }
@@ -628,17 +637,15 @@ sealed partial record Scaffolder(
     HashSet<MemberSymbol> Members { get; } = Named.GetMembers().Select(MemberSymbol.From).Filter().ToSet();
 
     [Pure]
-    ITypeSymbol? Common { get; } = Signature
-       .FindCommonBaseTypes(Symbols.Except(SingleEmpty(Symbols)).ToImmutableArray())
-       .FirstOrDefault();
+    ITypeSymbol? Common { get; } = Signature.FindCommonBaseTypes(Symbols.RemoveRange(SingleEmpty)).FirstOrDefault();
 
     [Pure]
     ImmutableArray<MemberSymbol> Reference { get; } =
-        Symbols.Omit(x => x.IsUnmanaged).Where(x => x.IsReference).Concat(SingleEmpty(Symbols)).ToImmutableArray();
+        Symbols.Omit(x => x.IsUnmanaged).Where(x => x.IsReference).Concat(SingleEmpty).ToImmutableArray();
 
     [Pure]
     ImmutableArray<MemberSymbol> Rest { get; } =
-        Symbols.Omit(x => x.IsUnmanaged).Omit(x => x.IsReference).Except(SingleEmpty(Symbols)).ToImmutableArray();
+        Symbols.Omit(x => x.IsUnmanaged).Omit(x => x.IsReference).Except(SingleEmpty).ToImmutableArray();
 
     [Pure]
     ImmutableArray<MemberSymbol> Unmanaged { get; } =
@@ -704,7 +711,7 @@ sealed partial record Scaffolder(
     }
 
     [Pure]
-    static ImmutableArray<MemberSymbol> SingleEmpty(ImmutableArray<MemberSymbol> symbols)
+    static ImmutableArray<MemberSymbol> FindSingleEmpty(ImmutableArray<MemberSymbol> symbols)
     {
         MemberSymbol single = default;
 
@@ -1036,7 +1043,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string PrefixCast(MemberSymbol x, string memberAccess = "") =>
-        x.IsEmpty ? SingleEmpty(Symbols).Any(x.ReferenceEquals) ? CSharp("default") : CSharp($"default({x.Type})") :
+        x.IsEmpty ? SingleEmpty.Any(x.ReferenceEquals) ? CSharp("default") : CSharp($"default({x.Type})") :
         Prefix(x) is not ReferenceField and var prefix ? $"{memberAccess}{prefix}{x.NullableSuppression}" :
         $"(({x.Type}){memberAccess}{ReferenceField}{x.NullableSuppression})";
 

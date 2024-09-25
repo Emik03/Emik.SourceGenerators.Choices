@@ -71,8 +71,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
         bool CanBeIncluded(ISymbol symbol) =>
             interfacesEqual || CanReturnTypeBeIncluded(symbol) && Parameters(symbol).All(CanParameterBeIncluded);
 
-        var interfaceDeclarations = interfaces.Select(x => $"{x}").ItemCanBeNull().ToImmutableArray();
-
+        var interfaceDeclarations = ImmutableArray.CreateRange(interfaces, string? (x) => $"{x}");
         return first.GetMembers().Where(CanBeIncluded).Select(x => (x, Signature.Kind(x), interfaceDeclarations));
     }
 
