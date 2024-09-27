@@ -424,7 +424,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override int GetHashCode()
-                        => unchecked(_discriminator * 727) ^
+                        => unchecked(_discriminator * 733) ^
                         (_discriminator switch
                         {
                             0 => _utf8.GetHashCode(),
@@ -488,6 +488,22 @@ namespace Emik
                             _ => onUtf16(_utf16),
                         };
 
+                    /// <inheritdoc cref="System.Span{T}.Clear()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public readonly void Clear()
+                    {
+                        switch (_discriminator)
+                        {
+                            default:
+                                _utf8.Clear();
+                                break;
+                            case 1:
+                                _utf16.Clear();
+                                break;
+                        }
+                    }
+
                     /// <inheritdoc cref="System.Span{T}.IsEmpty"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     public readonly bool IsEmpty
@@ -510,34 +526,6 @@ namespace Emik
                             0 => _utf8.Length,
                             _ => _utf16.Length,
                         };
-                    }
-
-                    /// <inheritdoc cref="System.Span{T}.Pointer"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public readonly unsafe void* Pointer
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => _discriminator switch
-                        {
-                            0 => _utf8.Pointer,
-                            _ => _utf16.Pointer,
-                        };
-                    }
-
-                    /// <inheritdoc cref="System.Span{T}.Clear()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly void Clear()
-                    {
-                        switch (_discriminator)
-                        {
-                            default:
-                                _utf8.Clear();
-                                break;
-                            case 1:
-                                _utf16.Clear();
-                                break;
-                        }
                     }
                 }
             }

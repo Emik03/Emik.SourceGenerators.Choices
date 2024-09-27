@@ -3,6 +3,7 @@ namespace Emik.SourceGenerators.Choices.Tests;
 
 using Task = System.Threading.Tasks.Task;
 
+[CollectionDefinition(nameof(Tester), DisableParallelization = true)]
 public class Tester
 {
     [Fact]
@@ -53,6 +54,8 @@ public class Tester
 
     static string CSharp([StringSyntax("C#")] string x) => // language=c#
         $$"""
+        using System;
+
         {{x}}
 
         namespace System.Diagnostics.CodeAnalysis

@@ -31,7 +31,7 @@ sealed partial record Scaffolder(
     static readonly ConcurrentDictionary<string, int> s_names = new(StringComparer.Ordinal);
 
     [ValueRange(Primes.Min, Primes.MaxInt16)]
-    readonly short _hash = Primes.Index(s_names.GetOrAdd(Named.GetFullyQualifiedName(), _ => s_names.Count + 1 << 7));
+    readonly short _hash = Primes.Index(s_names.GetOrAdd(Named.GetFullyQualifiedName(), _ => s_names.Count + (1 << 7)));
 
     string? _discriminator, _source;
 

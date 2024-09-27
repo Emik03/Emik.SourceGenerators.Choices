@@ -6,8 +6,6 @@ namespace Emik.SourceGenerators.Choices.Tests;
 #pragma warning disable 169
 public sealed class Verifier : CSharpSourceGeneratorTest<ExtendingGenerator, DefaultVerifier>
 {
-    public static Task GoAsync() => new Verifier().RunAsync();
-
     /// <summary>Gets the root of steam, if installed.</summary>
     static string? SteamRoot { get; } =
         Environment.GetEnvironmentVariable("STEAM_ROOT") ??
@@ -41,6 +39,11 @@ public sealed class Verifier : CSharpSourceGeneratorTest<ExtendingGenerator, Def
             "ktane_Data",
             "Managed"
         );
+
+        if (!Directory.Exists(directory))
+            throw new DirectoryNotFoundException(
+                "Steam and Keep Talking and Nobody Explodes must be installed to run these unit tests."
+            );
 
         return (await base.CreateProjectImplAsync(primaryProject, additionalProjects, cancellationToken))
            .AddMetadataReference(MetadataReference.CreateFromFile(Path.Join(directory, "KMFramework.dll")))
