@@ -105,7 +105,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     public string UnmanagedFieldDeclaration =>
         $"""
                  [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-                 internal {Type} {FieldName};
+                 internal {Unsafe}{Type} {FieldName};
          """;
 
     /// <summary>Gets the name of the field that corresponds to this <see cref="MemberSymbol"/>.</summary>
@@ -123,6 +123,10 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <summary>Gets the XML name that corresponds to this <see cref="MemberSymbol"/>.</summary>
     [Pure]
     public string XmlName => IsEmpty ? $"<c>{PropertyName}</c>" : $"<see cref=\"{PropertyName}\"/>";
+
+    /// <summary>Gets the unsafe modifier of the type that corresponds to this <see cref="MemberSymbol"/>.</summary>
+    [Pure]
+    public string Unsafe => Type.IsUnsafe() ? "unsafe " : "";
 
     /// <summary>
     /// Gets the first character of the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.

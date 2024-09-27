@@ -16,11 +16,11 @@ sealed partial record Scaffolder(
 
     [StringSyntax("C#")]
     const string
-        AggressiveInlining = "[global::System.Runtime.CompilerServices.MethodImpl(256)]",
+        AggressiveInlining = "[global::System.Runtime.CompilerServices.MethodImplAttribute(256)]",
         DiscriminatorField = "_discriminator",
         DiscriminatorProperty = "Discriminator",
         HideFromEditor =
-            "[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]",
+            "[global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]",
         Pure = "[global::System.Diagnostics.Contracts.PureAttribute]",
         ReadOnly = "readonly ",
         ReferenceField = "_reference",
@@ -28,11 +28,10 @@ sealed partial record Scaffolder(
         UnmanagedField = "_unmanaged",
         UsedImplicitly = nameof(UsedImplicitly);
 
-    static readonly ConcurrentDictionary<string, int> s_nameCounter = new(StringComparer.Ordinal);
+    static readonly ConcurrentDictionary<string, int> s_names = new(StringComparer.Ordinal);
 
     [ValueRange(Primes.Min, Primes.MaxInt16)]
-    readonly short _hash =
-        Primes.Index(s_nameCounter.GetOrAdd(Named.GetFullyQualifiedName(), _ => s_nameCounter.Count + 1));
+    readonly short _hash = Primes.Index(s_names.GetOrAdd(Named.GetFullyQualifiedName(), _ => s_names.Count + 1 << 7));
 
     string? _discriminator, _source;
 
@@ -84,6 +83,9 @@ sealed partial record Scaffolder(
 
     [Pure]
     string ReadOnlyIfMutableStruct { get; } = Named.IsValueType && MutablePublicly is not null ? ReadOnly : "";
+
+    [Pure]
+    string SymbolsUnsafe { get; } = Symbols.FirstOrDefault(x => !string.IsNullOrEmpty(x.Unsafe)).Unsafe;
 
     [Pure]
     string VirtualIfNonSealedRecordClass { get; } =
@@ -224,7 +226,7 @@ sealed partial record Scaffolder(
                 $"""
                          /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
                          {HideFromEditor}
-                         bool {UsedImplicitly} => {Symbols.Select(x => $"{x.ParameterName} is var _").Conjoin(" && ")};
+                         {SymbolsUnsafe}bool {UsedImplicitly} => {Symbols.Select(x => $"{x.ParameterName} is var _").Conjoin(" && ")};
 
 
                  """
@@ -303,7 +305,7 @@ sealed partial record Scaffolder(
                       {{Annotation}}
                       {{Pure}}
                       {{AggressiveInlining}}
-                      public static bool operator ==({{NullableName}} left, {{NullableName}} right)
+                      public static {{SymbolsUnsafe}}bool operator ==({{NullableName}} left, {{NullableName}} right)
                           =>{{(Named.IsReferenceType ? " left is null ? right is null : right is not null &&" : "")}} (left.{{
                               Discriminator}} == right.{{Discriminator}}) && (left.{{Discriminator}}
                           switch
@@ -410,7 +412,7 @@ sealed partial record Scaffolder(
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
-                  public static bool operator >({{NullableName}} left, {{NullableName}} right)
+                  public static {{SymbolsUnsafe}}bool operator >({{NullableName}} left, {{NullableName}} right)
                       =>{{(Named.IsReferenceType ? " left is null ? right is null : right is not null &&" : "")}} (left.{{
                           Discriminator}} == right.{{Discriminator}}) && (left.{{Discriminator}}
                       switch
@@ -490,7 +492,7 @@ sealed partial record Scaffolder(
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
-                  public {{ReadOnlyIfStruct}}override int GetHashCode()
+                  public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}override int GetHashCode()
                       => unchecked({{Discriminator}} * {{_hash}}) ^
                       ({{Discriminator}} switch
                       {
@@ -506,7 +508,7 @@ sealed partial record Scaffolder(
                   {{Annotation}}
                   {{Pure}}
                   {{AggressiveInlining}}
-                  public {{ReadOnlyIfStruct}}override string ToString()
+                  public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}override string ToString()
                       => {{Discriminator}} switch
                       {
                           {{Symbols.Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {ToStringCase(x)},").Conjoin("\n            ")}}
@@ -530,7 +532,7 @@ sealed partial record Scaffolder(
                   /// <returns>Itself.</returns>
                   {{Annotation}}
                   {{AggressiveInlining}}
-                  public {{ReadOnlyIfStruct}}{{NullableName}} Map(
+                  public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}{{NullableName}} Map(
                       {{Symbols
                           .Select(x => $"{x.DelegateTypeName(false)}? on{x.PropertyName} = null")
                           .Conjoin(",\n        ")}}
@@ -558,7 +560,7 @@ sealed partial record Scaffolder(
                   /// </returns>
                   {{Annotation}}
                   {{AggressiveInlining}}
-                  public {{ReadOnlyIfStruct}}{{ResultGeneric}} Map<{{ResultGeneric}}>(
+                  public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}{{ResultGeneric}} Map<{{ResultGeneric}}>(
                       {{Symbols.Select(x => $"{x.DelegateTypeName(true)} on{x.PropertyName}").Conjoin(",\n        ")}}
                   )
                       => {{Discriminator}}
@@ -567,9 +569,7 @@ sealed partial record Scaffolder(
                           {{Symbols
                               .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => on{x.PropertyName}({(x.IsEmpty ? "" : PrefixCast(x))}),")
                               .Conjoin("\n            ")}}
-                      };
-
-              {{DeclareUnderlyingValue}}
+                      };{{DeclareUnderlyingValue}}
               """
         );
 
@@ -578,6 +578,8 @@ sealed partial record Scaffolder(
             ? ""
             : CSharp(
                 $"""
+
+
                      /// <summary>
                      /// Gets the underlying value.
                      /// </summary>
@@ -587,7 +589,7 @@ sealed partial record Scaffolder(
                      {Annotation}
                      {Pure}
                      {AggressiveInlining}
-                     public {ReadOnlyIfStruct}{Common} GetUnderlyingValue()
+                     public {ReadOnlyIfStruct}{SymbolsUnsafe}{Common} GetUnderlyingValue()
                          => {(Symbols.Length == Reference.Length
                              ? $"{(Common.SpecialType is SpecialType.System_Object
                                  ? ""
@@ -770,7 +772,7 @@ sealed partial record Scaffolder(
                       {{Annotation}}
                       {{Pure}}
                       {{AggressiveInlining}}
-                      public {{Named.Name}}({{parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()}})
+                      public {{x.Unsafe}}{{Named.Name}}({{parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()}})
                           : this({{(isValue ? nameof(ValueTuple) : nameof(Tuple))}}.{{nameof(Tuple.Create)}}({{
                               parameters.Select(x => x.ParameterName).Conjoin()}})) { }
 
@@ -816,11 +818,11 @@ sealed partial record Scaffolder(
                   /// Gets the value determining if the {{XmlName}} is the variant {{x.XmlName}} of type {{XmlTypeName(x.Type)}}.
                   /// </summary>
                   {{Annotation}}
-                  public {{ReadOnlyIfStruct}}bool Is{{x.PropertyName}}
+                  public {{ReadOnlyIfStruct}}{{x.Unsafe}}bool Is{{x.PropertyName}}
                   {
                       {{Pure}}{{(x.IsEmpty
                           ? Opposite(x)
-                          : CSharp($"\n        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, \"{x.PropertyName}\")]{Opposite(x)}"))}}
+                          : CSharp($"\n        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, \"{x.PropertyName}\")]{Opposite(x)}"))}}
                       {{AggressiveInlining}}
                       get => {{Discriminator}} is {{i}};
                   }
@@ -842,10 +844,11 @@ sealed partial record Scaffolder(
                           (conflict ? "\n    /// <param name=\"x\">The discriminator.</param>" : "")}}
                       {{Annotation}}
                       {{AggressiveInlining}}
-                      {{(conflict ? "private" : "public")}} {{Named.Name}}({{x.Type}} {{x.ParameterName}}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")}}){{
-                          (UsesPrimaryConstructor ? $"\n        : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
-                          }{x.ParameterName}{(Symbols.Length - i - 1).For(i => $", default({Symbols[i].Type})").Conjoin("")
-                          })" : "")}}
+                      {{(conflict ? "private" : "public")}} {{x.Unsafe}}{{Named.Name}}({{x.Type}} {{x.ParameterName
+                      }}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")
+                      }}){{(UsesPrimaryConstructor ? $"\n        : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
+                      }{x.ParameterName}{(Symbols.Length - i - 1).For(i => $", default({Symbols[i].Type})").Conjoin("")
+                      })" : "")}}
                       {
                           {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : CSharp($"\n        {Prefix(x)} = {x.ParameterName};"))}}
                       }
@@ -864,7 +867,7 @@ sealed partial record Scaffolder(
                      /// </summary>
                      /// <param name="{x.ParameterName}">The referenced value.</param>
                      {Annotation}
-                     public delegate void {x.PropertyName}Handler({x.Type} {x.ParameterName});
+                     public {x.Unsafe}delegate void {x.PropertyName}Handler({x.Type} {x.ParameterName});
 
                      /// <summary>
                      /// Explicit mapper delegate for {Describe(x)} due to it being a by-ref like type.
@@ -873,7 +876,7 @@ sealed partial record Scaffolder(
                      /// <param name="{x.ParameterName}">The referenced value.</param>
                      /// <returns>The result of the mapping.</returns>
                      {Annotation}
-                     public delegate {ResultGeneric} {x.PropertyName}Handler<out {ResultGeneric}>({x.Type} {x.ParameterName});
+                     public {x.Unsafe}delegate {ResultGeneric} {x.PropertyName}Handler<out {ResultGeneric}>({x.Type} {x.ParameterName});
 
 
                  """
@@ -894,7 +897,7 @@ sealed partial record Scaffolder(
                      {Annotation}
                      {Pure}
                      {AggressiveInlining}
-                     public static explicit operator {x.NullableAnnotated}({Name} x)
+                     public static {x.Unsafe}explicit operator {x.NullableAnnotated}({Name} x)
                          => x.{x.PropertyName};
 
 
@@ -916,7 +919,7 @@ sealed partial record Scaffolder(
                  {Annotation}
                  {Pure}
                  {AggressiveInlining}
-                 public static {Name} Of{x.PropertyName}({x.Type} {x.ParameterName}{(x.IsEmpty ? " = default" : "")})
+                 public static {x.Unsafe}{Name} Of{x.PropertyName}({x.Type} {x.ParameterName}{(x.IsEmpty ? " = default" : "")})
                      => new {Name}({x.ParameterName}{discriminator});
 
              {DeclareAlternativeFactory(x, discriminator)}
@@ -930,7 +933,7 @@ sealed partial record Scaffolder(
             ? ""
             : CSharp(
                 $"""
-                     private {PrivatelyReadOnly}{x.NullableAnnotated} {x.FieldName};
+                     private {x.Unsafe}{PrivatelyReadOnly}{x.NullableAnnotated} {x.FieldName};
 
 
                  """
@@ -950,7 +953,7 @@ sealed partial record Scaffolder(
                      {Annotation}
                      {Pure}
                      {AggressiveInlining}
-                     public static implicit operator {Name}({x.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)} {x.ParameterName})
+                     public static {x.Unsafe}implicit operator {Name}({x.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)} {x.ParameterName})
                          => new {Name}({x.ParameterName});
 
                  {DeclareExplicitOperator(x)}
@@ -987,7 +990,7 @@ sealed partial record Scaffolder(
                   /// Gets{{(MutablePublicly is true ? " or sets" : "")}} the {{XmlTypeName(x.Type)}} variant.
                   /// </summary>
                   {{Annotation}}
-                  public {{ReadOnlyIfImmutableStruct}}{{x.NullableAnnotated}} {{x.PropertyName}}
+                  public {{ReadOnlyIfImmutableStruct}}{{x.Unsafe}}{{x.NullableAnnotated}} {{x.PropertyName}}
                   {
                       {{Pure}}
                       {{AggressiveInlining}}
@@ -1036,7 +1039,7 @@ sealed partial record Scaffolder(
             ? CSharp(
                 $"""
 
-                         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(false, "{other.PropertyName}")]
+                         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "{other.PropertyName}")]
                  """
             )
             : "";

@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emik.SourceGenerators.Choices", "Emik.SourceGenerators.Choices.csproj", "{7D239D49-3A7A-4CD9-87D7-0A20DFAD0EF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emik.SourceGenerators.Choices.Generated.Tests", "Emik.SourceGenerators.Choices.Generated.Tests\Emik.SourceGenerators.Choices.Generated.Tests.csproj", "{A4ABAE60-1C14-4865-B421-7E51659B9BA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emik.SourceGenerators.Choices.Tests", "Emik.SourceGenerators.Choices.Tests\Emik.SourceGenerators.Choices.Tests.csproj", "{A4ABAE60-1C14-4865-B421-7E51659B9BA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,4 +19,3 @@ Global
 		{A4ABAE60-1C14-4865-B421-7E51659B9BA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
-

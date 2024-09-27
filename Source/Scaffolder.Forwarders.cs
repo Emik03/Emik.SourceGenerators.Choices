@@ -148,8 +148,19 @@ sealed partial record Scaffolder
                 IPropertySymbol { IsReadOnly: true })
             builder.Append(CSharp("readonly "));
 
-        if (symbol is IEventSymbol)
-            builder.Append(CSharp("event "));
+        switch (symbol)
+        {
+            case IFieldSymbol { Type: var fieldType } when fieldType.IsUnsafe():
+            case IMethodSymbol { ReturnType: var returnType, Parameters: var methodParameters } when
+                returnType.IsUnsafe() || methodParameters.Any(x => x.Type.IsUnsafe()):
+            case IPropertySymbol { Type: var propertyType, Parameters: var propertyParameters } when
+                propertyType.IsUnsafe() || propertyParameters.Any(x => x.Type.IsUnsafe()):
+                builder.Append(CSharp("unsafe "));
+                break;
+            case IEventSymbol:
+                builder.Append(CSharp("event "));
+                break;
+        }
 
         builder.Append(kind.KeywordInReturn());
         builder.Append(symbol.ToUnderlying());
