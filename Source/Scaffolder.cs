@@ -591,18 +591,15 @@ sealed partial record Scaffolder(
                      {AggressiveInlining}
                      public {ReadOnlyIfStruct}{SymbolsUnsafe}{Common} GetUnderlyingValue()
                          => {(Symbols.Length == Reference.Length
-                             ? $"{(Common.SpecialType is SpecialType.System_Object
-                                 ? ""
-                                 : $"({Common})")}{ReferenceField}!"
+                             ? $"{(Common.SpecialType is SpecialType.System_Object ? "" : $"({Common})")}{ReferenceField}!"
                              : CSharp(
                                  $$"""
-                                   {{Discriminator}}
-                                   switch
-                                   {
-                                       {{Symbols
-                                          .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {PrefixCast(x)},")
-                                          .Conjoin("\n            ")}}
-                                   }
+                                   {{Discriminator}} switch
+                                           {
+                                   {{Symbols
+                                       .Select((x, i) => $"            {(i == Symbols.Length - 1 ? "_" : i)} => {PrefixCast(x)},")
+                                       .Conjoin("\n")}}
+                                           }
                                    """
                              ))};
                  """
