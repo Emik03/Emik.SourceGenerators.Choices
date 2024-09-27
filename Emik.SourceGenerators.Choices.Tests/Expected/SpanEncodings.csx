@@ -424,7 +424,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override int GetHashCode()
-                        => unchecked(_discriminator * 733) ^
+                        => unchecked(_discriminator * 13687) ^
                         (_discriminator switch
                         {
                             0 => _utf8.GetHashCode(),

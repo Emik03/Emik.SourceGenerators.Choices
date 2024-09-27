@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: MPL-2.0
-using Task = System.Threading.Tasks.Task;
-
 namespace Emik.SourceGenerators.Choices.Tests;
 
-#pragma warning disable 169
-public sealed class Verifier : CSharpSourceGeneratorTest<ExtendingGenerator, DefaultVerifier>
+public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, DefaultVerifier>
 {
     /// <summary>Gets the root of steam, if installed.</summary>
     static string? SteamRoot { get; } =
@@ -15,6 +12,10 @@ public sealed class Verifier : CSharpSourceGeneratorTest<ExtendingGenerator, Def
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) is var home &&
             OperatingSystem.IsMacOS() ? Path.Join(home, "Library/Application Support/Steam") :
             OperatingSystem.IsLinux() ? Path.Join(home, ".steam/steam") : null);
+
+    /// <summary>Gets the directory for additional assemblies.</summary>
+    static string AssemblyDirectory { get; } =
+        Path.Join(SteamRoot, "steamapps", "common", "Keep Talking and Nobody Explodes", "ktane_Data", "Managed");
 
     /// <inheritdoc />
     protected override IEnumerable<Type> GetSourceGenerators() =>
@@ -28,25 +29,12 @@ public sealed class Verifier : CSharpSourceGeneratorTest<ExtendingGenerator, Def
     protected override async Task<Project> CreateProjectImplAsync(
         EvaluatedProjectState primaryProject,
         ImmutableArray<EvaluatedProjectState> additionalProjects,
-        CancellationToken cancellationToken
-    )
-    {
-        var directory = Path.Join(
-            SteamRoot,
-            "steamapps",
-            "common",
-            "Keep Talking and Nobody Explodes",
-            "ktane_Data",
-            "Managed"
+        CancellationToken token
+    ) =>
+        (await base.CreateProjectImplAsync(primaryProject, additionalProjects, token)).AddMetadataReferences(
+            ((string[])["KMFramework.dll", "UnityEngine.dll"])
+           .Select(x => Path.Join(AssemblyDirectory, x))
+           .Where(File.Exists)
+           .Select(x => MetadataReference.CreateFromFile(x))
         );
-
-        if (!Directory.Exists(directory))
-            throw new DirectoryNotFoundException(
-                "Steam and Keep Talking and Nobody Explodes must be installed to run these unit tests."
-            );
-
-        return (await base.CreateProjectImplAsync(primaryProject, additionalProjects, cancellationToken))
-           .AddMetadataReference(MetadataReference.CreateFromFile(Path.Join(directory, "KMFramework.dll")))
-           .AddMetadataReference(MetadataReference.CreateFromFile(Path.Join(directory, "UnityEngine.dll")));
-    }
 }

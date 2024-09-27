@@ -28,10 +28,10 @@ sealed partial record Scaffolder(
         UnmanagedField = "_unmanaged",
         UsedImplicitly = nameof(UsedImplicitly);
 
-    static readonly ConcurrentDictionary<string, int> s_names = new(StringComparer.Ordinal);
+    static readonly ConcurrentDictionary<string, short> s_names = new(StringComparer.Ordinal);
 
     [ValueRange(Primes.Min, Primes.MaxInt16)]
-    readonly short _hash = Primes.Index(s_names.GetOrAdd(Named.GetFullyQualifiedName(), _ => s_names.Count + (1 << 7)));
+    readonly short _hash = s_names.GetOrAdd(Named.GetFullyQualifiedName(), x => Primes.Index(x.GetDjb2HashCode()));
 
     string? _discriminator, _source;
 
