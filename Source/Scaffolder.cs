@@ -67,9 +67,7 @@ sealed partial record Scaffolder(
     [Pure]
     string AutoIfStruct =>
         Named.IsValueType && Named.GetAttributes().All(x => x.AttributeClass?.Name is not nameof(StructLayoutAttribute))
-            ? CSharp(
-                "[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Auto)]\n"
-            )
+            ? CSharp($"[global::{typeof(StructLayoutAttribute)}(global::{typeof(LayoutKind)}.Auto)]\n")
             : "";
 
     [Pure]
@@ -240,7 +238,7 @@ sealed partial record Scaffolder(
             : CSharp(
                 $"""
                   :
-                     global::System.IComparable,
+                     global::{typeof(IComparable)},
                      global::System.IComparable<object>,
                      global::System.IComparable<{Name}>,
                  #if NET7_0_OR_GREATER
@@ -343,7 +341,7 @@ sealed partial record Scaffolder(
                       /// Compact representation of all unmanaged memory within the union {{XmlName}}.
                       /// </summary>
                       {{Annotation}}
-                      [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
+                      [global::{{typeof(StructLayoutAttribute)}}(global::{{typeof(LayoutKind)}}.Explicit)]
                       partial struct Unmanaged
                       {
                   {{Unmanaged.Select(x => x.UnmanagedFieldDeclaration).Conjoin("\n\n")}}
@@ -822,7 +820,7 @@ sealed partial record Scaffolder(
                   {
                       {{Pure}}{{(x.IsEmpty
                           ? Opposite(x)
-                          : CSharp($"\n        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, \"{x.PropertyName}\")]{Opposite(x)}"))}}
+                          : CSharp($"\n        [global::{typeof(MemberNotNullWhenAttribute)}(true, \"{x.PropertyName}\")]{Opposite(x)}"))}}
                       {{AggressiveInlining}}
                       get => {{Discriminator}} is {{i}};
                   }
@@ -1014,7 +1012,7 @@ sealed partial record Scaffolder(
                   {{HideFromEditor}}
                   {{(isChoiceClass ? "private" : "internal")}} {{(y.Index is 0 ? "sealed" : "static")
                   }} class {{y.Item.Name}}{{(isVariantClass ? $"<T{y.Item.Name}Discard>" : "")
-                  }}{{(y.Index is 0 ? " : global::System.Attribute" : "")
+                  }}{{(y.Index is 0 ? $" : global::{typeof(Attribute)}" : "")
                   }}{{(y.Item.IsRefLikeType ? $"\n        where T{y.Item.Name}Discard : allows ref struct" : "")}}
                   {{{(y.Index is 0 ? "" : $"\n{x.SplitLines().Select(x => $"    {x}").Conjoin("\n")}")}}
                   }
@@ -1042,7 +1040,7 @@ sealed partial record Scaffolder(
             ? CSharp(
                 $"""
 
-                         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "{other.PropertyName}")]
+                         [global::{typeof(MemberNotNullWhenAttribute)}(false, "{other.PropertyName}")]
                  """
             )
             : "";

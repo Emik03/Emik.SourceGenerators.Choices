@@ -103,10 +103,11 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public string NullableSuppression => Type.IsValueType ? "" : "!";
 
+    /// <summary>Gets the field declaration with an explicit offset for the internal unmanaged struct.</summary>
     [Pure]
     public string UnmanagedFieldDeclaration =>
         $"""
-                 [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
+                 [global::{typeof(FieldOffsetAttribute)}(0)]
                  internal {Unsafe}{Type} {FieldName};
          """;
 
