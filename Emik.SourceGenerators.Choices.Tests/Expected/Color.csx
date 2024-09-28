@@ -294,12 +294,13 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.Color? left, Emik.SourceGenerators.Choices.Tests.Color? right)
-                        => left is null ? right is null : right is not null && (left.Discriminator == right.Discriminator) && (left.Discriminator
-                        switch
-                        {
-                            0 => false,
-                            _ => false,
-                        });
+                        => left is null ? right is null : right is not null &&
+                            left.Discriminator == right.Discriminator &&
+                            left.Discriminator switch
+                            {
+                                0 => false,
+                                _ => false,
+                            };
 
                     /// <summary>
                     /// Determines whether the left-hand side is unequal to the right.
@@ -329,12 +330,15 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.Color? left, Emik.SourceGenerators.Choices.Tests.Color? right)
-                        => left is null ? right is null : right is not null && (left.Discriminator == right.Discriminator) && (left.Discriminator
-                        switch
-                        {
-                            0 => false,
-                            _ => false,
-                        });
+                        => left is not null &&
+                            (right is null ||
+                            left.Discriminator > right.Discriminator ||
+                            left.Discriminator == right.Discriminator &&
+                            left.Discriminator switch
+                            {
+                                0 => false,
+                                _ => false,
+                            });
 
                     /// <summary>
                     /// Determines whether the left-hand side is greater than or equal to the right.
@@ -471,8 +475,7 @@ namespace Emik
                         global::System.Func<Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?, TMappingResult> onRgba,
                         global::System.Func<Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?, TMappingResult> onGradient
                     )
-                        => Discriminator
-                        switch
+                        => Discriminator switch
                         {
                             0 => onRgba(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!)),
                             _ => onGradient(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!)),

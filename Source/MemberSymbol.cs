@@ -67,6 +67,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <summary>Gets a value indicating whether the member has an operator comparison method.</summary>
     [Pure]
     public bool IsOperatorComparable =>
+        Type is IPointerTypeSymbol ||
         Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         Type.IsUnmanagedPrimitive() ||
         Type.GetMembers().Any(x => IsOperator(x, "op_GreaterThan"));
@@ -74,6 +75,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <summary>Gets a value indicating whether the member has an operator equality method.</summary>
     [Pure]
     public bool IsOperatorEquatable =>
+        Type is IPointerTypeSymbol ||
         Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         Type.IsUnmanagedPrimitive() ||
         Type.GetMembers().Any(x => IsOperator(x, "op_Equality"));

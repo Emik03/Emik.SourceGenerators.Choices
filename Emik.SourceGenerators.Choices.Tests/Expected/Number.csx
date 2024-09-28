@@ -371,13 +371,14 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.Number? left, Emik.SourceGenerators.Choices.Tests.Number? right)
-                        => left is null ? right is null : right is not null && (left._discriminator == right._discriminator) && (left._discriminator
-                        switch
-                        {
-                            0 => left._unmanaged._integer == right._unmanaged._integer,
-                            1 => left._unmanaged._floating == right._unmanaged._floating,
-                            _ => true,
-                        });
+                        => left is null ? right is null : right is not null &&
+                            left._discriminator == right._discriminator &&
+                            left._discriminator switch
+                            {
+                                0 => left._unmanaged._integer == right._unmanaged._integer,
+                                1 => left._unmanaged._floating == right._unmanaged._floating,
+                                _ => true,
+                            };
 
                     /// <summary>
                     /// Determines whether the left-hand side is unequal to the right.
@@ -407,13 +408,16 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.Number? left, Emik.SourceGenerators.Choices.Tests.Number? right)
-                        => left is null ? right is null : right is not null && (left._discriminator == right._discriminator) && (left._discriminator
-                        switch
-                        {
-                            0 => left._unmanaged._integer > right._unmanaged._integer,
-                            1 => left._unmanaged._floating > right._unmanaged._floating,
-                            _ => true,
-                        });
+                        => left is not null &&
+                            (right is null ||
+                            left._discriminator > right._discriminator ||
+                            left._discriminator == right._discriminator &&
+                            left._discriminator switch
+                            {
+                                0 => left._unmanaged._integer > right._unmanaged._integer,
+                                1 => left._unmanaged._floating > right._unmanaged._floating,
+                                _ => true,
+                            });
 
                     /// <summary>
                     /// Determines whether the left-hand side is greater than or equal to the right.
@@ -559,8 +563,7 @@ namespace Emik
                         global::System.Func<float, TMappingResult> onFloating,
                         global::System.Func<TMappingResult> onUnknown
                     )
-                        => _discriminator
-                        switch
+                        => _discriminator switch
                         {
                             0 => onInteger(_unmanaged._integer),
                             1 => onFloating(_unmanaged._floating),
@@ -577,8 +580,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.IComparable GetUnderlyingValue()
-                        => _discriminator
-                        switch
+                        => _discriminator switch
                         {
                             0 => _unmanaged._integer,
                             1 => _unmanaged._floating,

@@ -38,3 +38,29 @@ public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, Defau
            .Select(x => MetadataReference.CreateFromFile(x))
         );
 }
+
+class A
+{
+    readonly byte _discriminator;
+
+    /// <summary>
+    /// Determines whether the left-hand side is greater than the right.
+    /// </summary>
+    /// <param name="left">The left-hand side.</param>
+    /// <param name="right">The right-hand side.</param>
+    /// <returns>
+    /// The value determining whether the parameter <paramref name="left"/>
+    /// is greater than the parameter <paramref name="right"/>.
+    /// </returns>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+    [global::System.Diagnostics.Contracts.PureAttribute]
+    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+    public static bool operator >(A left, A right)
+        => left._discriminator > right._discriminator ||
+            left._discriminator == right._discriminator &&
+            left._discriminator switch
+            {
+                0 => false,
+                _ => false,
+            };
+}

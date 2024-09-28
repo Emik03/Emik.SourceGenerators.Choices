@@ -328,12 +328,12 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot left, Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot right)
-                        => (left._discriminator == right._discriminator) && (left._discriminator
-                        switch
-                        {
-                            0 => false,
-                            _ => false,
-                        });
+                        => left._discriminator == right._discriminator &&
+                            left._discriminator switch
+                            {
+                                0 => false,
+                                _ => false,
+                            };
 
                     /// <summary>
                     /// Determines whether the left-hand side is unequal to the right.
@@ -363,12 +363,13 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot left, Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot right)
-                        => (left._discriminator == right._discriminator) && (left._discriminator
-                        switch
-                        {
-                            0 => false,
-                            _ => false,
-                        });
+                        => left._discriminator > right._discriminator ||
+                            left._discriminator == right._discriminator &&
+                            left._discriminator switch
+                            {
+                                0 => false,
+                                _ => false,
+                            };
 
                     /// <summary>
                     /// Determines whether the left-hand side is greater than or equal to the right.
@@ -505,8 +506,7 @@ namespace Emik
                         Utf8Handler<TMappingResult> onUtf8,
                         Utf16Handler<TMappingResult> onUtf16
                     )
-                        => _discriminator
-                        switch
+                        => _discriminator switch
                         {
                             0 => onUtf8(_utf8),
                             _ => onUtf16(_utf16),

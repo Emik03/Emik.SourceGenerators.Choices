@@ -318,8 +318,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe bool operator ==(Emik.SourceGenerators.Choices.Tests.Pointers left, Emik.SourceGenerators.Choices.Tests.Pointers right)
-                        => (left._discriminator == right._discriminator) && (left._discriminator
-                        switch
+                        => (left._discriminator == right._discriminator) && (left._discriminator switch
                         {
                             0 => false,
                             1 => false,
@@ -354,13 +353,14 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe bool operator >(Emik.SourceGenerators.Choices.Tests.Pointers left, Emik.SourceGenerators.Choices.Tests.Pointers right)
-                        => (left._discriminator == right._discriminator) && (left._discriminator
-                        switch
-                        {
-                            0 => false,
-                            1 => false,
-                            _ => left._unmanaged._native > right._unmanaged._native,
-                        });
+                        => left._discriminator > right._discriminator ||
+                            left._discriminator == right._discriminator &&
+                            left._discriminator switch
+                            {
+                                0 => left._unmanaged._bytes > right._unmanaged._bytes,
+                                1 => left._unmanaged._chars > right._unmanaged._chars,
+                                _ => left._unmanaged._native > right._unmanaged._native,
+                            };
 
                     /// <summary>
                     /// Determines whether the left-hand side is greater than or equal to the right.
@@ -506,8 +506,7 @@ namespace Emik
                         global::System.Func<char*, TMappingResult> onChars,
                         global::System.Func<nint, TMappingResult> onNative
                     )
-                        => _discriminator
-                        switch
+                        => _discriminator switch
                         {
                             0 => onBytes(_unmanaged._bytes),
                             1 => onChars(_unmanaged._chars),

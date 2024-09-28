@@ -319,14 +319,15 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.ConditionDescription? left, Emik.SourceGenerators.Choices.Tests.ConditionDescription? right)
-                        => left is null ? right is null : right is not null && (left._discriminator == right._discriminator) && (left._discriminator
-                        switch
-                        {
-                            0 => left._and.Equals(right._and),
-                            1 => left._and.Equals(right._and),
-                            2 => left._included.Equals(right._included),
-                            _ => left._included.Equals(right._included),
-                        });
+                        => left is null ? right is null : right is not null &&
+                            left._discriminator == right._discriminator &&
+                            left._discriminator switch
+                            {
+                                0 => left._and.Equals(right._and),
+                                1 => left._and.Equals(right._and),
+                                2 => left._included.Equals(right._included),
+                                _ => left._included.Equals(right._included),
+                            };
 
                     /// <summary>
                     /// Determines whether the left-hand side is unequal to the right.
@@ -356,14 +357,17 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.ConditionDescription? left, Emik.SourceGenerators.Choices.Tests.ConditionDescription? right)
-                        => left is null ? right is null : right is not null && (left._discriminator == right._discriminator) && (left._discriminator
-                        switch
-                        {
-                            0 => false,
-                            1 => false,
-                            2 => false,
-                            _ => false,
-                        });
+                        => left is not null &&
+                            (right is null ||
+                            left._discriminator > right._discriminator ||
+                            left._discriminator == right._discriminator &&
+                            left._discriminator switch
+                            {
+                                0 => false,
+                                1 => false,
+                                2 => false,
+                                _ => false,
+                            });
 
                     /// <summary>
                     /// Determines whether the left-hand side is greater than or equal to the right.
@@ -518,8 +522,7 @@ namespace Emik
                         global::System.Func<Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition, TMappingResult> onIncluded,
                         global::System.Func<Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition, TMappingResult> onExcluded
                     )
-                        => _discriminator
-                        switch
+                        => _discriminator switch
                         {
                             0 => onAnd(_and),
                             1 => onOr(_and),

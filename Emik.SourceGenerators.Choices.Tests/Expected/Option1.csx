@@ -247,12 +247,12 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.Option<T> left, Emik.SourceGenerators.Choices.Tests.Option<T> right)
-                        => (left.Discriminator == right.Discriminator) && (left.Discriminator
-                        switch
-                        {
-                            0 => false,
-                            _ => true,
-                        });
+                        => left.Discriminator == right.Discriminator &&
+                            left.Discriminator switch
+                            {
+                                0 => false,
+                                _ => true,
+                            };
 
                     /// <summary>
                     /// Determines whether the left-hand side is unequal to the right.
@@ -282,12 +282,14 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.Option<T> left, Emik.SourceGenerators.Choices.Tests.Option<T> right)
-                        => (left.Discriminator == right.Discriminator) && (left.Discriminator
-                        switch
-                        {
-                            0 => false,
-                            _ => true,
-                        });
+                        => left.Discriminator > right.Discriminator ||
+                            left.Discriminator == right.Discriminator &&
+                            left.Discriminator switch
+                            {
+                                0 => left._unmanaged._integer > right._unmanaged._integer,
+                                1 => left._unmanaged._floating > right._unmanaged._floating,
+                                _ => true,
+                            };
 
                     /// <summary>
                     /// Determines whether the left-hand side is greater than or equal to the right.

@@ -306,14 +306,14 @@ sealed partial record Scaffolder(
                       {{Pure}}
                       {{AggressiveInlining}}
                       public static {{SymbolsUnsafe}}bool operator ==({{NullableName}} left, {{NullableName}} right)
-                          =>{{(Named.IsReferenceType ? " left is null ? right is null : right is not null &&" : "")}} (left.{{
-                              Discriminator}} == right.{{Discriminator}}) && (left.{{Discriminator}}
-                          switch
-                          {
-                              {{Symbols
-                                 .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {Equality(x)},")
-                                 .Conjoin("\n            ")}}
-                          });
+                          => {{(Named.IsReferenceType ? "left is null ? right is null : right is not null &&\n            " : "")
+                          }}left.{{Discriminator}} == right.{{Discriminator}} &&
+                              left.{{Discriminator}} switch
+                              {
+                                  {{Symbols
+                                     .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {Equality(x)},")
+                                     .Conjoin("\n                ")}}
+                              };
 
                       /// <summary>
                       /// Determines whether the left-hand side is unequal to the right.
@@ -413,14 +413,15 @@ sealed partial record Scaffolder(
                   {{Pure}}
                   {{AggressiveInlining}}
                   public static {{SymbolsUnsafe}}bool operator >({{NullableName}} left, {{NullableName}} right)
-                      =>{{(Named.IsReferenceType ? " left is null ? right is null : right is not null &&" : "")}} (left.{{
-                          Discriminator}} == right.{{Discriminator}}) && (left.{{Discriminator}}
-                      switch
-                      {
-                          {{Symbols
-                             .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {Comparison(x)},")
-                             .Conjoin("\n            ")}}
-                      });
+                      => {{(Named.IsReferenceType ? "left is not null &&\n        (right is null ||\n            " : "")
+                  }}left.{{Discriminator}} > right.{{Discriminator}} ||
+                          left.{{Discriminator}} == right.{{Discriminator}} &&
+                          left.{{Discriminator}} switch
+                          {
+                              {{Symbols
+                                 .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {Comparison(x)},")
+                                 .Conjoin("\n            ")}}
+                          }{{(Named.IsReferenceType ? ")" : "")}};
 
                   /// <summary>
                   /// Determines whether the left-hand side is greater than or equal to the right.
@@ -563,8 +564,7 @@ sealed partial record Scaffolder(
                   public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}{{ResultGeneric}} Map<{{ResultGeneric}}>(
                       {{Symbols.Select(x => $"{x.DelegateTypeName(true)} on{x.PropertyName}").Conjoin(",\n        ")}}
                   )
-                      => {{Discriminator}}
-                      switch
+                      => {{Discriminator}} switch
                       {
                           {{Symbols
                               .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => on{x.PropertyName}({(x.IsEmpty ? "" : PrefixCast(x))}),")
@@ -747,7 +747,11 @@ sealed partial record Scaffolder(
         x.IsEmpty ? CSharp("true") :
         x.IsOperatorComparable ? CSharp($"{PrefixCast(x, "left.")} > {PrefixCast(x, "right.")}") :
         x.IsInterfaceComparable ? CSharp($"{PrefixCast(x, "left.")}.CompareTo({PrefixCast(x, "right.")}) > 0") :
-        CSharp("false");
+        !x.Type.CanBeGeneric() ? CSharp("false") :
+        CSharp(
+            $"global::System.Collections.Generic.Comparer<{x.Type
+            }>.Default.Equals({PrefixCast(x, "left.")}, {PrefixCast(x, "right.")})"
+        );
 
     [Pure]
     string DeclareAlternativeConstructor(MemberSymbol x, bool conflict) =>
@@ -1012,7 +1016,7 @@ sealed partial record Scaffolder(
                   {{(isChoiceClass ? "private" : "internal")}} {{(y.Index is 0 ? "sealed" : "static")
                   }} class {{y.Item.Name}}{{(isVariantClass ? $"<T{y.Item.Name}Discard>" : "")
                   }}{{(y.Index is 0 ? " : global::System.Attribute" : "")
-                  }}{{(y.Item.IsRefLikeType ? $"\n    where T{y.Item.Name}Discard : allows ref struct" : "")}}
+                  }}{{(y.Item.IsRefLikeType ? $"\n        where T{y.Item.Name}Discard : allows ref struct" : "")}}
                   {{{(y.Index is 0 ? "" : $"\n{x.SplitLines().Select(x => $"    {x}").Conjoin("\n")}")}}
                   }
               """
@@ -1028,7 +1032,11 @@ sealed partial record Scaffolder(
         x.IsEmpty ? CSharp("true") :
         x.IsOperatorEquatable ? CSharp($"{PrefixCast(x, "left.")} == {PrefixCast(x, "right.")}") :
         x.IsInterfaceEquatable ? CSharp($"{PrefixCast(x, "left.")}.Equals({PrefixCast(x, "right.")})") :
-        CSharp("false");
+        !x.Type.CanBeGeneric() ? CSharp("false") :
+        CSharp(
+            $"global::System.Collections.Generic.EqualityComparer<{x.Type
+            }>.Default.Equals({PrefixCast(x, "left.")}, {PrefixCast(x, "right.")})"
+        );
 
     [Pure]
     string Opposite(MemberSymbol x) =>
