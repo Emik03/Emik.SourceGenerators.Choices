@@ -122,7 +122,7 @@ public abstract class Case([StringSyntax("C#")] string? source)
             TestState = { GeneratedSources = { new AttributeGenerator().Source } },
         };
 
-        if (string.IsNullOrEmpty(source))
+        if (source is null)
         {
             await verify.RunAsync();
             return;

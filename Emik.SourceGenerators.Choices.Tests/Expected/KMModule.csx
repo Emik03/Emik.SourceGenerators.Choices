@@ -1029,4 +1029,563 @@ namespace Emik
                     public UnityEngine.Component[] GetComponents(global::System.Type type)
                         => Discriminator switch
                         {
-                            0 =>
+                            0 => ((KMBombModule)_reference!).GetComponents(type),
+                            _ => ((KMNeedyModule)_reference!).GetComponents(type),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponents(System.Type, System.Collections.Generic.List{UnityEngine.Component})"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void GetComponents(global::System.Type type, global::System.Collections.Generic.List<global::UnityEngine.Component> results)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).GetComponents(type, results);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).GetComponents(type, results);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponents{T}(System.Collections.Generic.List{T})"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void GetComponents<T>(global::System.Collections.Generic.List<T> results)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).GetComponents<T>(results);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).GetComponents<T>(results);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponents{T}()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public T[] GetComponents<T>()
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponents<T>(),
+                            _ => ((KMNeedyModule)_reference!).GetComponents<T>(),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.CompareTag(string)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public bool CompareTag(string tag)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).CompareTag(tag),
+                            _ => ((KMNeedyModule)_reference!).CompareTag(tag),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, object, UnityEngine.SendMessageOptions)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void SendMessageUpwards(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).SendMessageUpwards(methodName, value, options);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).SendMessageUpwards(methodName, value, options);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, object)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public void SendMessageUpwards(string methodName, object value)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).SendMessageUpwards(methodName, value);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).SendMessageUpwards(methodName, value);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public void SendMessageUpwards(string methodName)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).SendMessageUpwards(methodName);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).SendMessageUpwards(methodName);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, UnityEngine.SendMessageOptions)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void SendMessageUpwards(string methodName, global::UnityEngine.SendMessageOptions options)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).SendMessageUpwards(methodName, options);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).SendMessageUpwards(methodName, options);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, object, UnityEngine.SendMessageOptions)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void SendMessage(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).SendMessage(methodName, value, options);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).SendMessage(methodName, value, options);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, object)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public void SendMessage(string methodName, object value)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).SendMessage(methodName, value);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).SendMessage(methodName, value);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.SendMessage(string)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public void SendMessage(string methodName)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).SendMessage(methodName);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).SendMessage(methodName);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, UnityEngine.SendMessageOptions)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void SendMessage(string methodName, global::UnityEngine.SendMessageOptions options)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).SendMessage(methodName, options);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).SendMessage(methodName, options);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, object, UnityEngine.SendMessageOptions)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void BroadcastMessage(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object parameter, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).BroadcastMessage(methodName, parameter, options);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).BroadcastMessage(methodName, parameter, options);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, object)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public void BroadcastMessage(string methodName, object parameter)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).BroadcastMessage(methodName, parameter);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).BroadcastMessage(methodName, parameter);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public void BroadcastMessage(string methodName)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).BroadcastMessage(methodName);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).BroadcastMessage(methodName);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, UnityEngine.SendMessageOptions)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void BroadcastMessage(string methodName, global::UnityEngine.SendMessageOptions options)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).BroadcastMessage(methodName, options);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).BroadcastMessage(methodName, options);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.transform"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public UnityEngine.Transform transform
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).transform,
+                            _ => ((KMNeedyModule)_reference!).transform,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.gameObject"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public UnityEngine.GameObject gameObject
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).gameObject,
+                            _ => ((KMNeedyModule)_reference!).gameObject,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.tag"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public string tag
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).tag,
+                            _ => ((KMNeedyModule)_reference!).tag,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.rigidbody"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property rigidbody has been deprecated. Use GetComponent<Rigidbody>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component rigidbody
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).rigidbody,
+                            _ => ((KMNeedyModule)_reference!).rigidbody,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.rigidbody2D"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property rigidbody2D has been deprecated. Use GetComponent<Rigidbody2D>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component rigidbody2D
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).rigidbody2D,
+                            _ => ((KMNeedyModule)_reference!).rigidbody2D,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.camera"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property camera has been deprecated. Use GetComponent<Camera>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component camera
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).camera,
+                            _ => ((KMNeedyModule)_reference!).camera,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.light"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property light has been deprecated. Use GetComponent<Light>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component light
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).light,
+                            _ => ((KMNeedyModule)_reference!).light,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.animation"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property animation has been deprecated. Use GetComponent<Animation>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component animation
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).animation,
+                            _ => ((KMNeedyModule)_reference!).animation,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.constantForce"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property constantForce has been deprecated. Use GetComponent<ConstantForce>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component constantForce
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).constantForce,
+                            _ => ((KMNeedyModule)_reference!).constantForce,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.renderer"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property renderer has been deprecated. Use GetComponent<Renderer>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component renderer
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).renderer,
+                            _ => ((KMNeedyModule)_reference!).renderer,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.audio"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property audio has been deprecated. Use GetComponent<AudioSource>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component audio
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).audio,
+                            _ => ((KMNeedyModule)_reference!).audio,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.guiText"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property guiText has been deprecated. Use GetComponent<GUIText>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component guiText
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).guiText,
+                            _ => ((KMNeedyModule)_reference!).guiText,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.networkView"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property networkView has been deprecated. Use GetComponent<NetworkView>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component networkView
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).networkView,
+                            _ => ((KMNeedyModule)_reference!).networkView,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.guiElement"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property guiElement has been deprecated. Use GetComponent<GUIElement>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component guiElement
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).guiElement,
+                            _ => ((KMNeedyModule)_reference!).guiElement,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.guiTexture"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property guiTexture has been deprecated. Use GetComponent<GUITexture>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component guiTexture
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).guiTexture,
+                            _ => ((KMNeedyModule)_reference!).guiTexture,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.collider"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property collider has been deprecated. Use GetComponent<Collider>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component collider
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).collider,
+                            _ => ((KMNeedyModule)_reference!).collider,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.collider2D"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property collider2D has been deprecated. Use GetComponent<Collider2D>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component collider2D
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).collider2D,
+                            _ => ((KMNeedyModule)_reference!).collider2D,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.hingeJoint"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property hingeJoint has been deprecated. Use GetComponent<HingeJoint>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component hingeJoint
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).hingeJoint,
+                            _ => ((KMNeedyModule)_reference!).hingeJoint,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.particleEmitter"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property particleEmitter has been deprecated. Use GetComponent<ParticleEmitter>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component particleEmitter
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).particleEmitter,
+                            _ => ((KMNeedyModule)_reference!).particleEmitter,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.particleSystem"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.ObsoleteAttribute("Property particleSystem has been deprecated. Use GetComponent<ParticleSystem>() instead. (UnityUpgradable)", true)]
+                    public UnityEngine.Component particleSystem
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).particleSystem,
+                            _ => ((KMNeedyModule)_reference!).particleSystem,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Object.GetInstanceID()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [System.Security.SecuritySafeCriticalAttribute]
+                    public int GetInstanceID()
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetInstanceID(),
+                            _ => ((KMNeedyModule)_reference!).GetInstanceID(),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Object.name"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public string name
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).name,
+                            _ => ((KMNeedyModule)_reference!).name,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Object.hideFlags"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public UnityEngine.HideFlags hideFlags
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).hideFlags,
+                            _ => ((KMNeedyModule)_reference!).hideFlags,
+                        };
+                    }
+
+                    /// <inheritdoc cref="object.GetType()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public System.Type GetUnderlyingType()
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetType(),
+                            _ => ((KMNeedyModule)_reference!).GetType(),
+                        };
+                }
+            }
+        }
+    }
+}
