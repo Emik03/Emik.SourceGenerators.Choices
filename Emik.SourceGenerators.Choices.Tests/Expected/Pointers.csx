@@ -318,12 +318,13 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe bool operator ==(Emik.SourceGenerators.Choices.Tests.Pointers left, Emik.SourceGenerators.Choices.Tests.Pointers right)
-                        => (left._discriminator == right._discriminator) && (left._discriminator switch
-                        {
-                            0 => false,
-                            1 => false,
-                            _ => left._unmanaged._native == right._unmanaged._native,
-                        });
+                        => left._discriminator == right._discriminator &&
+                            left._discriminator switch
+                            {
+                                0 => left._unmanaged._bytes == right._unmanaged._bytes,
+                                1 => left._unmanaged._chars == right._unmanaged._chars,
+                                _ => left._unmanaged._native == right._unmanaged._native,
+                            };
 
                     /// <summary>
                     /// Determines whether the left-hand side is unequal to the right.

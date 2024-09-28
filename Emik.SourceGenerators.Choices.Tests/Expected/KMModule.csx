@@ -286,8 +286,8 @@ namespace Emik
                             left.Discriminator == right.Discriminator &&
                             left.Discriminator switch
                             {
-                                0 => false,
-                                _ => false,
+                                0 => global::System.Collections.Generic.EqualityComparer<KMBombModule>.Default.Equals(((KMBombModule)left._reference!), ((KMBombModule)right._reference!)),
+                                _ => global::System.Collections.Generic.EqualityComparer<KMNeedyModule>.Default.Equals(((KMNeedyModule)left._reference!), ((KMNeedyModule)right._reference!)),
                             };
 
                     /// <summary>
@@ -324,8 +324,8 @@ namespace Emik
                             left.Discriminator == right.Discriminator &&
                             left.Discriminator switch
                             {
-                                0 => false,
-                                _ => false,
+                                0 => global::System.Collections.Generic.Comparer<KMBombModule>.Default.Compare(((KMBombModule)left._reference!), ((KMBombModule)right._reference!)) > 0,
+                                _ => global::System.Collections.Generic.Comparer<KMNeedyModule>.Default.Compare(((KMNeedyModule)left._reference!), ((KMNeedyModule)right._reference!)) > 0,
                             });
 
                     /// <summary>

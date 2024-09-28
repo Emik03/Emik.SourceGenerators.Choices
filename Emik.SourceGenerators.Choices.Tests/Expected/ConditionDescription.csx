@@ -363,10 +363,10 @@ namespace Emik
                             left._discriminator == right._discriminator &&
                             left._discriminator switch
                             {
-                                0 => false,
-                                1 => false,
-                                2 => false,
-                                _ => false,
+                                0 => global::System.Collections.Generic.Comparer<Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition>.Default.Compare(left._and, right._and) > 0,
+                                1 => global::System.Collections.Generic.Comparer<Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition>.Default.Compare(left._and, right._and) > 0,
+                                2 => global::System.Collections.Generic.Comparer<Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition>.Default.Compare(left._included, right._included) > 0,
+                                _ => global::System.Collections.Generic.Comparer<Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition>.Default.Compare(left._included, right._included) > 0,
                             });
 
                     /// <summary>

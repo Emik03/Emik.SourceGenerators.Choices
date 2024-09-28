@@ -10,8 +10,10 @@ public abstract class Case([StringSyntax("C#")] string? source)
         [Choice]
         partial class Color(Color.OrRef<int>[]? rgba, Color.OrRef<Number>[]? gradient)
         {
-            public sealed class OrRef<[UsedImplicitly] T>;
+            public sealed class OrRef<T>;
         }
+
+        public partial struct Number;
         """
     );
 
@@ -21,11 +23,16 @@ public abstract class Case([StringSyntax("C#")] string? source)
         partial class ConditionDescription
         {
             public record struct BinaryCondition(ConditionDescription Left, ConditionDescription Right);
-        
+
             public record struct InclusionCondition(
                 Color.OrRef<JsonElement> Left,
                 Color.OrRef<Color.OrRef<JsonElement>[]> Right
             );
+
+            public partial class Color(Color.OrRef<int>[]? rgba, Color.OrRef<byte>[]? gradient)
+            {
+                public sealed class OrRef<T>;
+            }
         }
         """
     );
@@ -49,20 +56,19 @@ public abstract class Case([StringSyntax("C#")] string? source)
         [Choice(typeof((KMBombModule Regular, KMNeedyModule Needy)))]
         partial class KMModule
         {
-        readonly byte _discriminator;
+            readonly byte _discriminator;
         }
         """
     );
 
-    public sealed class Number() : Case(
-        "[Choice(typeof((int Integer, float Floating, ValueTuple Unknown)), false)] partial class Number;"
-    );
+    public sealed class Number()
+        : Case("[Choice(typeof((int Integer, float Floating, ValueTuple Unknown)), false)] partial class Number;");
 
     public sealed class Option1() : Case(
         """
         [Choice]
         readonly partial struct Option<T>
-        where T : class
+            where T : class
         {
             public T? Some { get; }
 
@@ -72,7 +78,7 @@ public abstract class Case([StringSyntax("C#")] string? source)
     );
 
     public sealed class Pointers()
-        : Case("[Choice] partial unsafe struct Pointers(byte* bytes, char* chars, nint native);");
+        : Case("[Choice] unsafe partial struct Pointers(byte* bytes, char* chars, nint native);");
 
     public sealed class Result2() : Case(
         """
@@ -98,9 +104,8 @@ public abstract class Case([StringSyntax("C#")] string? source)
         """
     );
 
-    public sealed class SpanEncodingsDot() : Case(
-        "[Choice.Public.Utf8<Span<byte>>.Utf16<Span<char>>] ref partial struct SpanEncodingsDot;"
-    );
+    public sealed class SpanEncodingsDot()
+        : Case("[Choice.Public.Utf8<Span<byte>>.Utf16<Span<char>>] ref partial struct SpanEncodingsDot;");
 
     public sealed class SuperTask()
         : Case("[Choice(typeof((Task Left, Task Right)), false)] partial record SuperTask;");
@@ -142,6 +147,7 @@ public abstract class Case([StringSyntax("C#")] string? source)
     static string Wrap(string? source) => // language=c#
         $$"""
           using System;
+          using System.Text.Json;
           using Emik;
 
           namespace Emik.SourceGenerators.Choices.Tests

@@ -413,14 +413,14 @@ sealed partial record Scaffolder(
                   {{Pure}}
                   {{AggressiveInlining}}
                   public static {{SymbolsUnsafe}}bool operator >({{NullableName}} left, {{NullableName}} right)
-                      => {{(Named.IsReferenceType ? "left is not null &&\n        (right is null ||\n            " : "")
+                      => {{(Named.IsReferenceType ? "left is not null &&\n            (right is null ||\n            " : "")
                   }}left.{{Discriminator}} > right.{{Discriminator}} ||
                           left.{{Discriminator}} == right.{{Discriminator}} &&
                           left.{{Discriminator}} switch
                           {
                               {{Symbols
                                  .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {Comparison(x)},")
-                                 .Conjoin("\n            ")}}
+                                 .Conjoin("\n                ")}}
                           }{{(Named.IsReferenceType ? ")" : "")}};
 
                   /// <summary>
@@ -749,8 +749,7 @@ sealed partial record Scaffolder(
         x.IsInterfaceComparable ? CSharp($"{PrefixCast(x, "left.")}.CompareTo({PrefixCast(x, "right.")}) > 0") :
         !x.Type.CanBeGeneric() ? CSharp("false") :
         CSharp(
-            $"global::System.Collections.Generic.Comparer<{x.Type
-            }>.Default.Equals({PrefixCast(x, "left.")}, {PrefixCast(x, "right.")})"
+            $"global::System.Collections.Generic.Comparer<{x.Type}>.Default.Compare({PrefixCast(x, "left.")}, {PrefixCast(x, "right.")}) > 0"
         );
 
     [Pure]
@@ -1034,8 +1033,7 @@ sealed partial record Scaffolder(
         x.IsInterfaceEquatable ? CSharp($"{PrefixCast(x, "left.")}.Equals({PrefixCast(x, "right.")})") :
         !x.Type.CanBeGeneric() ? CSharp("false") :
         CSharp(
-            $"global::System.Collections.Generic.EqualityComparer<{x.Type
-            }>.Default.Equals({PrefixCast(x, "left.")}, {PrefixCast(x, "right.")})"
+            $"global::System.Collections.Generic.EqualityComparer<{x.Type}>.Default.Equals({PrefixCast(x, "left.")}, {PrefixCast(x, "right.")})"
         );
 
     [Pure]

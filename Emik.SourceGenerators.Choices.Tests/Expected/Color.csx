@@ -70,7 +70,7 @@ namespace Emik
                 ///         </item>
                 ///         <item>
                 ///             <term>
-                ///                 <see cref="Gradient"/> <see langword="as"/> <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]"/>
+                ///                 <see cref="Gradient"/> <see langword="as"/> <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]"/>
                 ///                 <list type="bullet">
                 ///                     <item>
                 ///                         <description>
@@ -82,17 +82,17 @@ namespace Emik
                 ///                             <list type="number">
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="OfGradient(Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]?)"/>
+                ///                                         <see cref="OfGradient(Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]?)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.Color(Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]?)"/>
+                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.Color(Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]?)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="op_Implicit(Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]?)"/>
+                ///                                         <see cref="op_Implicit(Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]?)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                             </list>
@@ -151,12 +151,12 @@ namespace Emik
                     }
 
                     /// <summary>
-                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]"/>.
+                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]"/>.
                     /// </summary>
                     /// <param name="gradient">The variant.</param>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public Color(Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]? gradient)
+                    public Color(Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]? gradient)
                         : this(default(Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?), gradient)
                     {
                         Discriminator = 1;
@@ -177,7 +177,7 @@ namespace Emik
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> is the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]"/>.
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> is the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     public bool IsGradient
@@ -201,14 +201,14 @@ namespace Emik
                     }
 
                     /// <summary>
-                    /// Gets the <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]"/> variant.
+                    /// Gets the <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]"/> variant.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]? Gradient
+                    public Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]? Gradient
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator is 1 ? (Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference! : default;
+                        get => Discriminator is 1 ? (Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference! : default;
                     }
 
                         /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
@@ -238,25 +238,25 @@ namespace Emik
                         => x.Rgba;
 
                     /// <summary>
-                    /// Implicitly converts the <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]"/> parameter to the union.
+                    /// Implicitly converts the <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]"/> parameter to the union.
                     /// </summary>
                     /// <param name="gradient">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="gradient"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Color(Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[] gradient)
+                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Color(Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[] gradient)
                         => new global::Emik.SourceGenerators.Choices.Tests.Color(gradient);
 
                     /// <summary>
-                    /// Explicitly converts the union to the target type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]"/>.
+                    /// Explicitly converts the union to the target type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]"/>.
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static explicit operator Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?(global::Emik.SourceGenerators.Choices.Tests.Color x)
+                    public static explicit operator Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?(global::Emik.SourceGenerators.Choices.Tests.Color x)
                         => x.Gradient;
 
                     /// <summary>
@@ -271,14 +271,14 @@ namespace Emik
                         => new global::Emik.SourceGenerators.Choices.Tests.Color(rgba);
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]"/>.
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]"/>.
                     /// </summary>
                     /// <param name="gradient">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="gradient"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static global::Emik.SourceGenerators.Choices.Tests.Color OfGradient(Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]? gradient)
+                    public static global::Emik.SourceGenerators.Choices.Tests.Color OfGradient(Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]? gradient)
                         => new global::Emik.SourceGenerators.Choices.Tests.Color(gradient);
 
                     /// <summary>
@@ -298,8 +298,8 @@ namespace Emik
                             left.Discriminator == right.Discriminator &&
                             left.Discriminator switch
                             {
-                                0 => false,
-                                _ => false,
+                                0 => global::System.Collections.Generic.EqualityComparer<Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?>.Default.Equals(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)left._reference!), ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)right._reference!)),
+                                _ => global::System.Collections.Generic.EqualityComparer<Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?>.Default.Equals(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)left._reference!), ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)right._reference!)),
                             };
 
                     /// <summary>
@@ -336,8 +336,8 @@ namespace Emik
                             left.Discriminator == right.Discriminator &&
                             left.Discriminator switch
                             {
-                                0 => false,
-                                _ => false,
+                                0 => global::System.Collections.Generic.Comparer<Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?>.Default.Compare(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)left._reference!), ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)right._reference!)) > 0,
+                                _ => global::System.Collections.Generic.Comparer<Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?>.Default.Compare(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)left._reference!), ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)right._reference!)) > 0,
                             });
 
                     /// <summary>
@@ -422,7 +422,7 @@ namespace Emik
                         (Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetHashCode(),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetHashCode(),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetHashCode(),
                         });
 
                     /// <inheritdoc />
@@ -433,20 +433,20 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => $"{nameof(Rgba)}({((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!)})",
-                            _ => $"{nameof(Gradient)}({((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!)})",
+                            _ => $"{nameof(Gradient)}({((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!)})",
                         };
 
                     /// <summary>
                     /// Invokes the callback based on current variance.
                     /// </summary>
                     /// <param name="onRgba">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Rgba"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{int}[]"/> is held.</param>
-                    /// <param name="onGradient">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]"/> is held.</param>
+                    /// <param name="onGradient">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]"/> is held.</param>
                     /// <returns>Itself.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Emik.SourceGenerators.Choices.Tests.Color? Map(
                         global::System.Action<Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?>? onRgba = null,
-                        global::System.Action<Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?>? onGradient = null
+                        global::System.Action<Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?>? onGradient = null
                     )
                     {
                         switch (Discriminator)
@@ -455,7 +455,7 @@ namespace Emik
                                 onRgba?.Invoke(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!));
                                 return this;
                             default:
-                                onGradient?.Invoke(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!));
+                                onGradient?.Invoke(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!));
                                 return this;
                         }
                     }
@@ -465,7 +465,7 @@ namespace Emik
                     /// </summary>
                     /// <typeparam name="TMappingResult">The resulting type from the mapping.</typeparam>
                     /// <param name="onRgba">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Rgba"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{int}[]"/> is held.</param>
-                    /// <param name="onGradient">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Number}[]"/> is held.</param>
+                    /// <param name="onGradient">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Gradient"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{Emik.SourceGenerators.Choices.Tests.Number}[]"/> is held.</param>
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
@@ -473,12 +473,12 @@ namespace Emik
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public TMappingResult Map<TMappingResult>(
                         global::System.Func<Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?, TMappingResult> onRgba,
-                        global::System.Func<Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?, TMappingResult> onGradient
+                        global::System.Func<Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?, TMappingResult> onGradient
                     )
                         => Discriminator switch
                         {
                             0 => onRgba(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!)),
-                            _ => onGradient(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!)),
+                            _ => onGradient(((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!)),
                         };
 
                     /// <summary>
@@ -732,7 +732,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).Clone(),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).Clone(),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).Clone(),
                         };
 
                     /// <inheritdoc cref="System.Array.CopyTo(System.Array, int)"/>
@@ -746,7 +746,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).CopyTo(array, index);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).CopyTo(array, index);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).CopyTo(array, index);
                                 break;
                         }
                     }
@@ -762,7 +762,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).CopyTo(array, index);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).CopyTo(array, index);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).CopyTo(array, index);
                                 break;
                         }
                     }
@@ -774,7 +774,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetEnumerator(),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetEnumerator(),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetEnumerator(),
                         };
 
                     /// <inheritdoc cref="System.Array.GetLength(int)"/>
@@ -784,7 +784,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetLength(dimension),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetLength(dimension),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetLength(dimension),
                         };
 
                     /// <inheritdoc cref="System.Array.GetLongLength(int)"/>
@@ -794,7 +794,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetLongLength(dimension),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetLongLength(dimension),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetLongLength(dimension),
                         };
 
                     /// <inheritdoc cref="System.Array.GetLowerBound(int)"/>
@@ -804,7 +804,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetLowerBound(dimension),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetLowerBound(dimension),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetLowerBound(dimension),
                         };
 
                     /// <inheritdoc cref="System.Array.GetUpperBound(int)"/>
@@ -814,7 +814,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetUpperBound(dimension),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetUpperBound(dimension),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetUpperBound(dimension),
                         };
 
                     /// <inheritdoc cref="System.Array.GetValue(int)"/>
@@ -824,7 +824,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetValue(index),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetValue(index),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetValue(index),
                         };
 
                     /// <inheritdoc cref="System.Array.GetValue(int, int)"/>
@@ -834,7 +834,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetValue(index1, index2),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetValue(index1, index2),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetValue(index1, index2),
                         };
 
                     /// <inheritdoc cref="System.Array.GetValue(int, int, int)"/>
@@ -844,7 +844,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetValue(index1, index2, index3),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetValue(index1, index2, index3),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetValue(index1, index2, index3),
                         };
 
                     /// <inheritdoc cref="System.Array.GetValue(params int[])"/>
@@ -854,7 +854,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetValue(indices),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetValue(indices),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetValue(indices),
                         };
 
                     /// <inheritdoc cref="System.Array.GetValue(long)"/>
@@ -864,7 +864,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetValue(index),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetValue(index),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetValue(index),
                         };
 
                     /// <inheritdoc cref="System.Array.GetValue(long, long)"/>
@@ -874,7 +874,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetValue(index1, index2),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetValue(index1, index2),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetValue(index1, index2),
                         };
 
                     /// <inheritdoc cref="System.Array.GetValue(long, long, long)"/>
@@ -884,7 +884,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetValue(index1, index2, index3),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetValue(index1, index2, index3),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetValue(index1, index2, index3),
                         };
 
                     /// <inheritdoc cref="System.Array.GetValue(params long[])"/>
@@ -894,7 +894,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetValue(indices),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetValue(indices),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetValue(indices),
                         };
 
                     /// <inheritdoc cref="System.Array.Initialize()"/>
@@ -908,7 +908,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).Initialize();
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).Initialize();
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).Initialize();
                                 break;
                         }
                     }
@@ -924,7 +924,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).SetValue(value, index);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index);
                                 break;
                         }
                     }
@@ -940,7 +940,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index1, index2);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).SetValue(value, index1, index2);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index1, index2);
                                 break;
                         }
                     }
@@ -956,7 +956,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index1, index2, index3);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).SetValue(value, index1, index2, index3);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index1, index2, index3);
                                 break;
                         }
                     }
@@ -972,7 +972,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, indices);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).SetValue(value, indices);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, indices);
                                 break;
                         }
                     }
@@ -988,7 +988,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).SetValue(value, index);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index);
                                 break;
                         }
                     }
@@ -1004,7 +1004,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index1, index2);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).SetValue(value, index1, index2);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index1, index2);
                                 break;
                         }
                     }
@@ -1020,7 +1020,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index1, index2, index3);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).SetValue(value, index1, index2, index3);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index1, index2, index3);
                                 break;
                         }
                     }
@@ -1036,7 +1036,7 @@ namespace Emik
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, indices);
                                 break;
                             case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).SetValue(value, indices);
+                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, indices);
                                 break;
                         }
                     }
@@ -1049,7 +1049,7 @@ namespace Emik
                         get => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).Length,
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).Length,
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).Length,
                         };
                     }
 
@@ -1061,7 +1061,7 @@ namespace Emik
                         get => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).LongLength,
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).LongLength,
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).LongLength,
                         };
                     }
 
@@ -1073,7 +1073,7 @@ namespace Emik
                         get => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).Rank,
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).Rank,
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).Rank,
                         };
                     }
 
@@ -1085,7 +1085,7 @@ namespace Emik
                         get => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SyncRoot,
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).SyncRoot,
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SyncRoot,
                         };
                     }
 
@@ -1096,7 +1096,7 @@ namespace Emik
                         => Discriminator switch
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetType(),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Number>[]?)_reference!).GetType(),
+                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetType(),
                         };
                 }
             }

@@ -250,7 +250,7 @@ namespace Emik
                         => left.Discriminator == right.Discriminator &&
                             left.Discriminator switch
                             {
-                                0 => false,
+                                0 => global::System.Collections.Generic.EqualityComparer<T?>.Default.Equals(left.Some!, right.Some!),
                                 _ => true,
                             };
 
@@ -286,8 +286,7 @@ namespace Emik
                             left.Discriminator == right.Discriminator &&
                             left.Discriminator switch
                             {
-                                0 => left._unmanaged._integer > right._unmanaged._integer,
-                                1 => left._unmanaged._floating > right._unmanaged._floating,
+                                0 => global::System.Collections.Generic.Comparer<T?>.Default.Compare(left.Some!, right.Some!) > 0,
                                 _ => true,
                             };
 

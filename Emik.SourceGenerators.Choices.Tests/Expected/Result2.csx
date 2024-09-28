@@ -272,8 +272,8 @@ namespace Emik
                             left._discriminator == right._discriminator &&
                             left._discriminator switch
                             {
-                                0 => false,
-                                _ => false,
+                                0 => global::System.Collections.Generic.Comparer<TOk?>.Default.Compare(left._ok!, right._ok!) > 0,
+                                _ => global::System.Collections.Generic.Comparer<TErr?>.Default.Compare(left._err!, right._err!) > 0,
                             };
 
                     /// <summary>
