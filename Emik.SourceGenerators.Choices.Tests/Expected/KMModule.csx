@@ -558,8 +558,475 @@ namespace Emik
                             0 => ((KMBombModule)_reference!).GetRuleGenerationSeed(),
                             _ => ((KMNeedyModule)_reference!).GetRuleGenerationSeed(),
                         };
-                }
-            }
-        }
-    }
-}
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.Invoke(string, float)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void Invoke(string methodName, float time)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).Invoke(methodName, time);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).Invoke(methodName, time);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.InvokeRepeating(string, float, float)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void InvokeRepeating(string methodName, float time, float repeatRate)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).InvokeRepeating(methodName, time, repeatRate);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).InvokeRepeating(methodName, time, repeatRate);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.CancelInvoke()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void CancelInvoke()
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).CancelInvoke();
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).CancelInvoke();
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.CancelInvoke(string)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void CancelInvoke(string methodName)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).CancelInvoke(methodName);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).CancelInvoke(methodName);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.IsInvoking(string)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public bool IsInvoking(string methodName)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).IsInvoking(methodName),
+                            _ => ((KMNeedyModule)_reference!).IsInvoking(methodName),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.IsInvoking()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public bool IsInvoking()
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).IsInvoking(),
+                            _ => ((KMNeedyModule)_reference!).IsInvoking(),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(System.Collections.IEnumerator)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public UnityEngine.Coroutine StartCoroutine(global::System.Collections.IEnumerator routine)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).StartCoroutine(routine),
+                            _ => ((KMNeedyModule)_reference!).StartCoroutine(routine),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine_Auto(System.Collections.IEnumerator)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [System.ObsoleteAttribute("StartCoroutine_Auto has been deprecated. Use StartCoroutine instead (UnityUpgradable) -> StartCoroutine([mscorlib] System.Collections.IEnumerator)", false)]
+                    public UnityEngine.Coroutine StartCoroutine_Auto(global::System.Collections.IEnumerator routine)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).StartCoroutine_Auto(routine),
+                            _ => ((KMNeedyModule)_reference!).StartCoroutine_Auto(routine),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(string, object)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public UnityEngine.Coroutine StartCoroutine(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).StartCoroutine(methodName, value),
+                            _ => ((KMNeedyModule)_reference!).StartCoroutine(methodName, value),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(string)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public UnityEngine.Coroutine StartCoroutine(string methodName)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).StartCoroutine(methodName),
+                            _ => ((KMNeedyModule)_reference!).StartCoroutine(methodName),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(string)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void StopCoroutine(string methodName)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).StopCoroutine(methodName);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).StopCoroutine(methodName);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(System.Collections.IEnumerator)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void StopCoroutine(global::System.Collections.IEnumerator routine)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).StopCoroutine(routine);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).StopCoroutine(routine);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(UnityEngine.Coroutine)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void StopCoroutine(global::UnityEngine.Coroutine routine)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).StopCoroutine(routine);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).StopCoroutine(routine);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopAllCoroutines()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void StopAllCoroutines()
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).StopAllCoroutines();
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).StopAllCoroutines();
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.useGUILayout"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public bool useGUILayout
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).useGUILayout,
+                            _ => ((KMNeedyModule)_reference!).useGUILayout,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.runInEditMode"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public bool runInEditMode
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).runInEditMode,
+                            _ => ((KMNeedyModule)_reference!).runInEditMode,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Behaviour.enabled"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public bool enabled
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).enabled,
+                            _ => ((KMNeedyModule)_reference!).enabled,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Behaviour.isActiveAndEnabled"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public bool isActiveAndEnabled
+                    {
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).isActiveAndEnabled,
+                            _ => ((KMNeedyModule)_reference!).isActiveAndEnabled,
+                        };
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponent(System.Type)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
+                    public UnityEngine.Component GetComponent(global::System.Type type)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponent(type),
+                            _ => ((KMNeedyModule)_reference!).GetComponent(type),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponent{T}()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [System.Security.SecuritySafeCriticalAttribute]
+                    public T GetComponent<T>()
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponent<T>(),
+                            _ => ((KMNeedyModule)_reference!).GetComponent<T>(),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponent(string)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public UnityEngine.Component GetComponent(string type)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponent(type),
+                            _ => ((KMNeedyModule)_reference!).GetComponent(type),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren(System.Type, bool)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
+                    public UnityEngine.Component GetComponentInChildren(global::System.Type t, bool includeInactive)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentInChildren(t, includeInactive),
+                            _ => ((KMNeedyModule)_reference!).GetComponentInChildren(t, includeInactive),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren(System.Type)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
+                    public UnityEngine.Component GetComponentInChildren(global::System.Type t)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentInChildren(t),
+                            _ => ((KMNeedyModule)_reference!).GetComponentInChildren(t),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren{T}()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public T GetComponentInChildren<T>()
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentInChildren<T>(),
+                            _ => ((KMNeedyModule)_reference!).GetComponentInChildren<T>(),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren{T}(bool)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public T GetComponentInChildren<T>([UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentInChildren<T>(includeInactive),
+                            _ => ((KMNeedyModule)_reference!).GetComponentInChildren<T>(includeInactive),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren(System.Type)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public UnityEngine.Component[] GetComponentsInChildren(global::System.Type t)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentsInChildren(t),
+                            _ => ((KMNeedyModule)_reference!).GetComponentsInChildren(t),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren(System.Type, bool)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public UnityEngine.Component[] GetComponentsInChildren(global::System.Type t, [UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentsInChildren(t, includeInactive),
+                            _ => ((KMNeedyModule)_reference!).GetComponentsInChildren(t, includeInactive),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(bool)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public T[] GetComponentsInChildren<T>(bool includeInactive)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentsInChildren<T>(includeInactive),
+                            _ => ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(includeInactive),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(bool, System.Collections.Generic.List{T})"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void GetComponentsInChildren<T>(bool includeInactive, global::System.Collections.Generic.List<T> result)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).GetComponentsInChildren<T>(includeInactive, result);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(includeInactive, result);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public T[] GetComponentsInChildren<T>()
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentsInChildren<T>(),
+                            _ => ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(System.Collections.Generic.List{T})"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void GetComponentsInChildren<T>(global::System.Collections.Generic.List<T> results)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).GetComponentsInChildren<T>(results);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(results);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInParent(System.Type)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
+                    public UnityEngine.Component GetComponentInParent(global::System.Type t)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentInParent(t),
+                            _ => ((KMNeedyModule)_reference!).GetComponentInParent(t),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInParent{T}()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public T GetComponentInParent<T>()
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentInParent<T>(),
+                            _ => ((KMNeedyModule)_reference!).GetComponentInParent<T>(),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent(System.Type)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
+                    public UnityEngine.Component[] GetComponentsInParent(global::System.Type t)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentsInParent(t),
+                            _ => ((KMNeedyModule)_reference!).GetComponentsInParent(t),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent(System.Type, bool)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public UnityEngine.Component[] GetComponentsInParent(global::System.Type t, [UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentsInParent(t, includeInactive),
+                            _ => ((KMNeedyModule)_reference!).GetComponentsInParent(t, includeInactive),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}(bool)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public T[] GetComponentsInParent<T>(bool includeInactive)
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentsInParent<T>(includeInactive),
+                            _ => ((KMNeedyModule)_reference!).GetComponentsInParent<T>(includeInactive),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}(bool, System.Collections.Generic.List{T})"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public void GetComponentsInParent<T>(bool includeInactive, global::System.Collections.Generic.List<T> results)
+                    {
+                        switch (Discriminator)
+                        {
+                            default:
+                                ((KMBombModule)_reference!).GetComponentsInParent<T>(includeInactive, results);
+                                break;
+                            case 1:
+                                ((KMNeedyModule)_reference!).GetComponentsInParent<T>(includeInactive, results);
+                                break;
+                        }
+                    }
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}()"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public T[] GetComponentsInParent<T>()
+                        => Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).GetComponentsInParent<T>(),
+                            _ => ((KMNeedyModule)_reference!).GetComponentsInParent<T>(),
+                        };
+
+                    /// <inheritdoc cref="UnityEngine.Component.GetComponents(System.Type)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public UnityEngine.Component[] GetComponents(global::System.Type type)
+                        => Discriminator switch
+                        {
+                            0 =>
