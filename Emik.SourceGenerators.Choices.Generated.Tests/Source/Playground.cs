@@ -84,3 +84,6 @@ partial class ConditionDescription
         Color.OrRef<Color.OrRef<JsonElement>[]> Right
     );
 }
+
+[Choice]
+unsafe partial struct Pointers(byte* bytes, char* chars, nint native);
