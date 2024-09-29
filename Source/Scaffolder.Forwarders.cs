@@ -186,9 +186,7 @@ sealed partial record Scaffolder
 
         builder.Append("\n    {\n        ");
         var hasGetter = symbol is IFieldSymbol or IPropertySymbol { IsWriteOnly: false };
-
-        var hasSetter = MutablePublicly is not null &&
-            symbol is IFieldSymbol { IsReadOnly: false } or IPropertySymbol { IsReadOnly: false };
+        var hasSetter = symbol is IFieldSymbol { IsReadOnly: false } or IPropertySymbol { IsReadOnly: false };
 
         if (hasGetter)
             AppendSwitchExpression(builder, Named.IsValueType && hasSetter ? "readonly get " : "get ");

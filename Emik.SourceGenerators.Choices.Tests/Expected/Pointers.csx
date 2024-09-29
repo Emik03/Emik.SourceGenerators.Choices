@@ -145,7 +145,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public unsafe Pointers(byte* bytes)
-                        : this(bytes, default(byte*), default(char*))
+                        : this(bytes, default(char*), default(nint))
                     {
                         _discriminator = 0;
                         _unmanaged._bytes = bytes;
@@ -158,7 +158,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public unsafe Pointers(char* chars)
-                        : this(default(byte*), chars, default(byte*))
+                        : this(default(byte*), chars, default(nint))
                     {
                         _discriminator = 1;
                         _unmanaged._chars = chars;

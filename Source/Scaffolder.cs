@@ -374,7 +374,7 @@ sealed partial record Scaffolder(
             ? CSharp(
                 $"""
                      {Annotation}
-                     private {PrivatelyReadOnly}{new MemberSymbol(Common, "").NullableAnnotated} {ReferenceField};
+                     private {PrivatelyReadOnly}{(Common is null ? "object" : new MemberSymbol(Common, "").NullableAnnotated)} {ReferenceField};
 
 
                  """
@@ -845,7 +845,7 @@ sealed partial record Scaffolder(
                       {{(conflict ? "private" : "public")}} {{x.Unsafe}}{{Named.Name}}({{x.Type}} {{x.ParameterName
                       }}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")
                       }}){{(UsesPrimaryConstructor ? $"\n        : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
-                      }{x.ParameterName}{(Symbols.Length - i - 1).For(i => $", default({Symbols[i].Type})").Conjoin("")
+                      }{x.ParameterName}{(Symbols.Length - i - 1).For(j => $", default({Symbols[i + j + 1].Type})").Conjoin("")
                       })" : "")}}
                       {
                           {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : CSharp($"\n        {Prefix(x)} = {x.ParameterName};"))}}

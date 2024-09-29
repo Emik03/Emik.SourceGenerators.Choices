@@ -42,6 +42,14 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
             ContainingNamespace: { ContainingNamespace.IsGlobalNamespace: true, Name: nameof(System) },
         };
 
+    /// <summary>Determines whether the symbol is mutable.</summary>
+    /// <param name="symbol">The symbol to check.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if <paramref name="symbol"/> is mutable; otherwise, <see langword="false"/>.
+    /// </returns>
+    [Pure]
+    static bool IsMutable(ISymbol symbol) => symbol is IEventSymbol or IPropertySymbol { SetMethod: not null };
+
     /// <summary>Extracts the members that are in common with every member of <see cref="Symbols"/>.</summary>
     /// <param name="interfaces">The interfaces to try.</param>
     /// <returns>The members that are in common with every member of <see cref="Symbols"/>.</returns>
@@ -99,7 +107,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
            .Type
            .AllInterfaces
            .Omit(IsImplementedInterface)
-           .Omit(x => x.GetMembers().Any(x => IsReadOnly && x is IEventSymbol || x.IsStatic));
+           .Omit(x => IsReadOnly && x.GetMembers().Any(IsMutable));
 
     /// <summary>Creates the list of original definitions of <paramref name="interfaceFromFirst"/>.</summary>
     /// <param name="interfaceFromFirst">The first member.</param>

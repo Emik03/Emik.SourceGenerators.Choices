@@ -46,7 +46,12 @@ public abstract class Case([StringSyntax("C#")] string? source)
 
     public sealed class Enums() : Case(
         """
-        [Choice(typeof((AuditFlags Audits, BindingFlags Bindings, SocketFlags Sockets, ObjectAceFlags ObjectAces)))]
+        [Choice(
+            typeof((System.Reflection.AssemblyNameFlags AssemblyNames,
+                System.Reflection.BindingFlags Bindings,
+                System.Net.Sockets.SocketFlags Sockets,
+                System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags ValueTaskSources))
+        )]
         readonly partial struct Enums;
         """
     );

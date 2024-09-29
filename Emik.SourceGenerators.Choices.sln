@@ -3,6 +3,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emik.SourceGenerators.Choic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emik.SourceGenerators.Choices.Tests", "Emik.SourceGenerators.Choices.Tests\Emik.SourceGenerators.Choices.Tests.csproj", "{A4ABAE60-1C14-4865-B421-7E51659B9BA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emik.SourceGenerators.Choices.Generated.Tests", "Emik.SourceGenerators.Choices.Generated.Tests\Emik.SourceGenerators.Choices.Generated.Tests.csproj", "{27CDF633-3520-4D1C-A0FD-211AA40C1AFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,5 +19,9 @@ Global
 		{A4ABAE60-1C14-4865-B421-7E51659B9BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4ABAE60-1C14-4865-B421-7E51659B9BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4ABAE60-1C14-4865-B421-7E51659B9BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27CDF633-3520-4D1C-A0FD-211AA40C1AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27CDF633-3520-4D1C-A0FD-211AA40C1AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27CDF633-3520-4D1C-A0FD-211AA40C1AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27CDF633-3520-4D1C-A0FD-211AA40C1AFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -144,7 +144,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Color(Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]? rgba)
-                        : this(rgba, default(Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?))
+                        : this(rgba, default(Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?))
                     {
                         Discriminator = 0;
                         _reference = rgba;
@@ -620,6 +620,12 @@ namespace Emik
                         {
                             0 => ((System.Collections.IList)_reference!)[index],
                             _ => ((System.Collections.IList)_reference!)[index],
+                        };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((System.Collections.IList)_reference!)[index] = value,
+                            _ => ((System.Collections.IList)_reference!)[index] = value,
                         };
                     }
 
