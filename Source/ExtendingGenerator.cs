@@ -75,7 +75,6 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         =>
             AddSource(context, new Scaffolder(raw).Result);
 #endif
-
     /// <summary>
     /// Registers the provider to the generator, which also includes
     /// injecting the <see cref="RawEqualityComparer"/> and explicit filter.

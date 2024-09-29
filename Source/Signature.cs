@@ -94,7 +94,7 @@ readonly record struct Signature(
     public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(ImmutableArray<MemberSymbol> symbols) =>
         symbols.Skip(1).All(symbols[0].TypeEquals) ? [symbols[0].Type] :
         symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? [] : symbols
-           .Select(x => Inheritance(x.Type).ToSet(RoslynComparer.Instance))
+           .Select(x => Inheritance(x.Type).ToSet(RoslynComparer.Signature))
            .Aggregate(IntersectWith)
            .OrderBy(x => x.SpecialType is SpecialType.System_Object)
            .ThenBy(x => x.SpecialType is SpecialType.System_ValueType)
@@ -218,7 +218,7 @@ readonly record struct Signature(
         unchecked
         {
             hash = hash * Prime ^ Name.AsSpan().SplitOn('.').Last.GetDjb2HashCode();
-            hash = hash * Prime ^ RoslynComparer.Hash(Type);
+            hash = hash * Prime ^ RoslynComparer.Signature.GetHashCode(Type);
             hash = hash * Prime ^ Parameters.Length;
             return hash * Prime ^ TypeParameters.Length;
         }
@@ -235,7 +235,7 @@ readonly record struct Signature(
     static bool AnyBaseType(ITypeSymbol? x, ITypeSymbol y)
     {
         for (; x is not null; x = x.BaseType)
-            if (RoslynComparer.Eq(x, y))
+            if (RoslynComparer.Signature.Equals(x, y))
                 return true;
 
         return false;
@@ -291,7 +291,7 @@ readonly record struct Signature(
     /// <returns>The value <see langword="true"/> if both instances have the same type.</returns>
     [Pure]
     static bool SameType(ITypeSymbol left, ITypeSymbol right) =>
-        RoslynComparer.Eq(left, right) &&
+        RoslynComparer.Signature.Equals(left, right) &&
         left.ContainingType is null == right.ContainingType is null &&
         (left.ContainingType is null || SameType(left.ContainingType, right.ContainingType));
 

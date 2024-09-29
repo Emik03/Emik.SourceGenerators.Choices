@@ -12,7 +12,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
     /// <summary>Gets the set of interfaces that are in common with every member of <see cref="Symbols"/>.</summary>
     [Pure] // ReSharper disable once ReturnTypeCanBeEnumerable.Global
     public HashSet<INamedTypeSymbol> Set =>
-        Symbols.Skip(1).Aggregate(UnimplementedInterfaces(Symbols[0]).ToSet(RoslynComparer.Instance), Intersect);
+        Symbols.Skip(1).Aggregate(UnimplementedInterfaces(Symbols[0]).ToSet(RoslynComparer.Signature), Intersect);
 
     /// <summary>Gets the members that are in common with every member of <see cref="Symbols"/>.</summary>
     [Pure]
@@ -58,13 +58,13 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
                 _ => ImmutableArray<IParameterSymbol>.Empty,
             };
 
-        bool IsEqual(MemberSymbol union) => union.Type.AllInterfaces.Contains(first, RoslynComparer.Instance);
+        bool IsEqual(MemberSymbol union) => union.Type.AllInterfaces.Contains(first, RoslynComparer.Signature);
 
         bool CanReturnTypeBeIncluded(ISymbol symbol) =>
-            !first.TypeParameters.Contains(symbol.OriginalDefinition.ToUnderlying(), RoslynComparer.Instance);
+            !first.TypeParameters.Contains(symbol.OriginalDefinition.ToUnderlying(), RoslynComparer.Signature);
 
         bool CanParameterBeIncluded(IParameterSymbol symbol) =>
-            !first.TypeParameters.Contains(symbol.OriginalDefinition.Type, RoslynComparer.Instance);
+            !first.TypeParameters.Contains(symbol.OriginalDefinition.Type, RoslynComparer.Signature);
 
         var interfacesEqual = Symbols.All(IsEqual);
 
@@ -109,7 +109,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
         Symbols
            .Skip(1)
            .Select(x => x.Type.AllInterfaces)
-           .Select(x => x.FirstOrDefault(x => RoslynComparer.Eq(x, interfaceFromFirst)))
+           .Select(x => x.FirstOrDefault(x => RoslynComparer.Signature.Equals(x, interfaceFromFirst)))
            .Filter()
            .Prepend(interfaceFromFirst)
            .ToImmutableArray();

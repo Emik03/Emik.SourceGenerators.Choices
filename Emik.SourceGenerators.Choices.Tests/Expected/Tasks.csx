@@ -522,7 +522,6 @@ namespace Emik
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.IsFaulted"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Exception")]
                     public readonly bool IsFaulted
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]

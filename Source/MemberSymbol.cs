@@ -8,9 +8,7 @@ namespace Emik.SourceGenerators.Choices;
 public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbol? Symbol = null)
 {
     [StringSyntax("C#")]
-    const string
-        Action = "global::System.Action",
-        Func = "global::System.Func";
+    const string Action = "global::System.Action", Func = "global::System.Func";
 
     /// <summary>Initializes a new instance of the <see cref="MemberSymbol"/> struct.</summary>
     /// <param name="field">The field.</param>
@@ -192,7 +190,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
             Parameters: [{ Type: INamedTypeSymbol other }],
         } &&
         expect == name &&
-        RoslynComparer.Eq(type, other);
+        RoslynComparer.Signature.Equals(type, other);
 
     /// <summary>Determines if the <see cref="ISymbol"/> could fit within a unit type.</summary>
     /// <param name="x">The symbol to check.</param>
@@ -266,17 +264,17 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// have the same <see cref="Type"/>; otherwise, <see langword="false"/>.
     /// </returns>s
     [Pure]
-    public bool TypeEquals(MemberSymbol other) => RoslynComparer.Eq(Type, other.Type);
+    public bool TypeEquals(MemberSymbol other) => RoslynComparer.Signature.Equals(Type, other.Type);
 
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() =>
         Symbol switch
         {
-            IFieldSymbol field => RoslynComparer.Hash(field) * Prime(),
-            IPropertySymbol property => RoslynComparer.Hash(property) * Prime(),
-            IParameterSymbol parameter => RoslynComparer.Hash(parameter) * Prime(),
-            _ => RoslynComparer.Hash(Type) ^ StringComparer.Ordinal.GetHashCode(Name) * Prime(),
+            IFieldSymbol field => RoslynComparer.Signature.GetHashCode(field) * Prime(),
+            IPropertySymbol property => RoslynComparer.Signature.GetHashCode(property) * Prime(),
+            IParameterSymbol parameter => RoslynComparer.Signature.GetHashCode(parameter) * Prime(),
+            _ => RoslynComparer.Signature.GetHashCode(Type) ^ StringComparer.Ordinal.GetHashCode(Name) * Prime(),
         };
 
     /// <inheritdoc />
@@ -296,13 +294,13 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <returns>Whether the two <see cref="INamespaceOrTypeSymbol"/> instances are equal.</returns>
     static bool SourcedEquals(INamespaceOrTypeSymbol x, INamespaceOrTypeSymbol y) =>
         y.IsInSource() &&
-        RoslynComparer.Eq(x, y) &&
-        x.GetMembers().GuardedSequenceEqual(y.GetMembers(), RoslynComparer.Instance) &&
-        x.GetTypeMembers().GuardedSequenceEqual(y.GetTypeMembers(), RoslynComparer.Instance);
+        RoslynComparer.Signature.Equals(x, y) &&
+        x.GetMembers().GuardedSequenceEqual(y.GetMembers(), RoslynComparer.Signature) &&
+        x.GetTypeMembers().GuardedSequenceEqual(y.GetTypeMembers(), RoslynComparer.Signature);
 
     /// <summary>Determines if both symbols are equal but both not in source.</summary>
     /// <param name="x">The first <see cref="INamespaceOrTypeSymbol"/> to compare.</param>
     /// <param name="y">The second <see cref="INamespaceOrTypeSymbol"/> to compare.</param>
     /// <returns>Whether the two <see cref="INamespaceOrTypeSymbol"/> instances are equal.</returns>
-    static bool UnsourcedEquals(ISymbol x, ISymbol y) => !y.IsInSource() && RoslynComparer.Eq(x, y);
+    static bool UnsourcedEquals(ISymbol x, ISymbol y) => !y.IsInSource() && RoslynComparer.Signature.Equals(x, y);
 }

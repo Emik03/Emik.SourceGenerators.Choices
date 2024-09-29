@@ -607,7 +607,7 @@ sealed partial record Scaffolder(
     string Discriminator =>
         _discriminator ??= Symbols.Length != Reference.Length ||
             !CanReserveNull && Symbols.Any(x => Members.Any(x.ReferenceEquals)) ||
-            Symbols.Select(x => x.Type).GroupDuplicates(RoslynComparer.Instance).Any()
+            Symbols.Select(x => x.Type).GroupDuplicates(RoslynComparer.Signature).Any()
                 ? DiscriminatorField
                 : DiscriminatorProperty;
 
@@ -736,8 +736,8 @@ sealed partial record Scaffolder(
     [Pure]
     int Inheritance((int Index, MemberSymbol Item) tuple) =>
         Rest.Count(
-            x => tuple.Item.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, RoslynComparer.Instance) ||
-                tuple.Item.Type.AllInterfaces.Contains(x.Type, RoslynComparer.Instance)
+            x => tuple.Item.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, RoslynComparer.Signature) ||
+                tuple.Item.Type.AllInterfaces.Contains(x.Type, RoslynComparer.Signature)
         );
 
     [Pure]

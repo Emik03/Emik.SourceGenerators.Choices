@@ -148,12 +148,10 @@ public abstract class Case([StringSyntax("C#")] string? source)
         $$"""
           using System;
           using System.Text.Json;
+          using System.Threading.Tasks;
           using Emik;
 
-          namespace Emik.SourceGenerators.Choices.Tests
-          {
-          {{source}}
-          }
+          namespace Emik.SourceGenerators.Choices.Tests {{{source}}}
 
           namespace System.Diagnostics.CodeAnalysis
           {

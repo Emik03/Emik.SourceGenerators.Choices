@@ -725,32 +725,6 @@ namespace Emik
                             _ => ((System.Collections.IEnumerable)_reference!).GetEnumerator(),
                         };
 
-                    /// <inheritdoc cref="System.Array.Clone()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public object Clone()
-                        => Discriminator switch
-                        {
-                            0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).Clone(),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).Clone(),
-                        };
-
-                    /// <inheritdoc cref="System.Array.CopyTo(System.Array, int)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void CopyTo(global::System.Array array, int index)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).CopyTo(array, index);
-                                break;
-                            case 1:
-                                ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).CopyTo(array, index);
-                                break;
-                        }
-                    }
-
                     /// <inheritdoc cref="System.Array.CopyTo(System.Array, long)"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -766,16 +740,6 @@ namespace Emik
                                 break;
                         }
                     }
-
-                    /// <inheritdoc cref="System.Array.GetEnumerator()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public System.Collections.IEnumerator GetEnumerator()
-                        => Discriminator switch
-                        {
-                            0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).GetEnumerator(),
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).GetEnumerator(),
-                        };
 
                     /// <inheritdoc cref="System.Array.GetLength(int)"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
@@ -1074,18 +1038,6 @@ namespace Emik
                         {
                             0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).Rank,
                             _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).Rank,
-                        };
-                    }
-
-                    /// <inheritdoc cref="System.Array.SyncRoot"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public object SyncRoot
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SyncRoot,
-                            _ => ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SyncRoot,
                         };
                     }
 
