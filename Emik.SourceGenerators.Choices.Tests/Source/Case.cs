@@ -1,9 +1,13 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices.Tests;
 
-public abstract class Test([StringSyntax("C#")] string? source)
+public class Test()
 {
-    public sealed class Nothing() : Test(null);
+    readonly string? _source;
+
+    private protected Test(string source)
+        : this() =>
+        _source = source;
 
     public sealed class Color() : Test(
         """
@@ -123,11 +127,11 @@ public abstract class Test([StringSyntax("C#")] string? source)
     {
         Verify verify = new()
         {
-            TestCode = Wrap(source),
+            TestCode = Wrap(_source),
             TestState = { GeneratedSources = { new AttributeGenerator().Source } },
         };
 
-        if (source is null)
+        if (_source is null)
         {
             await verify.RunAsync();
             return;
