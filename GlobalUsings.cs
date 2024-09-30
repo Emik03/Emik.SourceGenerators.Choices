@@ -5,5 +5,5 @@ global using Extract = (Microsoft.CodeAnalysis.ISymbol Symbol,
 global using Raw = (Microsoft.CodeAnalysis.INamedTypeSymbol Named,
     System.Collections.Immutable.ImmutableArray<Emik.SourceGenerators.Choices.MemberSymbol> Fields,
     bool? MutablePublicly,
-    bool PolyfillAttributes);
+    bool? FullyPolyfillAttributes);
 global using static System.Runtime.InteropServices.ImmutableCollectionsMarshal;

@@ -6,7 +6,7 @@ sealed partial record Scaffolder(
     ImmutableArray<MemberSymbol> Symbols,
     ImmutableArray<MemberSymbol> SingleEmpty,
     bool? MutablePublicly,
-    bool PolyfillAttributes
+    bool? FullyPolyfillAttributes
 )
 {
     [StringSyntax("C#")]
@@ -36,15 +36,15 @@ sealed partial record Scaffolder(
     string? _discriminator, _source;
 
     public Scaffolder(
-        INamedTypeSymbol Named,
-        ImmutableArray<MemberSymbol> Symbols,
-        bool? MutablePublicly,
-        bool PolyfillAttributes
+        INamedTypeSymbol named,
+        ImmutableArray<MemberSymbol> symbols,
+        bool? mutablePublicly,
+        bool? fullyPolyfillAttributes
     )
-        : this(Named, Symbols, FindSingleEmpty(Symbols), MutablePublicly, PolyfillAttributes) { }
+        : this(named, symbols, FindSingleEmpty(symbols), mutablePublicly, fullyPolyfillAttributes) { }
 
     public Scaffolder(Raw raw)
-        : this(raw.Named, raw.Fields, raw.MutablePublicly, raw.PolyfillAttributes) { }
+        : this(raw.Named, raw.Fields, raw.MutablePublicly, raw.FullyPolyfillAttributes) { }
 
     [Pure]
     public GeneratedSource Result => (HintName, Source);
@@ -195,22 +195,21 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclarePolyfillAttributes =>
-        PolyfillAttributes
+        FullyPolyfillAttributes is not null
             ? CSharp(
                 $"""
                      {Annotation}
-                 {(MutablePublicly switch
-                 {
-                     true => nameof(Accessibility.Public),
-                     false => nameof(Accessibility.Private),
-                     null => null,
-                 }).YieldValued()
-                .Select(x => (false, x))
-                .Concat(Symbols.Select(x => (x.Type.IsRefLikeType, x.Name)))
-                .Prepend((false, nameof(ExtendingGenerator.Choice)))
-                .Reverse()
-                .Index()
-                .Aggregate("", DeclareNestedClass)}
+                 {(FullyPolyfillAttributes is true ? [nameof(Emik)] : Array.Empty<string>())
+                    .Append(ExtendingGenerator.Choice)
+                    .Concat(MutablePublicly switch
+                     {
+                         true => nameof(Accessibility.Public), false => nameof(Accessibility.Private), null => null,
+                     } is { } mutablePublicly ? [mutablePublicly] : [])
+                    .Select((x, i) => ((bool?)null, x, i is 0))
+                    .Concat(Symbols.Select(x => ((bool?)x.Type.IsRefLikeType, x.Name, false)))
+                    .Reverse()
+                    .Index()
+                    .Aggregate("", DeclareNestedClass)}
 
 
                  """
@@ -266,11 +265,12 @@ sealed partial record Scaffolder(
                       get => {{ReferenceField}} switch
                       {
                           {{Symbols
+                             .Index()
                              .OrderByDescending(Inheritance)
                              .Index()
                              .Select(x => $"{(x.Index == Symbols.Length - 1 ? "_" :
-                                 x.Item.IsEmpty ? CSharp("null") :
-                                 x.Item.NotNullableAnnotated)} => {x.Index},")
+                                 x.Item.Item.IsEmpty ? CSharp("null") :
+                                 x.Item.Item.NotNullableAnnotated)} => {x.Item.Index},")
                              .Conjoin("\n            ")}}
                       };
                       {{Pure}}
@@ -620,7 +620,11 @@ sealed partial record Scaffolder(
     string Name { get; } = Named.GetFullyQualifiedName();
 
     [Pure]
-    string NullableName { get; } = new MemberSymbol(Named, "").NullableAnnotated;
+    string NullableName { get; } = new MemberSymbol(Named, "").NullableAnnotated is var name &&
+        name.StartsWith(nameof(Emik)) &&
+        FullyPolyfillAttributes is true
+            ? CSharp($"global::{name}")
+            : name;
 
     [Pure]
     string Source =>
@@ -678,6 +682,22 @@ sealed partial record Scaffolder(
 
     [MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
     static string CSharp([StringSyntax("C#")] string x) => x;
+
+    [Pure]
+    static string DeclareNestedClass(string x, (int Index, (bool? IsRefLikeType, string Name, bool IsFirst) Item) y) =>
+        CSharp(
+            $$"""
+                  {{HideFromEditor}}
+                  {{(y.Item.IsFirst ? "private" : "internal")
+                  }} {{(y.Index is 0 ? "sealed" : "static")}} class {{y.Item.Name
+                  }}{{(y.Item.IsRefLikeType is not null ? $"<T{y.Item.Name}Discard>" : "")
+                  }}{{(y.Index is 0 ? $" : global::{typeof(Attribute)}" : "")
+                  }}{{(y.Item.IsRefLikeType is true ? CSharp($"\n        where T{y.Item.Name}Discard : allows ref struct") : "")
+                  }}
+                  {{{(y.Index is 0 ? "" : $"\n{x.SplitLines().Select(x => $"    {x}").Conjoin("\n")}")}}
+                  }
+              """
+        );
 
     [Pure]
     static string WrapNamespaceOrType(string acc, ISymbol next) =>
@@ -739,11 +759,11 @@ sealed partial record Scaffolder(
         (x.Type is not ITypeParameterSymbol and { BaseType: null } || HasConflict(x) || IsNoninitial(x));
 
     [Pure]
-    int Inheritance(MemberSymbol x) =>
+    int Inheritance((int Index, MemberSymbol Item) tuple) =>
         Symbols.Count(
-            y => RoslynComparer.Signature.Equals(x.Type, y.Type) ||
-                x.Type.AllInterfaces.Contains(y.Type, RoslynComparer.Signature) ||
-                x.Type.FindSmallPathToNull(x => x.BaseType).Contains(y.Type, RoslynComparer.Signature)
+            y => RoslynComparer.Signature.Equals(tuple.Item.Type, y.Type) ||
+                tuple.Item.Type.AllInterfaces.Contains(y.Type, RoslynComparer.Signature) ||
+                tuple.Item.Type.FindSmallPathToNull(x => x.BaseType).Contains(y.Type, RoslynComparer.Signature)
         );
 
     [Pure]
@@ -1003,26 +1023,6 @@ sealed partial record Scaffolder(
                   }
 
 
-              """
-        );
-    }
-
-    [Pure]
-    string DeclareNestedClass(string x, (int Index, (bool IsRefLikeType, string Name) Item) y)
-    {
-        var choiceIndex = Symbols.Length + (MutablePublicly is not null).ToByte();
-        var isChoiceClass = y.Index == choiceIndex;
-        var isVariantClass = !isChoiceClass && (MutablePublicly is null || y.Index != choiceIndex - 1);
-
-        return CSharp(
-            $$"""
-                  {{HideFromEditor}}
-                  {{(isChoiceClass ? "private" : "internal")}} {{(y.Index is 0 ? "sealed" : "static")
-                  }} class {{y.Item.Name}}{{(isVariantClass ? $"<T{y.Item.Name}Discard>" : "")
-                  }}{{(y.Index is 0 ? $" : global::{typeof(Attribute)}" : "")
-                  }}{{(y.Item.IsRefLikeType ? $"\n        where T{y.Item.Name}Discard : allows ref struct" : "")}}
-                  {{{(y.Index is 0 ? "" : $"\n{x.SplitLines().Select(x => $"    {x}").Conjoin("\n")}")}}
-                  }
               """
         );
     }

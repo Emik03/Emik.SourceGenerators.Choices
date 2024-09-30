@@ -23,11 +23,13 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// If <see langword="false"/>, the fields and properties generated will be mutable, but only from within the type.
     /// If <see langword="true"/>, the fields and properties generated will be publicly mutable.
     /// </param>
-    /// <param name="polyfillAttributes">
-    /// Determines whether to generate private attributes required to make dot-declaration
-    /// syntax work. Set this to <see langword="true"/> if you have annotated the parameter
-    /// <paramref name="named"/> using the dot-declaration feature; Nested class attributes such as
-    /// <c>[Choice.Public.Foo&lt;Bar&gt;.Baz&lt;Qux&gt;]</c> versus <c>[Choice(true, typeof((Bar Foo, Qux Baz)))]</c>.
+    /// <param name="fullyPolyfillAttributes">
+    /// Determines whether to generate private attributes required to make dot-declaration syntax work. Set this
+    /// to <see langword="null"/> if you are not using dot-declaration syntax, causing no attributes to be generated.
+    /// Set this to <see langword="false"/> if you have annotated the parameter <paramref name="named"/>
+    /// using the unqualified form, directly mentioning <c>[Choice]</c>. Set this to <see langword="true"/>
+    /// if the annotation is fully qualified as <c>[Emik.Choice]</c>. An example of the dot declaration syntax would be
+    /// <c>[Choice.Public.Foo&lt;Bar&gt;.Baz&lt;Qux&gt;]</c> and not <c>[Choice(typeof(true, (Bar Foo, Qux Baz)))]</c>.
     /// </param>
     /// <param name="members">
     /// The variants of the parameter <paramref name="named"/>. Variants created from a <see cref="IFieldSymbol"/> or
@@ -46,12 +48,12 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     public static GeneratedSource? Transform(
         INamedTypeSymbol? named,
         bool? publiclyMutable = null,
-        bool polyfillAttributes = false,
+        bool? fullyPolyfillAttributes = null,
         params MemberSymbol[] members
     ) =>
         named is { IsTupleType: false } &&
         members.Length >= MinimumMembers &&
-        (named, AsImmutableArray(members), publiclyMutable, polyfillAttributes) is var raw &&
+        (named, AsImmutableArray(members), publiclyMutable, fullyPolyfillAttributes) is var raw &&
         HasSufficientMembers(raw)
             ? new Scaffolder(raw).Result
             : null;
@@ -139,8 +141,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
                     Left: IdentifierNameSyntax { Identifier.Text: Choice } or
                     QualifiedNameSyntax
                     {
-                        Left: AliasQualifiedNameSyntax { Name.Identifier.Text: nameof(Emik) } or
-                        IdentifierNameSyntax { Identifier.Text: nameof(Emik) },
+                        Left: IdentifierNameSyntax { Identifier.Text: nameof(Emik) },
                         Right: IdentifierNameSyntax { Identifier.Text: Choice },
                     } or
                     QualifiedNameSyntax
@@ -174,15 +175,14 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 
         var fields = ImmutableArray.CreateBuilder<MemberSymbol>();
         bool? mutablePublicly = null;
+        var e = false;
 
         for (var n = attribute.Name; n is QualifiedNameSyntax q; n = q.Left)
         {
             token.ThrowIfCancellationRequested();
 
             if (q.Right is IdentifierNameSyntax { Identifier.Text: var right })
-                if (q.Left is AliasQualifiedNameSyntax { Name.Identifier.Text: nameof(Emik) } or
-                        IdentifierNameSyntax { Identifier.Text: nameof(Emik) } &&
-                    right is Choice)
+                if (right is Choice && q.Left is IdentifierNameSyntax { Identifier.Text: nameof(Emik) } && (e = true))
                     break;
                 else if (right is nameof(Accessibility.Private) or nameof(Accessibility.Public))
                     mutablePublicly = right is nameof(Accessibility.Public);
@@ -205,7 +205,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         }
 
         fields.Reverse();
-        return (named, fields.ToImmutable(), mutablePublicly, true);
+        return (named, fields.ToImmutable(), mutablePublicly, e);
     }
 
     /// <summary>Extracts the members from the node.</summary>
@@ -255,6 +255,6 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             _ => ImmutableArray<MemberSymbol>.Empty,
         };
 
-        return (target, fields, mutablePublicly, false);
+        return (target, fields, mutablePublicly, null);
     }
 }
