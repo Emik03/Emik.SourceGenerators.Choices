@@ -375,7 +375,7 @@ sealed partial record Scaffolder(
                 $"""
                      {Annotation}
                      private {PrivatelyReadOnly}{(Common is null ? "object" : new MemberSymbol(Common, "").NullableAnnotated)
-                     } {ReferenceField}{(UsesPrimaryConstructor ? CSharp($" = {Symbols[0].ParameterName}") : "")};
+                     } {ReferenceField}{(UsesPrimaryConstructor && Reference.Contains(Symbols[0]) ? CSharp($" = {Symbols[0].ParameterName}") : "")};
 
 
                  """
@@ -388,7 +388,7 @@ sealed partial record Scaffolder(
             ? CSharp(
                 $"""
                      {Annotation}
-                     private {PrivatelyReadOnly}{(UsesPrimaryConstructor ? Symbols[0].Unsafe : "")
+                     private {PrivatelyReadOnly}{(UsesPrimaryConstructor && Unmanaged.Contains(Symbols[0]) ? Symbols[0].Unsafe : "")
                      }Unmanaged {UnmanagedField}{(UsesPrimaryConstructor ? CSharp($" = new Unmanaged() {{ {Symbols[0].FieldName
                      } = {Symbols[0].ParameterName} }}") : "")};
 
@@ -952,13 +952,14 @@ sealed partial record Scaffolder(
     }
 
     [Pure]
-    string DeclareField(MemberSymbol x, int i) =>
+    string DeclareField(MemberSymbol x) =>
         x.IsEmpty || Members.Any(x.ReferenceEquals) || IsNoninitial(x)
             ? ""
             : CSharp(
                 $"""
                      private {x.Unsafe}{PrivatelyReadOnly}{x.NullableAnnotated} {
-                     x.FieldName}{(UsesPrimaryConstructor && i is 0 ? CSharp($" = {x.ParameterName}") : "")};
+                         x.FieldName}{(UsesPrimaryConstructor && Symbols.Except(Unmanaged).FirstOrDefault().Equals(x)
+                             ? CSharp($" = {x.ParameterName}") : "")};
 
 
                  """
