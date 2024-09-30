@@ -958,7 +958,7 @@ sealed partial record Scaffolder(
             : CSharp(
                 $"""
                      private {x.Unsafe}{PrivatelyReadOnly}{x.NullableAnnotated} {
-                         x.FieldName}{(UsesPrimaryConstructor && Symbols.Except(Unmanaged).FirstOrDefault().Equals(x)
+                         x.FieldName}{(UsesPrimaryConstructor && Symbols.Except(Unmanaged).Any(x.Equals)
                              ? CSharp($" = {x.ParameterName}") : "")};
 
 
