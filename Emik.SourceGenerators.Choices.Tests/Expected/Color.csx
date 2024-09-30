@@ -510,10 +510,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Collections.IList)_reference!).Clear();
                                 break;
-                            case 1:
+                            default:
                                 ((System.Collections.IList)_reference!).Clear();
                                 break;
                         }
@@ -546,10 +546,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Collections.IList)_reference!).Insert(index, value);
                                 break;
-                            case 1:
+                            default:
                                 ((System.Collections.IList)_reference!).Insert(index, value);
                                 break;
                         }
@@ -562,10 +562,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Collections.IList)_reference!).Remove(value);
                                 break;
-                            case 1:
+                            default:
                                 ((System.Collections.IList)_reference!).Remove(value);
                                 break;
                         }
@@ -578,10 +578,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Collections.IList)_reference!).RemoveAt(index);
                                 break;
-                            case 1:
+                            default:
                                 ((System.Collections.IList)_reference!).RemoveAt(index);
                                 break;
                         }
@@ -636,10 +636,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Collections.ICollection)_reference!).CopyTo(array, index);
                                 break;
-                            case 1:
+                            default:
                                 ((System.Collections.ICollection)_reference!).CopyTo(array, index);
                                 break;
                         }
@@ -738,10 +738,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).CopyTo(array, index);
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).CopyTo(array, index);
                                 break;
                         }
@@ -874,10 +874,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).Initialize();
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).Initialize();
                                 break;
                         }
@@ -890,10 +890,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index);
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index);
                                 break;
                         }
@@ -906,10 +906,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index1, index2);
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index1, index2);
                                 break;
                         }
@@ -922,10 +922,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index1, index2, index3);
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index1, index2, index3);
                                 break;
                         }
@@ -938,10 +938,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, indices);
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, indices);
                                 break;
                         }
@@ -954,10 +954,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index);
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index);
                                 break;
                         }
@@ -970,10 +970,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index1, index2);
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index1, index2);
                                 break;
                         }
@@ -986,10 +986,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, index1, index2, index3);
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, index1, index2, index3);
                                 break;
                         }
@@ -1002,10 +1002,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<int>[]?)_reference!).SetValue(value, indices);
                                 break;
-                            case 1:
+                            default:
                                 ((Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference!).SetValue(value, indices);
                                 break;
                         }

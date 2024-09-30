@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices.Tests;
 
-public abstract class Case([StringSyntax("C#")] string? source)
+public abstract class Test([StringSyntax("C#")] string? source)
 {
-    public sealed class Nothing() : Case(null);
+    public sealed class Nothing() : Test(null);
 
-    public sealed class Color() : Case(
+    public sealed class Color() : Test(
         """
         [Choice]
         partial class Color(Color.OrRef<int>[]? rgba, Color.OrRef<Number>[]? gradient)
@@ -17,7 +17,7 @@ public abstract class Case([StringSyntax("C#")] string? source)
         """
     );
 
-    public sealed class ConditionDescription() : Case(
+    public sealed class ConditionDescription() : Test(
         """
         [Choice.And<BinaryCondition>.Or<BinaryCondition>.Included<InclusionCondition>.Excluded<InclusionCondition>]
         partial class ConditionDescription
@@ -38,13 +38,13 @@ public abstract class Case([StringSyntax("C#")] string? source)
     );
 
     public sealed class DotFruit()
-        : Case("[Choice.Apple<byte>.Pear<int>.Orange<BindingFlags>] sealed partial class DotFruit;");
+        : Test("[Choice.Apple<byte>.Pear<int>.Orange<BindingFlags>] sealed partial class DotFruit;");
 
-    public sealed class DotKMModule() : Case(
+    public sealed class DotKMModule() : Test(
         "[Choice.Regular<KMBombModule>.Needy<KMNeedyModule>.Other<UnityEngine.Component>] partial class DotKMModule;"
     );
 
-    public sealed class Enums() : Case(
+    public sealed class Enums() : Test(
         """
         [Choice(
             typeof((System.Reflection.AssemblyNameFlags AssemblyNames,
@@ -56,7 +56,7 @@ public abstract class Case([StringSyntax("C#")] string? source)
         """
     );
 
-    public sealed class KMModule() : Case(
+    public sealed class KMModule() : Test(
         """
         [Choice(typeof((KMBombModule Regular, KMNeedyModule Needy)))]
         partial class KMModule
@@ -67,9 +67,9 @@ public abstract class Case([StringSyntax("C#")] string? source)
     );
 
     public sealed class Number()
-        : Case("[Choice(typeof((int Integer, float Floating, ValueTuple Unknown)), false)] partial class Number;");
+        : Test("[Choice(typeof((int Integer, float Floating, ValueTuple Unknown)), false)] partial class Number;");
 
-    public sealed class Option1() : Case(
+    public sealed class Option1() : Test(
         """
         [Choice]
         readonly partial struct Option<T>
@@ -83,9 +83,9 @@ public abstract class Case([StringSyntax("C#")] string? source)
     );
 
     public sealed class Pointers()
-        : Case("[Choice] unsafe partial struct Pointers(byte* bytes, char* chars, nint native);");
+        : Test("[Choice] unsafe partial struct Pointers(byte* bytes, char* chars, nint native);");
 
-    public sealed class Result2() : Case(
+    public sealed class Result2() : Test(
         """
         [Choice]
         readonly partial record struct Result<TOk, TErr>
@@ -97,7 +97,7 @@ public abstract class Case([StringSyntax("C#")] string? source)
         """
     );
 
-    public sealed class SpanEncodings() : Case(
+    public sealed class SpanEncodings() : Test(
         """
         [Choice(true)]
         ref partial struct SpanEncodings
@@ -110,13 +110,13 @@ public abstract class Case([StringSyntax("C#")] string? source)
     );
 
     public sealed class SpanEncodingsDot()
-        : Case("[Choice.Public.Utf8<Span<byte>>.Utf16<Span<char>>] ref partial struct SpanEncodingsDot;");
+        : Test("[Choice.Public.Utf8<Span<byte>>.Utf16<Span<char>>] ref partial struct SpanEncodingsDot;");
 
     public sealed class SuperTask()
-        : Case("[Choice(typeof((Task Left, Task Right)), false)] partial record SuperTask;");
+        : Test("[Choice(typeof((Task Left, Task Right)), false)] partial record SuperTask;");
 
     public sealed class Tasks()
-        : Case("[Choice(typeof((Task Referenced, ValueTask Valued)), true)] partial struct Tasks;");
+        : Test("[Choice(typeof((Task Referenced, ValueTask Valued)), true)] partial struct Tasks;");
 
     [Fact]
     public async Task RunAsync()
@@ -146,7 +146,7 @@ public abstract class Case([StringSyntax("C#")] string? source)
         var absolute = Path.Join(directory, "Expected", $"{memberName}.csx");
         var text = await File.ReadAllTextAsync(absolute);
         verify.TestState.GeneratedSources.Add((name, SourceText.From(text, Encoding.UTF8)));
-        await verify.RunAsync().ConfigureAwait(false);
+        await verify.RunAsync();
     }
 
     static string Wrap(string? source) => // language=c#

@@ -519,10 +519,10 @@ namespace Emik
                     {
                         switch (_discriminator)
                         {
-                            default:
+                            case 0:
                                 _utf8.Clear();
                                 break;
-                            case 1:
+                            default:
                                 _utf16.Clear();
                                 break;
                         }

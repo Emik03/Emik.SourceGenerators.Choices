@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices;
-#pragma warning disable CA1502, IDE0039, MA0051
+#pragma warning disable MA0051
 sealed partial record Scaffolder
 {
     [Pure]
@@ -49,15 +49,13 @@ sealed partial record Scaffolder
             )
         );
 
-        var name = (IParameterSymbol x) => $"{x.RefKind.KeywordInParameter()}{x.Name}";
-
         string FullyQualified(IParameterSymbol x) =>
             $"{Attributes(x, ' ')}{PrefixAnnotations(x)
             }{x.Type.GetFullyQualifiedNameWithNullabilityAnnotations()} {x.Name
             }{SuffixAnnotations(x)}";
 
         StringBuilder AppendParameterSymbols(char begin, ImmutableArray<IParameterSymbol> all, char end, bool typed) =>
-            builder.Append(begin).AppendMany(all.Select(typed ? FullyQualified : name)).Append(end);
+            builder.Append(begin).AppendMany(all.Select(typed ? FullyQualified : NameGetter())).Append(end);
 
         StringBuilder AppendParameters(StringBuilder builder) => AppendParametersTyped(builder, false);
 
@@ -98,7 +96,7 @@ sealed partial record Scaffolder
                 if (isSwitchCase)
                     return CSharp(
                         $"""
-                                 {(i == Symbols.Length - 1 ? $"case {i}" : "default")}:
+                                 {(i == Symbols.Length - 1 ? "default" : $"case {i}")}:
                                          {cast}{member}
                          """
                     );
@@ -332,4 +330,7 @@ sealed partial record Scaffolder
         x is null || Symbols[i].Type.IsReferenceType
             ? null
             : (Symbols[i].XmlName, x.Replace('<', '{').Replace('>', '}'));
+
+    [Pure]
+    static Func<IParameterSymbol, string> NameGetter() => x => $"{x.RefKind.KeywordInParameter()}{x.Name}";
 }

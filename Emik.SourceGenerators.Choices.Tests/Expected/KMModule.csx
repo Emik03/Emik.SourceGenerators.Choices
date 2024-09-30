@@ -542,10 +542,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).HandlePass();
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).HandlePass();
                                 break;
                         }
@@ -558,10 +558,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).HandleStrike();
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).HandleStrike();
                                 break;
                         }
@@ -584,10 +584,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).Invoke(methodName, time);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).Invoke(methodName, time);
                                 break;
                         }
@@ -600,10 +600,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).InvokeRepeating(methodName, time, repeatRate);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).InvokeRepeating(methodName, time, repeatRate);
                                 break;
                         }
@@ -616,10 +616,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).CancelInvoke();
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).CancelInvoke();
                                 break;
                         }
@@ -632,10 +632,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).CancelInvoke(methodName);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).CancelInvoke(methodName);
                                 break;
                         }
@@ -710,10 +710,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).StopCoroutine(methodName);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).StopCoroutine(methodName);
                                 break;
                         }
@@ -726,10 +726,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).StopCoroutine(routine);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).StopCoroutine(routine);
                                 break;
                         }
@@ -742,10 +742,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).StopCoroutine(routine);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).StopCoroutine(routine);
                                 break;
                         }
@@ -758,10 +758,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).StopAllCoroutines();
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).StopAllCoroutines();
                                 break;
                         }
@@ -946,10 +946,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).GetComponentsInChildren<T>(includeInactive, result);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(includeInactive, result);
                                 break;
                         }
@@ -972,10 +972,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).GetComponentsInChildren<T>(results);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(results);
                                 break;
                         }
@@ -1040,10 +1040,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).GetComponentsInParent<T>(includeInactive, results);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).GetComponentsInParent<T>(includeInactive, results);
                                 break;
                         }
@@ -1076,10 +1076,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).GetComponents(type, results);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).GetComponents(type, results);
                                 break;
                         }
@@ -1092,10 +1092,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).GetComponents<T>(results);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).GetComponents<T>(results);
                                 break;
                         }
@@ -1128,10 +1128,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).SendMessageUpwards(methodName, value, options);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).SendMessageUpwards(methodName, value, options);
                                 break;
                         }
@@ -1145,10 +1145,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).SendMessageUpwards(methodName, value);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).SendMessageUpwards(methodName, value);
                                 break;
                         }
@@ -1162,10 +1162,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).SendMessageUpwards(methodName);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).SendMessageUpwards(methodName);
                                 break;
                         }
@@ -1178,10 +1178,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).SendMessageUpwards(methodName, options);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).SendMessageUpwards(methodName, options);
                                 break;
                         }
@@ -1194,10 +1194,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).SendMessage(methodName, value, options);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).SendMessage(methodName, value, options);
                                 break;
                         }
@@ -1211,10 +1211,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).SendMessage(methodName, value);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).SendMessage(methodName, value);
                                 break;
                         }
@@ -1228,10 +1228,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).SendMessage(methodName);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).SendMessage(methodName);
                                 break;
                         }
@@ -1244,10 +1244,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).SendMessage(methodName, options);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).SendMessage(methodName, options);
                                 break;
                         }
@@ -1260,10 +1260,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).BroadcastMessage(methodName, parameter, options);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).BroadcastMessage(methodName, parameter, options);
                                 break;
                         }
@@ -1277,10 +1277,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).BroadcastMessage(methodName, parameter);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).BroadcastMessage(methodName, parameter);
                                 break;
                         }
@@ -1294,10 +1294,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).BroadcastMessage(methodName);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).BroadcastMessage(methodName);
                                 break;
                         }
@@ -1310,10 +1310,10 @@ namespace Emik
                     {
                         switch (Discriminator)
                         {
-                            default:
+                            case 0:
                                 ((KMBombModule)_reference!).BroadcastMessage(methodName, options);
                                 break;
-                            case 1:
+                            default:
                                 ((KMNeedyModule)_reference!).BroadcastMessage(methodName, options);
                                 break;
                         }

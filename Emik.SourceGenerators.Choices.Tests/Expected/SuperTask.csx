@@ -580,10 +580,10 @@ namespace Emik
                     {
                         switch (_discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Threading.Tasks.Task)_reference!).Dispose();
                                 break;
-                            case 1:
+                            default:
                                 ((System.Threading.Tasks.Task)_reference!).Dispose();
                                 break;
                         }
@@ -606,10 +606,10 @@ namespace Emik
                     {
                         switch (_discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Threading.Tasks.Task)_reference!).RunSynchronously();
                                 break;
-                            case 1:
+                            default:
                                 ((System.Threading.Tasks.Task)_reference!).RunSynchronously();
                                 break;
                         }
@@ -622,10 +622,10 @@ namespace Emik
                     {
                         switch (_discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Threading.Tasks.Task)_reference!).RunSynchronously(scheduler);
                                 break;
-                            case 1:
+                            default:
                                 ((System.Threading.Tasks.Task)_reference!).RunSynchronously(scheduler);
                                 break;
                         }
@@ -638,10 +638,10 @@ namespace Emik
                     {
                         switch (_discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Threading.Tasks.Task)_reference!).Start();
                                 break;
-                            case 1:
+                            default:
                                 ((System.Threading.Tasks.Task)_reference!).Start();
                                 break;
                         }
@@ -654,10 +654,10 @@ namespace Emik
                     {
                         switch (_discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Threading.Tasks.Task)_reference!).Start(scheduler);
                                 break;
-                            case 1:
+                            default:
                                 ((System.Threading.Tasks.Task)_reference!).Start(scheduler);
                                 break;
                         }
@@ -670,10 +670,10 @@ namespace Emik
                     {
                         switch (_discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Threading.Tasks.Task)_reference!).Wait();
                                 break;
-                            case 1:
+                            default:
                                 ((System.Threading.Tasks.Task)_reference!).Wait();
                                 break;
                         }
@@ -706,10 +706,10 @@ namespace Emik
                     {
                         switch (_discriminator)
                         {
-                            default:
+                            case 0:
                                 ((System.Threading.Tasks.Task)_reference!).Wait(cancellationToken);
                                 break;
-                            case 1:
+                            default:
                                 ((System.Threading.Tasks.Task)_reference!).Wait(cancellationToken);
                                 break;
                         }

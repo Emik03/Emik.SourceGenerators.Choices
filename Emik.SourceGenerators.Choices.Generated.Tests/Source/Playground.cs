@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MPL-2.0
 // ReSharper disable RedundantNameQualifier
+global using Attribute = System.Attribute;
+
 // ReSharper disable once CheckNamespace EmptyNamespace
-namespace Emik.SourceGenerators.Choices.Tests; // ReSharper disable once RedundantNameQualifier
+namespace Emik.SourceGenerators.Choices.Tests;
 #pragma warning disable 169
 extern alias unity;
 using Component = UnityEngine.Component;
@@ -86,5 +88,5 @@ partial class ConditionDescription
     );
 }
 
-[Choice]
+[Choice] // ReSharper disable once StructCanBeMadeReadOnly
 unsafe partial struct Pointers(byte* bytes, char* chars, nint native);
