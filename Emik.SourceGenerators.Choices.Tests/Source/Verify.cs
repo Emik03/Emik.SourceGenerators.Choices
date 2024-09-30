@@ -15,9 +15,36 @@ public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, Defau
             OperatingSystem.IsMacOS() ? Path.Join(home, "Library/Application Support/Steam") :
             OperatingSystem.IsLinux() ? Path.Join(home, ".steam/steam") : null);
 
-    /// <summary>Gets the directory for additional assemblies.</summary>
-    static string AssemblyDirectory { get; } =
-        Path.Join(SteamRoot, "steamapps", "common", "Keep Talking and Nobody Explodes", "ktane_Data", "Managed");
+    /// <summary>Gets the root of unity, if installed.</summary>
+    static string? UnityRoot { get; } =
+        ((Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) is var home &&
+            Path.Join(home, "Unity", "Hub", "Editor") is var linux &&
+            Directory.Exists(linux) ? linux :
+            Path.Join(home, "Applications", "Unity", "Hub", "Editor") is var macos &&
+            Directory.Exists(macos) ? macos :
+            Path.Join("C:", "Program Files", "Unity", "Hub", "Editor") is var windows &&
+            Directory.Exists(windows) ? windows : null) is { } unityHub
+            ? Directory.GetDirectories(unityHub)
+            : Directory.GetDirectories(home, "Unity-*")).FirstOrDefault();
+
+    static ImmutableArray<PortableExecutableReference> KMFramework { get; } =
+        Path.Join(
+            SteamRoot,
+            "steamapps",
+            "common",
+            "Keep Talking and Nobody Explodes",
+            "ktane_Data",
+            "Managed",
+            "KMFramework.dll"
+        ) is var km &&
+        File.Exists(km)
+            ? [MetadataReference.CreateFromFile(km)]
+            : [];
+
+    static ImmutableArray<PortableExecutableReference> UnityEngine { get; } =
+        Path.Join(UnityRoot, "Editor", "Data", "Managed", "UnityEngine.dll") is var unity && File.Exists(unity)
+            ? [MetadataReference.CreateFromFile(unity)]
+            : [];
 
     /// <inheritdoc />
     protected override IEnumerable<Type> GetSourceGenerators() =>
@@ -35,10 +62,6 @@ public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, Defau
     ) =>
         (await base.CreateProjectImplAsync(primaryProject, additionalProjects, token))
        .WithMetadataReferences(Net90.References.All)
-       .AddMetadataReferences(
-            ((string[])["KMFramework.dll", "UnityEngine.dll", "UnityEngine.CoreModule.dll"])
-           .Select(x => Path.Join(AssemblyDirectory, x))
-           .Where(File.Exists)
-           .Select(x => MetadataReference.CreateFromFile(x))
-        );
+       .AddMetadataReferences(KMFramework)
+       .AddMetadataReferences(UnityEngine);
 }

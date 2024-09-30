@@ -491,6 +491,12 @@ namespace Emik
                             0 => ((KMBombModule)_reference!).ModuleType,
                             _ => ((KMNeedyModule)_reference!).ModuleType,
                         };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).ModuleType = value,
+                            _ => ((KMNeedyModule)_reference!).ModuleType = value,
+                        };
                     }
 
                     /// <inheritdoc cref="KMBombModule.ModuleDisplayName"/>
@@ -503,6 +509,12 @@ namespace Emik
                             0 => ((KMBombModule)_reference!).ModuleDisplayName,
                             _ => ((KMNeedyModule)_reference!).ModuleDisplayName,
                         };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).ModuleDisplayName = value,
+                            _ => ((KMNeedyModule)_reference!).ModuleDisplayName = value,
+                        };
                     }
 
                     /// <inheritdoc cref="KMBombModule.RequiresTimerVisibility"/>
@@ -514,6 +526,12 @@ namespace Emik
                         {
                             0 => ((KMBombModule)_reference!).RequiresTimerVisibility,
                             _ => ((KMNeedyModule)_reference!).RequiresTimerVisibility,
+                        };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).RequiresTimerVisibility = value,
+                            _ => ((KMNeedyModule)_reference!).RequiresTimerVisibility = value,
                         };
                     }
 
@@ -759,6 +777,12 @@ namespace Emik
                             0 => ((KMBombModule)_reference!).useGUILayout,
                             _ => ((KMNeedyModule)_reference!).useGUILayout,
                         };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).useGUILayout = value,
+                            _ => ((KMNeedyModule)_reference!).useGUILayout = value,
+                        };
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.runInEditMode"/>
@@ -771,6 +795,12 @@ namespace Emik
                             0 => ((KMBombModule)_reference!).runInEditMode,
                             _ => ((KMNeedyModule)_reference!).runInEditMode,
                         };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).runInEditMode = value,
+                            _ => ((KMNeedyModule)_reference!).runInEditMode = value,
+                        };
                     }
 
                     /// <inheritdoc cref="UnityEngine.Behaviour.enabled"/>
@@ -782,6 +812,12 @@ namespace Emik
                         {
                             0 => ((KMBombModule)_reference!).enabled,
                             _ => ((KMNeedyModule)_reference!).enabled,
+                        };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).enabled = value,
+                            _ => ((KMNeedyModule)_reference!).enabled = value,
                         };
                     }
 
@@ -1317,6 +1353,12 @@ namespace Emik
                             0 => ((KMBombModule)_reference!).tag,
                             _ => ((KMNeedyModule)_reference!).tag,
                         };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).tag = value,
+                            _ => ((KMNeedyModule)_reference!).tag = value,
+                        };
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.rigidbody"/>
@@ -1561,6 +1603,12 @@ namespace Emik
                             0 => ((KMBombModule)_reference!).name,
                             _ => ((KMNeedyModule)_reference!).name,
                         };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).name = value,
+                            _ => ((KMNeedyModule)_reference!).name = value,
+                        };
                     }
 
                     /// <inheritdoc cref="UnityEngine.Object.hideFlags"/>
@@ -1572,6 +1620,12 @@ namespace Emik
                         {
                             0 => ((KMBombModule)_reference!).hideFlags,
                             _ => ((KMNeedyModule)_reference!).hideFlags,
+                        };
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        set => _ = Discriminator switch
+                        {
+                            0 => ((KMBombModule)_reference!).hideFlags = value,
+                            _ => ((KMNeedyModule)_reference!).hideFlags = value,
                         };
                     }
 

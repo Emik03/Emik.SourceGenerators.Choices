@@ -152,6 +152,7 @@ public abstract class Case([StringSyntax("C#")] string? source)
     static string Wrap(string? source) => // language=c#
         $$"""
           using System;
+          using System.Reflection;
           using System.Text.Json;
           using System.Threading.Tasks;
           using Emik;

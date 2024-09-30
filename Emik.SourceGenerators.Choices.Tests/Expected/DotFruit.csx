@@ -11,10 +11,10 @@ namespace Emik
         {
             namespace Tests
             {
-                /// <inheritdoc cref="Emik.SourceGenerators.Choices.Tests.KMModule"/>
+                /// <inheritdoc cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/>
                 /// <remarks>
                 ///     <para>
-                ///         The type <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/>
+                ///         The type <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/>
                 ///         is an immutable disjoint union representing the following variants:
                 ///     </para>
                 ///     <list type="table">
@@ -37,11 +37,11 @@ namespace Emik
                 ///         </listheader>
                 ///         <item>
                 ///             <term>
-                ///                 <see cref="Regular"/> <see langword="as"/> <see cref="KMBombModule"/>
+                ///                 <see cref="Apple"/> <see langword="as"/> <see cref="byte"/>
                 ///                 <list type="bullet">
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="IsRegular"/>
+                ///                             <see cref="IsApple"/>
                 ///                         </description>
                 ///                     </item>
                 ///                     <item>
@@ -49,17 +49,17 @@ namespace Emik
                 ///                             <list type="number">
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="OfRegular(KMBombModule)"/>
+                ///                                         <see cref="OfApple(byte)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.KMModule(KMBombModule)"/>
+                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit(byte)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="op_Implicit(KMBombModule)"/>
+                ///                                         <see cref="op_Implicit(byte)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                             </list>
@@ -70,11 +70,11 @@ namespace Emik
                 ///         </item>
                 ///         <item>
                 ///             <term>
-                ///                 <see cref="Needy"/> <see langword="as"/> <see cref="KMNeedyModule"/>
+                ///                 <see cref="Pear"/> <see langword="as"/> <see cref="int"/>
                 ///                 <list type="bullet">
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="IsNeedy"/>
+                ///                             <see cref="IsPear"/>
                 ///                         </description>
                 ///                     </item>
                 ///                     <item>
@@ -82,17 +82,50 @@ namespace Emik
                 ///                             <list type="number">
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="OfNeedy(KMNeedyModule)"/>
+                ///                                         <see cref="OfPear(int)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.KMModule(KMNeedyModule)"/>
+                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit(int)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="op_Implicit(KMNeedyModule)"/>
+                ///                                         <see cref="op_Implicit(int)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                             </list>
+                ///                         </description>
+                ///                     </item>
+                ///                 </list>
+                ///             </term>
+                ///         </item>
+                ///         <item>
+                ///             <term>
+                ///                 <see cref="Orange"/> <see langword="as"/> <see cref="System.Reflection.BindingFlags"/>
+                ///                 <list type="bullet">
+                ///                     <item>
+                ///                         <description>
+                ///                             <see cref="IsOrange"/>
+                ///                         </description>
+                ///                     </item>
+                ///                     <item>
+                ///                         <description>
+                ///                             <list type="number">
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="OfOrange(System.Reflection.BindingFlags)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit(System.Reflection.BindingFlags)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="op_Implicit(System.Reflection.BindingFlags)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                             </list>
@@ -103,171 +136,263 @@ namespace Emik
                 ///         </item>
                 ///     </list>
                 /// </remarks>
-                partial class KMModule :
+                partial class DotFruit :
                     global::System.IComparable,
                     global::System.IComparable<object>,
-                    global::System.IComparable<global::Emik.SourceGenerators.Choices.Tests.KMModule>,
+                    global::System.IComparable<global::Emik.SourceGenerators.Choices.Tests.DotFruit>,
 #if NET7_0_OR_GREATER
-                    global::System.Numerics.IComparisonOperators<global::Emik.SourceGenerators.Choices.Tests.KMModule, global::Emik.SourceGenerators.Choices.Tests.KMModule, bool>,
+                    global::System.Numerics.IComparisonOperators<global::Emik.SourceGenerators.Choices.Tests.DotFruit, global::Emik.SourceGenerators.Choices.Tests.DotFruit, bool>,
 #endif
                     global::System.IEquatable<object>,
-                    global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.KMModule>
+                    global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.DotFruit>,
+                    System.IConvertible,
+                    System.ISpanFormattable,
+                    System.IFormattable
                 {
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    private byte Discriminator
+                    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+                    private static class Choice
                     {
-                        [global::System.Diagnostics.Contracts.PureAttribute]
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => _reference switch
+                        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+                        internal static class Apple<TAppleDiscard>
                         {
-                            KMBombModule => 0,
-                            _ => 1,
-                        };
-                        [global::System.Diagnostics.Contracts.PureAttribute]
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        set { /* Intentionally left blank. */ }
+                            [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+                            internal static class Pear<TPearDiscard>
+                            {
+                                [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+                                internal sealed class Orange<TOrangeDiscard> : global::System.Attribute
+                                {
+                                }
+                            }
+                        }
+                    }
+
+                    /// <summary>
+                    /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/>.
+                    /// </summary>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
+                    partial struct Unmanaged
+                    {
+                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
+                        internal byte _apple;
+
+                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
+                        internal int _pear;
+
+                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
+                        internal System.Reflection.BindingFlags _orange;
                     }
 
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    private readonly UnityEngine.MonoBehaviour? _reference;
+                    private readonly byte _discriminator;
+
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    private readonly Unmanaged _unmanaged;
 
                     /// <summary>
-                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Regular"/> of type <see cref="KMBombModule"/>.
+                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Apple"/> of type <see cref="byte"/>.
                     /// </summary>
-                    /// <param name="regular">The variant.</param>
+                    /// <param name="apple">The variant.</param>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public KMModule(KMBombModule regular)
+                    public DotFruit(byte apple)
                     {
-                        Discriminator = 0;
-                        _reference = regular;
+                        _discriminator = 0;
+                        _unmanaged._apple = apple;
                     }
 
                     /// <summary>
-                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/>.
+                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Pear"/> of type <see cref="int"/>.
                     /// </summary>
-                    /// <param name="needy">The variant.</param>
+                    /// <param name="pear">The variant.</param>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public KMModule(KMNeedyModule needy)
+                    public DotFruit(int pear)
                     {
-                        Discriminator = 1;
-                        _reference = needy;
+                        _discriminator = 1;
+                        _unmanaged._pear = pear;
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> is the variant <see cref="Regular"/> of type <see cref="KMBombModule"/>.
+                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Orange"/> of type <see cref="System.Reflection.BindingFlags"/>.
+                    /// </summary>
+                    /// <param name="orange">The variant.</param>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public DotFruit(System.Reflection.BindingFlags orange)
+                    {
+                        _discriminator = 2;
+                        _unmanaged._orange = orange;
+                    }
+
+                    /// <summary>
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> is the variant <see cref="Apple"/> of type <see cref="byte"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public bool IsRegular
+                    public bool IsApple
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
-                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Regular")]
-                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "Needy")]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Apple")]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator is 0;
+                        get => _discriminator is 0;
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> is the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/>.
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> is the variant <see cref="Pear"/> of type <see cref="int"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public bool IsNeedy
+                    public bool IsPear
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
-                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Needy")]
-                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "Regular")]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Pear")]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator is 1;
+                        get => _discriminator is 1;
                     }
 
                     /// <summary>
-                    /// Gets the <see cref="KMBombModule"/> variant.
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> is the variant <see cref="Orange"/> of type <see cref="System.Reflection.BindingFlags"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public KMBombModule? Regular
+                    public bool IsOrange
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Orange")]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator is 0 ? (KMBombModule)_reference! : default;
+                        get => _discriminator is 2;
                     }
 
                     /// <summary>
-                    /// Gets the <see cref="KMNeedyModule"/> variant.
+                    /// Gets the <see cref="byte"/> variant.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public KMNeedyModule? Needy
+                    public byte Apple
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator is 1 ? (KMNeedyModule)_reference! : default;
+                        get => _discriminator is 0 ? _unmanaged._apple : default;
                     }
 
                     /// <summary>
-                    /// Implicitly converts the <see cref="KMBombModule"/> parameter to the union.
+                    /// Gets the <see cref="int"/> variant.
                     /// </summary>
-                    /// <param name="regular">The parameter to pass onto the constructor.</param>
-                    /// <returns>The union containing the parameter <paramref name="regular"/>.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public int Pear
+                    {
+                        [global::System.Diagnostics.Contracts.PureAttribute]
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => _discriminator is 1 ? _unmanaged._pear : default;
+                    }
+
+                    /// <summary>
+                    /// Gets the <see cref="System.Reflection.BindingFlags"/> variant.
+                    /// </summary>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public System.Reflection.BindingFlags Orange
+                    {
+                        [global::System.Diagnostics.Contracts.PureAttribute]
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => _discriminator is 2 ? _unmanaged._orange : default;
+                    }
+
+                    /// <summary>
+                    /// Implicitly converts the <see cref="byte"/> parameter to the union.
+                    /// </summary>
+                    /// <param name="apple">The parameter to pass onto the constructor.</param>
+                    /// <returns>The union containing the parameter <paramref name="apple"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.KMModule(KMBombModule regular)
-                        => new global::Emik.SourceGenerators.Choices.Tests.KMModule(regular);
+                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.DotFruit(byte apple)
+                        => new global::Emik.SourceGenerators.Choices.Tests.DotFruit(apple);
 
                     /// <summary>
-                    /// Explicitly converts the union to the target type <see cref="KMBombModule"/>.
+                    /// Explicitly converts the union to the target type <see cref="byte"/>.
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static explicit operator KMBombModule?(global::Emik.SourceGenerators.Choices.Tests.KMModule x)
-                        => x.Regular;
+                    public static explicit operator byte(global::Emik.SourceGenerators.Choices.Tests.DotFruit x)
+                        => x.Apple;
 
                     /// <summary>
-                    /// Implicitly converts the <see cref="KMNeedyModule"/> parameter to the union.
+                    /// Implicitly converts the <see cref="int"/> parameter to the union.
                     /// </summary>
-                    /// <param name="needy">The parameter to pass onto the constructor.</param>
-                    /// <returns>The union containing the parameter <paramref name="needy"/>.</returns>
+                    /// <param name="pear">The parameter to pass onto the constructor.</param>
+                    /// <returns>The union containing the parameter <paramref name="pear"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.KMModule(KMNeedyModule needy)
-                        => new global::Emik.SourceGenerators.Choices.Tests.KMModule(needy);
+                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.DotFruit(int pear)
+                        => new global::Emik.SourceGenerators.Choices.Tests.DotFruit(pear);
 
                     /// <summary>
-                    /// Explicitly converts the union to the target type <see cref="KMNeedyModule"/>.
+                    /// Explicitly converts the union to the target type <see cref="int"/>.
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static explicit operator KMNeedyModule?(global::Emik.SourceGenerators.Choices.Tests.KMModule x)
-                        => x.Needy;
+                    public static explicit operator int(global::Emik.SourceGenerators.Choices.Tests.DotFruit x)
+                        => x.Pear;
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Regular"/> of type <see cref="KMBombModule"/>.
+                    /// Implicitly converts the <see cref="System.Reflection.BindingFlags"/> parameter to the union.
                     /// </summary>
-                    /// <param name="regular">The value to pass into the type.</param>
-                    /// <returns>The union containing the parameter <paramref name="regular"/>.</returns>
+                    /// <param name="orange">The parameter to pass onto the constructor.</param>
+                    /// <returns>The union containing the parameter <paramref name="orange"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static global::Emik.SourceGenerators.Choices.Tests.KMModule OfRegular(KMBombModule regular)
-                        => new global::Emik.SourceGenerators.Choices.Tests.KMModule(regular);
+                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.DotFruit(System.Reflection.BindingFlags orange)
+                        => new global::Emik.SourceGenerators.Choices.Tests.DotFruit(orange);
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/>.
+                    /// Explicitly converts the union to the target type <see cref="System.Reflection.BindingFlags"/>.
                     /// </summary>
-                    /// <param name="needy">The value to pass into the type.</param>
-                    /// <returns>The union containing the parameter <paramref name="needy"/>.</returns>
+                    /// <param name="x">The union to access its property.</param>
+                    /// <returns>The getter of the union <paramref name="x"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static global::Emik.SourceGenerators.Choices.Tests.KMModule OfNeedy(KMNeedyModule needy)
-                        => new global::Emik.SourceGenerators.Choices.Tests.KMModule(needy);
+                    public static explicit operator System.Reflection.BindingFlags(global::Emik.SourceGenerators.Choices.Tests.DotFruit x)
+                        => x.Orange;
+
+                    /// <summary>
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Apple"/> of type <see cref="byte"/>.
+                    /// </summary>
+                    /// <param name="apple">The value to pass into the type.</param>
+                    /// <returns>The union containing the parameter <paramref name="apple"/>.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public static global::Emik.SourceGenerators.Choices.Tests.DotFruit OfApple(byte apple)
+                        => new global::Emik.SourceGenerators.Choices.Tests.DotFruit(apple);
+
+                    /// <summary>
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Pear"/> of type <see cref="int"/>.
+                    /// </summary>
+                    /// <param name="pear">The value to pass into the type.</param>
+                    /// <returns>The union containing the parameter <paramref name="pear"/>.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public static global::Emik.SourceGenerators.Choices.Tests.DotFruit OfPear(int pear)
+                        => new global::Emik.SourceGenerators.Choices.Tests.DotFruit(pear);
+
+                    /// <summary>
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Orange"/> of type <see cref="System.Reflection.BindingFlags"/>.
+                    /// </summary>
+                    /// <param name="orange">The value to pass into the type.</param>
+                    /// <returns>The union containing the parameter <paramref name="orange"/>.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public static global::Emik.SourceGenerators.Choices.Tests.DotFruit OfOrange(System.Reflection.BindingFlags orange)
+                        => new global::Emik.SourceGenerators.Choices.Tests.DotFruit(orange);
 
                     /// <summary>
                     /// Determines whether the left-hand side is equal to the right.
@@ -281,13 +406,14 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator ==(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
+                    public static bool operator ==(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
                         => left is null ? right is null : right is not null &&
-                            left.Discriminator == right.Discriminator &&
-                            left.Discriminator switch
+                            left._discriminator == right._discriminator &&
+                            left._discriminator switch
                             {
-                                0 => global::System.Collections.Generic.EqualityComparer<KMBombModule>.Default.Equals(((KMBombModule)left._reference!), ((KMBombModule)right._reference!)),
-                                _ => global::System.Collections.Generic.EqualityComparer<KMNeedyModule>.Default.Equals(((KMNeedyModule)left._reference!), ((KMNeedyModule)right._reference!)),
+                                0 => left._unmanaged._apple == right._unmanaged._apple,
+                                1 => left._unmanaged._pear == right._unmanaged._pear,
+                                _ => left._unmanaged._orange == right._unmanaged._orange,
                             };
 
                     /// <summary>
@@ -302,7 +428,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator !=(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
+                    public static bool operator !=(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
                         => !(left == right);
 
                     /// <summary>
@@ -317,15 +443,16 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator >(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
+                    public static bool operator >(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
                         => left is not null &&
                             (right is null ||
-                            left.Discriminator > right.Discriminator ||
-                            left.Discriminator == right.Discriminator &&
-                            left.Discriminator switch
+                            left._discriminator > right._discriminator ||
+                            left._discriminator == right._discriminator &&
+                            left._discriminator switch
                             {
-                                0 => global::System.Collections.Generic.Comparer<KMBombModule>.Default.Compare(((KMBombModule)left._reference!), ((KMBombModule)right._reference!)) > 0,
-                                _ => global::System.Collections.Generic.Comparer<KMNeedyModule>.Default.Compare(((KMNeedyModule)left._reference!), ((KMNeedyModule)right._reference!)) > 0,
+                                0 => left._unmanaged._apple > right._unmanaged._apple,
+                                1 => left._unmanaged._pear > right._unmanaged._pear,
+                                _ => left._unmanaged._orange > right._unmanaged._orange,
                             });
 
                     /// <summary>
@@ -340,7 +467,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator >=(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
+                    public static bool operator >=(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
                         => left == right || left > right;
 
                     /// <summary>
@@ -355,7 +482,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator <(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
+                    public static bool operator <(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
                         => right > left;
 
                     /// <summary>
@@ -370,7 +497,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator <=(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
+                    public static bool operator <=(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
@@ -378,13 +505,13 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
-                        => obj is global::Emik.SourceGenerators.Choices.Tests.KMModule x && Equals(x);
+                        => obj is global::Emik.SourceGenerators.Choices.Tests.DotFruit x && Equals(x);
 
                     /// <inheritdoc />
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public bool Equals(Emik.SourceGenerators.Choices.Tests.KMModule? other)
+                    public bool Equals(Emik.SourceGenerators.Choices.Tests.DotFruit? other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
@@ -392,13 +519,13 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int CompareTo(object? obj)
-                        => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.KMModule x ? CompareTo(x) : -1;
+                        => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.DotFruit x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public int CompareTo(Emik.SourceGenerators.Choices.Tests.KMModule? other)
+                    public int CompareTo(Emik.SourceGenerators.Choices.Tests.DotFruit? other)
                         => other is null ? 1 : Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
@@ -406,11 +533,12 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override int GetHashCode()
-                        => unchecked(Discriminator * 28019) ^
-                        (Discriminator switch
+                        => unchecked(_discriminator * 25309) ^
+                        (_discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).GetHashCode(),
-                            _ => ((KMNeedyModule)_reference!).GetHashCode(),
+                            0 => _unmanaged._apple.GetHashCode(),
+                            1 => _unmanaged._pear.GetHashCode(),
+                            _ => _unmanaged._orange.GetHashCode(),
                         });
 
                     /// <inheritdoc />
@@ -418,32 +546,38 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override string ToString()
-                        => Discriminator switch
+                        => _discriminator switch
                         {
-                            0 => $"{nameof(Regular)}({((KMBombModule)_reference!)})",
-                            _ => $"{nameof(Needy)}({((KMNeedyModule)_reference!)})",
+                            0 => $"{nameof(Apple)}({_unmanaged._apple})",
+                            1 => $"{nameof(Pear)}({_unmanaged._pear})",
+                            _ => $"{nameof(Orange)}({_unmanaged._orange})",
                         };
 
                     /// <summary>
                     /// Invokes the callback based on current variance.
                     /// </summary>
-                    /// <param name="onRegular">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Regular"/> of type <see cref="KMBombModule"/> is held.</param>
-                    /// <param name="onNeedy">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/> is held.</param>
+                    /// <param name="onApple">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Apple"/> of type <see cref="byte"/> is held.</param>
+                    /// <param name="onPear">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Pear"/> of type <see cref="int"/> is held.</param>
+                    /// <param name="onOrange">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Orange"/> of type <see cref="System.Reflection.BindingFlags"/> is held.</param>
                     /// <returns>Itself.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public Emik.SourceGenerators.Choices.Tests.KMModule? Map(
-                        global::System.Action<KMBombModule>? onRegular = null,
-                        global::System.Action<KMNeedyModule>? onNeedy = null
+                    public Emik.SourceGenerators.Choices.Tests.DotFruit? Map(
+                        global::System.Action<byte>? onApple = null,
+                        global::System.Action<int>? onPear = null,
+                        global::System.Action<System.Reflection.BindingFlags>? onOrange = null
                     )
                     {
-                        switch (Discriminator)
+                        switch (_discriminator)
                         {
                             case 0:
-                                onRegular?.Invoke(((KMBombModule)_reference!));
+                                onApple?.Invoke(_unmanaged._apple);
+                                return this;
+                            case 1:
+                                onPear?.Invoke(_unmanaged._pear);
                                 return this;
                             default:
-                                onNeedy?.Invoke(((KMNeedyModule)_reference!));
+                                onOrange?.Invoke(_unmanaged._orange);
                                 return this;
                         }
                     }
@@ -452,21 +586,24 @@ namespace Emik
                     /// Maps each variant to <typeparamref name="TMappingResult"/>.
                     /// </summary>
                     /// <typeparam name="TMappingResult">The resulting type from the mapping.</typeparam>
-                    /// <param name="onRegular">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Regular"/> of type <see cref="KMBombModule"/> is held.</param>
-                    /// <param name="onNeedy">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/> is held.</param>
+                    /// <param name="onApple">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Apple"/> of type <see cref="byte"/> is held.</param>
+                    /// <param name="onPear">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Pear"/> of type <see cref="int"/> is held.</param>
+                    /// <param name="onOrange">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Orange"/> of type <see cref="System.Reflection.BindingFlags"/> is held.</param>
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public TMappingResult Map<TMappingResult>(
-                        global::System.Func<KMBombModule, TMappingResult> onRegular,
-                        global::System.Func<KMNeedyModule, TMappingResult> onNeedy
+                        global::System.Func<byte, TMappingResult> onApple,
+                        global::System.Func<int, TMappingResult> onPear,
+                        global::System.Func<System.Reflection.BindingFlags, TMappingResult> onOrange
                     )
-                        => Discriminator switch
+                        => _discriminator switch
                         {
-                            0 => onRegular(((KMBombModule)_reference!)),
-                            _ => onNeedy(((KMNeedyModule)_reference!)),
+                            0 => onApple(_unmanaged._apple),
+                            1 => onPear(_unmanaged._pear),
+                            _ => onOrange(_unmanaged._orange),
                         };
 
                     /// <summary>
@@ -478,1111 +615,346 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public UnityEngine.MonoBehaviour GetUnderlyingValue()
-                        => (UnityEngine.MonoBehaviour)_reference!;
-
-                    /// <inheritdoc cref="KMBombModule.ModuleType"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public string ModuleType
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
+                    public System.ISpanFormattable GetUnderlyingValue()
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).ModuleType,
-                            _ => ((KMNeedyModule)_reference!).ModuleType,
+                            0 => _unmanaged._apple,
+                            1 => _unmanaged._pear,
+                            _ => _unmanaged._orange,
                         };
-                    }
 
-                    /// <inheritdoc cref="KMBombModule.ModuleDisplayName"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public string ModuleDisplayName
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).ModuleDisplayName,
-                            _ => ((KMNeedyModule)_reference!).ModuleDisplayName,
-                        };
-                    }
-
-                    /// <inheritdoc cref="KMBombModule.RequiresTimerVisibility"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public bool RequiresTimerVisibility
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).RequiresTimerVisibility,
-                            _ => ((KMNeedyModule)_reference!).RequiresTimerVisibility,
-                        };
-                    }
-
-                    /// <inheritdoc cref="KMBombModule.HandlePass()"/>
+                    /// <inheritdoc cref="System.IConvertible.GetTypeCode()"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void HandlePass()
-                    {
-                        switch (Discriminator)
+                    public System.TypeCode GetTypeCode()
+                        => _discriminator switch
                         {
-                            default:
-                                ((KMBombModule)_reference!).HandlePass();
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).HandlePass();
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="KMBombModule.HandleStrike()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void HandleStrike()
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).HandleStrike();
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).HandleStrike();
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="KMBombModule.GetRuleGenerationSeed()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public int GetRuleGenerationSeed()
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetRuleGenerationSeed(),
-                            _ => ((KMNeedyModule)_reference!).GetRuleGenerationSeed(),
+                            0 => ((System.IConvertible)_unmanaged._apple).GetTypeCode(),
+                            1 => ((System.IConvertible)_unmanaged._pear).GetTypeCode(),
+                            _ => ((System.IConvertible)_unmanaged._orange).GetTypeCode(),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.Invoke(string, float)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToBoolean(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void Invoke(string methodName, float time)
-                    {
-                        switch (Discriminator)
+                    public bool ToBoolean(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            default:
-                                ((KMBombModule)_reference!).Invoke(methodName, time);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).Invoke(methodName, time);
-                                break;
-                        }
-                    }
+                            0 => ((System.IConvertible)_unmanaged._apple).ToBoolean(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToBoolean(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToBoolean(provider),
+                        };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.InvokeRepeating(string, float, float)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToByte(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void InvokeRepeating(string methodName, float time, float repeatRate)
-                    {
-                        switch (Discriminator)
+                    public byte ToByte(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            default:
-                                ((KMBombModule)_reference!).InvokeRepeating(methodName, time, repeatRate);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).InvokeRepeating(methodName, time, repeatRate);
-                                break;
-                        }
-                    }
+                            0 => ((System.IConvertible)_unmanaged._apple).ToByte(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToByte(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToByte(provider),
+                        };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.CancelInvoke()"/>
+                    /// <inheritdoc cref="System.IConvertible.ToChar(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void CancelInvoke()
-                    {
-                        switch (Discriminator)
+                    public char ToChar(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            default:
-                                ((KMBombModule)_reference!).CancelInvoke();
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).CancelInvoke();
-                                break;
-                        }
-                    }
+                            0 => ((System.IConvertible)_unmanaged._apple).ToChar(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToChar(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToChar(provider),
+                        };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.CancelInvoke(string)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToDateTime(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void CancelInvoke(string methodName)
-                    {
-                        switch (Discriminator)
+                    public System.DateTime ToDateTime(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            default:
-                                ((KMBombModule)_reference!).CancelInvoke(methodName);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).CancelInvoke(methodName);
-                                break;
-                        }
-                    }
+                            0 => ((System.IConvertible)_unmanaged._apple).ToDateTime(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToDateTime(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToDateTime(provider),
+                        };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.IsInvoking(string)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToDecimal(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public bool IsInvoking(string methodName)
-                        => Discriminator switch
+                    public decimal ToDecimal(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).IsInvoking(methodName),
-                            _ => ((KMNeedyModule)_reference!).IsInvoking(methodName),
+                            0 => ((System.IConvertible)_unmanaged._apple).ToDecimal(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToDecimal(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToDecimal(provider),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.IsInvoking()"/>
+                    /// <inheritdoc cref="System.IConvertible.ToDouble(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public bool IsInvoking()
-                        => Discriminator switch
+                    public double ToDouble(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).IsInvoking(),
-                            _ => ((KMNeedyModule)_reference!).IsInvoking(),
+                            0 => ((System.IConvertible)_unmanaged._apple).ToDouble(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToDouble(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToDouble(provider),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(System.Collections.IEnumerator)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToInt16(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public UnityEngine.Coroutine StartCoroutine(global::System.Collections.IEnumerator routine)
-                        => Discriminator switch
+                    public short ToInt16(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).StartCoroutine(routine),
-                            _ => ((KMNeedyModule)_reference!).StartCoroutine(routine),
+                            0 => ((System.IConvertible)_unmanaged._apple).ToInt16(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToInt16(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToInt16(provider),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine_Auto(System.Collections.IEnumerator)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToInt32(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [System.ObsoleteAttribute("StartCoroutine_Auto has been deprecated. Use StartCoroutine instead (UnityUpgradable) -> StartCoroutine([mscorlib] System.Collections.IEnumerator)", false)]
-                    public UnityEngine.Coroutine StartCoroutine_Auto(global::System.Collections.IEnumerator routine)
-                        => Discriminator switch
+                    public int ToInt32(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).StartCoroutine_Auto(routine),
-                            _ => ((KMNeedyModule)_reference!).StartCoroutine_Auto(routine),
+                            0 => ((System.IConvertible)_unmanaged._apple).ToInt32(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToInt32(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToInt32(provider),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(string, object)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToInt64(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public UnityEngine.Coroutine StartCoroutine(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value)
-                        => Discriminator switch
+                    public long ToInt64(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).StartCoroutine(methodName, value),
-                            _ => ((KMNeedyModule)_reference!).StartCoroutine(methodName, value),
+                            0 => ((System.IConvertible)_unmanaged._apple).ToInt64(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToInt64(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToInt64(provider),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(string)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToSByte(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public UnityEngine.Coroutine StartCoroutine(string methodName)
-                        => Discriminator switch
+                    public sbyte ToSByte(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).StartCoroutine(methodName),
-                            _ => ((KMNeedyModule)_reference!).StartCoroutine(methodName),
+                            0 => ((System.IConvertible)_unmanaged._apple).ToSByte(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToSByte(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToSByte(provider),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(string)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToSingle(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void StopCoroutine(string methodName)
-                    {
-                        switch (Discriminator)
+                    public float ToSingle(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            default:
-                                ((KMBombModule)_reference!).StopCoroutine(methodName);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).StopCoroutine(methodName);
-                                break;
-                        }
-                    }
+                            0 => ((System.IConvertible)_unmanaged._apple).ToSingle(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToSingle(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToSingle(provider),
+                        };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(System.Collections.IEnumerator)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToString(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void StopCoroutine(global::System.Collections.IEnumerator routine)
-                    {
-                        switch (Discriminator)
+                    public string ToString(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            default:
-                                ((KMBombModule)_reference!).StopCoroutine(routine);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).StopCoroutine(routine);
-                                break;
-                        }
-                    }
+                            0 => ((System.IConvertible)_unmanaged._apple).ToString(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToString(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToString(provider),
+                        };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(UnityEngine.Coroutine)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToType(System.Type, System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void StopCoroutine(global::UnityEngine.Coroutine routine)
-                    {
-                        switch (Discriminator)
+                    public object ToType(global::System.Type conversionType, global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            default:
-                                ((KMBombModule)_reference!).StopCoroutine(routine);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).StopCoroutine(routine);
-                                break;
-                        }
-                    }
+                            0 => ((System.IConvertible)_unmanaged._apple).ToType(conversionType, provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToType(conversionType, provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToType(conversionType, provider),
+                        };
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopAllCoroutines()"/>
+                    /// <inheritdoc cref="System.IConvertible.ToUInt16(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void StopAllCoroutines()
-                    {
-                        switch (Discriminator)
+                    public ushort ToUInt16(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            default:
-                                ((KMBombModule)_reference!).StopAllCoroutines();
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).StopAllCoroutines();
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.useGUILayout"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public bool useGUILayout
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).useGUILayout,
-                            _ => ((KMNeedyModule)_reference!).useGUILayout,
+                            0 => ((System.IConvertible)_unmanaged._apple).ToUInt16(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToUInt16(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToUInt16(provider),
                         };
-                    }
 
-                    /// <inheritdoc cref="UnityEngine.MonoBehaviour.runInEditMode"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public bool runInEditMode
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).runInEditMode,
-                            _ => ((KMNeedyModule)_reference!).runInEditMode,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Behaviour.enabled"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public bool enabled
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).enabled,
-                            _ => ((KMNeedyModule)_reference!).enabled,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Behaviour.isActiveAndEnabled"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public bool isActiveAndEnabled
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).isActiveAndEnabled,
-                            _ => ((KMNeedyModule)_reference!).isActiveAndEnabled,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponent(System.Type)"/>
+                    /// <inheritdoc cref="System.IConvertible.ToUInt32(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
-                    public UnityEngine.Component GetComponent(global::System.Type type)
-                        => Discriminator switch
+                    public uint ToUInt32(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).GetComponent(type),
-                            _ => ((KMNeedyModule)_reference!).GetComponent(type),
+                            0 => ((System.IConvertible)_unmanaged._apple).ToUInt32(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToUInt32(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToUInt32(provider),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponent{T}()"/>
+                    /// <inheritdoc cref="System.IConvertible.ToUInt64(System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [System.Security.SecuritySafeCriticalAttribute]
-                    public T GetComponent<T>()
-                        => Discriminator switch
+                    public ulong ToUInt64(global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).GetComponent<T>(),
-                            _ => ((KMNeedyModule)_reference!).GetComponent<T>(),
+                            0 => ((System.IConvertible)_unmanaged._apple).ToUInt64(provider),
+                            1 => ((System.IConvertible)_unmanaged._pear).ToUInt64(provider),
+                            _ => ((System.IConvertible)_unmanaged._orange).ToUInt64(provider),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponent(string)"/>
+                    /// <inheritdoc cref="System.ISpanFormattable.TryFormat(System.Span{char}, out int, System.ReadOnlySpan{char}, System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.ISpanFormattable"/>,
+                    /// <see cref="Pear"/> as <see cref="System.ISpanFormattable"/>,
+                    /// <see cref="Orange"/> as <see cref="System.ISpanFormattable"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public UnityEngine.Component GetComponent(string type)
-                        => Discriminator switch
+                    public bool TryFormat(global::System.Span<char> destination, scoped out int charsWritten, global::System.ReadOnlySpan<char> format, global::System.IFormatProvider? provider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).GetComponent(type),
-                            _ => ((KMNeedyModule)_reference!).GetComponent(type),
+                            0 => ((System.ISpanFormattable)_unmanaged._apple).TryFormat(destination, out charsWritten, format, provider),
+                            1 => ((System.ISpanFormattable)_unmanaged._pear).TryFormat(destination, out charsWritten, format, provider),
+                            _ => ((System.ISpanFormattable)_unmanaged._orange).TryFormat(destination, out charsWritten, format, provider),
                         };
 
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren(System.Type, bool)"/>
+                    /// <inheritdoc cref="System.IFormattable.ToString(string?, System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="Apple"/> as <see cref="System.IFormattable"/>,
+                    /// <see cref="Pear"/> as <see cref="System.IFormattable"/>,
+                    /// <see cref="Orange"/> as <see cref="System.IFormattable"/>.
+                    /// </remarks>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
-                    public UnityEngine.Component GetComponentInChildren(global::System.Type t, bool includeInactive)
-                        => Discriminator switch
+                    public string ToString(string? format, global::System.IFormatProvider? formatProvider)
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).GetComponentInChildren(t, includeInactive),
-                            _ => ((KMNeedyModule)_reference!).GetComponentInChildren(t, includeInactive),
+                            0 => ((System.IFormattable)_unmanaged._apple).ToString(format, formatProvider),
+                            1 => ((System.IFormattable)_unmanaged._pear).ToString(format, formatProvider),
+                            _ => ((System.IFormattable)_unmanaged._orange).ToString(format, formatProvider),
                         };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
-                    public UnityEngine.Component GetComponentInChildren(global::System.Type t)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentInChildren(t),
-                            _ => ((KMNeedyModule)_reference!).GetComponentInChildren(t),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public T GetComponentInChildren<T>()
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentInChildren<T>(),
-                            _ => ((KMNeedyModule)_reference!).GetComponentInChildren<T>(),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren{T}(bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public T GetComponentInChildren<T>([UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentInChildren<T>(includeInactive),
-                            _ => ((KMNeedyModule)_reference!).GetComponentInChildren<T>(includeInactive),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public UnityEngine.Component[] GetComponentsInChildren(global::System.Type t)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentsInChildren(t),
-                            _ => ((KMNeedyModule)_reference!).GetComponentsInChildren(t),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren(System.Type, bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public UnityEngine.Component[] GetComponentsInChildren(global::System.Type t, [UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentsInChildren(t, includeInactive),
-                            _ => ((KMNeedyModule)_reference!).GetComponentsInChildren(t, includeInactive),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public T[] GetComponentsInChildren<T>(bool includeInactive)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentsInChildren<T>(includeInactive),
-                            _ => ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(includeInactive),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(bool, System.Collections.Generic.List{T})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void GetComponentsInChildren<T>(bool includeInactive, global::System.Collections.Generic.List<T> result)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).GetComponentsInChildren<T>(includeInactive, result);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(includeInactive, result);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public T[] GetComponentsInChildren<T>()
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentsInChildren<T>(),
-                            _ => ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(System.Collections.Generic.List{T})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void GetComponentsInChildren<T>(global::System.Collections.Generic.List<T> results)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).GetComponentsInChildren<T>(results);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).GetComponentsInChildren<T>(results);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInParent(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
-                    public UnityEngine.Component GetComponentInParent(global::System.Type t)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentInParent(t),
-                            _ => ((KMNeedyModule)_reference!).GetComponentInParent(t),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentInParent{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public T GetComponentInParent<T>()
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentInParent<T>(),
-                            _ => ((KMNeedyModule)_reference!).GetComponentInParent<T>(),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public UnityEngine.Component[] GetComponentsInParent(global::System.Type t)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentsInParent(t),
-                            _ => ((KMNeedyModule)_reference!).GetComponentsInParent(t),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent(System.Type, bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public UnityEngine.Component[] GetComponentsInParent(global::System.Type t, [UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentsInParent(t, includeInactive),
-                            _ => ((KMNeedyModule)_reference!).GetComponentsInParent(t, includeInactive),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}(bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public T[] GetComponentsInParent<T>(bool includeInactive)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentsInParent<T>(includeInactive),
-                            _ => ((KMNeedyModule)_reference!).GetComponentsInParent<T>(includeInactive),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}(bool, System.Collections.Generic.List{T})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void GetComponentsInParent<T>(bool includeInactive, global::System.Collections.Generic.List<T> results)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).GetComponentsInParent<T>(includeInactive, results);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).GetComponentsInParent<T>(includeInactive, results);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public T[] GetComponentsInParent<T>()
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponentsInParent<T>(),
-                            _ => ((KMNeedyModule)_reference!).GetComponentsInParent<T>(),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponents(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public UnityEngine.Component[] GetComponents(global::System.Type type)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponents(type),
-                            _ => ((KMNeedyModule)_reference!).GetComponents(type),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponents(System.Type, System.Collections.Generic.List{UnityEngine.Component})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void GetComponents(global::System.Type type, global::System.Collections.Generic.List<global::UnityEngine.Component> results)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).GetComponents(type, results);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).GetComponents(type, results);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponents{T}(System.Collections.Generic.List{T})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void GetComponents<T>(global::System.Collections.Generic.List<T> results)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).GetComponents<T>(results);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).GetComponents<T>(results);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.GetComponents{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public T[] GetComponents<T>()
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetComponents<T>(),
-                            _ => ((KMNeedyModule)_reference!).GetComponents<T>(),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.CompareTag(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public bool CompareTag(string tag)
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).CompareTag(tag),
-                            _ => ((KMNeedyModule)_reference!).CompareTag(tag),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, object, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void SendMessageUpwards(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).SendMessageUpwards(methodName, value, options);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).SendMessageUpwards(methodName, value, options);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public void SendMessageUpwards(string methodName, object value)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).SendMessageUpwards(methodName, value);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).SendMessageUpwards(methodName, value);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public void SendMessageUpwards(string methodName)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).SendMessageUpwards(methodName);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).SendMessageUpwards(methodName);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void SendMessageUpwards(string methodName, global::UnityEngine.SendMessageOptions options)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).SendMessageUpwards(methodName, options);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).SendMessageUpwards(methodName, options);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, object, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void SendMessage(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).SendMessage(methodName, value, options);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).SendMessage(methodName, value, options);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public void SendMessage(string methodName, object value)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).SendMessage(methodName, value);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).SendMessage(methodName, value);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.SendMessage(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public void SendMessage(string methodName)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).SendMessage(methodName);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).SendMessage(methodName);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void SendMessage(string methodName, global::UnityEngine.SendMessageOptions options)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).SendMessage(methodName, options);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).SendMessage(methodName, options);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, object, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void BroadcastMessage(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object parameter, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).BroadcastMessage(methodName, parameter, options);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).BroadcastMessage(methodName, parameter, options);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public void BroadcastMessage(string methodName, object parameter)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).BroadcastMessage(methodName, parameter);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).BroadcastMessage(methodName, parameter);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [UnityEngine.Internal.ExcludeFromDocsAttribute]
-                    public void BroadcastMessage(string methodName)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).BroadcastMessage(methodName);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).BroadcastMessage(methodName);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public void BroadcastMessage(string methodName, global::UnityEngine.SendMessageOptions options)
-                    {
-                        switch (Discriminator)
-                        {
-                            default:
-                                ((KMBombModule)_reference!).BroadcastMessage(methodName, options);
-                                break;
-                            case 1:
-                                ((KMNeedyModule)_reference!).BroadcastMessage(methodName, options);
-                                break;
-                        }
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.transform"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public UnityEngine.Transform transform
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).transform,
-                            _ => ((KMNeedyModule)_reference!).transform,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.gameObject"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public UnityEngine.GameObject gameObject
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).gameObject,
-                            _ => ((KMNeedyModule)_reference!).gameObject,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.tag"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public string tag
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).tag,
-                            _ => ((KMNeedyModule)_reference!).tag,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.rigidbody"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property rigidbody has been deprecated. Use GetComponent<Rigidbody>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component rigidbody
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).rigidbody,
-                            _ => ((KMNeedyModule)_reference!).rigidbody,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.rigidbody2D"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property rigidbody2D has been deprecated. Use GetComponent<Rigidbody2D>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component rigidbody2D
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).rigidbody2D,
-                            _ => ((KMNeedyModule)_reference!).rigidbody2D,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.camera"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property camera has been deprecated. Use GetComponent<Camera>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component camera
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).camera,
-                            _ => ((KMNeedyModule)_reference!).camera,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.light"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property light has been deprecated. Use GetComponent<Light>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component light
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).light,
-                            _ => ((KMNeedyModule)_reference!).light,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.animation"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property animation has been deprecated. Use GetComponent<Animation>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component animation
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).animation,
-                            _ => ((KMNeedyModule)_reference!).animation,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.constantForce"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property constantForce has been deprecated. Use GetComponent<ConstantForce>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component constantForce
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).constantForce,
-                            _ => ((KMNeedyModule)_reference!).constantForce,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.renderer"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property renderer has been deprecated. Use GetComponent<Renderer>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component renderer
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).renderer,
-                            _ => ((KMNeedyModule)_reference!).renderer,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.audio"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property audio has been deprecated. Use GetComponent<AudioSource>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component audio
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).audio,
-                            _ => ((KMNeedyModule)_reference!).audio,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.guiText"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property guiText has been deprecated. Use GetComponent<GUIText>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component guiText
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).guiText,
-                            _ => ((KMNeedyModule)_reference!).guiText,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.networkView"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property networkView has been deprecated. Use GetComponent<NetworkView>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component networkView
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).networkView,
-                            _ => ((KMNeedyModule)_reference!).networkView,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.guiElement"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property guiElement has been deprecated. Use GetComponent<GUIElement>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component guiElement
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).guiElement,
-                            _ => ((KMNeedyModule)_reference!).guiElement,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.guiTexture"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property guiTexture has been deprecated. Use GetComponent<GUITexture>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component guiTexture
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).guiTexture,
-                            _ => ((KMNeedyModule)_reference!).guiTexture,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.collider"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property collider has been deprecated. Use GetComponent<Collider>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component collider
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).collider,
-                            _ => ((KMNeedyModule)_reference!).collider,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.collider2D"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property collider2D has been deprecated. Use GetComponent<Collider2D>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component collider2D
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).collider2D,
-                            _ => ((KMNeedyModule)_reference!).collider2D,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.hingeJoint"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property hingeJoint has been deprecated. Use GetComponent<HingeJoint>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component hingeJoint
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).hingeJoint,
-                            _ => ((KMNeedyModule)_reference!).hingeJoint,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.particleEmitter"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property particleEmitter has been deprecated. Use GetComponent<ParticleEmitter>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component particleEmitter
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).particleEmitter,
-                            _ => ((KMNeedyModule)_reference!).particleEmitter,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Component.particleSystem"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [System.ObsoleteAttribute("Property particleSystem has been deprecated. Use GetComponent<ParticleSystem>() instead. (UnityUpgradable)", true)]
-                    public UnityEngine.Component particleSystem
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).particleSystem,
-                            _ => ((KMNeedyModule)_reference!).particleSystem,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Object.GetInstanceID()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    [System.Security.SecuritySafeCriticalAttribute]
-                    public int GetInstanceID()
-                        => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).GetInstanceID(),
-                            _ => ((KMNeedyModule)_reference!).GetInstanceID(),
-                        };
-
-                    /// <inheritdoc cref="UnityEngine.Object.name"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public string name
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).name,
-                            _ => ((KMNeedyModule)_reference!).name,
-                        };
-                    }
-
-                    /// <inheritdoc cref="UnityEngine.Object.hideFlags"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public UnityEngine.HideFlags hideFlags
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => Discriminator switch
-                        {
-                            0 => ((KMBombModule)_reference!).hideFlags,
-                            _ => ((KMNeedyModule)_reference!).hideFlags,
-                        };
-                    }
 
                     /// <inheritdoc cref="object.GetType()"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Type GetUnderlyingType()
-                        => Discriminator switch
+                        => _discriminator switch
                         {
-                            0 => ((KMBombModule)_reference!).GetType(),
-                            _ => ((KMNeedyModule)_reference!).GetType(),
+                            0 => typeof(byte),
+                            1 => typeof(int),
+                            _ => typeof(System.Reflection.BindingFlags),
                         };
                 }
             }

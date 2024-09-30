@@ -46,7 +46,8 @@ partial class KMModule
     readonly byte _discriminator;
 }
 
-[Choice.Regular<KMBombModule>.Needy<KMNeedyModule>.Other<Component>]
+// ReSharper disable once UseSymbolAlias
+[Choice.Regular<KMBombModule>.Needy<KMNeedyModule>.Other<UnityEngine.Component>]
 partial class DotKMModule;
 
 [Choice.Apple<byte>.Pear<int>.Orange<BindingFlags>]
