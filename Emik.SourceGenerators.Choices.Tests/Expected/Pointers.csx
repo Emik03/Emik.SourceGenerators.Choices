@@ -200,7 +200,7 @@ namespace Emik
                     private readonly byte _discriminator;
 
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    private readonly Unmanaged _unmanaged;
+                    private readonly unsafe Unmanaged _unmanaged = new Unmanaged() { _bytes = bytes };
 
                     /// <summary>
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Bytes"/> of type <see cref="byte*"/>.
@@ -312,7 +312,7 @@ namespace Emik
 
                     /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
                     [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                    unsafe bool UsedImplicitly => bytes is var _ && chars is var _ && native is var _;
+                    unsafe bool UsedImplicitly => chars is var _ && native is var _;
 
                     /// <summary>
                     /// Implicitly converts the <see cref="byte*"/> parameter to the union.

@@ -224,7 +224,7 @@ sealed partial record Scaffolder(
                 $"""
                      /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
                      {HideFromEditor}
-                     {SymbolsUnsafe}bool {UsedImplicitly} => {Symbols.Select(x => $"{x.ParameterName} is var _").Conjoin(" && ")};
+                     {SymbolsUnsafe}bool {UsedImplicitly} => {Symbols.Skip(1).Select(x => $"{x.ParameterName} is var _").Conjoin(" && ")};
 
 
                  """
@@ -374,7 +374,8 @@ sealed partial record Scaffolder(
             ? CSharp(
                 $"""
                      {Annotation}
-                     private {PrivatelyReadOnly}{(Common is null ? "object" : new MemberSymbol(Common, "").NullableAnnotated)} {ReferenceField};
+                     private {PrivatelyReadOnly}{(Common is null ? "object" : new MemberSymbol(Common, "").NullableAnnotated)
+                     } {ReferenceField}{(UsesPrimaryConstructor ? CSharp($" = {Symbols[0].ParameterName}") : "")};
 
 
                  """
@@ -387,7 +388,9 @@ sealed partial record Scaffolder(
             ? CSharp(
                 $"""
                      {Annotation}
-                     private {PrivatelyReadOnly}Unmanaged {UnmanagedField};
+                     private {PrivatelyReadOnly}{(UsesPrimaryConstructor ? Symbols[0].Unsafe : "")
+                     }Unmanaged {UnmanagedField}{(UsesPrimaryConstructor ? CSharp($" = new Unmanaged() {{ {Symbols[0].FieldName
+                     } = {Symbols[0].ParameterName} }}") : "")};
 
 
                  """
@@ -624,7 +627,7 @@ sealed partial record Scaffolder(
         _source ??= $"{Header}{Suppression}{Named
            .ContainingWithoutGlobal()
            .FindSmallPathToNull(x => x.ContainingWithoutGlobal())
-           .Aggregate(DeclareType, WrapNamespace)}\n";
+           .Aggregate(DeclareType, WrapNamespaceOrType)}\n";
 
     [Pure]
     string XmlName { get; } = XmlTypeName(Named);
@@ -677,10 +680,12 @@ sealed partial record Scaffolder(
     static string CSharp([StringSyntax("C#")] string x) => x;
 
     [Pure]
-    static string WrapNamespace(string acc, ISymbol next) =>
+    static string WrapNamespaceOrType(string acc, ISymbol next) =>
         CSharp(
             $$"""
-              {{(next is ITypeSymbol type ? $"partial {type.Keyword()} {next.Name}" : $"namespace {next.Name}")}}
+              {{(next is ITypeSymbol type ? $"partial {type.Keyword()} {next.Name
+              }{(type is INamedTypeSymbol { TypeParameters: var generics and not [] } ? $"<{generics.Conjoin()}>" : "")
+              }" : CSharp($"namespace {next.Name}"))}}
               {
               {{acc.Split('\r', '\n').Select(x => x is "" or ['#', ..] ? x : $"    {x}").Conjoin("\n")}}
               }
@@ -926,12 +931,13 @@ sealed partial record Scaffolder(
     }
 
     [Pure]
-    string DeclareField(MemberSymbol x) =>
+    string DeclareField(MemberSymbol x, int i) =>
         x.IsEmpty || Members.Any(x.ReferenceEquals) || IsNoninitial(x)
             ? ""
             : CSharp(
                 $"""
-                     private {x.Unsafe}{PrivatelyReadOnly}{x.NullableAnnotated} {x.FieldName};
+                     private {x.Unsafe}{PrivatelyReadOnly}{x.NullableAnnotated} {
+                     x.FieldName}{(UsesPrimaryConstructor && i is 0 ? CSharp($" = {x.ParameterName}") : "")};
 
 
                  """

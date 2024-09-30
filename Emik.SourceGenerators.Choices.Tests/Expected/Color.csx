@@ -135,7 +135,7 @@ namespace Emik
                     }
 
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    private readonly System.Array? _reference;
+                    private readonly System.Array? _reference = rgba;
 
                     /// <summary>
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Color"/> class with the variant <see cref="Rgba"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{int}[]"/>.
@@ -213,7 +213,7 @@ namespace Emik
 
                     /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
                     [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                    bool UsedImplicitly => rgba is var _ && gradient is var _;
+                    bool UsedImplicitly => gradient is var _;
 
                     /// <summary>
                     /// Implicitly converts the <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{int}[]"/> parameter to the union.

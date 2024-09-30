@@ -22,7 +22,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
     /// <param name="polyfillAttributes">
     /// Determines whether to generate private attributes required to make dot-declaration
     /// syntax work. Set this to <see langword="true"/> if you have annotated the parameter
-    /// <paramref name="named"/> using the dot-declaration feature; nested class attributes such as
+    /// <paramref name="named"/> using the dot-declaration feature; Nested class attributes such as
     /// <c>[Choice.Public.Foo&lt;Bar&gt;.Baz&lt;Qux&gt;]</c> versus <c>[Choice(true, typeof((Bar Foo, Qux Baz)))]</c>.
     /// </param>
     /// <param name="members">
