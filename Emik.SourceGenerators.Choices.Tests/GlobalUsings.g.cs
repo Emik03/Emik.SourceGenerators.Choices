@@ -29,7 +29,6 @@ global using global::System.Composition.Debugging;
 global using global::System.Composition.Diagnostics;
 global using global::System.Composition.Hosting;
 global using global::System.Composition.Hosting.Core;
-global using global::System.Composition.Hosting.Properties;
 global using global::System.Composition.Hosting.Providers;
 global using global::System.Composition.Hosting.Providers.CurrentScope;
 global using global::System.Composition.Hosting.Providers.ExportFactory;
@@ -37,7 +36,6 @@ global using global::System.Composition.Hosting.Providers.ImportMany;
 global using global::System.Composition.Hosting.Providers.Lazy;
 global using global::System.Composition.Hosting.Providers.Metadata;
 global using global::System.Composition.Hosting.Util;
-global using global::System.Composition.Properties;
 global using global::System.Composition.Runtime;
 global using global::System.Composition.Runtime.Util;
 global using global::System.Composition.TypedParts;
@@ -79,6 +77,7 @@ global using global::System.Globalization;
 global using global::System.IO;
 global using global::System.IO.Compression;
 global using global::System.IO.Enumeration;
+global using global::System.IO.Hashing;
 global using global::System.IO.IsolatedStorage;
 global using global::System.IO.MemoryMappedFiles;
 global using global::System.IO.Packaging;
@@ -107,14 +106,12 @@ global using global::System.Numerics;
 global using global::System.Numerics.Hashing;
 global using global::System.Reflection;
 global using global::System.Reflection.Emit;
-global using global::System.Reflection.Internal;
 global using global::System.Reflection.Metadata;
 global using global::System.Reflection.Metadata.Ecma335;
 global using global::System.Reflection.PortableExecutable;
 global using global::System.Resources;
 global using global::System.Runtime;
 global using global::System.Runtime.CompilerServices;
-global using global::System.Runtime.CompilerServices2;
 global using global::System.Runtime.ConstrainedExecution;
 global using global::System.Runtime.ExceptionServices;
 global using global::System.Runtime.InteropServices;
@@ -159,6 +156,7 @@ global using global::System.Text.Json.Schema;
 global using global::System.Text.Json.Serialization;
 global using global::System.Text.Json.Serialization.Metadata;
 global using global::System.Text.RegularExpressions;
+global using global::System.Text.RegularExpressions.Generated;
 global using global::System.Text.Unicode;
 global using global::System.Threading;
 global using global::System.Threading.Channels;
@@ -241,6 +239,9 @@ global using global::Assets.Scripts.Utility;
 global using global::Assets.Scripts.VR;
 global using global::Assets.Scripts.VR.Null;
 global using global::Assets.Scripts.VR.Oculus;
+global using global::Basic;
+global using global::Basic.Reference;
+global using global::Basic.Reference.Assemblies;
 global using global::BasicExample;
 global using global::BindingsExample;
 global using global::BombGame;
@@ -269,21 +270,6 @@ global using global::DarkTonic.MasterAudio;
 global using global::DigitalOpus;
 global using global::DigitalOpus.MB;
 global using global::DigitalOpus.MB.Core;
-global using global::DotNetProjectFile;
-global using global::DotNetProjectFile.Analyzers;
-global using global::DotNetProjectFile.Analyzers.Helpers;
-global using global::DotNetProjectFile.Analyzers.MsBuild;
-global using global::DotNetProjectFile.Analyzers.Resx;
-global using global::DotNetProjectFile.Caching;
-global using global::DotNetProjectFile.CodeAnalysis;
-global using global::DotNetProjectFile.Conversion;
-global using global::DotNetProjectFile.Diagnostics;
-global using global::DotNetProjectFile.IO;
-global using global::DotNetProjectFile.MsBuild;
-global using global::DotNetProjectFile.MsBuild.Conversion;
-global using global::DotNetProjectFile.NuGet;
-global using global::DotNetProjectFile.Resx;
-global using global::DotNetProjectFile.Xml;
 global using global::Emik;
 global using global::Emik.Morsels;
 global using global::Emik.SourceGenerators;
@@ -293,25 +279,11 @@ global using global::Events;
 global using global::Fody;
 global using global::FxResources;
 global using global::FxResources.System;
-global using global::FxResources.System.Collections;
-global using global::FxResources.System.Collections.Immutable;
 global using global::FxResources.System.Composition;
 global using global::FxResources.System.Composition.Convention;
 global using global::FxResources.System.Composition.Hosting;
 global using global::FxResources.System.Composition.Runtime;
 global using global::FxResources.System.Composition.TypedParts;
-global using global::FxResources.System.Diagnostics;
-global using global::FxResources.System.Diagnostics.DiagnosticSource;
-global using global::FxResources.System.IO;
-global using global::FxResources.System.IO.Pipelines;
-global using global::FxResources.System.Memory;
-global using global::FxResources.System.Reflection;
-global using global::FxResources.System.Reflection.Metadata;
-global using global::FxResources.System.Text;
-global using global::FxResources.System.Text.Encoding;
-global using global::FxResources.System.Text.Encoding.CodePages;
-global using global::FxResources.System.Threading;
-global using global::FxResources.System.Threading.Channels;
 global using global::Gu;
 global using global::Gu.Roslyn;
 global using global::Gu.Roslyn.AnalyzerExtensions;
@@ -329,7 +301,6 @@ global using global::InControl.NativeProfile;
 global using global::InlineIL;
 global using global::InlineMethod;
 global using global::InterfaceMovement;
-global using global::Internal;
 global using global::JetBrains;
 global using global::JetBrains.Annotations;
 global using global::KeyboardAndMouseExample;
@@ -341,25 +312,22 @@ global using global::Microsoft.CSharp.RuntimeBinder;
 global using global::Microsoft.Cci;
 global using global::Microsoft.CodeAnalysis;
 global using global::Microsoft.CodeAnalysis.AddImport;
-global using global::Microsoft.CodeAnalysis.AddImports;
 global using global::Microsoft.CodeAnalysis.CSharp;
 global using global::Microsoft.CodeAnalysis.CSharp.AddImport;
-global using global::Microsoft.CodeAnalysis.CSharp.AddImports;
 global using global::Microsoft.CodeAnalysis.CSharp.CaseCorrection;
 global using global::Microsoft.CodeAnalysis.CSharp.Classification;
 global using global::Microsoft.CodeAnalysis.CSharp.Classification.Classifiers;
-global using global::Microsoft.CodeAnalysis.CSharp.Classification.SyntaxClassification;
 global using global::Microsoft.CodeAnalysis.CSharp.CodeCleanup;
 global using global::Microsoft.CodeAnalysis.CSharp.CodeFixesAndRefactorings;
 global using global::Microsoft.CodeAnalysis.CSharp.CodeGen;
 global using global::Microsoft.CodeAnalysis.CSharp.CodeGeneration;
+global using global::Microsoft.CodeAnalysis.CSharp.CodeRefactorings;
 global using global::Microsoft.CodeAnalysis.CSharp.CodeStyle;
 global using global::Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle;
 global using global::Microsoft.CodeAnalysis.CSharp.Diagnostics;
 global using global::Microsoft.CodeAnalysis.CSharp.DocumentationComments;
 global using global::Microsoft.CodeAnalysis.CSharp.Editing;
 global using global::Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages;
-global using global::Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.LanguageServices;
 global using global::Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars;
 global using global::Microsoft.CodeAnalysis.CSharp.Emit;
 global using global::Microsoft.CodeAnalysis.CSharp.Emit.NoPia;
@@ -370,8 +338,8 @@ global using global::Microsoft.CodeAnalysis.CSharp.Formatting;
 global using global::Microsoft.CodeAnalysis.CSharp.GeneratedCodeRecognition;
 global using global::Microsoft.CodeAnalysis.CSharp.Indentation;
 global using global::Microsoft.CodeAnalysis.CSharp.LanguageService;
-global using global::Microsoft.CodeAnalysis.CSharp.LanguageServices;
 global using global::Microsoft.CodeAnalysis.CSharp.MoveDeclarationNearReference;
+global using global::Microsoft.CodeAnalysis.CSharp.ObsoleteSymbol;
 global using global::Microsoft.CodeAnalysis.CSharp.OrganizeImports;
 global using global::Microsoft.CodeAnalysis.CSharp.Precedence;
 global using global::Microsoft.CodeAnalysis.CSharp.ReassignedVariable;
@@ -411,30 +379,25 @@ global using global::Microsoft.CodeAnalysis.CodeStyle;
 global using global::Microsoft.CodeAnalysis.Collections;
 global using global::Microsoft.CodeAnalysis.Collections.Internal;
 global using global::Microsoft.CodeAnalysis.Debugging;
-global using global::Microsoft.CodeAnalysis.DesignerAttribute;
 global using global::Microsoft.CodeAnalysis.Diagnostics;
 global using global::Microsoft.CodeAnalysis.Diagnostics.Analyzers;
 global using global::Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
 global using global::Microsoft.CodeAnalysis.Diagnostics.CSharp;
 global using global::Microsoft.CodeAnalysis.Diagnostics.Telemetry;
+global using global::Microsoft.CodeAnalysis.Diagnostics.VisualBasic;
 global using global::Microsoft.CodeAnalysis.Differencing;
 global using global::Microsoft.CodeAnalysis.Editing;
-global using global::Microsoft.CodeAnalysis.Editor;
-global using global::Microsoft.CodeAnalysis.Editor.Implementation;
-global using global::Microsoft.CodeAnalysis.Editor.Implementation.TodoComments;
 global using global::Microsoft.CodeAnalysis.EditorConfig;
 global using global::Microsoft.CodeAnalysis.EditorConfig.Parsing;
 global using global::Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles;
 global using global::Microsoft.CodeAnalysis.EmbeddedLanguages;
 global using global::Microsoft.CodeAnalysis.EmbeddedLanguages.Common;
-global using global::Microsoft.CodeAnalysis.EmbeddedLanguages.LanguageServices;
 global using global::Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 global using global::Microsoft.CodeAnalysis.Emit;
 global using global::Microsoft.CodeAnalysis.Emit.EditAndContinue;
 global using global::Microsoft.CodeAnalysis.Emit.NoPia;
 global using global::Microsoft.CodeAnalysis.ErrorLogger;
 global using global::Microsoft.CodeAnalysis.ErrorReporting;
-global using global::Microsoft.CodeAnalysis.Experiments;
 global using global::Microsoft.CodeAnalysis.Extensions;
 global using global::Microsoft.CodeAnalysis.ExternalAccess;
 global using global::Microsoft.CodeAnalysis.ExternalAccess.Pythia;
@@ -444,7 +407,6 @@ global using global::Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api;
 global using global::Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 global using global::Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 global using global::Microsoft.CodeAnalysis.ExtractMethod;
-global using global::Microsoft.CodeAnalysis.Fading;
 global using global::Microsoft.CodeAnalysis.FindSymbols;
 global using global::Microsoft.CodeAnalysis.FindSymbols.FindReferences;
 global using global::Microsoft.CodeAnalysis.FindSymbols.Finders;
@@ -456,7 +418,6 @@ global using global::Microsoft.CodeAnalysis.Formatting.Rules;
 global using global::Microsoft.CodeAnalysis.GeneratedCodeRecognition;
 global using global::Microsoft.CodeAnalysis.Host;
 global using global::Microsoft.CodeAnalysis.Host.Mef;
-global using global::Microsoft.CodeAnalysis.ImplementType;
 global using global::Microsoft.CodeAnalysis.Indentation;
 global using global::Microsoft.CodeAnalysis.Internal;
 global using global::Microsoft.CodeAnalysis.Internal.Log;
@@ -464,24 +425,19 @@ global using global::Microsoft.CodeAnalysis.InternalUtilities;
 global using global::Microsoft.CodeAnalysis.Interop;
 global using global::Microsoft.CodeAnalysis.LanguageService;
 global using global::Microsoft.CodeAnalysis.LanguageService.TypeInferenceService;
-global using global::Microsoft.CodeAnalysis.LanguageServices;
-global using global::Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService;
-global using global::Microsoft.CodeAnalysis.Logging;
 global using global::Microsoft.CodeAnalysis.MoveDeclarationNearReference;
 global using global::Microsoft.CodeAnalysis.NamingStyles;
 global using global::Microsoft.CodeAnalysis.Notification;
+global using global::Microsoft.CodeAnalysis.ObsoleteSymbol;
 global using global::Microsoft.CodeAnalysis.Operations;
 global using global::Microsoft.CodeAnalysis.Options;
-global using global::Microsoft.CodeAnalysis.Options.EditorConfig;
-global using global::Microsoft.CodeAnalysis.Options.Providers;
 global using global::Microsoft.CodeAnalysis.OrganizeImports;
 global using global::Microsoft.CodeAnalysis.Packaging;
 global using global::Microsoft.CodeAnalysis.PatternMatching;
-global using global::Microsoft.CodeAnalysis.PersistentStorage;
 global using global::Microsoft.CodeAnalysis.PooledObjects;
 global using global::Microsoft.CodeAnalysis.Precedence;
+global using global::Microsoft.CodeAnalysis.Progress;
 global using global::Microsoft.CodeAnalysis.ProjectSystem;
-global using global::Microsoft.CodeAnalysis.ProjectTelemetry;
 global using global::Microsoft.CodeAnalysis.ReassignedVariable;
 global using global::Microsoft.CodeAnalysis.Recommendations;
 global using global::Microsoft.CodeAnalysis.Remote;
@@ -492,19 +448,17 @@ global using global::Microsoft.CodeAnalysis.ReplaceDiscardDeclarationsWithAssign
 global using global::Microsoft.CodeAnalysis.RuntimeMembers;
 global using global::Microsoft.CodeAnalysis.SQLite;
 global using global::Microsoft.CodeAnalysis.SQLite.Interop;
-global using global::Microsoft.CodeAnalysis.SQLite.v1;
-global using global::Microsoft.CodeAnalysis.SQLite.v1.Interop;
 global using global::Microsoft.CodeAnalysis.SQLite.v2;
 global using global::Microsoft.CodeAnalysis.SQLite.v2.Interop;
 global using global::Microsoft.CodeAnalysis.SemanticModelReuse;
 global using global::Microsoft.CodeAnalysis.Serialization;
 global using global::Microsoft.CodeAnalysis.Shared;
+global using global::Microsoft.CodeAnalysis.Shared.CodeStyle;
 global using global::Microsoft.CodeAnalysis.Shared.Collections;
 global using global::Microsoft.CodeAnalysis.Shared.Extensions;
 global using global::Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery;
 global using global::Microsoft.CodeAnalysis.Shared.Helpers;
 global using global::Microsoft.CodeAnalysis.Shared.Helpers.RemoveUnnecessaryImports;
-global using global::Microsoft.CodeAnalysis.Shared.Options;
 global using global::Microsoft.CodeAnalysis.Shared.TestHooks;
 global using global::Microsoft.CodeAnalysis.Shared.Utilities;
 global using global::Microsoft.CodeAnalysis.Simplification;
@@ -513,7 +467,6 @@ global using global::Microsoft.CodeAnalysis.SolutionCrawler;
 global using global::Microsoft.CodeAnalysis.SourceGeneration;
 global using global::Microsoft.CodeAnalysis.SourceGeneratorTelemetry;
 global using global::Microsoft.CodeAnalysis.Storage;
-global using global::Microsoft.CodeAnalysis.Storage.CloudCache;
 global using global::Microsoft.CodeAnalysis.SymbolDisplay;
 global using global::Microsoft.CodeAnalysis.SymbolSearch;
 global using global::Microsoft.CodeAnalysis.Symbols;
@@ -527,17 +480,57 @@ global using global::Microsoft.CodeAnalysis.Testing.Extensions;
 global using global::Microsoft.CodeAnalysis.Testing.Lightup;
 global using global::Microsoft.CodeAnalysis.Testing.Model;
 global using global::Microsoft.CodeAnalysis.Text;
-global using global::Microsoft.CodeAnalysis.TodoComments;
 global using global::Microsoft.CodeAnalysis.UnitTests;
 global using global::Microsoft.CodeAnalysis.Utilities;
-global using global::Microsoft.CodeAnalysis.Versions;
+global using global::Microsoft.CodeAnalysis.VisualBasic;
+global using global::Microsoft.CodeAnalysis.VisualBasic.AddImports;
+global using global::Microsoft.CodeAnalysis.VisualBasic.CaseCorrection;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Classification;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Classification.Classifiers;
+global using global::Microsoft.CodeAnalysis.VisualBasic.CodeCleanup;
+global using global::Microsoft.CodeAnalysis.VisualBasic.CodeFixesAndRefactorings;
+global using global::Microsoft.CodeAnalysis.VisualBasic.CodeGen;
+global using global::Microsoft.CodeAnalysis.VisualBasic.CodeGeneration;
+global using global::Microsoft.CodeAnalysis.VisualBasic.CodeRefactorings;
+global using global::Microsoft.CodeAnalysis.VisualBasic.CodeStyle;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Diagnostics;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Editing;
+global using global::Microsoft.CodeAnalysis.VisualBasic.EmbeddedLanguages;
+global using global::Microsoft.CodeAnalysis.VisualBasic.EmbeddedLanguages.VirtualChars;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Emit;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Emit.NoPia;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Extensions;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Extensions.ContextQuery;
+global using global::Microsoft.CodeAnalysis.VisualBasic.FindSymbols;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Formatting;
+global using global::Microsoft.CodeAnalysis.VisualBasic.GeneratedCodeRecognition;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Indentation;
+global using global::Microsoft.CodeAnalysis.VisualBasic.LanguageService;
+global using global::Microsoft.CodeAnalysis.VisualBasic.MoveDeclarationNearReference;
+global using global::Microsoft.CodeAnalysis.VisualBasic.ObjectDisplay;
+global using global::Microsoft.CodeAnalysis.VisualBasic.ObsoleteSymbol;
+global using global::Microsoft.CodeAnalysis.VisualBasic.OrganizeImports;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Precedence;
+global using global::Microsoft.CodeAnalysis.VisualBasic.ReassignedVariable;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Recommendations;
+global using global::Microsoft.CodeAnalysis.VisualBasic.RemoveUnnecessaryImports;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Rename;
+global using global::Microsoft.CodeAnalysis.VisualBasic.SemanticModelReuse;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Serialization;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Simplification;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Simplification.Simplifiers;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Symbols;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Symbols.Metadata;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Symbols.Metadata.PE;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Symbols.Retargeting;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Syntax;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Syntax.InternalSyntax;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Utilities;
+global using global::Microsoft.CodeAnalysis.VisualBasic.Utilities.IntrinsicOperators;
 global using global::Microsoft.CodeAnalysis.Workspaces;
 global using global::Microsoft.CodeAnalysis.Workspaces.Diagnostics;
 global using global::Microsoft.CodeAnalysis.Workspaces.ProjectSystem;
-global using global::Microsoft.Composition;
-global using global::Microsoft.Composition.Diagnostics;
 global using global::Microsoft.DiaSymReader;
-global using global::Microsoft.Internal;
 global using global::Microsoft.SqlServer;
 global using global::Microsoft.SqlServer.Server;
 global using global::Microsoft.TestPlatform;
@@ -653,8 +646,6 @@ global using global::Oculus.Platform.Samples.VrBoardGame;
 global using global::Oculus.Platform.Samples.VrHoops;
 global using global::Oculus.Platform.Samples.VrVoiceChat;
 global using global::Roslyn;
-global using global::Roslyn.Collections;
-global using global::Roslyn.Collections.Immutable;
 global using global::Roslyn.Utilities;
 global using global::Scifa;
 global using global::Scifa.CheckedExceptions;
@@ -898,8 +889,6 @@ namespace System.Composition.Hosting { }
 
 namespace System.Composition.Hosting.Core { }
 
-namespace System.Composition.Hosting.Properties { }
-
 namespace System.Composition.Hosting.Providers { }
 
 namespace System.Composition.Hosting.Providers.CurrentScope { }
@@ -913,8 +902,6 @@ namespace System.Composition.Hosting.Providers.Lazy { }
 namespace System.Composition.Hosting.Providers.Metadata { }
 
 namespace System.Composition.Hosting.Util { }
-
-namespace System.Composition.Properties { }
 
 namespace System.Composition.Runtime { }
 
@@ -998,6 +985,8 @@ namespace System.IO.Compression { }
 
 namespace System.IO.Enumeration { }
 
+namespace System.IO.Hashing { }
+
 namespace System.IO.IsolatedStorage { }
 
 namespace System.IO.MemoryMappedFiles { }
@@ -1054,8 +1043,6 @@ namespace System.Reflection { }
 
 namespace System.Reflection.Emit { }
 
-namespace System.Reflection.Internal { }
-
 namespace System.Reflection.Metadata { }
 
 namespace System.Reflection.Metadata.Ecma335 { }
@@ -1067,8 +1054,6 @@ namespace System.Resources { }
 namespace System.Runtime { }
 
 namespace System.Runtime.CompilerServices { }
-
-namespace System.Runtime.CompilerServices2 { }
 
 namespace System.Runtime.ConstrainedExecution { }
 
@@ -1157,6 +1142,8 @@ namespace System.Text.Json.Serialization { }
 namespace System.Text.Json.Serialization.Metadata { }
 
 namespace System.Text.RegularExpressions { }
+
+namespace System.Text.RegularExpressions.Generated { }
 
 namespace System.Text.Unicode { }
 
@@ -1322,6 +1309,12 @@ namespace Assets.Scripts.VR.Null { }
 
 namespace Assets.Scripts.VR.Oculus { }
 
+namespace Basic { }
+
+namespace Basic.Reference { }
+
+namespace Basic.Reference.Assemblies { }
+
 namespace BasicExample { }
 
 namespace BindingsExample { }
@@ -1378,36 +1371,6 @@ namespace DigitalOpus.MB { }
 
 namespace DigitalOpus.MB.Core { }
 
-namespace DotNetProjectFile { }
-
-namespace DotNetProjectFile.Analyzers { }
-
-namespace DotNetProjectFile.Analyzers.Helpers { }
-
-namespace DotNetProjectFile.Analyzers.MsBuild { }
-
-namespace DotNetProjectFile.Analyzers.Resx { }
-
-namespace DotNetProjectFile.Caching { }
-
-namespace DotNetProjectFile.CodeAnalysis { }
-
-namespace DotNetProjectFile.Conversion { }
-
-namespace DotNetProjectFile.Diagnostics { }
-
-namespace DotNetProjectFile.IO { }
-
-namespace DotNetProjectFile.MsBuild { }
-
-namespace DotNetProjectFile.MsBuild.Conversion { }
-
-namespace DotNetProjectFile.NuGet { }
-
-namespace DotNetProjectFile.Resx { }
-
-namespace DotNetProjectFile.Xml { }
-
 namespace Emik { }
 
 namespace Emik.Morsels { }
@@ -1426,10 +1389,6 @@ namespace FxResources { }
 
 namespace FxResources.System { }
 
-namespace FxResources.System.Collections { }
-
-namespace FxResources.System.Collections.Immutable { }
-
 namespace FxResources.System.Composition { }
 
 namespace FxResources.System.Composition.Convention { }
@@ -1439,30 +1398,6 @@ namespace FxResources.System.Composition.Hosting { }
 namespace FxResources.System.Composition.Runtime { }
 
 namespace FxResources.System.Composition.TypedParts { }
-
-namespace FxResources.System.Diagnostics { }
-
-namespace FxResources.System.Diagnostics.DiagnosticSource { }
-
-namespace FxResources.System.IO { }
-
-namespace FxResources.System.IO.Pipelines { }
-
-namespace FxResources.System.Memory { }
-
-namespace FxResources.System.Reflection { }
-
-namespace FxResources.System.Reflection.Metadata { }
-
-namespace FxResources.System.Text { }
-
-namespace FxResources.System.Text.Encoding { }
-
-namespace FxResources.System.Text.Encoding.CodePages { }
-
-namespace FxResources.System.Threading { }
-
-namespace FxResources.System.Threading.Channels { }
 
 namespace Gu { }
 
@@ -1498,8 +1433,6 @@ namespace InlineMethod { }
 
 namespace InterfaceMovement { }
 
-namespace Internal { }
-
 namespace JetBrains { }
 
 namespace JetBrains.Annotations { }
@@ -1522,21 +1455,15 @@ namespace Microsoft.CodeAnalysis { }
 
 namespace Microsoft.CodeAnalysis.AddImport { }
 
-namespace Microsoft.CodeAnalysis.AddImports { }
-
 namespace Microsoft.CodeAnalysis.CSharp { }
 
 namespace Microsoft.CodeAnalysis.CSharp.AddImport { }
-
-namespace Microsoft.CodeAnalysis.CSharp.AddImports { }
 
 namespace Microsoft.CodeAnalysis.CSharp.CaseCorrection { }
 
 namespace Microsoft.CodeAnalysis.CSharp.Classification { }
 
 namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers { }
-
-namespace Microsoft.CodeAnalysis.CSharp.Classification.SyntaxClassification { }
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeCleanup { }
 
@@ -1545,6 +1472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixesAndRefactorings { }
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen { }
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration { }
+
+namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings { }
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeStyle { }
 
@@ -1557,8 +1486,6 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments { }
 namespace Microsoft.CodeAnalysis.CSharp.Editing { }
 
 namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages { }
-
-namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.LanguageServices { }
 
 namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars { }
 
@@ -1580,9 +1507,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation { }
 
 namespace Microsoft.CodeAnalysis.CSharp.LanguageService { }
 
-namespace Microsoft.CodeAnalysis.CSharp.LanguageServices { }
-
 namespace Microsoft.CodeAnalysis.CSharp.MoveDeclarationNearReference { }
+
+namespace Microsoft.CodeAnalysis.CSharp.ObsoleteSymbol { }
 
 namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports { }
 
@@ -1662,8 +1589,6 @@ namespace Microsoft.CodeAnalysis.Collections.Internal { }
 
 namespace Microsoft.CodeAnalysis.Debugging { }
 
-namespace Microsoft.CodeAnalysis.DesignerAttribute { }
-
 namespace Microsoft.CodeAnalysis.Diagnostics { }
 
 namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers { }
@@ -1674,15 +1599,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.CSharp { }
 
 namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry { }
 
+namespace Microsoft.CodeAnalysis.Diagnostics.VisualBasic { }
+
 namespace Microsoft.CodeAnalysis.Differencing { }
 
 namespace Microsoft.CodeAnalysis.Editing { }
-
-namespace Microsoft.CodeAnalysis.Editor { }
-
-namespace Microsoft.CodeAnalysis.Editor.Implementation { }
-
-namespace Microsoft.CodeAnalysis.Editor.Implementation.TodoComments { }
 
 namespace Microsoft.CodeAnalysis.EditorConfig { }
 
@@ -1693,8 +1614,6 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles { }
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages { }
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common { }
-
-namespace Microsoft.CodeAnalysis.EmbeddedLanguages.LanguageServices { }
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars { }
 
@@ -1707,8 +1626,6 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia { }
 namespace Microsoft.CodeAnalysis.ErrorLogger { }
 
 namespace Microsoft.CodeAnalysis.ErrorReporting { }
-
-namespace Microsoft.CodeAnalysis.Experiments { }
 
 namespace Microsoft.CodeAnalysis.Extensions { }
 
@@ -1727,8 +1644,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript { }
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api { }
 
 namespace Microsoft.CodeAnalysis.ExtractMethod { }
-
-namespace Microsoft.CodeAnalysis.Fading { }
 
 namespace Microsoft.CodeAnalysis.FindSymbols { }
 
@@ -1752,8 +1667,6 @@ namespace Microsoft.CodeAnalysis.Host { }
 
 namespace Microsoft.CodeAnalysis.Host.Mef { }
 
-namespace Microsoft.CodeAnalysis.ImplementType { }
-
 namespace Microsoft.CodeAnalysis.Indentation { }
 
 namespace Microsoft.CodeAnalysis.Internal { }
@@ -1768,25 +1681,17 @@ namespace Microsoft.CodeAnalysis.LanguageService { }
 
 namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService { }
 
-namespace Microsoft.CodeAnalysis.LanguageServices { }
-
-namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService { }
-
-namespace Microsoft.CodeAnalysis.Logging { }
-
 namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference { }
 
 namespace Microsoft.CodeAnalysis.NamingStyles { }
 
 namespace Microsoft.CodeAnalysis.Notification { }
 
+namespace Microsoft.CodeAnalysis.ObsoleteSymbol { }
+
 namespace Microsoft.CodeAnalysis.Operations { }
 
 namespace Microsoft.CodeAnalysis.Options { }
-
-namespace Microsoft.CodeAnalysis.Options.EditorConfig { }
-
-namespace Microsoft.CodeAnalysis.Options.Providers { }
 
 namespace Microsoft.CodeAnalysis.OrganizeImports { }
 
@@ -1794,15 +1699,13 @@ namespace Microsoft.CodeAnalysis.Packaging { }
 
 namespace Microsoft.CodeAnalysis.PatternMatching { }
 
-namespace Microsoft.CodeAnalysis.PersistentStorage { }
-
 namespace Microsoft.CodeAnalysis.PooledObjects { }
 
 namespace Microsoft.CodeAnalysis.Precedence { }
 
-namespace Microsoft.CodeAnalysis.ProjectSystem { }
+namespace Microsoft.CodeAnalysis.Progress { }
 
-namespace Microsoft.CodeAnalysis.ProjectTelemetry { }
+namespace Microsoft.CodeAnalysis.ProjectSystem { }
 
 namespace Microsoft.CodeAnalysis.ReassignedVariable { }
 
@@ -1824,10 +1727,6 @@ namespace Microsoft.CodeAnalysis.SQLite { }
 
 namespace Microsoft.CodeAnalysis.SQLite.Interop { }
 
-namespace Microsoft.CodeAnalysis.SQLite.v1 { }
-
-namespace Microsoft.CodeAnalysis.SQLite.v1.Interop { }
-
 namespace Microsoft.CodeAnalysis.SQLite.v2 { }
 
 namespace Microsoft.CodeAnalysis.SQLite.v2.Interop { }
@@ -1838,6 +1737,8 @@ namespace Microsoft.CodeAnalysis.Serialization { }
 
 namespace Microsoft.CodeAnalysis.Shared { }
 
+namespace Microsoft.CodeAnalysis.Shared.CodeStyle { }
+
 namespace Microsoft.CodeAnalysis.Shared.Collections { }
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions { }
@@ -1847,8 +1748,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery { }
 namespace Microsoft.CodeAnalysis.Shared.Helpers { }
 
 namespace Microsoft.CodeAnalysis.Shared.Helpers.RemoveUnnecessaryImports { }
-
-namespace Microsoft.CodeAnalysis.Shared.Options { }
 
 namespace Microsoft.CodeAnalysis.Shared.TestHooks { }
 
@@ -1865,8 +1764,6 @@ namespace Microsoft.CodeAnalysis.SourceGeneration { }
 namespace Microsoft.CodeAnalysis.SourceGeneratorTelemetry { }
 
 namespace Microsoft.CodeAnalysis.Storage { }
-
-namespace Microsoft.CodeAnalysis.Storage.CloudCache { }
 
 namespace Microsoft.CodeAnalysis.SymbolDisplay { }
 
@@ -1894,13 +1791,99 @@ namespace Microsoft.CodeAnalysis.Testing.Model { }
 
 namespace Microsoft.CodeAnalysis.Text { }
 
-namespace Microsoft.CodeAnalysis.TodoComments { }
-
 namespace Microsoft.CodeAnalysis.UnitTests { }
 
 namespace Microsoft.CodeAnalysis.Utilities { }
 
-namespace Microsoft.CodeAnalysis.Versions { }
+namespace Microsoft.CodeAnalysis.VisualBasic { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.AddImports { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.CaseCorrection { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Classification { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Classification.Classifiers { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.CodeCleanup { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.CodeFixesAndRefactorings { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.CodeGen { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.CodeGeneration { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.CodeRefactorings { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.CodeStyle { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Diagnostics { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Editing { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.EmbeddedLanguages { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.EmbeddedLanguages.VirtualChars { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Emit { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Emit.NoPia { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Extensions { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Extensions.ContextQuery { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.FindSymbols { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Formatting { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.GeneratedCodeRecognition { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Indentation { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.LanguageService { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.MoveDeclarationNearReference { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.ObjectDisplay { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.ObsoleteSymbol { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.OrganizeImports { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Precedence { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.ReassignedVariable { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Recommendations { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.RemoveUnnecessaryImports { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Rename { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.SemanticModelReuse { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Serialization { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Simplification { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Simplification.Simplifiers { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Symbols { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Symbols.Metadata { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Symbols.Metadata.PE { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Symbols.Retargeting { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Syntax { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Syntax.InternalSyntax { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Utilities { }
+
+namespace Microsoft.CodeAnalysis.VisualBasic.Utilities.IntrinsicOperators { }
 
 namespace Microsoft.CodeAnalysis.Workspaces { }
 
@@ -1908,13 +1891,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics { }
 
 namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem { }
 
-namespace Microsoft.Composition { }
-
-namespace Microsoft.Composition.Diagnostics { }
-
 namespace Microsoft.DiaSymReader { }
-
-namespace Microsoft.Internal { }
 
 namespace Microsoft.SqlServer { }
 
@@ -2145,10 +2122,6 @@ namespace Oculus.Platform.Samples.VrHoops { }
 namespace Oculus.Platform.Samples.VrVoiceChat { }
 
 namespace Roslyn { }
-
-namespace Roslyn.Collections { }
-
-namespace Roslyn.Collections.Immutable { }
 
 namespace Roslyn.Utilities { }
 

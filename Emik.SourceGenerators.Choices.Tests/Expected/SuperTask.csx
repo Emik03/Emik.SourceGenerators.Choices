@@ -363,6 +363,16 @@ namespace Emik
                             _ => ((System.Threading.Tasks.Task)_reference!).ConfigureAwait(continueOnCapturedContext),
                         };
 
+                    /// <inheritdoc cref="System.Threading.Tasks.Task.ConfigureAwait(System.Threading.Tasks.ConfigureAwaitOptions)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public System.Runtime.CompilerServices.ConfiguredTaskAwaitable ConfigureAwait(global::System.Threading.Tasks.ConfigureAwaitOptions options)
+                        => _discriminator switch
+                        {
+                            0 => ((System.Threading.Tasks.Task)_reference!).ConfigureAwait(options),
+                            _ => ((System.Threading.Tasks.Task)_reference!).ConfigureAwait(options),
+                        };
+
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?)"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -715,6 +725,66 @@ namespace Emik
                             _ => ((System.Threading.Tasks.Task)_reference!).Wait(timeout),
                         };
 
+                    /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(System.TimeSpan, System.Threading.CancellationToken)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public bool Wait(global::System.TimeSpan timeout, global::System.Threading.CancellationToken cancellationToken)
+                        => _discriminator switch
+                        {
+                            0 => ((System.Threading.Tasks.Task)_reference!).Wait(timeout, cancellationToken),
+                            _ => ((System.Threading.Tasks.Task)_reference!).Wait(timeout, cancellationToken),
+                        };
+
+                    /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public System.Threading.Tasks.Task WaitAsync(global::System.Threading.CancellationToken cancellationToken)
+                        => _discriminator switch
+                        {
+                            0 => ((System.Threading.Tasks.Task)_reference!).WaitAsync(cancellationToken),
+                            _ => ((System.Threading.Tasks.Task)_reference!).WaitAsync(cancellationToken),
+                        };
+
+                    /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout)
+                        => _discriminator switch
+                        {
+                            0 => ((System.Threading.Tasks.Task)_reference!).WaitAsync(timeout),
+                            _ => ((System.Threading.Tasks.Task)_reference!).WaitAsync(timeout),
+                        };
+
+                    /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan, System.Threading.CancellationToken)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout, global::System.Threading.CancellationToken cancellationToken)
+                        => _discriminator switch
+                        {
+                            0 => ((System.Threading.Tasks.Task)_reference!).WaitAsync(timeout, cancellationToken),
+                            _ => ((System.Threading.Tasks.Task)_reference!).WaitAsync(timeout, cancellationToken),
+                        };
+
+                    /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan, System.TimeProvider)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout, global::System.TimeProvider timeProvider)
+                        => _discriminator switch
+                        {
+                            0 => ((System.Threading.Tasks.Task)_reference!).WaitAsync(timeout, timeProvider),
+                            _ => ((System.Threading.Tasks.Task)_reference!).WaitAsync(timeout, timeProvider),
+                        };
+
+                    /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan, System.TimeProvider, System.Threading.CancellationToken)"/>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout, global::System.TimeProvider timeProvider, global::System.Threading.CancellationToken cancellationToken)
+                        => _discriminator switch
+                        {
+                            0 => ((System.Threading.Tasks.Task)_reference!).WaitAsync(timeout, timeProvider, cancellationToken),
+                            _ => ((System.Threading.Tasks.Task)_reference!).WaitAsync(timeout, timeProvider, cancellationToken),
+                        };
+
                     /// <inheritdoc cref="System.Threading.Tasks.Task.AsyncState"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     public object? AsyncState
@@ -801,6 +871,7 @@ namespace Emik
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.IsFaulted"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Exception")]
                     public bool IsFaulted
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]

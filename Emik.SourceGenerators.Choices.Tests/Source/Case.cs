@@ -146,7 +146,7 @@ public abstract class Case([StringSyntax("C#")] string? source)
         var absolute = Path.Join(directory, "Expected", $"{memberName}.csx");
         var text = await File.ReadAllTextAsync(absolute);
         verify.TestState.GeneratedSources.Add((name, SourceText.From(text, Encoding.UTF8)));
-        await verify.RunAsync();
+        await verify.RunAsync().ConfigureAwait(false);
     }
 
     static string Wrap(string? source) => // language=c#

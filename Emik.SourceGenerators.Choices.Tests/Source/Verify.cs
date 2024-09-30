@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
+using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
+
 namespace Emik.SourceGenerators.Choices.Tests;
 
 public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, DefaultVerifier>
@@ -23,7 +25,7 @@ public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, Defau
 
     /// <inheritdoc />
     protected override ParseOptions CreateParseOptions() =>
-        ((CSharpParseOptions)base.CreateParseOptions()).WithLanguageVersion(LanguageVersion.Preview);
+        ((CSharpParseOptions)base.CreateParseOptions()).WithLanguageVersion(Preview);
 
     /// <inheritdoc />
     protected override async Task<Project> CreateProjectImplAsync(
@@ -31,7 +33,9 @@ public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, Defau
         ImmutableArray<EvaluatedProjectState> additionalProjects,
         CancellationToken token
     ) =>
-        (await base.CreateProjectImplAsync(primaryProject, additionalProjects, token)).AddMetadataReferences(
+        (await base.CreateProjectImplAsync(primaryProject, additionalProjects, token))
+       .WithMetadataReferences(Net90.References.All)
+       .AddMetadataReferences(
             ((string[])["KMFramework.dll", "UnityEngine.dll", "UnityEngine.CoreModule.dll"])
            .Select(x => Path.Join(AssemblyDirectory, x))
            .Where(File.Exists)

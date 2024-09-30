@@ -579,7 +579,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public System.IComparable GetUnderlyingValue()
+                    public System.ISpanFormattable GetUnderlyingValue()
                         => _discriminator switch
                         {
                             0 => _unmanaged._integer,

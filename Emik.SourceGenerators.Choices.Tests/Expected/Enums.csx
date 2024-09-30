@@ -180,6 +180,7 @@ namespace Emik
                     global::System.IEquatable<object>,
                     global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.Enums>,
                     System.IConvertible,
+                    System.ISpanFormattable,
                     System.IFormattable
                 {
                     /// <summary>
@@ -1042,6 +1043,25 @@ namespace Emik
                             _ => ((System.IConvertible)_unmanaged._valueTaskSources).ToUInt64(provider),
                         };
 
+                    /// <inheritdoc cref="System.ISpanFormattable.TryFormat(System.Span{char}, out int, System.ReadOnlySpan{char}, System.IFormatProvider?)"/>
+                    /// <remarks>
+                    /// Boxes when the current instance is
+                    /// <see cref="AssemblyNames"/> as <see cref="System.ISpanFormattable"/>,
+                    /// <see cref="Bindings"/> as <see cref="System.ISpanFormattable"/>,
+                    /// <see cref="Sockets"/> as <see cref="System.ISpanFormattable"/>,
+                    /// <see cref="ValueTaskSources"/> as <see cref="System.ISpanFormattable"/>.
+                    /// </remarks>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public bool TryFormat(global::System.Span<char> destination, scoped out int charsWritten, global::System.ReadOnlySpan<char> format, global::System.IFormatProvider? provider)
+                        => _discriminator switch
+                        {
+                            0 => ((System.ISpanFormattable)_unmanaged._assemblyNames).TryFormat(destination, out charsWritten, format, provider),
+                            1 => ((System.ISpanFormattable)_unmanaged._bindings).TryFormat(destination, out charsWritten, format, provider),
+                            2 => ((System.ISpanFormattable)_unmanaged._sockets).TryFormat(destination, out charsWritten, format, provider),
+                            _ => ((System.ISpanFormattable)_unmanaged._valueTaskSources).TryFormat(destination, out charsWritten, format, provider),
+                        };
+
                     /// <inheritdoc cref="System.IFormattable.ToString(string?, System.IFormatProvider?)"/>
                     /// <remarks>
                     /// Boxes when the current instance is
@@ -1076,7 +1096,7 @@ namespace Emik
                     /// <inheritdoc cref="System.Enum.ToString(string?)"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public string ToString(string? format)
+                    public string ToString([System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("EnumFormat")] string? format)
                         => _discriminator switch
                         {
                             0 => _unmanaged._assemblyNames.ToString(format),
