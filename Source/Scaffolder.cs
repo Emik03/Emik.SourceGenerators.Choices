@@ -207,7 +207,7 @@ sealed partial record Scaffolder(
                  }).YieldValued()
                 .Select(x => (false, x))
                 .Concat(Symbols.Select(x => (x.Type.IsRefLikeType, x.Name)))
-                .Prepend((false, "Choice"))
+                .Prepend((false, nameof(ExtendingGenerator.Choice)))
                 .Reverse()
                 .Index()
                 .Aggregate("", DeclareNestedClass)}

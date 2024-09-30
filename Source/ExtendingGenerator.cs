@@ -5,6 +5,10 @@ namespace Emik.SourceGenerators.Choices;
 [Generator]
 public sealed class ExtendingGenerator : IIncrementalGenerator
 {
+    /// <summary>The name of the <see cref="Choice"/> attribute.</summary>
+    public const string Choice = nameof(Choice);
+
+    /// <summary>The minimum number of members required to generate a disjoint union.</summary>
     const int MinimumMembers = 2;
 
     /// <summary>Executes this source generation based on given input.</summary>
@@ -132,10 +136,16 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             {
                 Left: QualifiedNameSyntax
                 {
-                    Left: IdentifierNameSyntax { Identifier.Text: "Choice" } or
+                    Left: IdentifierNameSyntax { Identifier.Text: Choice } or
                     QualifiedNameSyntax
                     {
-                        Left: IdentifierNameSyntax { Identifier.Text: "Choice" } or QualifiedNameSyntax,
+                        Left: AliasQualifiedNameSyntax { Name.Identifier.Text: nameof(Emik) } or
+                        IdentifierNameSyntax { Identifier.Text: nameof(Emik) },
+                        Right: IdentifierNameSyntax { Identifier.Text: Choice },
+                    } or
+                    QualifiedNameSyntax
+                    {
+                        Left: IdentifierNameSyntax { Identifier.Text: Choice } or QualifiedNameSyntax,
                         Right: IdentifierNameSyntax
                         {
                             Identifier.Text: nameof(Accessibility.Private) or nameof(Accessibility.Public),
@@ -165,36 +175,33 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         var fields = ImmutableArray.CreateBuilder<MemberSymbol>();
         bool? mutablePublicly = null;
 
-        for (var name = attribute.Name; name is QualifiedNameSyntax qualifiedName; name = qualifiedName.Left)
+        for (var n = attribute.Name; n is QualifiedNameSyntax q; n = q.Left)
         {
             token.ThrowIfCancellationRequested();
 
-            if (qualifiedName.Right is IdentifierNameSyntax rightIdentifier)
-                switch (rightIdentifier.Identifier.Text)
-                {
-                    case nameof(Accessibility.Private):
-                        mutablePublicly = false;
-                        break;
-                    case nameof(Accessibility.Public):
-                        mutablePublicly = true;
-                        break;
-                    default: return default;
-                }
+            if (q.Right is IdentifierNameSyntax { Identifier.Text: var right })
+                if (q.Left is AliasQualifiedNameSyntax { Name.Identifier.Text: nameof(Emik) } or
+                        IdentifierNameSyntax { Identifier.Text: nameof(Emik) } &&
+                    right is Choice)
+                    break;
+                else if (right is nameof(Accessibility.Private) or nameof(Accessibility.Public))
+                    mutablePublicly = right is nameof(Accessibility.Public);
+                else
+                    return default;
 
-            if (qualifiedName is { Left: IdentifierNameSyntax leftIdentifier, Right: not GenericNameSyntax })
-                if (leftIdentifier.Identifier.Text is "Choice")
+            if (q is { Left: IdentifierNameSyntax { Identifier.Text: var end }, Right: not GenericNameSyntax })
+                if (end is Choice)
                     break;
                 else
                     return default;
 
             if (mutablePublicly is not null ||
-                qualifiedName.Right is not GenericNameSyntax genericName ||
-                genericName.TypeArgumentList.Arguments is not [var typeArgument] ||
-                (context.SemanticModel.GetDeclaredSymbolSafe(typeArgument, token) ??
-                    context.SemanticModel.GetSymbolSafe(typeArgument, token)) is not ITypeSymbol type)
+                q.Right is not GenericNameSyntax { Identifier.Text: var next, TypeArgumentList.Arguments: [var arg] } ||
+                (context.SemanticModel.GetDeclaredSymbolSafe(arg, token) ??
+                    context.SemanticModel.GetSymbolSafe(arg, token)) is not ITypeSymbol type)
                 return default;
 
-            fields.Add(new(type, genericName.Identifier.Text));
+            fields.Add(new(type, next));
         }
 
         fields.Reverse();
@@ -234,7 +241,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
            .Filter()
            .FirstOrDefault()
           ?.Parameters
-           .Select(x => context.SemanticModel.GetDeclaredSymbol(x, token))
+           .Select(x => context.SemanticModel.GetDeclaredSymbolSafe(x, token))
            .Filter()
            .Select(x => new MemberSymbol(x))
            .ToImmutableArray();
