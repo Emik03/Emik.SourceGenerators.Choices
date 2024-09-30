@@ -222,9 +222,9 @@ sealed partial record Scaffolder(
         UsesPrimaryConstructor && Members.All(x => x.Name is not UsedImplicitly)
             ? CSharp(
                 $"""
-                         /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
-                         {HideFromEditor}
-                         {SymbolsUnsafe}bool {UsedImplicitly} => {Symbols.Select(x => $"{x.ParameterName} is var _").Conjoin(" && ")};
+                     /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
+                     {HideFromEditor}
+                     {SymbolsUnsafe}bool {UsedImplicitly} => {Symbols.Select(x => $"{x.ParameterName} is var _").Conjoin(" && ")};
 
 
                  """
@@ -498,8 +498,7 @@ sealed partial record Scaffolder(
                           {{Symbols
                              .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {
                                  (x.IsEmpty || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(GetHashCode)))
-                                     ? "0"
-                                     : $"{PrefixCast(x)}.GetHashCode()")},")
+                                     ? "0" : x.Type is IPointerTypeSymbol ? $"(int)(nint){PrefixCast(x)}" : $"{PrefixCast(x)}.GetHashCode()")},")
                              .Conjoin("\n            ")}}
                       });
 
@@ -731,7 +730,8 @@ sealed partial record Scaffolder(
 
     [Pure]
     bool SkipOperator(MemberSymbol x) =>
-        x.Type is not ITypeParameterSymbol and { BaseType: null } || HasConflict(x) || IsNoninitial(x);
+        x.Type is not IPointerTypeSymbol &&
+        (x.Type is not ITypeParameterSymbol and { BaseType: null } || HasConflict(x) || IsNoninitial(x));
 
     [Pure]
     int Inheritance((int Index, MemberSymbol Item) tuple) =>
@@ -816,7 +816,7 @@ sealed partial record Scaffolder(
                   /// Gets the value determining if the {{XmlName}} is the variant {{x.XmlName}} of type {{XmlTypeName(x.Type)}}.
                   /// </summary>
                   {{Annotation}}
-                  public {{ReadOnlyIfStruct}}{{x.Unsafe}}bool Is{{x.PropertyName}}
+                  public {{ReadOnlyIfStruct}}bool Is{{x.PropertyName}}
                   {
                       {{Pure}}{{(x.IsEmpty
                           ? Opposite(x)
@@ -842,7 +842,7 @@ sealed partial record Scaffolder(
                           (conflict ? "\n    /// <param name=\"x\">The discriminator.</param>" : "")}}
                       {{Annotation}}
                       {{AggressiveInlining}}
-                      {{(conflict ? "private" : "public")}} {{x.Unsafe}}{{Named.Name}}({{x.Type}} {{x.ParameterName
+                      {{(conflict ? "private" : "public")}} {{SymbolsUnsafe}}{{Named.Name}}({{x.Type}} {{x.ParameterName
                       }}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")
                       }}){{(UsesPrimaryConstructor ? $"\n        : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
                       }{x.ParameterName}{(Symbols.Length - i - 1).For(j => $", default({Symbols[i + j + 1].Type})").Conjoin("")
@@ -857,18 +857,18 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareDelegate(MemberSymbol x) =>
-        x.Type.IsRefLikeType && !x.IsEmpty
+        x is { IsEmpty: false, Type: IPointerTypeSymbol or { IsRefLikeType: true } }
             ? CSharp(
                 $"""
                      /// <summary>
-                     /// Explicit side effect delegate for {Describe(x)} due to it being a by-ref like type.
+                     /// Explicit side effect delegate for {Describe(x)} due to it being a {(x.Type is IPointerTypeSymbol ? "pointer" : "by-ref like")} type.
                      /// </summary>
                      /// <param name="{x.ParameterName}">The referenced value.</param>
                      {Annotation}
                      public {x.Unsafe}delegate void {x.PropertyName}Handler({x.Type} {x.ParameterName});
 
                      /// <summary>
-                     /// Explicit mapper delegate for {Describe(x)} due to it being a by-ref like type.
+                     /// Explicit mapper delegate for {Describe(x)} due to it being a {(x.Type is IPointerTypeSymbol ? "pointer" : "by-ref like")} type.
                      /// </summary>
                      /// <typeparam name="{ResultGeneric}">The type of value to return.</typeparam>
                      /// <param name="{x.ParameterName}">The referenced value.</param>
@@ -1063,7 +1063,8 @@ sealed partial record Scaffolder(
             ? $"\"{x.PropertyName}\""
             : CSharp(
                 $$"""
-                  $"{nameof({{x.PropertyName}})}({{{PrefixCast(x)}}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
+                  $"{nameof({{x.PropertyName}})}({{{(x.Type is IPointerTypeSymbol ? "(nint)" : "")}}{{PrefixCast(x)
+                  }}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
                   """
             );
 }

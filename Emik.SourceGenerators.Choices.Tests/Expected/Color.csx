@@ -211,9 +211,9 @@ namespace Emik
                         get => Discriminator is 1 ? (Emik.SourceGenerators.Choices.Tests.Color.OrRef<Emik.SourceGenerators.Choices.Tests.Number>[]?)_reference! : default;
                     }
 
-                        /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
-                        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                        bool UsedImplicitly => rgba is var _ && gradient is var _;
+                    /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
+                    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+                    bool UsedImplicitly => rgba is var _ && gradient is var _;
 
                     /// <summary>
                     /// Implicitly converts the <see cref="Emik.SourceGenerators.Choices.Tests.Color.OrRef{int}[]"/> parameter to the union.

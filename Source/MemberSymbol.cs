@@ -225,8 +225,10 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <returns>The name of the delegate type.</returns>
     [Pure]
     public string DelegateTypeName(bool hasGenericReturn) =>
-        $"{(Type.IsRefLikeType && !IsEmpty ? $"{PropertyName}Handler" : hasGenericReturn ? Func : Action)}{(
-            Type.IsRefLikeType || IsEmpty
+        $"{(this is { IsEmpty: false, Type: IPointerTypeSymbol or { IsRefLikeType: true } }
+            ? $"{PropertyName}Handler"
+            : hasGenericReturn ? Func : Action)}{(
+            this is { IsEmpty: true } or { Type: IPointerTypeSymbol or { IsRefLikeType: true } }
                 ? hasGenericReturn ? $"<{Scaffolder.ResultGeneric}>" : ""
                 : hasGenericReturn ? $"<{Type}, {Scaffolder.ResultGeneric}>" : $"<{Type}>")}";
 

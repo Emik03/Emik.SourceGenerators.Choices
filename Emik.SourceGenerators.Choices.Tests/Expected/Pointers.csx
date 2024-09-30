@@ -46,7 +46,23 @@ namespace Emik
                 ///                     </item>
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="OfBytes(byte*)"/>
+                ///                             <list type="number">
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="OfBytes(byte*)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.Pointers(byte*)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="op_Implicit(byte*)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                             </list>
                 ///                         </description>
                 ///                     </item>
                 ///                 </list>
@@ -63,7 +79,23 @@ namespace Emik
                 ///                     </item>
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="OfChars(char*)"/>
+                ///                             <list type="number">
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="OfChars(char*)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.Pointers(char*)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="op_Implicit(char*)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                             </list>
                 ///                         </description>
                 ///                     </item>
                 ///                 </list>
@@ -132,6 +164,38 @@ namespace Emik
                         internal nint _native;
                     }
 
+                    /// <summary>
+                    /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Bytes"/> of type <see cref="byte*"/> due to it being a pointer type.
+                    /// </summary>
+                    /// <param name="bytes">The referenced value.</param>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public unsafe delegate void BytesHandler(byte* bytes);
+
+                    /// <summary>
+                    /// Explicit mapper delegate for the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Bytes"/> of type <see cref="byte*"/> due to it being a pointer type.
+                    /// </summary>
+                    /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
+                    /// <param name="bytes">The referenced value.</param>
+                    /// <returns>The result of the mapping.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public unsafe delegate TMappingResult BytesHandler<out TMappingResult>(byte* bytes);
+
+                    /// <summary>
+                    /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Chars"/> of type <see cref="char*"/> due to it being a pointer type.
+                    /// </summary>
+                    /// <param name="chars">The referenced value.</param>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public unsafe delegate void CharsHandler(char* chars);
+
+                    /// <summary>
+                    /// Explicit mapper delegate for the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Chars"/> of type <see cref="char*"/> due to it being a pointer type.
+                    /// </summary>
+                    /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
+                    /// <param name="chars">The referenced value.</param>
+                    /// <returns>The result of the mapping.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    public unsafe delegate TMappingResult CharsHandler<out TMappingResult>(char* chars);
+
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     private readonly byte _discriminator;
 
@@ -170,7 +234,7 @@ namespace Emik
                     /// <param name="native">The variant.</param>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public Pointers(nint native)
+                    public unsafe Pointers(nint native)
                         : this(default(byte*), default(char*), native)
                     {
                         _discriminator = 2;
@@ -181,7 +245,7 @@ namespace Emik
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> is the variant <see cref="Bytes"/> of type <see cref="byte*"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public readonly unsafe bool IsBytes
+                    public readonly bool IsBytes
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
                         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Bytes")]
@@ -193,7 +257,7 @@ namespace Emik
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> is the variant <see cref="Chars"/> of type <see cref="char*"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
-                    public readonly unsafe bool IsChars
+                    public readonly bool IsChars
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
                         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Chars")]
@@ -246,9 +310,53 @@ namespace Emik
                         get => _discriminator is 2 ? _unmanaged._native : default;
                     }
 
-                        /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
-                        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                        unsafe bool UsedImplicitly => bytes is var _ && chars is var _ && native is var _;
+                    /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
+                    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+                    unsafe bool UsedImplicitly => bytes is var _ && chars is var _ && native is var _;
+
+                    /// <summary>
+                    /// Implicitly converts the <see cref="byte*"/> parameter to the union.
+                    /// </summary>
+                    /// <param name="bytes">The parameter to pass onto the constructor.</param>
+                    /// <returns>The union containing the parameter <paramref name="bytes"/>.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public static unsafe implicit operator global::Emik.SourceGenerators.Choices.Tests.Pointers(byte* bytes)
+                        => new global::Emik.SourceGenerators.Choices.Tests.Pointers(bytes);
+
+                    /// <summary>
+                    /// Explicitly converts the union to the target type <see cref="byte*"/>.
+                    /// </summary>
+                    /// <param name="x">The union to access its property.</param>
+                    /// <returns>The getter of the union <paramref name="x"/>.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public static unsafe explicit operator byte*(global::Emik.SourceGenerators.Choices.Tests.Pointers x)
+                        => x.Bytes;
+
+                    /// <summary>
+                    /// Implicitly converts the <see cref="char*"/> parameter to the union.
+                    /// </summary>
+                    /// <param name="chars">The parameter to pass onto the constructor.</param>
+                    /// <returns>The union containing the parameter <paramref name="chars"/>.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public static unsafe implicit operator global::Emik.SourceGenerators.Choices.Tests.Pointers(char* chars)
+                        => new global::Emik.SourceGenerators.Choices.Tests.Pointers(chars);
+
+                    /// <summary>
+                    /// Explicitly converts the union to the target type <see cref="char*"/>.
+                    /// </summary>
+                    /// <param name="x">The union to access its property.</param>
+                    /// <returns>The getter of the union <paramref name="x"/>.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public static unsafe explicit operator char*(global::Emik.SourceGenerators.Choices.Tests.Pointers x)
+                        => x.Chars;
 
                     /// <summary>
                     /// Implicitly converts the <see cref="nint"/> parameter to the union.
@@ -444,8 +552,8 @@ namespace Emik
                         => unchecked(_discriminator * 22157) ^
                         (_discriminator switch
                         {
-                            0 => _unmanaged._bytes.GetHashCode(),
-                            1 => _unmanaged._chars.GetHashCode(),
+                            0 => (int)(nint)_unmanaged._bytes,
+                            1 => (int)(nint)_unmanaged._chars,
                             _ => _unmanaged._native.GetHashCode(),
                         });
 
@@ -456,8 +564,8 @@ namespace Emik
                     public readonly unsafe override string ToString()
                         => _discriminator switch
                         {
-                            0 => $"{nameof(Bytes)}({_unmanaged._bytes})",
-                            1 => $"{nameof(Chars)}({_unmanaged._chars})",
+                            0 => $"{nameof(Bytes)}({(nint)_unmanaged._bytes})",
+                            1 => $"{nameof(Chars)}({(nint)_unmanaged._chars})",
                             _ => $"{nameof(Native)}({_unmanaged._native})",
                         };
 
@@ -471,8 +579,8 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly unsafe Emik.SourceGenerators.Choices.Tests.Pointers Map(
-                        global::System.Action<byte*>? onBytes = null,
-                        global::System.Action<char*>? onChars = null,
+                        BytesHandler? onBytes = null,
+                        CharsHandler? onChars = null,
                         global::System.Action<nint>? onNative = null
                     )
                     {
@@ -503,8 +611,8 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly unsafe TMappingResult Map<TMappingResult>(
-                        global::System.Func<byte*, TMappingResult> onBytes,
-                        global::System.Func<char*, TMappingResult> onChars,
+                        BytesHandler<TMappingResult> onBytes,
+                        CharsHandler<TMappingResult> onChars,
                         global::System.Func<nint, TMappingResult> onNative
                     )
                         => _discriminator switch

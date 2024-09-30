@@ -44,7 +44,7 @@ sealed partial record Scaffolder
 
                      /// {XmlTypeName(symbol, "inheritdoc")}{Remarks(interfacesDeclared)}
                      {Annotation}{(symbol is IMethodSymbol ? $"\n    {AggressiveInlining}" : "")}
-                     {attributes}{(attributes is "" ? "" : "    ")}public{' '}
+                     {attributes}{(attributes is "" ? "" : "    ")}public {SymbolsUnsafe}
                  """
             )
         );
