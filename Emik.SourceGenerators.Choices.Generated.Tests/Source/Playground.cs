@@ -90,3 +90,23 @@ partial class ConditionDescription
 
 [Choice] // ReSharper disable once StructCanBeMadeReadOnly
 unsafe partial struct Pointers(byte* bytes, char* chars, nint native);
+
+static partial class Examples
+{
+    [Choice]
+    readonly partial record struct Result<TOk, TErr>(TOk? ok, TErr? err);
+
+    [Choice.Utf8<Span<byte>>.Utf16<Span<char>>]
+    ref partial struct Encoding;
+
+    [Choice(typeof((object Ok, Exception Err)))]
+    sealed partial class Result;
+
+    [Choice]
+    readonly partial struct Option<T>
+    {
+        readonly T _some;
+
+        ValueTuple None => default;
+    }
+}
