@@ -25,12 +25,12 @@ This project has a dependency to [Emik.Morsels](https://github.com/Emik03/Emik.M
 
 ```csharp
 Result<string, int> result = "Success"; // Implicit conversion to `Ok`.
-Encoding encoding = default; // Defaults to first 
+Encoding encoding = default; // Defaults to the first variant, which is `Utf8`, with the default value of `Span<byte>`.
 Result result = new(ok: 1m); // Constructor for `Ok`.
 Option<string> option = Option.OfSome("Hello"); // Factory method to `Some`.
 
 if (result.IsOk) // Checks for whether the union is `Ok`.
-    Console.WriteLine(result.Ok.GetHashCode()); // `Ok` is flagged as non-null.
+    Console.WriteLine(result.Ok.GetHashCode()); // `Ok` is flagged as non-null to the nullable analyzer.
 
 var length = encoding.Length; // Since both variants have a `Length` property, you can access it from the union directly.
 encoding.Clear(); // Since both variants have a `Clear` method, you can invoke it from the union directly.
