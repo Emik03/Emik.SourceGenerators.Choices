@@ -93,6 +93,12 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public bool IsUnmanaged => Type.IsUnmanagedType && Type is not ITypeParameterSymbol;
 
+    /// <summary>
+    /// Gets a string representation with the <see cref="NullableAnnotation.NotAnnotated"/> annotation.
+    /// </summary>
+    [Pure]
+    public string NotNullableAnnotated => $"{Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)}";
+
     /// <summary>Gets a string representation with the <see cref="NullableAnnotation.Annotated"/> annotation.</summary>
     [Pure]
     public string NullableAnnotated => $"{Type.WithNullableAnnotation(NullableAnnotation.Annotated)}";

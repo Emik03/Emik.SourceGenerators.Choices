@@ -266,11 +266,11 @@ sealed partial record Scaffolder(
                       get => {{ReferenceField}} switch
                       {
                           {{Symbols
-                             .Index()
                              .OrderByDescending(Inheritance)
+                             .Index()
                              .Select(x => $"{(x.Index == Symbols.Length - 1 ? "_" :
-                                 x.Item.IsEmpty ? "null" :
-                                 x.Item.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated))} => {x.Index},")
+                                 x.Item.IsEmpty ? CSharp("null") :
+                                 x.Item.NotNullableAnnotated)} => {x.Index},")
                              .Conjoin("\n            ")}}
                       };
                       {{Pure}}
@@ -739,10 +739,11 @@ sealed partial record Scaffolder(
         (x.Type is not ITypeParameterSymbol and { BaseType: null } || HasConflict(x) || IsNoninitial(x));
 
     [Pure]
-    int Inheritance((int Index, MemberSymbol Item) tuple) =>
-        Rest.Count(
-            x => tuple.Item.Type.FindSmallPathToNull(x => x.BaseType).Contains(x.Type, RoslynComparer.Signature) ||
-                tuple.Item.Type.AllInterfaces.Contains(x.Type, RoslynComparer.Signature)
+    int Inheritance(MemberSymbol x) =>
+        Symbols.Count(
+            y => RoslynComparer.Signature.Equals(x.Type, y.Type) ||
+                x.Type.AllInterfaces.Contains(y.Type, RoslynComparer.Signature) ||
+                x.Type.FindSmallPathToNull(x => x.BaseType).Contains(y.Type, RoslynComparer.Signature)
         );
 
     [Pure]
@@ -957,7 +958,7 @@ sealed partial record Scaffolder(
                      {Annotation}
                      {Pure}
                      {AggressiveInlining}
-                     public static {x.Unsafe}implicit operator {Name}({x.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)} {x.ParameterName})
+                     public static {x.Unsafe}implicit operator {Name}({x.NotNullableAnnotated} {x.ParameterName})
                          => new {Name}({x.ParameterName});
 
                  {DeclareExplicitOperator(x)}
