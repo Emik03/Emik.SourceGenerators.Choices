@@ -5,7 +5,7 @@ public class Test()
 {
     readonly string? _source;
 
-    private protected Test(string source)
+    private protected Test([StringSyntax("C#")] string source)
         : this() =>
         _source = source;
 
@@ -153,6 +153,7 @@ public class Test()
         await verify.RunAsync();
     }
 
+    [MustUseReturnValue]
     static string Wrap(string? source) => // language=c#
         $$"""
           using System;

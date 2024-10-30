@@ -76,10 +76,7 @@ sealed partial record Scaffolder
         )
         {
             void AppendCase(string x) =>
-                builder
-                   .Append("    ")
-                   .Append(x)
-                   .Then(AppendParameters)
+                AppendParameters(builder.Append("    ").Append(x))
                    .Append(suffix)
                    .AppendLine(isSwitchCase ? CSharp(";\n                break;") : ",");
 

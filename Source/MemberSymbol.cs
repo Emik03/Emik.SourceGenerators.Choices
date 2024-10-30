@@ -34,6 +34,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
         x => StringComparer.Ordinal.GetHashCode(x.Name) ^ EqualityComparer<ITypeSymbol>.Default.GetHashCode(x.Type)
     );
 
+    /// <summary>Determines whether <see cref="Type"/> is a unit type.</summary>
     [Pure]
     public bool IsEmpty =>
         Type is { BaseType.SpecialType: not SpecialType.System_Enum, IsValueType: true } type &&
