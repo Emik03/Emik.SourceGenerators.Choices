@@ -264,7 +264,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// instances hold the same references; otherwise, <see langword="false"/>.
     /// </returns>s
     [Pure]
-    public bool ReferenceEquals(MemberSymbol other) => (object)Name == other.Name && ReferenceEquals(Type, other.Type);
+    public bool ReferenceEquals(MemberSymbol other) => (object)Name == other.Name && (object)Type == other.Type;
 
     /// <summary>Compares two <see cref="MemberSymbol"/> instances by <see cref="Type"/>.</summary>
     /// <param name="other">The other <see cref="MemberSymbol"/> to compare.</param>

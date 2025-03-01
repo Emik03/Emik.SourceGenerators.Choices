@@ -134,6 +134,21 @@ public class Test()
     public sealed class Tasks()
         : Test("[Choice(typeof((Task Referenced, ValueTask Valued)), true)] partial struct Tasks;");
 
+    public sealed class UnderlyingInt()
+        : Test(
+            """
+            [Choice]
+            partial struct UnderlyingInt
+            {
+                public int Left { get; }
+
+                public ValueTuple Center => default;
+
+                public int Right { get; }
+            }
+            """
+        );
+
     [Fact]
     public async Task RunAsync()
     {

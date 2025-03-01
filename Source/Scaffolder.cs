@@ -858,7 +858,7 @@ sealed partial record Scaffolder(
     [Pure]
     string DeclareConstructor(MemberSymbol x, int i) =>
         HasConflict(x) is var conflict && conflict && IsNoninitial(x)
-            ? ""
+            ? "" // TODO: Make output: _ = x is 0 ? First = first : x is 1 ? Second = second : Third = third;
             : CSharp(
                 $$"""
                       /// <summary>
@@ -1061,6 +1061,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string Prefix(MemberSymbol x) =>
+        x.Symbol is IPropertySymbol { Name: var name } ? name :
         Symbols.First(x.TypeEquals) is var y && Members.Any(y.ReferenceEquals) ? y.Name :
         CanOverlapUnmanagedMemorySpace && Unmanaged.Any(y.ReferenceEquals) ? $"{UnmanagedField}.{y.FieldName}" :
         CanOverlapReferenceMemorySpace && Reference.Any(y.ReferenceEquals) ? ReferenceField : y.FieldName;
