@@ -113,7 +113,7 @@ namespace Emik
                     global::System.IEquatable<object>,
                     global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.KMModule>
                 {
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     private byte Discriminator
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -128,14 +128,14 @@ namespace Emik
                         set { /* Intentionally left blank. */ }
                     }
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     private readonly UnityEngine.MonoBehaviour? _reference;
 
                     /// <summary>
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Regular"/> of type <see cref="KMBombModule"/>.
                     /// </summary>
                     /// <param name="regular">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public KMModule(KMBombModule regular)
                     {
@@ -147,7 +147,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/>.
                     /// </summary>
                     /// <param name="needy">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public KMModule(KMNeedyModule needy)
                     {
@@ -158,7 +158,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> is the variant <see cref="Regular"/> of type <see cref="KMBombModule"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool IsRegular
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -171,7 +171,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> is the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool IsNeedy
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -184,7 +184,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="KMBombModule"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public KMBombModule? Regular
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -195,7 +195,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="KMNeedyModule"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public KMNeedyModule? Needy
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -208,7 +208,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="regular">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="regular"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.KMModule(KMBombModule regular)
@@ -219,7 +219,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator KMBombModule?(global::Emik.SourceGenerators.Choices.Tests.KMModule x)
@@ -230,7 +230,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="needy">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="needy"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.KMModule(KMNeedyModule needy)
@@ -241,7 +241,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator KMNeedyModule?(global::Emik.SourceGenerators.Choices.Tests.KMModule x)
@@ -252,7 +252,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="regular">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="regular"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.KMModule OfRegular(KMBombModule regular)
@@ -263,7 +263,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="needy">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="needy"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.KMModule OfNeedy(KMNeedyModule needy)
@@ -278,7 +278,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
@@ -299,7 +299,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is unequal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator !=(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
@@ -314,7 +314,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
@@ -337,7 +337,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
@@ -352,7 +352,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
@@ -367,42 +367,42 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.KMModule? left, Emik.SourceGenerators.Choices.Tests.KMModule? right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
                         => obj is global::Emik.SourceGenerators.Choices.Tests.KMModule x && Equals(x);
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool Equals(Emik.SourceGenerators.Choices.Tests.KMModule? other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int CompareTo(object? obj)
                         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.KMModule x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int CompareTo(Emik.SourceGenerators.Choices.Tests.KMModule? other)
                         => other is null ? 1 : Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override int GetHashCode()
@@ -414,7 +414,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override string ToString()
@@ -430,7 +430,7 @@ namespace Emik
                     /// <param name="onRegular">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Regular"/> of type <see cref="KMBombModule"/> is held.</param>
                     /// <param name="onNeedy">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.KMModule"/> class with the variant <see cref="Needy"/> of type <see cref="KMNeedyModule"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Emik.SourceGenerators.Choices.Tests.KMModule? Map(
                         global::System.Action<KMBombModule>? onRegular = null,
@@ -457,7 +457,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public TMappingResult Map<TMappingResult>(
                         global::System.Func<KMBombModule, TMappingResult> onRegular,
@@ -475,14 +475,14 @@ namespace Emik
                     /// <returns>
                     /// The underlying value from this instance.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public UnityEngine.MonoBehaviour GetUnderlyingValue()
                         => (UnityEngine.MonoBehaviour)_reference!;
 
                     /// <inheritdoc cref="KMBombModule.ModuleType"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public string ModuleType
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -500,7 +500,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="KMBombModule.ModuleDisplayName"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public string ModuleDisplayName
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -518,7 +518,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="KMBombModule.RequiresTimerVisibility"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool RequiresTimerVisibility
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -536,7 +536,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="KMBombModule.HandlePass()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void HandlePass()
                     {
@@ -552,7 +552,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="KMBombModule.HandleStrike()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void HandleStrike()
                     {
@@ -568,7 +568,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="KMBombModule.GetRuleGenerationSeed()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int GetRuleGenerationSeed()
                         => Discriminator switch
@@ -578,7 +578,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.Invoke(string, float)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void Invoke(string methodName, float time)
                     {
@@ -594,7 +594,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.InvokeRepeating(string, float, float)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void InvokeRepeating(string methodName, float time, float repeatRate)
                     {
@@ -610,7 +610,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.CancelInvoke()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void CancelInvoke()
                     {
@@ -626,7 +626,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.CancelInvoke(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void CancelInvoke(string methodName)
                     {
@@ -642,7 +642,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.IsInvoking(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool IsInvoking(string methodName)
                         => Discriminator switch
@@ -652,7 +652,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.IsInvoking()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool IsInvoking()
                         => Discriminator switch
@@ -662,7 +662,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(System.Collections.IEnumerator)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public UnityEngine.Coroutine StartCoroutine(global::System.Collections.IEnumerator routine)
                         => Discriminator switch
@@ -672,7 +672,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine_Auto(System.Collections.IEnumerator)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [System.ObsoleteAttribute("StartCoroutine_Auto has been deprecated. Use StartCoroutine instead (UnityUpgradable) -> StartCoroutine([mscorlib] System.Collections.IEnumerator)", false)]
                     public UnityEngine.Coroutine StartCoroutine_Auto(global::System.Collections.IEnumerator routine)
@@ -683,7 +683,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(string, object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public UnityEngine.Coroutine StartCoroutine(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value)
                         => Discriminator switch
@@ -693,7 +693,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StartCoroutine(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public UnityEngine.Coroutine StartCoroutine(string methodName)
@@ -704,7 +704,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void StopCoroutine(string methodName)
                     {
@@ -720,7 +720,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(System.Collections.IEnumerator)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void StopCoroutine(global::System.Collections.IEnumerator routine)
                     {
@@ -736,7 +736,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopCoroutine(UnityEngine.Coroutine)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void StopCoroutine(global::UnityEngine.Coroutine routine)
                     {
@@ -752,7 +752,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.StopAllCoroutines()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void StopAllCoroutines()
                     {
@@ -768,7 +768,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.useGUILayout"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool useGUILayout
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -786,7 +786,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.MonoBehaviour.runInEditMode"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool runInEditMode
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -804,7 +804,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Behaviour.enabled"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool enabled
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -822,7 +822,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Behaviour.isActiveAndEnabled"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool isActiveAndEnabled
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -834,7 +834,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponent(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
                     public UnityEngine.Component GetComponent(global::System.Type type)
@@ -845,7 +845,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponent{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [System.Security.SecuritySafeCriticalAttribute]
                     public T GetComponent<T>()
@@ -856,7 +856,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponent(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public UnityEngine.Component GetComponent(string type)
                         => Discriminator switch
@@ -866,7 +866,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren(System.Type, bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
                     public UnityEngine.Component GetComponentInChildren(global::System.Type t, bool includeInactive)
@@ -877,7 +877,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
                     public UnityEngine.Component GetComponentInChildren(global::System.Type t)
@@ -888,7 +888,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public T GetComponentInChildren<T>()
@@ -899,7 +899,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentInChildren{T}(bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public T GetComponentInChildren<T>([UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
                         => Discriminator switch
@@ -909,7 +909,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public UnityEngine.Component[] GetComponentsInChildren(global::System.Type t)
@@ -920,7 +920,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren(System.Type, bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public UnityEngine.Component[] GetComponentsInChildren(global::System.Type t, [UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
                         => Discriminator switch
@@ -930,7 +930,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public T[] GetComponentsInChildren<T>(bool includeInactive)
                         => Discriminator switch
@@ -940,7 +940,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(bool, System.Collections.Generic.List{T})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void GetComponentsInChildren<T>(bool includeInactive, global::System.Collections.Generic.List<T> result)
                     {
@@ -956,7 +956,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public T[] GetComponentsInChildren<T>()
                         => Discriminator switch
@@ -966,7 +966,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInChildren{T}(System.Collections.Generic.List{T})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void GetComponentsInChildren<T>(global::System.Collections.Generic.List<T> results)
                     {
@@ -982,7 +982,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentInParent(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngineInternal.TypeInferenceRuleAttribute((UnityEngineInternal.TypeInferenceRules)0)]
                     public UnityEngine.Component GetComponentInParent(global::System.Type t)
@@ -993,7 +993,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentInParent{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public T GetComponentInParent<T>()
                         => Discriminator switch
@@ -1003,7 +1003,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public UnityEngine.Component[] GetComponentsInParent(global::System.Type t)
@@ -1014,7 +1014,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent(System.Type, bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public UnityEngine.Component[] GetComponentsInParent(global::System.Type t, [UnityEngine.Internal.DefaultValueAttribute("false")] bool includeInactive)
                         => Discriminator switch
@@ -1024,7 +1024,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}(bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public T[] GetComponentsInParent<T>(bool includeInactive)
                         => Discriminator switch
@@ -1034,7 +1034,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}(bool, System.Collections.Generic.List{T})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void GetComponentsInParent<T>(bool includeInactive, global::System.Collections.Generic.List<T> results)
                     {
@@ -1050,7 +1050,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponentsInParent{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public T[] GetComponentsInParent<T>()
                         => Discriminator switch
@@ -1060,7 +1060,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponents(System.Type)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public UnityEngine.Component[] GetComponents(global::System.Type type)
                         => Discriminator switch
@@ -1070,7 +1070,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponents(System.Type, System.Collections.Generic.List{UnityEngine.Component})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void GetComponents(global::System.Type type, global::System.Collections.Generic.List<global::UnityEngine.Component> results)
                     {
@@ -1086,7 +1086,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponents{T}(System.Collections.Generic.List{T})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void GetComponents<T>(global::System.Collections.Generic.List<T> results)
                     {
@@ -1102,7 +1102,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.GetComponents{T}()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public T[] GetComponents<T>()
                         => Discriminator switch
@@ -1112,7 +1112,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.CompareTag(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool CompareTag(string tag)
                         => Discriminator switch
@@ -1122,7 +1122,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, object, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void SendMessageUpwards(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
                     {
@@ -1138,7 +1138,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public void SendMessageUpwards(string methodName, object value)
@@ -1155,7 +1155,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public void SendMessageUpwards(string methodName)
@@ -1172,7 +1172,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.SendMessageUpwards(string, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void SendMessageUpwards(string methodName, global::UnityEngine.SendMessageOptions options)
                     {
@@ -1188,7 +1188,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, object, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void SendMessage(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object value, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
                     {
@@ -1204,7 +1204,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public void SendMessage(string methodName, object value)
@@ -1221,7 +1221,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.SendMessage(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public void SendMessage(string methodName)
@@ -1238,7 +1238,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.SendMessage(string, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void SendMessage(string methodName, global::UnityEngine.SendMessageOptions options)
                     {
@@ -1254,7 +1254,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, object, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void BroadcastMessage(string methodName, [UnityEngine.Internal.DefaultValueAttribute("null")] object parameter, [UnityEngine.Internal.DefaultValueAttribute("SendMessageOptions.RequireReceiver")] global::UnityEngine.SendMessageOptions options)
                     {
@@ -1270,7 +1270,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public void BroadcastMessage(string methodName, object parameter)
@@ -1287,7 +1287,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [UnityEngine.Internal.ExcludeFromDocsAttribute]
                     public void BroadcastMessage(string methodName)
@@ -1304,7 +1304,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.BroadcastMessage(string, UnityEngine.SendMessageOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void BroadcastMessage(string methodName, global::UnityEngine.SendMessageOptions options)
                     {
@@ -1320,7 +1320,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.transform"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public UnityEngine.Transform transform
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -1332,7 +1332,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.gameObject"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public UnityEngine.GameObject gameObject
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -1344,7 +1344,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.tag"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public string tag
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -1362,7 +1362,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.rigidbody"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property rigidbody has been deprecated. Use GetComponent<Rigidbody>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component rigidbody
                     {
@@ -1375,7 +1375,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.rigidbody2D"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property rigidbody2D has been deprecated. Use GetComponent<Rigidbody2D>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component rigidbody2D
                     {
@@ -1388,7 +1388,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.camera"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property camera has been deprecated. Use GetComponent<Camera>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component camera
                     {
@@ -1401,7 +1401,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.light"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property light has been deprecated. Use GetComponent<Light>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component light
                     {
@@ -1414,7 +1414,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.animation"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property animation has been deprecated. Use GetComponent<Animation>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component animation
                     {
@@ -1427,7 +1427,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.constantForce"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property constantForce has been deprecated. Use GetComponent<ConstantForce>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component constantForce
                     {
@@ -1440,7 +1440,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.renderer"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property renderer has been deprecated. Use GetComponent<Renderer>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component renderer
                     {
@@ -1453,7 +1453,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.audio"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property audio has been deprecated. Use GetComponent<AudioSource>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component audio
                     {
@@ -1466,7 +1466,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.guiText"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property guiText has been deprecated. Use GetComponent<GUIText>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component guiText
                     {
@@ -1479,7 +1479,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.networkView"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property networkView has been deprecated. Use GetComponent<NetworkView>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component networkView
                     {
@@ -1492,7 +1492,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.guiElement"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property guiElement has been deprecated. Use GetComponent<GUIElement>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component guiElement
                     {
@@ -1505,7 +1505,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.guiTexture"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property guiTexture has been deprecated. Use GetComponent<GUITexture>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component guiTexture
                     {
@@ -1518,7 +1518,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.collider"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property collider has been deprecated. Use GetComponent<Collider>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component collider
                     {
@@ -1531,7 +1531,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.collider2D"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property collider2D has been deprecated. Use GetComponent<Collider2D>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component collider2D
                     {
@@ -1544,7 +1544,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.hingeJoint"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property hingeJoint has been deprecated. Use GetComponent<HingeJoint>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component hingeJoint
                     {
@@ -1557,7 +1557,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.particleEmitter"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property particleEmitter has been deprecated. Use GetComponent<ParticleEmitter>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component particleEmitter
                     {
@@ -1570,7 +1570,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Component.particleSystem"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.ObsoleteAttribute("Property particleSystem has been deprecated. Use GetComponent<ParticleSystem>() instead. (UnityUpgradable)", true)]
                     public UnityEngine.Component particleSystem
                     {
@@ -1583,7 +1583,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Object.GetInstanceID()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     [System.Security.SecuritySafeCriticalAttribute]
                     public int GetInstanceID()
@@ -1594,7 +1594,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="UnityEngine.Object.name"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public string name
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -1612,7 +1612,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="UnityEngine.Object.hideFlags"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public UnityEngine.HideFlags hideFlags
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -1630,7 +1630,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="object.GetType()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Type GetUnderlyingType()
                         => Discriminator switch

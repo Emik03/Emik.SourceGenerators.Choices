@@ -60,6 +60,18 @@ public class Test()
         """
     );
 
+    public sealed class Ints() : Test(
+        """
+        [Choice]
+        readonly partial struct Ints
+        {
+            public int First { get; }
+
+            public int Second { get; }
+        }
+        """
+    );
+
     public sealed class KMModule() : Test(
         """
         [Choice(typeof((KMBombModule Regular, KMNeedyModule Needy)))]

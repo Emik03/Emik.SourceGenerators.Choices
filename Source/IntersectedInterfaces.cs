@@ -107,7 +107,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
            .Type
            .AllInterfaces
            .Omit(IsImplementedInterface)
-           .Omit(x => IsReadOnly && x.GetMembers().Any(IsMutable));
+           .Omit(x => x.GetMembers().Any(x => x.IsStatic) || IsReadOnly && x.GetMembers().Any(IsMutable));
 
     /// <summary>Creates the list of original definitions of <paramref name="interfaceFromFirst"/>.</summary>
     /// <param name="interfaceFromFirst">The first member.</param>

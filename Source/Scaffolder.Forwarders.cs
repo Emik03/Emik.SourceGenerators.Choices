@@ -5,7 +5,10 @@ sealed partial record Scaffolder
 {
     [Pure]
     string DeclareForwarders =>
-        Signature.FindForwarders(Symbols, Named, Members).Select(DeclareForwarder).Conjoin("");
+        Signature.FindForwarders(Symbols, Named, Members)
+           .Aggregate(new ForwarderAggregate(), DeclareForwarder)
+           .Select(x => x.Code)
+           .Conjoin("");
 
     [Pure]
     static string PrefixAnnotations(IParameterSymbol x) =>
@@ -28,12 +31,25 @@ sealed partial record Scaffolder
             IPropertySymbol { IsReadOnly: true, IsWriteOnly: true };
 
     [Pure] // ReSharper disable once CognitiveComplexity
-    string DeclareForwarder(Extract extract)
+    ForwarderAggregate DeclareForwarder(ForwarderAggregate list, Extract extract)
     {
         var (symbol, kind, interfacesDeclared) = extract;
 
-        if (IsIgnored(symbol))
-            return "";
+        bool SameSignature((ISymbol Symbol, string Code) x) =>
+            x.Symbol.Kind == symbol.Kind &&
+            (x.Symbol as IMethodSymbol)?.TypeParameters.Length ==
+            (symbol as IMethodSymbol)?.TypeParameters.Length &&
+            x.Symbol.GetFullyQualifiedName() == symbol.GetFullyQualifiedName() &&
+            ((x.Symbol as IMethodSymbol)?.Parameters ?? (x.Symbol as IPropertySymbol)?.Parameters ?? default)
+           .Select(x => x.Type)
+           .SequenceEqual(
+                ((symbol as IMethodSymbol)?.Parameters ?? (symbol as IPropertySymbol)?.Parameters ?? default)
+               .Select(x => x.Type),
+                Equating<ITypeSymbol>((x, y) => x.GetFullyQualifiedName() == y.GetFullyQualifiedName())
+            );
+
+        if (IsIgnored(symbol) || list.Exists(SameSignature))
+            return list;
 
         var attributes = Attributes(symbol, '\n');
 
@@ -175,8 +191,10 @@ sealed partial record Scaffolder
         switch (symbol)
         {
             case IMethodSymbol { ReturnType.SpecialType: SpecialType.System_Void }:
-                return $"{AppendSwitchExpression(builder, "\n    {", isSwitchCase: true).Append("\n    }")}";
-            case IMethodSymbol: return $"{AppendSwitchExpression(builder.Append("\n        "))}";
+                return list.AndAdd(
+                    (symbol, $"{AppendSwitchExpression(builder, "\n    {", isSwitchCase: true).Append("\n    }")}")
+                );
+            case IMethodSymbol: return list.AndAdd((symbol, $"{AppendSwitchExpression(builder.Append("\n        "))}"));
         }
 
         builder.Append("\n    {\n        ");
@@ -200,13 +218,13 @@ sealed partial record Scaffolder
             AppendSwitchExpression(builder, "add ", " += value");
 
         if (symbol is not IEventSymbol { RemoveMethod: not null })
-            return $"{builder.Append("\n    }")}";
+            return list.AndAdd((symbol, $"{builder.Append("\n    }")}"));
 
         if (hasAdder)
             builder.Append("\n        ");
 
         AppendSwitchExpression(builder, "remove ", " -= value");
-        return $"{builder.Append("\n    }")}";
+        return list.AndAdd((symbol, $"{builder.Append("\n    }")}"));
     }
 
     [Pure]

@@ -83,10 +83,10 @@ namespace Emik
                     System.IAsyncResult,
                     System.IDisposable
                 {
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     private byte _discriminator;
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     private System.Threading.Tasks.Task? _reference;
 
                     /// <summary>
@@ -94,7 +94,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="left">The variant.</param>
                     /// <param name="x">The discriminator.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     private SuperTask(System.Threading.Tasks.Task left, byte x)
                     {
@@ -105,7 +105,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.SuperTask"/> is the variant <see cref="Left"/> of type <see cref="System.Threading.Tasks.Task"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool IsLeft
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -118,7 +118,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.SuperTask"/> is the variant <see cref="Right"/> of type <see cref="System.Threading.Tasks.Task"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool IsRight
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -131,7 +131,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="System.Threading.Tasks.Task"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public System.Threading.Tasks.Task? Left
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -148,7 +148,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="System.Threading.Tasks.Task"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public System.Threading.Tasks.Task? Right
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -167,7 +167,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="left">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="left"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.SuperTask OfLeft(System.Threading.Tasks.Task left)
@@ -178,7 +178,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="right">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="right"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.SuperTask OfRight(System.Threading.Tasks.Task right)
@@ -193,7 +193,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.SuperTask? left, Emik.SourceGenerators.Choices.Tests.SuperTask? right)
@@ -216,7 +216,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.SuperTask? left, Emik.SourceGenerators.Choices.Tests.SuperTask? right)
@@ -231,7 +231,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.SuperTask? left, Emik.SourceGenerators.Choices.Tests.SuperTask? right)
@@ -246,35 +246,35 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.SuperTask? left, Emik.SourceGenerators.Choices.Tests.SuperTask? right)
                         => right >= left;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public virtual bool Equals(Emik.SourceGenerators.Choices.Tests.SuperTask? other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int CompareTo(object? obj)
                         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.SuperTask x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int CompareTo(Emik.SourceGenerators.Choices.Tests.SuperTask? other)
                         => other is null ? 1 : Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override int GetHashCode()
@@ -286,7 +286,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override string ToString()
@@ -302,7 +302,7 @@ namespace Emik
                     /// <param name="onLeft">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.SuperTask"/> record with the variant <see cref="Left"/> of type <see cref="System.Threading.Tasks.Task"/> is held.</param>
                     /// <param name="onRight">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.SuperTask"/> record with the variant <see cref="Right"/> of type <see cref="System.Threading.Tasks.Task"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Emik.SourceGenerators.Choices.Tests.SuperTask? Map(
                         global::System.Action<System.Threading.Tasks.Task>? onLeft = null,
@@ -329,7 +329,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public TMappingResult Map<TMappingResult>(
                         global::System.Func<System.Threading.Tasks.Task, TMappingResult> onLeft,
@@ -347,14 +347,14 @@ namespace Emik
                     /// <returns>
                     /// The underlying value from this instance.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task GetUnderlyingValue()
                         => (System.Threading.Tasks.Task)_reference!;
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ConfigureAwait(bool)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Runtime.CompilerServices.ConfiguredTaskAwaitable ConfigureAwait(bool continueOnCapturedContext)
                         => _discriminator switch
@@ -364,7 +364,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ConfigureAwait(System.Threading.Tasks.ConfigureAwaitOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Runtime.CompilerServices.ConfiguredTaskAwaitable ConfigureAwait(global::System.Threading.Tasks.ConfigureAwaitOptions options)
                         => _discriminator switch
@@ -374,7 +374,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state)
                         => _discriminator switch
@@ -384,7 +384,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?, System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state, global::System.Threading.CancellationToken cancellationToken)
                         => _discriminator switch
@@ -394,7 +394,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?, System.Threading.CancellationToken, System.Threading.Tasks.TaskContinuationOptions, System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state, global::System.Threading.CancellationToken cancellationToken, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions, global::System.Threading.Tasks.TaskScheduler scheduler)
                         => _discriminator switch
@@ -404,7 +404,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?, System.Threading.Tasks.TaskContinuationOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions)
                         => _discriminator switch
@@ -414,7 +414,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task, object?}, object?, System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task, object?> continuationAction, object? state, global::System.Threading.Tasks.TaskScheduler scheduler)
                         => _discriminator switch
@@ -424,7 +424,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction)
                         => _discriminator switch
@@ -434,7 +434,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task}, System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction, global::System.Threading.CancellationToken cancellationToken)
                         => _discriminator switch
@@ -444,7 +444,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task}, System.Threading.CancellationToken, System.Threading.Tasks.TaskContinuationOptions, System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction, global::System.Threading.CancellationToken cancellationToken, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions, global::System.Threading.Tasks.TaskScheduler scheduler)
                         => _discriminator switch
@@ -454,7 +454,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task}, System.Threading.Tasks.TaskContinuationOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions)
                         => _discriminator switch
@@ -464,7 +464,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith(System.Action{System.Threading.Tasks.Task}, System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task ContinueWith(global::System.Action<global::System.Threading.Tasks.Task> continuationAction, global::System.Threading.Tasks.TaskScheduler scheduler)
                         => _discriminator switch
@@ -474,7 +474,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state)
                         => _discriminator switch
@@ -484,7 +484,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?, System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state, global::System.Threading.CancellationToken cancellationToken)
                         => _discriminator switch
@@ -494,7 +494,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?, System.Threading.CancellationToken, System.Threading.Tasks.TaskContinuationOptions, System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state, global::System.Threading.CancellationToken cancellationToken, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions, global::System.Threading.Tasks.TaskScheduler scheduler)
                         => _discriminator switch
@@ -504,7 +504,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?, System.Threading.Tasks.TaskContinuationOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions)
                         => _discriminator switch
@@ -514,7 +514,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, object?, TResult}, object?, System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, object?, TResult> continuationFunction, object? state, global::System.Threading.Tasks.TaskScheduler scheduler)
                         => _discriminator switch
@@ -524,7 +524,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult})"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction)
                         => _discriminator switch
@@ -534,7 +534,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult}, System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction, global::System.Threading.CancellationToken cancellationToken)
                         => _discriminator switch
@@ -544,7 +544,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult}, System.Threading.CancellationToken, System.Threading.Tasks.TaskContinuationOptions, System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction, global::System.Threading.CancellationToken cancellationToken, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions, global::System.Threading.Tasks.TaskScheduler scheduler)
                         => _discriminator switch
@@ -554,7 +554,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult}, System.Threading.Tasks.TaskContinuationOptions)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction, global::System.Threading.Tasks.TaskContinuationOptions continuationOptions)
                         => _discriminator switch
@@ -564,7 +564,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.ContinueWith{TResult}(System.Func{System.Threading.Tasks.Task, TResult}, System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task<TResult> ContinueWith<TResult>(global::System.Func<global::System.Threading.Tasks.Task, TResult> continuationFunction, global::System.Threading.Tasks.TaskScheduler scheduler)
                         => _discriminator switch
@@ -574,7 +574,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Dispose()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void Dispose()
                     {
@@ -590,7 +590,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.GetAwaiter()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Runtime.CompilerServices.TaskAwaiter GetAwaiter()
                         => _discriminator switch
@@ -600,7 +600,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.RunSynchronously()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void RunSynchronously()
                     {
@@ -616,7 +616,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.RunSynchronously(System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void RunSynchronously(global::System.Threading.Tasks.TaskScheduler scheduler)
                     {
@@ -632,7 +632,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Start()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void Start()
                     {
@@ -648,7 +648,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Start(System.Threading.Tasks.TaskScheduler)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void Start(global::System.Threading.Tasks.TaskScheduler scheduler)
                     {
@@ -664,7 +664,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void Wait()
                     {
@@ -680,7 +680,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(int)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool Wait(int millisecondsTimeout)
                         => _discriminator switch
@@ -690,7 +690,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(int, System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool Wait(int millisecondsTimeout, global::System.Threading.CancellationToken cancellationToken)
                         => _discriminator switch
@@ -700,7 +700,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public void Wait(global::System.Threading.CancellationToken cancellationToken)
                     {
@@ -716,7 +716,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(System.TimeSpan)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool Wait(global::System.TimeSpan timeout)
                         => _discriminator switch
@@ -726,7 +726,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Wait(System.TimeSpan, System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool Wait(global::System.TimeSpan timeout, global::System.Threading.CancellationToken cancellationToken)
                         => _discriminator switch
@@ -736,7 +736,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task WaitAsync(global::System.Threading.CancellationToken cancellationToken)
                         => _discriminator switch
@@ -746,7 +746,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout)
                         => _discriminator switch
@@ -756,7 +756,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan, System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout, global::System.Threading.CancellationToken cancellationToken)
                         => _discriminator switch
@@ -766,7 +766,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan, System.TimeProvider)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout, global::System.TimeProvider timeProvider)
                         => _discriminator switch
@@ -776,7 +776,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.WaitAsync(System.TimeSpan, System.TimeProvider, System.Threading.CancellationToken)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Threading.Tasks.Task WaitAsync(global::System.TimeSpan timeout, global::System.TimeProvider timeProvider, global::System.Threading.CancellationToken cancellationToken)
                         => _discriminator switch
@@ -786,7 +786,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.AsyncState"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public object? AsyncState
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -798,7 +798,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.CreationOptions"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public System.Threading.Tasks.TaskCreationOptions CreationOptions
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -810,7 +810,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Exception"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public System.AggregateException? Exception
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -822,7 +822,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Id"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public int Id
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -834,7 +834,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.IsCanceled"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool IsCanceled
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -846,7 +846,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.IsCompleted"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool IsCompleted
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -858,7 +858,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.IsCompletedSuccessfully"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool IsCompletedSuccessfully
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -870,7 +870,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.IsFaulted"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     [System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Exception")]
                     public bool IsFaulted
                     {
@@ -883,7 +883,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Threading.Tasks.Task.Status"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public System.Threading.Tasks.TaskStatus Status
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -895,7 +895,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.IAsyncResult.AsyncWaitHandle"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public System.Threading.WaitHandle AsyncWaitHandle
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -907,7 +907,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.IAsyncResult.CompletedSynchronously"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.0.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
                     public bool CompletedSynchronously
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]

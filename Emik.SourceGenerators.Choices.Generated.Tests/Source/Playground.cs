@@ -4,9 +4,8 @@ global using Attribute = System.Attribute;
 
 // ReSharper disable once CheckNamespace EmptyNamespace
 namespace Emik.SourceGenerators.Choices.Tests;
-#pragma warning disable 169
+#pragma warning disable 169, IDE0250
 extern alias unity;
-using Component = UnityEngine.Component;
 using Task = System.Threading.Tasks.Task;
 
 [Choice]
@@ -90,6 +89,15 @@ partial class ConditionDescription
 
 [Choice] // ReSharper disable once StructCanBeMadeReadOnly
 unsafe partial struct Pointers(byte* bytes, char* chars, nint native);
+
+[Choice]
+readonly partial struct Ints
+{
+    [NonNegativeValue]
+    public int First { get; }
+
+    public int Second { get; }
+}
 
 static partial class Examples
 {
