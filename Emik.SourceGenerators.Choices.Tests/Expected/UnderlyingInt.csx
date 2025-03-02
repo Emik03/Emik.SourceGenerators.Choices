@@ -128,7 +128,9 @@ namespace Emik
                     private UnderlyingInt(int left, byte x)
                     {
                         _discriminator = x;
-                        _ = x is 0 ? Left = left : Right = left;
+
+                        _ = x is 0 ? Left = left :
+                            Right = left;
                     }
 
                     /// <summary>

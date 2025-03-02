@@ -101,7 +101,9 @@ namespace Emik
                     private Ints(int first, byte x)
                     {
                         _discriminator = x;
-                        First = first;
+
+                        _ = x is 0 ? First = first :
+                            Second = first;
                     }
 
                     /// <summary>
@@ -169,7 +171,7 @@ namespace Emik
                             left._discriminator switch
                             {
                                 0 => left.First == right.First,
-                                _ => left.First == right.First,
+                                _ => left.Second == right.Second,
                             };
 
                     /// <summary>
@@ -205,7 +207,7 @@ namespace Emik
                             left._discriminator switch
                             {
                                 0 => left.First > right.First,
-                                _ => left.First > right.First,
+                                _ => left.Second > right.Second,
                             };
 
                     /// <summary>
@@ -290,7 +292,7 @@ namespace Emik
                         (_discriminator switch
                         {
                             0 => First.GetHashCode(),
-                            _ => First.GetHashCode(),
+                            _ => Second.GetHashCode(),
                         });
 
                     /// <inheritdoc />
@@ -301,7 +303,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => $"{nameof(First)}({First})",
-                            _ => $"{nameof(Second)}({First})",
+                            _ => $"{nameof(Second)}({Second})",
                         };
 
                     /// <summary>
@@ -323,7 +325,7 @@ namespace Emik
                                 onFirst?.Invoke(First);
                                 return this;
                             default:
-                                onSecond?.Invoke(First);
+                                onSecond?.Invoke(Second);
                                 return this;
                         }
                     }
@@ -346,7 +348,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => onFirst(First),
-                            _ => onSecond(First),
+                            _ => onSecond(Second),
                         };
 
                     /// <summary>
@@ -362,7 +364,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => First,
-                            _ => First,
+                            _ => Second,
                         };
 
                     /// <inheritdoc cref="int.CompareTo(int)"/>
@@ -372,7 +374,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => First.CompareTo(value),
-                            _ => First.CompareTo(value),
+                            _ => Second.CompareTo(value),
                         };
 
                     /// <inheritdoc cref="int.Equals(int)"/>
@@ -382,7 +384,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => First.Equals(obj),
-                            _ => First.Equals(obj),
+                            _ => Second.Equals(obj),
                         };
 
                     /// <inheritdoc cref="int.GetTypeCode()"/>
@@ -392,7 +394,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => First.GetTypeCode(),
-                            _ => First.GetTypeCode(),
+                            _ => Second.GetTypeCode(),
                         };
 
                     /// <inheritdoc cref="int.ToString(System.IFormatProvider?)"/>
@@ -402,7 +404,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => First.ToString(provider),
-                            _ => First.ToString(provider),
+                            _ => Second.ToString(provider),
                         };
 
                     /// <inheritdoc cref="int.ToString(string?)"/>
@@ -412,7 +414,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => First.ToString(format),
-                            _ => First.ToString(format),
+                            _ => Second.ToString(format),
                         };
 
                     /// <inheritdoc cref="int.ToString(string?, System.IFormatProvider?)"/>
@@ -422,7 +424,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => First.ToString(format, provider),
-                            _ => First.ToString(format, provider),
+                            _ => Second.ToString(format, provider),
                         };
 
                     /// <inheritdoc cref="int.TryFormat(System.Span{byte}, out int, System.ReadOnlySpan{char}, System.IFormatProvider?)"/>
@@ -432,7 +434,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => First.TryFormat(utf8Destination, out bytesWritten, format, provider),
-                            _ => First.TryFormat(utf8Destination, out bytesWritten, format, provider),
+                            _ => Second.TryFormat(utf8Destination, out bytesWritten, format, provider),
                         };
 
                     /// <inheritdoc cref="int.TryFormat(System.Span{char}, out int, System.ReadOnlySpan{char}, System.IFormatProvider?)"/>
@@ -442,7 +444,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => First.TryFormat(destination, out charsWritten, format, provider),
-                            _ => First.TryFormat(destination, out charsWritten, format, provider),
+                            _ => Second.TryFormat(destination, out charsWritten, format, provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToBoolean(System.IFormatProvider?)"/>
@@ -457,7 +459,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToBoolean(provider),
-                            _ => ((System.IConvertible)First).ToBoolean(provider),
+                            _ => ((System.IConvertible)Second).ToBoolean(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToByte(System.IFormatProvider?)"/>
@@ -472,7 +474,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToByte(provider),
-                            _ => ((System.IConvertible)First).ToByte(provider),
+                            _ => ((System.IConvertible)Second).ToByte(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToChar(System.IFormatProvider?)"/>
@@ -487,7 +489,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToChar(provider),
-                            _ => ((System.IConvertible)First).ToChar(provider),
+                            _ => ((System.IConvertible)Second).ToChar(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToDateTime(System.IFormatProvider?)"/>
@@ -502,7 +504,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToDateTime(provider),
-                            _ => ((System.IConvertible)First).ToDateTime(provider),
+                            _ => ((System.IConvertible)Second).ToDateTime(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToDecimal(System.IFormatProvider?)"/>
@@ -517,7 +519,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToDecimal(provider),
-                            _ => ((System.IConvertible)First).ToDecimal(provider),
+                            _ => ((System.IConvertible)Second).ToDecimal(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToDouble(System.IFormatProvider?)"/>
@@ -532,7 +534,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToDouble(provider),
-                            _ => ((System.IConvertible)First).ToDouble(provider),
+                            _ => ((System.IConvertible)Second).ToDouble(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToInt16(System.IFormatProvider?)"/>
@@ -547,7 +549,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToInt16(provider),
-                            _ => ((System.IConvertible)First).ToInt16(provider),
+                            _ => ((System.IConvertible)Second).ToInt16(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToInt32(System.IFormatProvider?)"/>
@@ -562,7 +564,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToInt32(provider),
-                            _ => ((System.IConvertible)First).ToInt32(provider),
+                            _ => ((System.IConvertible)Second).ToInt32(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToInt64(System.IFormatProvider?)"/>
@@ -577,7 +579,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToInt64(provider),
-                            _ => ((System.IConvertible)First).ToInt64(provider),
+                            _ => ((System.IConvertible)Second).ToInt64(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToSByte(System.IFormatProvider?)"/>
@@ -592,7 +594,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToSByte(provider),
-                            _ => ((System.IConvertible)First).ToSByte(provider),
+                            _ => ((System.IConvertible)Second).ToSByte(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToSingle(System.IFormatProvider?)"/>
@@ -607,7 +609,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToSingle(provider),
-                            _ => ((System.IConvertible)First).ToSingle(provider),
+                            _ => ((System.IConvertible)Second).ToSingle(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToType(System.Type, System.IFormatProvider?)"/>
@@ -622,7 +624,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToType(conversionType, provider),
-                            _ => ((System.IConvertible)First).ToType(conversionType, provider),
+                            _ => ((System.IConvertible)Second).ToType(conversionType, provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToUInt16(System.IFormatProvider?)"/>
@@ -637,7 +639,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToUInt16(provider),
-                            _ => ((System.IConvertible)First).ToUInt16(provider),
+                            _ => ((System.IConvertible)Second).ToUInt16(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToUInt32(System.IFormatProvider?)"/>
@@ -652,7 +654,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToUInt32(provider),
-                            _ => ((System.IConvertible)First).ToUInt32(provider),
+                            _ => ((System.IConvertible)Second).ToUInt32(provider),
                         };
 
                     /// <inheritdoc cref="System.IConvertible.ToUInt64(System.IFormatProvider?)"/>
@@ -667,7 +669,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.IConvertible)First).ToUInt64(provider),
-                            _ => ((System.IConvertible)First).ToUInt64(provider),
+                            _ => ((System.IConvertible)Second).ToUInt64(provider),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.GetByteCount()"/>
@@ -682,7 +684,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).GetByteCount(),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).GetByteCount(),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).GetByteCount(),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.GetShortestBitLength()"/>
@@ -697,7 +699,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).GetShortestBitLength(),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).GetShortestBitLength(),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).GetShortestBitLength(),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.TryWriteBigEndian(System.Span{byte}, out int)"/>
@@ -712,7 +714,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).TryWriteBigEndian(destination, out bytesWritten),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).TryWriteBigEndian(destination, out bytesWritten),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).TryWriteBigEndian(destination, out bytesWritten),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.TryWriteLittleEndian(System.Span{byte}, out int)"/>
@@ -727,7 +729,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).TryWriteLittleEndian(destination, out bytesWritten),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).TryWriteLittleEndian(destination, out bytesWritten),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).TryWriteLittleEndian(destination, out bytesWritten),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.WriteBigEndian(byte[])"/>
@@ -742,7 +744,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).WriteBigEndian(destination),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).WriteBigEndian(destination),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).WriteBigEndian(destination),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.WriteBigEndian(byte[], int)"/>
@@ -757,7 +759,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).WriteBigEndian(destination, startIndex),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).WriteBigEndian(destination, startIndex),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).WriteBigEndian(destination, startIndex),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.WriteBigEndian(System.Span{byte})"/>
@@ -772,7 +774,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).WriteBigEndian(destination),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).WriteBigEndian(destination),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).WriteBigEndian(destination),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.WriteLittleEndian(byte[])"/>
@@ -787,7 +789,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).WriteLittleEndian(destination),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).WriteLittleEndian(destination),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).WriteLittleEndian(destination),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.WriteLittleEndian(byte[], int)"/>
@@ -802,7 +804,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).WriteLittleEndian(destination, startIndex),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).WriteLittleEndian(destination, startIndex),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).WriteLittleEndian(destination, startIndex),
                         };
 
                     /// <inheritdoc cref="System.Numerics.IBinaryInteger{TSelf}.WriteLittleEndian(System.Span{byte})"/>
@@ -817,7 +819,7 @@ namespace Emik
                         => _discriminator switch
                         {
                             0 => ((System.Numerics.IBinaryInteger<int>)First).WriteLittleEndian(destination),
-                            _ => ((System.Numerics.IBinaryInteger<int>)First).WriteLittleEndian(destination),
+                            _ => ((System.Numerics.IBinaryInteger<int>)Second).WriteLittleEndian(destination),
                         };
                 }
             }

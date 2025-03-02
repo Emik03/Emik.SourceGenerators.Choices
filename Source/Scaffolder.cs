@@ -91,107 +91,101 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareType =>
-        CSharp(
-            $$"""
-              /// {{XmlTypeName(Named, "inheritdoc")}}
-              /// <remarks>
-              ///     <para>
-              ///         The type {{XmlName}}
-              ///         is {{MutablePublicly switch {
-                  true => "a mutable",
-                  false => "a",
-                  null => "an immutable",
-              }}} disjoint union representing the following variants:
-              ///     </para>
-              ///     <list type="table">
-              ///         <listheader>
-              ///             <term>
-              ///                 <c>Name</c> <see langword="as"/> <c>Type</c>
-              ///                 <list type="bullet">
-              ///                     <item>
-              ///                         <description>
-              ///                             Predicate
-              ///                         </description>
-              ///                     </item>
-              ///                     <item>
-              ///                         <description>
-              ///                             {{(Symbols.All(SkipOperator) ? "Factory" : "Factories")}}
-              ///                         </description>
-              ///                     </item>
-              ///                 </list>
-              ///             </term>
-              ///         </listheader>
-              {{Symbols
-                 .Select(x =>
-                      CSharp(
-                          $"""
-                           ///         <item>
-                           ///             <term>
-                           ///                 {x.XmlName} <see langword="as"/> {XmlTypeName(x.Type)}
-                           ///                 <list type="bullet">
-                           ///                     <item>
-                           ///                         <description>
-                           ///                             <see cref="Is{x.PropertyName}"/>
-                           ///                         </description>
-                           ///                     </item>
-                           ///                     <item>
-                           ///                         <description>
-                           {(SkipOperator(x) ?
-                               CSharp(
-                                   $"""///                             <see cref="Of{x.PropertyName}({XmlEscape(x.Type)})"/>"""
-                               ) : CSharp(
-                                   $"""
-                                    ///                             <list type="number">
-                                    ///                                 <item>
-                                    ///                                     <description>
-                                    ///                                         <see cref="Of{x.PropertyName}({XmlEscape(x.Type, true)})"/>
-                                    ///                                     </description>
-                                    ///                                 </item>
-                                    ///                                 <item>
-                                    ///                                     <description>
-                                    ///                                         <see cref="{XmlEscape(Named)}({XmlEscape(x.Type, true)})"/>
-                                    ///                                     </description>
-                                    ///                                 </item>
-                                    ///                                 <item>
-                                    ///                                     <description>
-                                    ///                                         <see cref="op_Implicit({XmlEscape(x.Type, true)})"/>
-                                    ///                                     </description>
-                                    ///                                 </item>
-                                    ///                             </list>
-                                    """))}
-                           ///                         </description>
-                           ///                     </item>
-                           ///                 </list>
-                           ///             </term>
-                           ///         </item>
-                           """))
-                 .Conjoin("\n")}}
-              ///     </list>
-              /// </remarks>
-              {{AutoIfStruct}}partial {{Named.Keyword()}} {{Named.Name
-              }}{{(Named.TypeArguments is [] ? "" : $"<{Named.TypeArguments.Conjoin()}>")
-              }}{{DeclareInterfaces}}
-              {
-              {{DeclarePolyfillAttributes
-              }}{{DeclareExplicitStruct
-              }}{{Symbols.Select(DeclareDelegate).Conjoin("")
-              }}{{DeclareDiscriminator}}
+        $$"""
+          /// {{XmlTypeName(Named, "inheritdoc")}}
+          /// <remarks>
+          ///     <para>
+          ///         The type {{XmlName}}
+          ///         is {{MutablePublicly switch {
+              true => "a mutable",
+              false => "a",
+              null => "an immutable",
+          }}} disjoint union representing the following variants:
+          ///     </para>
+          ///     <list type="table">
+          ///         <listheader>
+          ///             <term>
+          ///                 <c>Name</c> <see langword="as"/> <c>Type</c>
+          ///                 <list type="bullet">
+          ///                     <item>
+          ///                         <description>
+          ///                             Predicate
+          ///                         </description>
+          ///                     </item>
+          ///                     <item>
+          ///                         <description>
+          ///                             {{(Symbols.All(SkipOperator) ? "Factory" : "Factories")}}
+          ///                         </description>
+          ///                     </item>
+          ///                 </list>
+          ///             </term>
+          ///         </listheader>
+          {{Symbols
+             .Select(x =>
+                  $"""
+                   ///         <item>
+                   ///             <term>
+                   ///                 {x.XmlName} <see langword="as"/> {XmlTypeName(x.Type)}
+                   ///                 <list type="bullet">
+                   ///                     <item>
+                   ///                         <description>
+                   ///                             <see cref="Is{x.PropertyName}"/>
+                   ///                         </description>
+                   ///                     </item>
+                   ///                     <item>
+                   ///                         <description>
+                   {(SkipOperator(x) ?
+                       $"""///                             <see cref="Of{x.PropertyName}({XmlEscape(x.Type)})"/>""" : $"""
+                            ///                             <list type="number">
+                            ///                                 <item>
+                            ///                                     <description>
+                            ///                                         <see cref="Of{x.PropertyName}({XmlEscape(x.Type, true)})"/>
+                            ///                                     </description>
+                            ///                                 </item>
+                            ///                                 <item>
+                            ///                                     <description>
+                            ///                                         <see cref="{XmlEscape(Named)}({XmlEscape(x.Type, true)})"/>
+                            ///                                     </description>
+                            ///                                 </item>
+                            ///                                 <item>
+                            ///                                     <description>
+                            ///                                         <see cref="op_Implicit({XmlEscape(x.Type, true)})"/>
+                            ///                                     </description>
+                            ///                                 </item>
+                            ///                             </list>
+                            """)}
+                   ///                         </description>
+                   ///                     </item>
+                   ///                 </list>
+                   ///             </term>
+                   ///         </item>
+                   """)
+             .Conjoin("\n")}}
+          ///     </list>
+          /// </remarks>
+          {{AutoIfStruct}}partial {{Named.Keyword()}} {{Named.Name
+          }}{{(Named.TypeArguments is [] ? "" : $"<{Named.TypeArguments.Conjoin()}>")
+          }}{{DeclareInterfaces}}
+          {
+          {{DeclarePolyfillAttributes
+          }}{{DeclareExplicitStruct
+          }}{{Symbols.Select(DeclareDelegate).Conjoin("")
+          }}{{DeclareDiscriminator}}
 
-              {{DeclareUnmanagedFields
-              }}{{DeclareReferencedFields
-              }}{{Rest.Select(DeclareField).Conjoin("")
-              }}{{Symbols.Select(DeclareConstructor).Conjoin("")
-              }}{{Symbols.Select(DeclareCheck).Conjoin("")
-              }}{{Symbols.Select(DeclareProperty).Conjoin("")
-              }}{{DeclareImplicitlyUsingParametersProperty
-              }}{{Symbols.Select(DeclareOperators).Conjoin("")
-              }}{{Symbols.Select(DeclareFactory).Conjoin("")
-              }}{{DeclareInterfaceImplementations
-              }}{{DeclareMappers
-              }}{{DeclareForwarders}}
-              }
-              """
-        );
+          {{DeclareUnmanagedFields
+          }}{{DeclareReferencedFields
+          }}{{Rest.Select(DeclareField).Conjoin("")
+          }}{{Symbols.Select(DeclareConstructor).Conjoin("")
+          }}{{Symbols.Select(DeclareCheck).Conjoin("")
+          }}{{Symbols.Select(DeclareProperty).Conjoin("")
+          }}{{DeclareImplicitlyUsingParametersProperty
+          }}{{Symbols.Select(DeclareOperators).Conjoin("")
+          }}{{Symbols.Select(DeclareFactory).Conjoin("")
+          }}{{DeclareInterfaceImplementations
+          }}{{DeclareMappers
+          }}{{DeclareForwarders}}
+          }
+          """;
 
     [Pure]
     string DeclarePolyfillAttributes =>
@@ -415,7 +409,7 @@ sealed partial record Scaffolder(
                   {{AggressiveInlining}}
                   public static {{SymbolsUnsafe}}bool operator >({{NullableName}} left, {{NullableName}} right)
                       => {{(Named.IsReferenceType ? "left is not null &&\n            (right is null ||\n            " : "")
-                  }}left.{{Discriminator}} > right.{{Discriminator}} ||
+                      }}left.{{Discriminator}} > right.{{Discriminator}} ||
                           left.{{Discriminator}} == right.{{Discriminator}} &&
                           left.{{Discriminator}} switch
                           {
@@ -535,16 +529,16 @@ sealed partial record Scaffolder(
                   {{AggressiveInlining}}
                   public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}{{NullableName}} Map(
                       {{Symbols
-                          .Select(x => $"{x.DelegateTypeName(false)}? on{x.PropertyName} = null")
-                          .Conjoin(",\n        ")}}
+                         .Select(x => $"{x.DelegateTypeName(false)}? on{x.PropertyName} = null")
+                         .Conjoin(",\n        ")}}
                   )
                   {
                       switch ({{Discriminator}})
                       {
                           {{Symbols
-                              .Select((x, i) => $"{(i == Symbols.Length - 1 ? "default" : $"case {i}")}:\n                on{x.PropertyName
-                              }?.Invoke({(x.IsEmpty ? "" : PrefixCast(x))});\n                return this;")
-                              .Conjoin("\n            ")}}
+                             .Select((x, i) => $"{(i == Symbols.Length - 1 ? "default" : $"case {i}")}:\n                on{x.PropertyName
+                             }?.Invoke({(x.IsEmpty ? "" : PrefixCast(x))});\n                return this;")
+                             .Conjoin("\n            ")}}
                       }
                   }
 
@@ -553,8 +547,8 @@ sealed partial record Scaffolder(
                   /// </summary>
                   /// <typeparam name="{{ResultGeneric}}">The resulting type from the mapping.</typeparam>
               {{Symbols
-                      .Select(x => $"""    /// <param name="on{x.PropertyName}">The callback to use when the contract of {Describe(x)} is held.</param>""")
-                      .Conjoin("\n")
+                 .Select(x => $"""    /// <param name="on{x.PropertyName}">The callback to use when the contract of {Describe(x)} is held.</param>""")
+                 .Conjoin("\n")
               }}
                   /// <returns>
                   /// The resulting value from one of the parameters based on the current state of the object.
@@ -567,8 +561,8 @@ sealed partial record Scaffolder(
                       => {{Discriminator}} switch
                       {
                           {{Symbols
-                              .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => on{x.PropertyName}({(x.IsEmpty ? "" : PrefixCast(x))}),")
-                              .Conjoin("\n            ")}}
+                             .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => on{x.PropertyName}({(x.IsEmpty ? "" : PrefixCast(x))}),")
+                             .Conjoin("\n            ")}}
                       };{{DeclareUnderlyingValue}}
               """
         );
@@ -597,8 +591,8 @@ sealed partial record Scaffolder(
                                    {{Discriminator}} switch
                                            {
                                    {{Symbols
-                                       .Select((x, i) => $"            {(i == Symbols.Length - 1 ? "_" : i)} => {PrefixCast(x)},")
-                                       .Conjoin("\n")}}
+                                      .Select((x, i) => $"            {(i == Symbols.Length - 1 ? "_" : i)} => {PrefixCast(x)},")
+                                      .Conjoin("\n")}}
                                            }
                                    """
                              ))};
@@ -858,14 +852,14 @@ sealed partial record Scaffolder(
     [Pure]
     string DeclareConstructor(MemberSymbol x, int i) =>
         HasConflict(x) is var conflict && conflict && IsNoninitial(x)
-            ? "" // TODO: Make output: _ = x is 0 ? First = first : x is 1 ? Second = second : Third = third;
+            ? ""
             : CSharp(
                 $$"""
                       /// <summary>
                       /// Initializes a new instance of {{Describe(x)}}.
                       /// </summary>
                       /// <param name="{{x.ParameterName}}">The variant.</param>{{
-                          (conflict ? "\n    /// <param name=\"x\">The discriminator.</param>" : "")}}
+                          (conflict ? CSharp("\n    /// <param name=\"x\">The discriminator.</param>") : "")}}
                       {{Annotation}}
                       {{AggressiveInlining}}
                       {{(conflict ? "private" : "public")}} {{SymbolsUnsafe}}{{Named.Name}}({{x.Type}} {{x.ParameterName
@@ -874,7 +868,11 @@ sealed partial record Scaffolder(
                       }{x.ParameterName}{(Symbols.Length - i - 1).For(j => $", default({Symbols[i + j + 1].Type})").Conjoin("")
                       })" : "")}}
                       {
-                          {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : CSharp($"\n        {Prefix(x)} = {x.ParameterName};"))}}
+                          {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : conflict && Symbols.Where(x.TypeEquals)
+                             .Aggregate((true, x), (a, x) => (a.Item1 && x.Symbol is IPropertySymbol, x)) is (true, var l)
+                              ? $"\n\n        _ = {Symbols.Select((y, i) => y.ReferenceEquals(l) ? $"{y.PropertyName} = {x.ParameterName};"
+                                  : y.TypeEquals(x) ? $"x is {i} ? {Prefix(y)} = {x.ParameterName} :\n            " : "").Conjoin("")}"
+                              : $"\n        {Prefix(x)} = {x.ParameterName};")}}
                       }
 
                   {{DeclareAlternativeConstructor(x, conflict)}}
