@@ -228,7 +228,7 @@ sealed partial record Scaffolder
     }
 
     [Pure]
-    static bool IsGoodAttribute(AttributeData x) =>
+    static bool IsGoodClass(AttributeData x) =>
         x.AttributeClass is not
             {
                 ContainingNamespace:
@@ -318,7 +318,7 @@ sealed partial record Scaffolder
     string Attributes(ISymbol symbol, char separator) =>
         symbol
            .GetAttributes()
-           .Where(x => IsGoodAttribute(x) && x.AttributeConstructor.CanBeAccessedFrom(Named.ContainingAssembly))
+           .Where(x => IsGoodClass(x) && x.AttributeConstructor?.CanBeAccessedFrom(Named.ContainingAssembly) is true)
            .Select(x => $"{Display(x)}{separator}")
            .Conjoin("");
 
