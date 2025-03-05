@@ -5,8 +5,6 @@ public partial class Case
 {
     public sealed class ExhaustStandardLibrary
     {
-        sealed class ExhaustStandardLibraryException(string source, Exception inner) : Exception(source, inner);
-
         const string DotPattern = // language=cs
             """
             [Choice.First<{1}>.Second<{2}>]
