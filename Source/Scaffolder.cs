@@ -584,7 +584,7 @@ sealed partial record Scaffolder(
                      {Pure}
                      {AggressiveInlining}
                      public {ReadOnlyIfStruct}{SymbolsUnsafe}{Common} GetUnderlyingValue()
-                         => {(Symbols.Length == Reference.Length
+                         => {(CanOverlapReferenceMemorySpace && Symbols.Length == Reference.Length
                              ? $"{(Common.SpecialType is SpecialType.System_Object ? "" : $"({Common})")}{ReferenceField}!"
                              : CSharp(
                                  $$"""
