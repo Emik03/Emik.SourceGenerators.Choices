@@ -149,7 +149,7 @@ namespace Emik
                     System.ISpanFormattable,
                     System.IFormattable
                 {
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
                     private static class Choice
                     {
@@ -170,7 +170,7 @@ namespace Emik
                     /// <summary>
                     /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                     partial struct Unmanaged
                     {
@@ -184,17 +184,17 @@ namespace Emik
                         internal System.Reflection.BindingFlags _orange;
                     }
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     private readonly byte _discriminator;
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     private readonly Unmanaged _unmanaged;
 
                     /// <summary>
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Apple"/> of type <see cref="byte"/>.
                     /// </summary>
                     /// <param name="apple">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public DotFruit(byte apple)
                     {
@@ -206,7 +206,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Pear"/> of type <see cref="int"/>.
                     /// </summary>
                     /// <param name="pear">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public DotFruit(int pear)
                     {
@@ -218,7 +218,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Orange"/> of type <see cref="System.Reflection.BindingFlags"/>.
                     /// </summary>
                     /// <param name="orange">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public DotFruit(System.Reflection.BindingFlags orange)
                     {
@@ -229,7 +229,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> is the variant <see cref="Apple"/> of type <see cref="byte"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     public bool IsApple
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -241,7 +241,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> is the variant <see cref="Pear"/> of type <see cref="int"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     public bool IsPear
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -253,7 +253,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> is the variant <see cref="Orange"/> of type <see cref="System.Reflection.BindingFlags"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     public bool IsOrange
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -265,7 +265,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="byte"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     public byte Apple
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -276,7 +276,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="int"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     public int Pear
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -287,7 +287,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="System.Reflection.BindingFlags"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     public System.Reflection.BindingFlags Orange
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -300,7 +300,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="apple">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="apple"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.DotFruit(byte apple)
@@ -311,7 +311,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator byte(global::Emik.SourceGenerators.Choices.Tests.DotFruit x)
@@ -322,7 +322,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="pear">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="pear"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.DotFruit(int pear)
@@ -333,7 +333,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator int(global::Emik.SourceGenerators.Choices.Tests.DotFruit x)
@@ -344,7 +344,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="orange">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="orange"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.DotFruit(System.Reflection.BindingFlags orange)
@@ -355,7 +355,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator System.Reflection.BindingFlags(global::Emik.SourceGenerators.Choices.Tests.DotFruit x)
@@ -366,7 +366,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="apple">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="apple"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.DotFruit OfApple(byte apple)
@@ -377,7 +377,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="pear">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="pear"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.DotFruit OfPear(int pear)
@@ -388,7 +388,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="orange">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="orange"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.DotFruit OfOrange(System.Reflection.BindingFlags orange)
@@ -403,7 +403,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
@@ -425,7 +425,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is unequal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator !=(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
@@ -440,7 +440,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
@@ -464,7 +464,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
@@ -479,7 +479,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
@@ -494,42 +494,42 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.DotFruit? left, Emik.SourceGenerators.Choices.Tests.DotFruit? right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
                         => obj is global::Emik.SourceGenerators.Choices.Tests.DotFruit x && Equals(x);
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool Equals(Emik.SourceGenerators.Choices.Tests.DotFruit? other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int CompareTo(object? obj)
                         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.DotFruit x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int CompareTo(Emik.SourceGenerators.Choices.Tests.DotFruit? other)
                         => other is null ? 1 : Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override int GetHashCode()
@@ -542,7 +542,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override string ToString()
@@ -560,7 +560,7 @@ namespace Emik
                     /// <param name="onPear">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Pear"/> of type <see cref="int"/> is held.</param>
                     /// <param name="onOrange">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.DotFruit"/> class with the variant <see cref="Orange"/> of type <see cref="System.Reflection.BindingFlags"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Emik.SourceGenerators.Choices.Tests.DotFruit? Map(
                         global::System.Action<byte>? onApple = null,
@@ -592,7 +592,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public TMappingResult Map<TMappingResult>(
                         global::System.Func<byte, TMappingResult> onApple,
@@ -612,7 +612,7 @@ namespace Emik
                     /// <returns>
                     /// The underlying value from this instance.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.ISpanFormattable GetUnderlyingValue()
@@ -630,7 +630,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.TypeCode GetTypeCode()
                         => _discriminator switch
@@ -647,7 +647,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool ToBoolean(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -664,7 +664,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public byte ToByte(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -681,7 +681,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public char ToChar(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -698,7 +698,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.DateTime ToDateTime(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -715,7 +715,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public decimal ToDecimal(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -732,7 +732,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public double ToDouble(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -749,7 +749,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public short ToInt16(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -766,7 +766,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int ToInt32(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -783,7 +783,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public long ToInt64(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -800,7 +800,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public sbyte ToSByte(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -817,7 +817,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public float ToSingle(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -834,7 +834,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public string ToString(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -851,7 +851,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public object ToType(global::System.Type conversionType, global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -868,7 +868,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public ushort ToUInt16(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -885,7 +885,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public uint ToUInt32(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -902,7 +902,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Orange"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public ulong ToUInt64(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -919,7 +919,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.ISpanFormattable"/>,
                     /// <see cref="Orange"/> as <see cref="System.ISpanFormattable"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool TryFormat(global::System.Span<char> destination, scoped out int charsWritten, global::System.ReadOnlySpan<char> format, global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -936,7 +936,7 @@ namespace Emik
                     /// <see cref="Pear"/> as <see cref="System.IFormattable"/>,
                     /// <see cref="Orange"/> as <see cref="System.IFormattable"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public string ToString(string? format, global::System.IFormatProvider? formatProvider)
                         => _discriminator switch
@@ -947,7 +947,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="object.GetType()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.1.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Type GetUnderlyingType()
                         => _discriminator switch
