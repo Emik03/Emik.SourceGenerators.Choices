@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices.Tests;
 
-public class Test()
+public partial class Case()
 {
     readonly string? _source;
 
-    private protected Test([StringSyntax("C#")] string source)
+    private protected Case([StringSyntax("C#")] string source)
         : this() =>
         _source = source;
 
-    public sealed class Color() : Test(
+    public sealed class Color() : Case(
         """
         [Choice]
         partial class Color(Color.OrRef<int>[]? rgba, Color.OrRef<Number>[]? gradient)
@@ -21,7 +21,7 @@ public class Test()
         """
     );
 
-    public sealed class ConditionDescription() : Test(
+    public sealed class ConditionDescription() : Case(
         """
         [Choice.And<BinaryCondition>.Or<BinaryCondition>.Included<InclusionCondition>.Excluded<InclusionCondition>]
         partial class ConditionDescription
@@ -42,13 +42,13 @@ public class Test()
     );
 
     public sealed class DotFruit()
-        : Test("[Choice.Apple<byte>.Pear<int>.Orange<BindingFlags>] sealed partial class DotFruit;");
+        : Case("[Choice.Apple<byte>.Pear<int>.Orange<BindingFlags>] sealed partial class DotFruit;");
 
-    public sealed class DotKMModule() : Test(
+    public sealed class DotKMModule() : Case(
         "[Choice.Regular<KMBombModule>.Needy<KMNeedyModule>.Other<UnityEngine.Component>] partial class DotKMModule;"
     );
 
-    public sealed class Enums() : Test(
+    public sealed class Enums() : Case(
         """
         [Choice(
             typeof((System.Reflection.AssemblyNameFlags AssemblyNames,
@@ -60,7 +60,7 @@ public class Test()
         """
     );
 
-    public sealed class Ints() : Test(
+    public sealed class Ints() : Case(
         """
         [Choice]
         readonly partial struct Ints
@@ -72,7 +72,7 @@ public class Test()
         """
     );
 
-    public sealed class KMModule() : Test(
+    public sealed class KMModule() : Case(
         """
         [Choice(typeof((KMBombModule Regular, KMNeedyModule Needy)))]
         partial class KMModule
@@ -83,9 +83,9 @@ public class Test()
     );
 
     public sealed class Number()
-        : Test("[Choice(typeof((int Integer, float Floating, ValueTuple Unknown)), false)] partial class Number;");
+        : Case("[Choice(typeof((int Integer, float Floating, ValueTuple Unknown)), false)] partial class Number;");
 
-    public sealed class Option1() : Test(
+    public sealed class Option1() : Case(
         """
         [Choice]
         readonly partial struct Option<T>
@@ -99,9 +99,9 @@ public class Test()
     );
 
     public sealed class Pointers()
-        : Test("[Choice] unsafe partial struct Pointers(byte* bytes, char* chars, nint native);");
+        : Case("[Choice] unsafe partial struct Pointers(byte* bytes, char* chars, nint native);");
 
-    public sealed class Result2() : Test(
+    public sealed class Result2() : Case(
         """
         [Choice]
         readonly partial record struct Result<TOk, TErr>
@@ -113,7 +113,7 @@ public class Test()
         """
     );
 
-    public sealed class SpanEncodings() : Test(
+    public sealed class SpanEncodings() : Case(
         """
         [Choice(true)]
         ref partial struct SpanEncodings
@@ -126,16 +126,16 @@ public class Test()
     );
 
     public sealed class SpanEncodingsDot()
-        : Test("[Choice.Public.Utf8<Span<byte>>.Utf16<Span<char>>] ref partial struct SpanEncodingsDot;");
+        : Case("[Choice.Public.Utf8<Span<byte>>.Utf16<Span<char>>] ref partial struct SpanEncodingsDot;");
 
     public sealed class SuperTask()
-        : Test("[Choice(typeof((Task Left, Task Right)), false)] partial record SuperTask;");
+        : Case("[Choice(typeof((Task Left, Task Right)), false)] partial record SuperTask;");
 
     public sealed class Tasks()
-        : Test("[Choice(typeof((Task Referenced, ValueTask Valued)), true)] partial struct Tasks;");
+        : Case("[Choice(typeof((Task Referenced, ValueTask Valued)), true)] partial struct Tasks;");
 
     public sealed class UnderlyingInt()
-        : Test(
+        : Case(
             """
             [Choice]
             partial struct UnderlyingInt
