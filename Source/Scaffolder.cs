@@ -369,7 +369,7 @@ sealed partial record Scaffolder(
                 $"""
                      {Annotation}
                      private {PrivatelyReadOnly}{(Common is null ? "object" : new MemberSymbol(Common, "").NullableAnnotated)
-                     } {ReferenceField}{(UsesPrimaryConstructor && Reference.Contains(Symbols[0]) ? CSharp($" = {Symbols[0].ParameterName}") : "")};
+                     } {ReferenceField}{(UsesPrimaryConstructor && !Symbols[0].IsEmpty && Reference.Contains(Symbols[0]) ? CSharp($" = {Symbols[0].ParameterName}") : "")};
 
 
                  """
@@ -383,7 +383,7 @@ sealed partial record Scaffolder(
                 $"""
                      {Annotation}
                      private {PrivatelyReadOnly}{(UsesPrimaryConstructor && Unmanaged.Contains(Symbols[0]) ? Symbols[0].Unsafe : "")
-                     }Unmanaged {UnmanagedField}{(UsesPrimaryConstructor ? CSharp($" = new Unmanaged() {{ {Symbols[0].FieldName
+                     }Unmanaged {UnmanagedField}{(UsesPrimaryConstructor && !Symbols[0].IsEmpty ? CSharp($" = new Unmanaged() {{ {Symbols[0].FieldName
                      } = {Symbols[0].ParameterName} }}") : "")};
 
 
@@ -750,7 +750,10 @@ sealed partial record Scaffolder(
     [Pure]
     bool SkipOperator(MemberSymbol x) =>
         x.Type is not IPointerTypeSymbol &&
-        (x.Type is not ITypeParameterSymbol and { BaseType: null } || HasConflict(x) || IsNoninitial(x));
+        (x.Type is not ITypeParameterSymbol and { BaseType: null } ||
+            x.Type.SpecialType is SpecialType.System_ValueType ||
+            HasConflict(x) ||
+            IsNoninitial(x));
 
     [Pure]
     int Inheritance((int Index, MemberSymbol Item) tuple) =>
