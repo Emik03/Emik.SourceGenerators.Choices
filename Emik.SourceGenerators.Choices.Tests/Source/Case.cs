@@ -188,9 +188,9 @@ public partial class Case()
           using System.Text.Json;
           using System.Threading.Tasks;
           using Emik;
-
+          #pragma warning disable SYSLIB5003
           namespace Emik.SourceGenerators.Choices.Tests {{{source}}}
-
+          #pragma warning restore SYSLIB5003
           namespace System.Diagnostics.CodeAnalysis
           {
               /// <summary>
@@ -198,7 +198,7 @@ public partial class Case()
               /// have not-null values when returning with the specified return value condition.
               /// </summary>
               [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = true)]
-              sealed partial class MemberNotNullWhenAttribute : Attribute
+              public sealed partial class MemberNotNullWhenAttribute : Attribute
               {
                   /// <summary>
                   /// Initializes a new instance of the <see cref="MemberNotNullWhenAttribute"/> class
