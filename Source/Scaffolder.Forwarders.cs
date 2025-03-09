@@ -199,8 +199,7 @@ sealed partial record Scaffolder
 
         builder.Append("\n    {\n        ");
         var hasGetter = symbol is IFieldSymbol or IPropertySymbol { IsWriteOnly: false };
-        // TODO: 'hasSetter' needs to also check whether all forwarders have a setter, not just the first one!
-        var hasSetter = symbol is IFieldSymbol { IsReadOnly: false } or IPropertySymbol { IsReadOnly: false };
+        var hasSetter = Symbols.Select(x => x.Type.GetMembers().FirstOrDefault(Finder(symbol))).All(HasSetter);
 
         if (hasGetter)
             AppendSwitchExpression(builder, Named.IsValueType && hasSetter ? "readonly get " : "get ");
@@ -227,6 +226,10 @@ sealed partial record Scaffolder
         AppendSwitchExpression(builder, "remove ", " -= value");
         return list.AndAdd((symbol, $"{builder.Append("\n    }")}"));
     }
+
+    [Pure]
+    static bool HasSetter(ISymbol? symbol) =>
+        symbol is IFieldSymbol { IsReadOnly: false } or IPropertySymbol { IsReadOnly: false };
 
     [Pure]
     static bool IsGoodClass(AttributeData x) =>
@@ -310,6 +313,11 @@ sealed partial record Scaffolder
             _ when char.IsControl(x) => @$"\u{(int)x:x4}",
             _ => $"{x}",
         };
+
+    [Pure]
+    static Func<ISymbol, bool> Finder(ISymbol symbol) =>
+        x => x.Name == symbol.Name &&
+            (x as IPropertySymbol)?.Parameters.Length == (symbol as IPropertySymbol)?.Parameters.Length;
 
     [Pure]
     static string ObjectSuffix(TypedConstant x) =>

@@ -188,9 +188,9 @@ public partial class Case()
           using System.Text.Json;
           using System.Threading.Tasks;
           using Emik;
-          #pragma warning disable SYSLIB5003
+          #pragma warning disable 619, SYSLIB5003
           namespace Emik.SourceGenerators.Choices.Tests {{{source}}}
-          #pragma warning restore SYSLIB5003
+          #pragma warning restore 619, SYSLIB5003
           namespace System.Diagnostics.CodeAnalysis
           {
               /// <summary>
