@@ -9,19 +9,19 @@ public partial class Case
 
         const string DotPattern = // language=cs
             """
-            [Choice.First<{1}>.Second<{2}>]
+            [Choice.First<{1}>.Second<{2}>, Obsolete]
             public partial {0} Test;
             """;
 
         const string PrimaryConstructors = // language=cs
             """
-            [Choice]
+            [Choice, Obsolete]
             public partial {0} Test({1} first, {2} second);
             """;
 
         const string Fields = // language=cs
             """
-            [Choice]
+            [Choice, Obsolete]
             public partial {0} Test
             {{
                 {1} _first;
@@ -32,7 +32,7 @@ public partial class Case
 
         const string Properties = // language=cs
             """
-            [Choice]
+            [Choice, Obsolete]
             public partial {0} Test
             {{
                 public {1} First {{ get; }}
