@@ -932,7 +932,7 @@ sealed partial record Scaffolder(
     [Pure]
     string DeclareFactory(MemberSymbol x, int i)
     {
-        var discriminator = HasConflict(x) ? $", {i}" : "";
+        var discriminator = HasConflict(x) ? $", (byte){i}" : "";
 
         return CSharp(
             $"""
