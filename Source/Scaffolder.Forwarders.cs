@@ -28,7 +28,8 @@ sealed partial record Scaffolder
     bool IsIgnored(ISymbol symbol) =>
         Named.IsRefLikeType && symbol is IEventSymbol ||
         symbol is IEventSymbol { AddMethod: null, RemoveMethod: null } or
-            IPropertySymbol { IsReadOnly: true, IsWriteOnly: true };
+            IPropertySymbol { IsReadOnly: true, IsWriteOnly: true } ||
+        Named.IsRecord && symbol.Name is "Clone";
 
     [Pure] // ReSharper disable once CognitiveComplexity
     ForwarderAggregate DeclareForwarder(ForwarderAggregate list, Extract extract)
