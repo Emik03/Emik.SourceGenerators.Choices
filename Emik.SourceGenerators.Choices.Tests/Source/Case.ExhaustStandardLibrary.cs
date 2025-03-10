@@ -58,10 +58,29 @@ public partial class Case
         ];
 
         [Fact]
-        public async Task RunAsync()
+        public Task Run1Async() => EnumerateAsync(1);
+
+        [Fact]
+        public Task Run2Async() => EnumerateAsync(2);
+
+        [Fact]
+        public Task Run4Async() => EnumerateAsync(4);
+
+        [Fact]
+        public Task Run8Async() => EnumerateAsync(8);
+
+        [Fact]
+        public Task RunAllAsync() => EnumerateAsync(int.MaxValue);
+
+        async Task EnumerateAsync(int size)
         {
-            var tests = from second in AccessibleTypes
-                from first in AccessibleTypes
+            static int FlattenedLength(int source, int size) =>
+                source / size * size * size +
+                source % size * (source % size);
+
+            static IEnumerable<(string, Verify)> Query(INamedTypeSymbol[] array) =>
+                from second in array
+                from first in array
                 from typeKeyword in TypeKeywords
                 from structure in Structures
                 let testCode = string.Format(structure, typeKeyword, first, second)
@@ -71,25 +90,25 @@ public partial class Case
                     TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
                 });
 
-            var length = AccessibleTypes.Length * AccessibleTypes.Length * TypeKeywords.Length * Structures.Length;
-            var fail = "";
-            var i = 0;
+            var length = FlattenedLength(AccessibleTypes.Length, size);
+            var code = "";
+            var i = 1;
 
             try
             {
-                foreach (var (source, verify) in tests)
+                foreach (var (source, verify) in AccessibleTypes.Chunk(size).SelectMany(Query))
                 {
                     i++;
-                    fail = source;
+                    code = source;
                     await verify.RunAsync();
 
-                    if ((i + 1) % UpdateMeEvery is 0)
-                        output.WriteLine($"Successfully ran micro-test {i + 1}/{length}.");
+                    if (i % UpdateMeEvery is 0)
+                        output.WriteLine($"Successfully ran micro-test {i}/{length}.");
                 }
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException($"Micro-test {i + 1}/{length} causes invalid codegen:\n{fail}", e);
+                throw new InvalidOperationException($"Micro-test {i}/{length} caused invalid codegen:\n{code}", e);
             }
         }
 

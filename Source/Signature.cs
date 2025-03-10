@@ -80,7 +80,7 @@ readonly record struct Signature(
         var signatures = ToSelf(except, assembly);
         var forwarders = Add(symbols, assembly, signatures);
 
-        forwarders.UnionWith(new IntersectedInterfaces(symbols, named.IsReadOnly).Members);
+        forwarders.UnionWith(new IntersectedInterfaces(symbols, named.IsReadOnly, named.IsRecord).Members);
         forwarders.UnionWith(FindCommonBaseMembers(symbols));
         forwarders.ExceptWith(forwarders.ToArray().SelectMany(GeneratedMethods).Filter());
 

@@ -7,7 +7,7 @@ namespace Emik.SourceGenerators.Choices;
 /// <param name="Symbols">The set of <see cref="MemberSymbol"/> instances.</param>
 /// <param name="IsReadOnly">Whether the type is immutable, which normally restricts some implementations.</param>
 // ReSharper disable NullableWarningSuppressionIsUsed
-sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool IsReadOnly)
+sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool IsReadOnly, bool IsRecord)
 {
     /// <summary>Gets the set of interfaces that are in common with every member of <see cref="Symbols"/>.</summary>
     [Pure] // ReSharper disable once ReturnTypeCanBeEnumerable.Global
@@ -37,7 +37,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
     static bool IsImplementedInterface([NotNullWhen(true)] INamedTypeSymbol? symbol) =>
         symbol is
         {
-            Name: nameof(IComparable) or nameof(IEquatable<int>),
+            Name: nameof(IComparable) or nameof(IEquatable<>),
             TypeArguments: [] or [{ SpecialType: SpecialType.System_Object }],
             ContainingNamespace: { ContainingNamespace.IsGlobalNamespace: true, Name: nameof(System) },
         };
@@ -49,6 +49,11 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
     /// </returns>
     [Pure]
     static bool IsMutable(ISymbol symbol) => symbol is IEventSymbol or IPropertySymbol { SetMethod: not null };
+
+    [Pure]
+    bool IsIncompatible(INamedTypeSymbol x) =>
+        x.GetMembers().Any(x => x.IsStatic || x.Name is "Clone" && IsRecord) ||
+        IsReadOnly && x.GetMembers().Any(IsMutable);
 
     /// <summary>Extracts the members that are in common with every member of <see cref="Symbols"/>.</summary>
     /// <param name="interfaces">The interfaces to try.</param>
@@ -107,7 +112,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
            .Type
            .AllInterfaces
            .Omit(IsImplementedInterface)
-           .Omit(x => x.GetMembers().Any(x => x.IsStatic) || IsReadOnly && x.GetMembers().Any(IsMutable));
+           .Omit(IsIncompatible);
 
     /// <summary>Creates the list of original definitions of <paramref name="interfaceFromFirst"/>.</summary>
     /// <param name="interfaceFromFirst">The first member.</param>

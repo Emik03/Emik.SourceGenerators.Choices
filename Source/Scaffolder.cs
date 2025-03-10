@@ -33,8 +33,6 @@ sealed partial record Scaffolder(
     [ValueRange(Primes.Min, Primes.MaxInt16)]
     readonly short _hash = s_names.GetOrAdd(Named.GetFullyQualifiedName(), x => Primes.Index(x.GetDjb2HashCode()));
 
-    string? _discriminator, _source;
-
     public Scaffolder(
         INamedTypeSymbol named,
         ImmutableArray<MemberSymbol> symbols,
@@ -244,7 +242,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareAdditionalInterfaces =>
-        new IntersectedInterfaces(Symbols, Named.IsReadOnly).Set.Select(x => $",\n    {x}").Conjoin("");
+        new IntersectedInterfaces(Symbols, Named.IsReadOnly, Named.IsRecord).Set.Select(x => $",\n    {x}").Conjoin("");
 
     [Pure]
     string DeclareDiscriminator =>

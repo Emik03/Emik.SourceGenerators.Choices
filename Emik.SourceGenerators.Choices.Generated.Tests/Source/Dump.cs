@@ -1,4 +1,3 @@
-
 /// <inheritdoc cref="Test"/>
 /// <remarks>
 ///     <para>
@@ -25,7 +24,7 @@
 ///         </listheader>
 ///         <item>
 ///             <term>
-///                 <see cref="First"/> <see langword="as"/> <see cref="System.Buffers.OperationStatus"/>
+///                 <see cref="First"/> <see langword="as"/> <see cref="System.Collections.CollectionBase"/>
 ///                 <list type="bullet">
 ///                     <item>
 ///                         <description>
@@ -34,7 +33,7 @@
 ///                     </item>
 ///                     <item>
 ///                         <description>
-///                             <see cref="OfFirst(System.Buffers.OperationStatus)"/>
+///                             <see cref="OfFirst(System.Collections.CollectionBase)"/>
 ///                         </description>
 ///                     </item>
 ///                 </list>
@@ -42,7 +41,7 @@
 ///         </item>
 ///         <item>
 ///             <term>
-///                 <see cref="Second"/> <see langword="as"/> <see cref="System.Buffers.OperationStatus"/>
+///                 <see cref="Second"/> <see langword="as"/> <see cref="System.Collections.CollectionBase"/>
 ///                 <list type="bullet">
 ///                     <item>
 ///                         <description>
@@ -51,7 +50,7 @@
 ///                     </item>
 ///                     <item>
 ///                         <description>
-///                             <see cref="OfSecond(System.Buffers.OperationStatus)"/>
+///                             <see cref="OfSecond(System.Collections.CollectionBase)"/>
 ///                         </description>
 ///                     </item>
 ///                 </list>
@@ -59,7 +58,7 @@
 ///         </item>
 ///     </list>
 /// </remarks>
-class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus second) :
+partial class Test :
     global::System.IComparable,
     global::System.IComparable<object>,
     global::System.IComparable<global::Test>,
@@ -68,46 +67,45 @@ class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus 
 #endif
     global::System.IEquatable<object>,
     global::System.IEquatable<global::Test>,
-    System.IConvertible,
-    System.ISpanFormattable,
-    System.IFormattable
+    System.Collections.IList,
+    System.Collections.ICollection,
+    System.Collections.IEnumerable
 {
-    /// <summary>
-    /// Compact representation of all unmanaged memory within the union <see cref="Test"/>.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
-    partial struct Unmanaged
+    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+    private static class Choice
     {
-        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-        internal System.Buffers.OperationStatus _first;
-
-        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-        internal System.Buffers.OperationStatus _second;
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        internal static class First<TFirstDiscard>
+        {
+            [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+            internal sealed class Second<TSecondDiscard> : global::System.Attribute
+            {
+            }
+        }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     private readonly byte _discriminator;
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    private readonly Unmanaged _unmanaged = new Unmanaged() { _first = first };
+    private readonly System.Collections.CollectionBase? _reference;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Test"/> class with the variant <see cref="First"/> of type <see cref="System.Buffers.OperationStatus"/>.
+    /// Initializes a new instance of the <see cref="Test"/> class with the variant <see cref="First"/> of type <see cref="System.Collections.CollectionBase"/>.
     /// </summary>
     /// <param name="first">The variant.</param>
     /// <param name="x">The discriminator.</param>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    private Test(System.Buffers.OperationStatus first, byte x)
-        : this(first, default(System.Buffers.OperationStatus))
+    private Test(System.Collections.CollectionBase first, byte x)
     {
         _discriminator = x;
-        _unmanaged._first = first;
+        _reference = first;
     }
 
     /// <summary>
-    /// Gets the value determining if the <see cref="Test"/> is the variant <see cref="First"/> of type <see cref="System.Buffers.OperationStatus"/>.
+    /// Gets the value determining if the <see cref="Test"/> is the variant <see cref="First"/> of type <see cref="System.Collections.CollectionBase"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     public bool IsFirst
@@ -120,7 +118,7 @@ class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus 
     }
 
     /// <summary>
-    /// Gets the value determining if the <see cref="Test"/> is the variant <see cref="Second"/> of type <see cref="System.Buffers.OperationStatus"/>.
+    /// Gets the value determining if the <see cref="Test"/> is the variant <see cref="Second"/> of type <see cref="System.Collections.CollectionBase"/>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     public bool IsSecond
@@ -133,51 +131,47 @@ class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus 
     }
 
     /// <summary>
-    /// Gets the <see cref="System.Buffers.OperationStatus"/> variant.
+    /// Gets the <see cref="System.Collections.CollectionBase"/> variant.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    public System.Buffers.OperationStatus First
+    public System.Collections.CollectionBase? First
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-        get => _discriminator is 0 ? _unmanaged._first : default;
+        get => _discriminator is 0 ? (System.Collections.CollectionBase)_reference! : default;
     }
 
     /// <summary>
-    /// Gets the <see cref="System.Buffers.OperationStatus"/> variant.
+    /// Gets the <see cref="System.Collections.CollectionBase"/> variant.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    public System.Buffers.OperationStatus Second
+    public System.Collections.CollectionBase? Second
     {
         [global::System.Diagnostics.Contracts.PureAttribute]
         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-        get => _discriminator is 1 ? _unmanaged._first : default;
+        get => _discriminator is 1 ? (System.Collections.CollectionBase)_reference! : default;
     }
 
-    /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
-    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-    bool UsedImplicitly => second is var _;
-
     /// <summary>
-    /// Creates a new instance of the <see cref="Test"/> class with the variant <see cref="First"/> of type <see cref="System.Buffers.OperationStatus"/>.
+    /// Creates a new instance of the <see cref="Test"/> class with the variant <see cref="First"/> of type <see cref="System.Collections.CollectionBase"/>.
     /// </summary>
     /// <param name="first">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="first"/>.</returns>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public static global::Test OfFirst(System.Buffers.OperationStatus first)
+    public static global::Test OfFirst(System.Collections.CollectionBase first)
         => new global::Test(first, 0);
 
     /// <summary>
-    /// Creates a new instance of the <see cref="Test"/> class with the variant <see cref="Second"/> of type <see cref="System.Buffers.OperationStatus"/>.
+    /// Creates a new instance of the <see cref="Test"/> class with the variant <see cref="Second"/> of type <see cref="System.Collections.CollectionBase"/>.
     /// </summary>
     /// <param name="second">The value to pass into the type.</param>
     /// <returns>The union containing the parameter <paramref name="second"/>.</returns>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public static global::Test OfSecond(System.Buffers.OperationStatus second)
+    public static global::Test OfSecond(System.Collections.CollectionBase second)
         => new global::Test(second, 1);
 
     /// <summary>
@@ -197,8 +191,8 @@ class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus 
             left._discriminator == right._discriminator &&
             left._discriminator switch
             {
-                0 => left._unmanaged._first == right._unmanaged._first,
-                _ => left._unmanaged._first == right._unmanaged._first,
+                0 => global::System.Collections.Generic.EqualityComparer<System.Collections.CollectionBase>.Default.Equals(((System.Collections.CollectionBase)left._reference!), ((System.Collections.CollectionBase)right._reference!)),
+                _ => global::System.Collections.Generic.EqualityComparer<System.Collections.CollectionBase>.Default.Equals(((System.Collections.CollectionBase)left._reference!), ((System.Collections.CollectionBase)right._reference!)),
             };
 
     /// <summary>
@@ -235,8 +229,8 @@ class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus 
             left._discriminator == right._discriminator &&
             left._discriminator switch
             {
-                0 => left._unmanaged._first > right._unmanaged._first,
-                _ => left._unmanaged._first > right._unmanaged._first,
+                0 => global::System.Collections.Generic.Comparer<System.Collections.CollectionBase>.Default.Compare(((System.Collections.CollectionBase)left._reference!), ((System.Collections.CollectionBase)right._reference!)) > 0,
+                _ => global::System.Collections.Generic.Comparer<System.Collections.CollectionBase>.Default.Compare(((System.Collections.CollectionBase)left._reference!), ((System.Collections.CollectionBase)right._reference!)) > 0,
             });
 
     /// <summary>
@@ -320,8 +314,8 @@ class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus 
         => unchecked(_discriminator * 28019) ^
         (_discriminator switch
         {
-            0 => _unmanaged._first.GetHashCode(),
-            _ => _unmanaged._first.GetHashCode(),
+            0 => ((System.Collections.CollectionBase)_reference!).GetHashCode(),
+            _ => ((System.Collections.CollectionBase)_reference!).GetHashCode(),
         });
 
     /// <inheritdoc />
@@ -331,30 +325,30 @@ class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus 
     public override string ToString()
         => _discriminator switch
         {
-            0 => $"{nameof(First)}({_unmanaged._first})",
-            _ => $"{nameof(Second)}({_unmanaged._first})",
+            0 => $"{nameof(First)}({((System.Collections.CollectionBase)_reference!)})",
+            _ => $"{nameof(Second)}({((System.Collections.CollectionBase)_reference!)})",
         };
 
     /// <summary>
     /// Invokes the callback based on current variance.
     /// </summary>
-    /// <param name="onFirst">The callback to use when the contract of the <see cref="Test"/> class with the variant <see cref="First"/> of type <see cref="System.Buffers.OperationStatus"/> is held.</param>
-    /// <param name="onSecond">The callback to use when the contract of the <see cref="Test"/> class with the variant <see cref="Second"/> of type <see cref="System.Buffers.OperationStatus"/> is held.</param>
+    /// <param name="onFirst">The callback to use when the contract of the <see cref="Test"/> class with the variant <see cref="First"/> of type <see cref="System.Collections.CollectionBase"/> is held.</param>
+    /// <param name="onSecond">The callback to use when the contract of the <see cref="Test"/> class with the variant <see cref="Second"/> of type <see cref="System.Collections.CollectionBase"/> is held.</param>
     /// <returns>Itself.</returns>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
     public Test? Map(
-        global::System.Action<System.Buffers.OperationStatus>? onFirst = null,
-        global::System.Action<System.Buffers.OperationStatus>? onSecond = null
+        global::System.Action<System.Collections.CollectionBase>? onFirst = null,
+        global::System.Action<System.Collections.CollectionBase>? onSecond = null
     )
     {
         switch (_discriminator)
         {
             case 0:
-                onFirst?.Invoke(_unmanaged._first);
+                onFirst?.Invoke(((System.Collections.CollectionBase)_reference!));
                 return this;
             default:
-                onSecond?.Invoke(_unmanaged._first);
+                onSecond?.Invoke(((System.Collections.CollectionBase)_reference!));
                 return this;
         }
     }
@@ -363,21 +357,21 @@ class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus 
     /// Maps each variant to <typeparamref name="TMappingResult"/>.
     /// </summary>
     /// <typeparam name="TMappingResult">The resulting type from the mapping.</typeparam>
-    /// <param name="onFirst">The callback to use when the contract of the <see cref="Test"/> class with the variant <see cref="First"/> of type <see cref="System.Buffers.OperationStatus"/> is held.</param>
-    /// <param name="onSecond">The callback to use when the contract of the <see cref="Test"/> class with the variant <see cref="Second"/> of type <see cref="System.Buffers.OperationStatus"/> is held.</param>
+    /// <param name="onFirst">The callback to use when the contract of the <see cref="Test"/> class with the variant <see cref="First"/> of type <see cref="System.Collections.CollectionBase"/> is held.</param>
+    /// <param name="onSecond">The callback to use when the contract of the <see cref="Test"/> class with the variant <see cref="Second"/> of type <see cref="System.Collections.CollectionBase"/> is held.</param>
     /// <returns>
     /// The resulting value from one of the parameters based on the current state of the object.
     /// </returns>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
     public TMappingResult Map<TMappingResult>(
-        global::System.Func<System.Buffers.OperationStatus, TMappingResult> onFirst,
-        global::System.Func<System.Buffers.OperationStatus, TMappingResult> onSecond
+        global::System.Func<System.Collections.CollectionBase, TMappingResult> onFirst,
+        global::System.Func<System.Collections.CollectionBase, TMappingResult> onSecond
     )
         => _discriminator switch
         {
-            0 => onFirst(_unmanaged._first),
-            _ => onSecond(_unmanaged._first),
+            0 => onFirst(((System.Collections.CollectionBase)_reference!)),
+            _ => onSecond(((System.Collections.CollectionBase)_reference!)),
         };
 
     /// <summary>
@@ -389,295 +383,222 @@ class Test(System.Buffers.OperationStatus first, System.Buffers.OperationStatus 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Diagnostics.Contracts.PureAttribute]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public System.Buffers.OperationStatus GetUnderlyingValue()
-        => _discriminator switch
-        {
-            0 => _unmanaged._first,
-            _ => _unmanaged._first,
-        };
+    public System.Collections.CollectionBase GetUnderlyingValue()
+        => (System.Collections.CollectionBase)_reference!;
 
-    /// <inheritdoc cref="System.IConvertible.GetTypeCode()"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.CollectionBase.Clear()"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public System.TypeCode GetTypeCode()
-        => _discriminator switch
+    public void Clear()
+    {
+        switch (_discriminator)
         {
-            0 => ((System.IConvertible)_unmanaged._first).GetTypeCode(),
-            _ => ((System.IConvertible)_unmanaged._first).GetTypeCode(),
-        };
+            case 0:
+                ((System.Collections.CollectionBase)_reference!).Clear();
+                break;
+            default:
+                ((System.Collections.CollectionBase)_reference!).Clear();
+                break;
+        }
+    }
 
-    /// <inheritdoc cref="System.IConvertible.ToBoolean(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.CollectionBase.GetEnumerator()"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public bool ToBoolean(global::System.IFormatProvider? provider)
+    public System.Collections.IEnumerator GetEnumerator()
         => _discriminator switch
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToBoolean(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToBoolean(provider),
+            0 => ((System.Collections.CollectionBase)_reference!).GetEnumerator(),
+            _ => ((System.Collections.CollectionBase)_reference!).GetEnumerator(),
         };
 
-    /// <inheritdoc cref="System.IConvertible.ToByte(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.CollectionBase.RemoveAt(int)"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public byte ToByte(global::System.IFormatProvider? provider)
+    public void RemoveAt(int index)
+    {
+        switch (_discriminator)
+        {
+            case 0:
+                ((System.Collections.CollectionBase)_reference!).RemoveAt(index);
+                break;
+            default:
+                ((System.Collections.CollectionBase)_reference!).RemoveAt(index);
+                break;
+        }
+    }
+
+    /// <inheritdoc cref="System.Collections.CollectionBase.Capacity"/>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
+    public int Capacity
+    {
+        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+        get => _discriminator switch
+        {
+            0 => ((System.Collections.CollectionBase)_reference!).Capacity,
+            _ => ((System.Collections.CollectionBase)_reference!).Capacity,
+        };
+        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+        set => _ = _discriminator switch
+        {
+            0 => ((System.Collections.CollectionBase)_reference!).Capacity = value,
+            _ => ((System.Collections.CollectionBase)_reference!).Capacity = value,
+        };
+    }
+
+    /// <inheritdoc cref="System.Collections.CollectionBase.Count"/>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
+    public int Count
+    {
+        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+        get => _discriminator switch
+        {
+            0 => ((System.Collections.CollectionBase)_reference!).Count,
+            _ => ((System.Collections.CollectionBase)_reference!).Count,
+        };
+    }
+
+    /// <inheritdoc cref="System.Collections.IList.Add(object?)"/>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
+    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+    public int Add(object? value)
         => _discriminator switch
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToByte(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToByte(provider),
+            0 => ((System.Collections.IList)_reference!).Add(value),
+            _ => ((System.Collections.IList)_reference!).Add(value),
         };
 
-    /// <inheritdoc cref="System.IConvertible.ToChar(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.IList.Contains(object?)"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public char ToChar(global::System.IFormatProvider? provider)
+    public bool Contains(object? value)
         => _discriminator switch
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToChar(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToChar(provider),
+            0 => ((System.Collections.IList)_reference!).Contains(value),
+            _ => ((System.Collections.IList)_reference!).Contains(value),
         };
 
-    /// <inheritdoc cref="System.IConvertible.ToDateTime(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.IList.IndexOf(object?)"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public System.DateTime ToDateTime(global::System.IFormatProvider? provider)
+    public int IndexOf(object? value)
         => _discriminator switch
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToDateTime(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToDateTime(provider),
+            0 => ((System.Collections.IList)_reference!).IndexOf(value),
+            _ => ((System.Collections.IList)_reference!).IndexOf(value),
         };
 
-    /// <inheritdoc cref="System.IConvertible.ToDecimal(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.IList.Insert(int, object?)"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public decimal ToDecimal(global::System.IFormatProvider? provider)
-        => _discriminator switch
+    public void Insert(int index, object? value)
+    {
+        switch (_discriminator)
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToDecimal(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToDecimal(provider),
-        };
+            case 0:
+                ((System.Collections.IList)_reference!).Insert(index, value);
+                break;
+            default:
+                ((System.Collections.IList)_reference!).Insert(index, value);
+                break;
+        }
+    }
 
-    /// <inheritdoc cref="System.IConvertible.ToDouble(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.IList.Remove(object?)"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public double ToDouble(global::System.IFormatProvider? provider)
-        => _discriminator switch
+    public void Remove(object? value)
+    {
+        switch (_discriminator)
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToDouble(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToDouble(provider),
-        };
+            case 0:
+                ((System.Collections.IList)_reference!).Remove(value);
+                break;
+            default:
+                ((System.Collections.IList)_reference!).Remove(value);
+                break;
+        }
+    }
 
-    /// <inheritdoc cref="System.IConvertible.ToInt16(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.IList.IsFixedSize"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public short ToInt16(global::System.IFormatProvider? provider)
-        => _discriminator switch
+    public bool IsFixedSize
+    {
+        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+        get => _discriminator switch
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToInt16(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToInt16(provider),
+            0 => ((System.Collections.IList)_reference!).IsFixedSize,
+            _ => ((System.Collections.IList)_reference!).IsFixedSize,
         };
+    }
 
-    /// <inheritdoc cref="System.IConvertible.ToInt32(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.IList.IsReadOnly"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public int ToInt32(global::System.IFormatProvider? provider)
-        => _discriminator switch
+    public bool IsReadOnly
+    {
+        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+        get => _discriminator switch
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToInt32(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToInt32(provider),
+            0 => ((System.Collections.IList)_reference!).IsReadOnly,
+            _ => ((System.Collections.IList)_reference!).IsReadOnly,
         };
+    }
 
-    /// <inheritdoc cref="System.IConvertible.ToInt64(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.IList.this[int]"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public long ToInt64(global::System.IFormatProvider? provider)
-        => _discriminator switch
+    public object? this[int index]
+    {
+        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+        get => _discriminator switch
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToInt64(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToInt64(provider),
+            0 => ((System.Collections.IList)_reference!)[index],
+            _ => ((System.Collections.IList)_reference!)[index],
         };
+        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+        set => _ = _discriminator switch
+        {
+            0 => ((System.Collections.IList)_reference!)[index] = value,
+            _ => ((System.Collections.IList)_reference!)[index] = value,
+        };
+    }
 
-    /// <inheritdoc cref="System.IConvertible.ToSByte(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.ICollection.CopyTo(System.Array, int)"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public sbyte ToSByte(global::System.IFormatProvider? provider)
-        => _discriminator switch
+    public void CopyTo(global::System.Array array, int index)
+    {
+        switch (_discriminator)
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToSByte(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToSByte(provider),
-        };
+            case 0:
+                ((System.Collections.ICollection)_reference!).CopyTo(array, index);
+                break;
+            default:
+                ((System.Collections.ICollection)_reference!).CopyTo(array, index);
+                break;
+        }
+    }
 
-    /// <inheritdoc cref="System.IConvertible.ToSingle(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.ICollection.IsSynchronized"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public float ToSingle(global::System.IFormatProvider? provider)
-        => _discriminator switch
+    public bool IsSynchronized
+    {
+        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+        get => _discriminator switch
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToSingle(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToSingle(provider),
+            0 => ((System.Collections.ICollection)_reference!).IsSynchronized,
+            _ => ((System.Collections.ICollection)_reference!).IsSynchronized,
         };
+    }
 
-    /// <inheritdoc cref="System.IConvertible.ToString(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
+    /// <inheritdoc cref="System.Collections.ICollection.SyncRoot"/>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public string ToString(global::System.IFormatProvider? provider)
-        => _discriminator switch
+    public object SyncRoot
+    {
+        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+        get => _discriminator switch
         {
-            0 => ((System.IConvertible)_unmanaged._first).ToString(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToString(provider),
+            0 => ((System.Collections.ICollection)_reference!).SyncRoot,
+            _ => ((System.Collections.ICollection)_reference!).SyncRoot,
         };
-
-    /// <inheritdoc cref="System.IConvertible.ToType(System.Type, System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public object ToType(global::System.Type conversionType, global::System.IFormatProvider? provider)
-        => _discriminator switch
-        {
-            0 => ((System.IConvertible)_unmanaged._first).ToType(conversionType, provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToType(conversionType, provider),
-        };
-
-    /// <inheritdoc cref="System.IConvertible.ToUInt16(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public ushort ToUInt16(global::System.IFormatProvider? provider)
-        => _discriminator switch
-        {
-            0 => ((System.IConvertible)_unmanaged._first).ToUInt16(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToUInt16(provider),
-        };
-
-    /// <inheritdoc cref="System.IConvertible.ToUInt32(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public uint ToUInt32(global::System.IFormatProvider? provider)
-        => _discriminator switch
-        {
-            0 => ((System.IConvertible)_unmanaged._first).ToUInt32(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToUInt32(provider),
-        };
-
-    /// <inheritdoc cref="System.IConvertible.ToUInt64(System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IConvertible"/>,
-    /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
-    /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public ulong ToUInt64(global::System.IFormatProvider? provider)
-        => _discriminator switch
-        {
-            0 => ((System.IConvertible)_unmanaged._first).ToUInt64(provider),
-            _ => ((System.IConvertible)_unmanaged._first).ToUInt64(provider),
-        };
-
-    /// <inheritdoc cref="System.ISpanFormattable.TryFormat(System.Span{char}, out int, System.ReadOnlySpan{char}, System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.ISpanFormattable"/>,
-    /// <see cref="Second"/> as <see cref="System.ISpanFormattable"/>.
-    /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public bool TryFormat(global::System.Span<char> destination, scoped out int charsWritten, global::System.ReadOnlySpan<char> format, global::System.IFormatProvider? provider)
-        => _discriminator switch
-        {
-            0 => ((System.ISpanFormattable)_unmanaged._first).TryFormat(destination, out charsWritten, format, provider),
-            _ => ((System.ISpanFormattable)_unmanaged._first).TryFormat(destination, out charsWritten, format, provider),
-        };
-
-    /// <inheritdoc cref="System.IFormattable.ToString(string?, System.IFormatProvider?)"/>
-    /// <remarks>
-    /// Boxes when the current instance is
-    /// <see cref="First"/> as <see cref="System.IFormattable"/>,
-    /// <see cref="Second"/> as <see cref="System.IFormattable"/>.
-    /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.2.0")]
-    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-    public string ToString(string? format, global::System.IFormatProvider? formatProvider)
-        => _discriminator switch
-        {
-            0 => ((System.IFormattable)_unmanaged._first).ToString(format, formatProvider),
-            _ => ((System.IFormattable)_unmanaged._first).ToString(format, formatProvider),
-        };
+    }
 }
