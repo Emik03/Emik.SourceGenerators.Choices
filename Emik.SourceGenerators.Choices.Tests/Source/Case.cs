@@ -189,56 +189,10 @@ public partial class Case()
           using System.Threading.Tasks;
           using Emik;
           #pragma warning disable SYSLIB5003
-          namespace Emik.SourceGenerators.Choices.Tests {{{source}}}
-          #pragma warning restore SYSLIB5003
-          namespace System.Diagnostics.CodeAnalysis
+          namespace Emik.SourceGenerators.Choices.Tests
           {
-              /// <summary>
-              /// Specifies that the method or property will ensure that the listed field and property members
-              /// have not-null values when returning with the specified return value condition.
-              /// </summary>
-              [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = true)]
-              public sealed partial class MemberNotNullWhenAttribute : Attribute
-              {
-                  /// <summary>
-                  /// Initializes a new instance of the <see cref="MemberNotNullWhenAttribute"/> class
-                  /// with the specified return value condition and a field or property member.
-                  /// </summary>
-                  /// <param name="returnValue">
-                  /// The return value condition. If the method returns this value, the associated parameter will not be null.
-                  /// </param>
-                  /// <param name="member">The field or property member that is promised to be not-null.</param>
-                  public MemberNotNullWhenAttribute(bool returnValue, string member)
-                  {
-                      ReturnValue = returnValue;
-                      Members = [member];
-                  }
-          
-                  /// <summary>
-                  /// Initializes a new instance of the <see cref="MemberNotNullWhenAttribute"/> class
-                  /// with the specified return value condition and list of field and property members.
-                  /// </summary>
-                  /// <param name="returnValue">
-                  /// The return value condition. If the method returns this value, the associated parameter will not be null.
-                  /// </param>
-                  /// <param name="members">
-                  /// The list of field and property members that are promised to be not-null.
-                  /// </param>
-                  public MemberNotNullWhenAttribute(bool returnValue, params string[] members)
-                  {
-                      ReturnValue = returnValue;
-                      Members = members;
-                  }
-          
-                  /// <summary>
-                  /// Gets a value indicating whether the return value condition
-                  /// is <see langword="true"/> or <see langword="false"/>.
-                  /// </summary>
-                  public bool ReturnValue { get; }
-          
-                  /// <summary>Gets field or property member names.</summary>
-                  public string[] Members { get; }
-              }
+          {{string.Join("\n", source?.Split('\n').Select(x => $"    {x}") ?? [])}}
           }
+          #pragma warning restore SYSLIB5003
           """;
 }

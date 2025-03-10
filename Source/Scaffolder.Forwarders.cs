@@ -200,7 +200,9 @@ sealed partial record Scaffolder
 
         builder.Append("\n    {\n        ");
         var hasGetter = symbol is IFieldSymbol or IPropertySymbol { IsWriteOnly: false };
-        var hasSetter = Symbols.Select(x => x.Type.GetMembers().FirstOrDefault(Finder(symbol))).All(HasSetter);
+
+        var hasSetter = HasSetter(symbol) &&
+            Symbols.Select(x => x.Type.GetMembers().FirstOrDefault(Finder(symbol))).All(HasSetter);
 
         if (hasGetter)
             AppendSwitchExpression(builder, Named.IsValueType && hasSetter ? "readonly get " : "get ");
@@ -230,7 +232,7 @@ sealed partial record Scaffolder
 
     [Pure]
     static bool HasSetter(ISymbol? symbol) =>
-        symbol is IFieldSymbol { IsReadOnly: false } or IPropertySymbol { IsReadOnly: false };
+        symbol is null or IFieldSymbol { IsReadOnly: false } or IPropertySymbol { IsReadOnly: false };
 
     [Pure]
     static bool IsGoodClass(AttributeData x) =>
@@ -316,9 +318,8 @@ sealed partial record Scaffolder
         };
 
     [Pure]
-    static Func<ISymbol, bool> Finder(ISymbol symbol) =>
-        x => x.Name == symbol.Name &&
-            (x as IPropertySymbol)?.Parameters.Length == (symbol as IPropertySymbol)?.Parameters.Length;
+    static Func<ISymbol, bool> Finder(ISymbol y) =>
+        x => x.Name == y.Name && (x as IPropertySymbol)?.Parameters.Length == (y as IPropertySymbol)?.Parameters.Length;
 
     [Pure]
     static string ObjectSuffix(TypedConstant x) =>

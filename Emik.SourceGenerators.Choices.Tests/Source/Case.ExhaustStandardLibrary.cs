@@ -78,28 +78,27 @@ public partial class Case
                 source / size * size * size +
                 source % size * (source % size);
 
-            static IEnumerable<(string, Verify)> Query(INamedTypeSymbol[] array) =>
+            static IEnumerable<Verify> Query(INamedTypeSymbol[] array) =>
                 from second in array
                 from first in array
                 from typeKeyword in TypeKeywords
                 from structure in Structures
-                let testCode = string.Format(structure, typeKeyword, first, second)
-                select (testCode, new Verify
+                select new Verify
                 {
-                    TestCode = Wrap(testCode),
+                    TestCode = Wrap(string.Format(structure, typeKeyword, first, second)),
                     TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                });
+                };
 
-            var length = FlattenedLength(AccessibleTypes.Length, size);
-            var code = "";
             var i = 1;
+            Verify? fail = null;
+            var length = FlattenedLength(AccessibleTypes.Length, size);
 
             try
             {
-                foreach (var (source, verify) in AccessibleTypes.Chunk(size).SelectMany(Query))
+                foreach (var verify in AccessibleTypes.Chunk(size).SelectMany(Query))
                 {
                     i++;
-                    code = source;
+                    fail = verify;
                     await verify.RunAsync();
 
                     if (i % UpdateMeEvery is 0)
@@ -108,7 +107,8 @@ public partial class Case
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException($"Micro-test {i}/{length} caused invalid codegen:\n{code}", e);
+                var source = Display(fail?.TestState.Sources);
+                throw new InvalidOperationException($"// Micro-test {i}/{length} caused invalid codegen:\n{source}", e);
             }
         }
 
@@ -121,10 +121,13 @@ public partial class Case
             IsNonGenericInstance(x.ContainingType) &&
             (x.BaseType is not null || x.GetMembers().All(x => !x.IsStatic));
 
-        static IEnumerable<ITypeSymbol> GetBaseTypes(ITypeSymbol? x) =>
-            x is null ? [] : GetBaseTypes(x.BaseType).Prepend(x);
+        static string Display(SourceFileCollection? sources) =>
+            string.Join('\n', sources?.Select(x => $"// {x.filename}:\n{x.content}") ?? []);
 
         static IEnumerable<ISymbol> GetMembers(INamespaceOrTypeSymbol x) =>
             x.GetMembers().OfType<INamespaceOrTypeSymbol>().SelectMany(GetMembers).Prepend(x);
+
+        static IEnumerable<ITypeSymbol> GetBaseTypes(ITypeSymbol? x) =>
+            x is null ? [] : GetBaseTypes(x.BaseType).Prepend(x);
     }
 }

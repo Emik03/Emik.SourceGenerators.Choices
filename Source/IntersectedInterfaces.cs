@@ -6,6 +6,7 @@ namespace Emik.SourceGenerators.Choices;
 /// </summary>
 /// <param name="Symbols">The set of <see cref="MemberSymbol"/> instances.</param>
 /// <param name="IsReadOnly">Whether the type is immutable, which normally restricts some implementations.</param>
+/// <param name="IsRecord">Whether the type is a record, which restricts members named <c>Clone</c>.</param>
 // ReSharper disable NullableWarningSuppressionIsUsed
 sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool IsReadOnly, bool IsRecord)
 {
