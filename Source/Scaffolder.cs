@@ -598,7 +598,7 @@ sealed partial record Scaffolder(
             );
 
     [Pure]
-    [field: AllowNull, MaybeNull]
+    [field: MaybeNull]
     string Discriminator =>
         field ??= Symbols.Length != Reference.Length ||
             !CanReserveNull && Symbols.Any(x => Members.Any(x.ReferenceEquals)) ||
@@ -620,7 +620,7 @@ sealed partial record Scaffolder(
             : name;
 
     [Pure]
-    [field: AllowNull, MaybeNull]
+    [field: MaybeNull]
     string Source =>
         field ??= $"{Header}{Suppression}{Named
            .ContainingWithoutGlobal()
