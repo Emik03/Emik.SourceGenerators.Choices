@@ -598,8 +598,9 @@ sealed partial record Scaffolder(
             );
 
     [Pure]
+    [field: AllowNull, MaybeNull]
     string Discriminator =>
-        _discriminator ??= Symbols.Length != Reference.Length ||
+        field ??= Symbols.Length != Reference.Length ||
             !CanReserveNull && Symbols.Any(x => Members.Any(x.ReferenceEquals)) ||
             Symbols.Select(x => x.Type).GroupDuplicates(RoslynComparer.Signature).Any()
                 ? DiscriminatorField
@@ -619,8 +620,9 @@ sealed partial record Scaffolder(
             : name;
 
     [Pure]
+    [field: AllowNull, MaybeNull]
     string Source =>
-        _source ??= $"{Header}{Suppression}{Named
+        field ??= $"{Header}{Suppression}{Named
            .ContainingWithoutGlobal()
            .FindSmallPathToNull(x => x.ContainingWithoutGlobal())
            .Aggregate(DeclareType, WrapNamespaceOrType)}\n";
