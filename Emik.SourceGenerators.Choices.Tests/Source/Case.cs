@@ -191,7 +191,7 @@ public partial class Case()
           #pragma warning disable SYSLIB5003
           namespace Emik.SourceGenerators.Choices.Tests
           {
-          {{string.Join("\n", source?.Split('\n').Select(x => $"    {x}") ?? [])}}
+          {{string.Join('\n', source?.Split('\n').Select(x => $"    {x}") ?? [])}}
           }
           #pragma warning restore SYSLIB5003
           """;

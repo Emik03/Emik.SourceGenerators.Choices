@@ -1,2 +1,7 @@
-[Choice.First<System.Collections.DictionaryBase>.Second<System.Collections.DictionaryBase>, Obsolete]
-public partial class Test;
+[Choice]
+partial class B(A first, A second);
+
+class A
+{
+    public void Foo(object @object) { }
+}

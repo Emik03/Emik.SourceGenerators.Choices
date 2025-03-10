@@ -54,7 +54,10 @@ readonly record struct Signature(
     {
         [Pure]
         static IEnumerable<Extract> FindCommonBaseMembers(ImmutableArray<MemberSymbol> s) =>
-            FindCommonBaseTypes(s).SelectMany(x => x.GetMembers()).Select(x => AsDirectExtract(x, s.Length));
+            FindCommonBaseTypes(s)
+               .SelectMany(x => x.GetMembers())
+               .Omit(x => x is ITypeSymbol)
+               .Select(x => AsDirectExtract(x, s.Length));
 
         [Pure]
         static IEnumerable<Extract> GeneratedMethods(Extract symbol) =>
@@ -114,7 +117,7 @@ readonly record struct Signature(
             IMethodSymbol { RefKind: var ret } => ret,
             IPropertySymbol { RefKind: var ret } => ret,
             IParameterSymbol { RefKind: var ret } => ret,
-            null => RefKind.None,
+            IEventSymbol or null => RefKind.None,
             _ => throw Unreachable,
         };
 

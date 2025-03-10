@@ -36,7 +36,7 @@ sealed partial record Scaffolder
     {
         var (symbol, kind, interfacesDeclared) = extract;
 
-        bool SameSignature((ISymbol Symbol, string Code) x) =>
+        bool SameSignature((ISymbol Symbol, string) x) =>
             x.Symbol.Kind == symbol.Kind &&
             (x.Symbol as IMethodSymbol)?.TypeParameters.Length ==
             (symbol as IMethodSymbol)?.TypeParameters.Length &&
@@ -49,7 +49,15 @@ sealed partial record Scaffolder
                 Equating<ITypeSymbol>((x, y) => x.GetFullyQualifiedName() == y.GetFullyQualifiedName())
             );
 
-        if (IsIgnored(symbol) || list.Exists(SameSignature))
+        bool SameUnderlying((ISymbol Symbol, string) x) =>
+            RoslynComparer.Gu.Equals(x.Symbol.ToUnderlying(), symbol.ToUnderlying());
+
+        if (IsIgnored(symbol))
+            return list;
+
+        var explicitDeclaration = list.Exists(SameSignature);
+
+        if (explicitDeclaration && (interfacesDeclared.IsEmpty || list.Exists(SameUnderlying)))
             return list;
 
         var attributes = Attributes(symbol, '\n');
@@ -61,7 +69,8 @@ sealed partial record Scaffolder
 
                      /// {XmlTypeName(symbol, "inheritdoc")}{Remarks(interfacesDeclared)}
                      {Annotation}{(symbol is IMethodSymbol ? $"\n    {AggressiveInlining}" : "")}
-                     {attributes}{(attributes is "" ? "" : "    ")}public {SymbolsUnsafe}
+                     {attributes}{(attributes is "" ? "" : "    ")}{(explicitDeclaration && interfacesDeclared.Any() ? "" : "public ")
+                     }{SymbolsUnsafe}
                  """
             )
         );
@@ -178,6 +187,9 @@ sealed partial record Scaffolder
         builder.Append(symbol.ToUnderlying());
         builder.Append(' ');
 
+        if (explicitDeclaration && interfacesDeclared is [var first, ..])
+            builder.Append(first).Append('.');
+
         builder.Append(
             symbol switch
             {
@@ -201,32 +213,31 @@ sealed partial record Scaffolder
         builder.Append("\n    {\n        ");
         var hasGetter = symbol is IFieldSymbol or IPropertySymbol { IsWriteOnly: false };
 
-        var hasSetter = HasSetter(symbol) &&
+        var hasSetter = (MutablePublicly is not null || Unmanaged.IsEmpty && Rest.IsEmpty) &&
+            HasSetter(symbol) &&
             Symbols.Select(x => x.Type.GetMembers().FirstOrDefault(Finder(symbol))).All(HasSetter);
 
         if (hasGetter)
             AppendSwitchExpression(builder, Named.IsValueType && hasSetter ? "readonly get " : "get ");
 
-        if (hasSetter)
-        {
-            if (hasGetter)
-                builder.Append("\n        ");
-
-            AppendSwitchExpression(builder, "set ", " = value");
-        }
-
-        var hasAdder = symbol is IEventSymbol { AddMethod: not null };
-
-        if (hasAdder)
-            AppendSwitchExpression(builder, "add ", " += value");
-
-        if (symbol is not IEventSymbol { RemoveMethod: not null })
-            return list.AndAdd((symbol, $"{builder.Append("\n    }")}"));
-
-        if (hasAdder)
+        if (hasGetter && hasSetter)
             builder.Append("\n        ");
 
-        AppendSwitchExpression(builder, "remove ", " -= value");
+        if (hasSetter)
+            AppendSwitchExpression(builder, "set ", " = value");
+
+        var hasAdder = symbol is IEventSymbol { AddMethod: not null };
+        var hasRemover = symbol is IEventSymbol { RemoveMethod: not null };
+
+        if (hasAdder)
+            AppendSwitchExpression(builder, "add\n        {", " += value", true).Append("\n        }");
+
+        if (hasAdder && hasRemover)
+            builder.Append("\n        ");
+
+        if (hasRemover)
+            AppendSwitchExpression(builder, "remove\n        {", " -= value", true).Append("\n        }");
+
         return list.AndAdd((symbol, $"{builder.Append("\n    }")}"));
     }
 
