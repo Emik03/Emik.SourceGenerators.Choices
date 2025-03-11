@@ -90,7 +90,7 @@ public partial class Case
 
             var i = 1;
             Verify? fail = null;
-            var length = FlattenedLength(AccessibleTypes.Length, size);
+            var length = FlattenedLength(AccessibleTypes.Length, size) * Structures.Length * TypeKeywords.Length;
 
             try
             {
