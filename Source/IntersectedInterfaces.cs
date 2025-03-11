@@ -52,9 +52,14 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
     static bool IsMutable(ISymbol symbol) => symbol is IEventSymbol or IPropertySymbol { SetMethod: not null };
 
     [Pure]
-    bool IsIncompatible(INamedTypeSymbol x) =>
-        x.GetMembers().Any(x => x.IsStatic || x.Name is "Clone" && IsRecord) ||
-        IsReadOnly && x.GetMembers().Any(IsMutable);
+    bool IsIncompatible(INamedTypeSymbol x)
+    {
+        bool Test(INamespaceOrTypeSymbol x) =>
+            x.GetMembers().Any(x => x.IsStatic || x.Name is "Clone" && IsRecord) ||
+            IsReadOnly && x.GetMembers().Any(IsMutable);
+
+        return Test(x) || x.AllInterfaces.Any(Test);
+    }
 
     /// <summary>Extracts the members that are in common with every member of <see cref="Symbols"/>.</summary>
     /// <param name="interfaces">The interfaces to try.</param>

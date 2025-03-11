@@ -247,7 +247,9 @@ sealed partial record Scaffolder
 
     [Pure]
     static bool HasSetter(ISymbol? symbol) =>
-        symbol is null or IFieldSymbol { IsReadOnly: false } or IPropertySymbol { IsReadOnly: false };
+        symbol is null or
+            IFieldSymbol { IsReadOnly: false } or
+            IPropertySymbol { IsReadOnly: false, SetMethod: not { IsInitOnly: true } };
 
     [Pure]
     static bool IsGoodClass(AttributeData x) =>
@@ -277,7 +279,10 @@ sealed partial record Scaffolder
                     },
                     Name: nameof(System.Runtime.CompilerServices),
                 },
-                Name: nameof(MethodImplAttribute) or "NullableAttribute" or "NullableContextAttribute",
+                Name: nameof(MethodImplAttribute) or
+                nameof(TupleElementNamesAttribute) or
+                "NullableAttribute" or
+                "NullableContextAttribute",
             };
 
     [Pure]
@@ -367,7 +372,7 @@ sealed partial record Scaffolder
     [Pure]
     bool IsValidAttribute(AttributeData x) =>
         IsGoodClass(x) &&
-        (Named.IsValueType || IsUnscopedRefAttribute(x.AttributeClass)) &&
+        (Named.IsValueType || !IsUnscopedRefAttribute(x.AttributeClass)) &&
         x.AttributeConstructor?.CanBeAccessedFrom(Named.ContainingAssembly) is true;
 
     [Pure]
