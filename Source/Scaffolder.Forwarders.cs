@@ -55,9 +55,9 @@ sealed partial record Scaffolder
         if (IsIgnored(symbol))
             return list;
 
-        var explicitDeclaration = list.Exists(SameSignature);
+        var explicitDeclaration = list.Where(SameSignature).ToImmutableArray();
 
-        if (explicitDeclaration && (interfacesDeclared.IsEmpty || list.Exists(SameUnderlying)))
+        if (explicitDeclaration.Any(x => interfacesDeclared.IsEmpty || SameUnderlying(x)))
             return list;
 
         var attributes = Attributes(symbol, '\n');
@@ -69,7 +69,7 @@ sealed partial record Scaffolder
 
                      /// {XmlTypeName(symbol, "inheritdoc")}{Remarks(interfacesDeclared)}
                      {Annotation}{(symbol is IMethodSymbol ? $"\n    {AggressiveInlining}" : "")}
-                     {attributes}{(attributes is "" ? "" : "    ")}{(explicitDeclaration && interfacesDeclared.Any() ? "" : "public ")
+                     {attributes}{(attributes is "" ? "" : "    ")}{(explicitDeclaration.Any() && interfacesDeclared.Any() ? "" : "public ")
                      }{SymbolsUnsafe}
                  """
             )
@@ -187,7 +187,7 @@ sealed partial record Scaffolder
         builder.Append(symbol.ToUnderlying());
         builder.Append(' ');
 
-        if (explicitDeclaration && interfacesDeclared is [var first, ..])
+        if (explicitDeclaration.Any() && interfacesDeclared is [var first, ..])
             builder.Append(first).Append('.');
 
         builder.Append(
@@ -325,7 +325,7 @@ sealed partial record Scaffolder
             _ when x.Type?.SpecialType is SpecialType.System_String =>
                 $"\"{x.Value?.ToString().SelectMany(Escape).Concat()}\"",
             TypedConstantKind.Error or TypedConstantKind.Primitive => $"{x.Value}",
-            TypedConstantKind.Enum => $"({x.Type}){x.Value}",
+            TypedConstantKind.Enum => $"({x.Type})({x.Value})",
             TypedConstantKind.Type => $"typeof({x.Type})",
             TypedConstantKind.Array => $"new{ObjectSuffix(x)}[] {{ {x.Values.Select(Display).Conjoin()} }}",
             _ => throw Unreachable,
@@ -335,7 +335,11 @@ sealed partial record Scaffolder
     static string DisplayArguments(AttributeData x) =>
         x.ConstructorArguments.IsEmpty && x.NamedArguments.IsEmpty
             ? ""
-            : $"({x.ConstructorArguments.Select(Display).Concat(x.NamedArguments.Select(Display)).Conjoin()})";
+            : $"({x.ConstructorArguments.Select(Display).Concat(x.NamedArguments.Where(
+                y => x.AttributeClass?.GetMembers().FirstOrDefault(x => x.Name == y.Key) is not null and
+                    not IPropertySymbol { IsReadOnly: true } and
+                    not IPropertySymbol { SetMethod.DeclaredAccessibility: not Accessibility.Public }
+            ).Select(Display)).Conjoin()})";
 
     [Pure]
     static string Escape(char x) =>
