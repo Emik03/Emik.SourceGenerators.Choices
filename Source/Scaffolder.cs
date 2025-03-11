@@ -162,7 +162,6 @@ sealed partial record Scaffolder(
           ///     </list>
           /// </remarks>
           {{AutoIfStruct}}partial {{Named.Keyword()}} {{Named.GetMinimallyQualifiedName()
-          }}{{(Named.TypeArguments is [] ? "" : $"<{Named.TypeArguments.Conjoin()}>")
           }}{{DeclareInterfaces}}
           {
           {{DeclarePolyfillAttributes
@@ -865,7 +864,10 @@ sealed partial record Scaffolder(
                           (conflict ? CSharp("\n    /// <param name=\"x\">The discriminator.</param>") : "")}}
                       {{Annotation}}
                       {{AggressiveInlining}}
-                      {{(conflict ? "private" : "public")}} {{SymbolsUnsafe}}{{Named.GetMinimallyQualifiedName()}}({{x.Type}} {{x.ParameterName
+                      {{(conflict ? "private" : "public")}} {{SymbolsUnsafe}}{{Named.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat
+                         .WithGenericsOptions(SymbolDisplayGenericsOptions.None)
+                         .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers))
+                      }}({{x.Type}} {{x.ParameterName
                       }}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")
                       }}){{(UsesPrimaryConstructor ? $"\n        : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
                       }{x.ParameterName}{(Symbols.Length - i - 1).For(j => $", default({Symbols[i + j + 1].Type})").Conjoin("")
