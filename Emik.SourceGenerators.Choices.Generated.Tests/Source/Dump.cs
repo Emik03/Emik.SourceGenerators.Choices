@@ -1,7 +1,3 @@
-[Choice]
-partial class B(A first, A second);
-
-class A
-{
-    public void Foo(object @object) { }
-}
+[Choice.First<System.Runtime.InteropServices.Marshalling.ComVariant>.Second<
+     System.Runtime.InteropServices.Marshalling.ComVariant>, Obsolete]
+public partial class Test;

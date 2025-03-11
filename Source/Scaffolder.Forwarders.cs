@@ -201,6 +201,10 @@ sealed partial record Scaffolder
 
         AppendParametersTyped(builder);
 
+        if (symbol is IMethodSymbol { TypeParameters: var typeParameters } &&
+            typeParameters.Select(IncludedSyntaxNodeRegistrant.Constraints).Filter().ToIList() is [_, ..] constraints)
+            builder.Append("\n        ").Append(constraints.Conjoin("\n        "));
+
         switch (symbol)
         {
             case IMethodSymbol { ReturnType.SpecialType: SpecialType.System_Void }:
@@ -337,10 +341,17 @@ sealed partial record Scaffolder
         x.Type.ToUnderlying()?.SpecialType is SpecialType.System_Object ? " object" : "";
 
     [Pure]
+    bool IsValidAttribute(AttributeData x) =>
+        IsGoodClass(x) &&
+        (Named.IsValueType ||
+            x.AttributeClass?.GetFullyQualifiedName() != $"global::{typeof(UnscopedRefAttribute).FullName}") &&
+        x.AttributeConstructor?.CanBeAccessedFrom(Named.ContainingAssembly) is true;
+
+    [Pure]
     string Attributes(ISymbol symbol, char separator) =>
         symbol
            .GetAttributes()
-           .Where(x => IsGoodClass(x) && x.AttributeConstructor?.CanBeAccessedFrom(Named.ContainingAssembly) is true)
+           .Where(IsValidAttribute)
            .Select(x => $"{Display(x)}{separator}")
            .Conjoin("");
 
