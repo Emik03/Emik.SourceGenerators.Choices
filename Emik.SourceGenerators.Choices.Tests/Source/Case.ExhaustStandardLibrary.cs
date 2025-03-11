@@ -88,20 +88,44 @@ public partial class Case
                     TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
                 };
 
-            var i = 1;
+            var i = 0;
             Verify? fail = null;
-            var length = FlattenedLength(AccessibleTypes.Length, size) * Structures.Length * TypeKeywords.Length;
+            var pass = FlattenedLength(AccessibleTypes.Length, size);
+            var length = pass * Structures.Length * TypeKeywords.Length;
+            var milestone = pass;
+
+            async Task RunAsync(Verify x)
+            {
+                try // ReSharper disable once AccessToModifiedClosure
+                {
+                    await x.RunAsync();
+                    Interlocked.Increment(ref i);
+                }
+                catch (Exception)
+                {
+                    fail = x;
+                    throw;
+                }
+            }
+
+            var tasks = AccessibleTypes.Chunk(size)
+               .SelectMany(Query)
+               .Chunk(Environment.ProcessorCount)
+               .Select(x => Task.WhenAll(x.Select(RunAsync)));
+
+            output.WriteLine($"Running {length} micro-tests.");
 
             try
             {
-                foreach (var verify in AccessibleTypes.Chunk(size).SelectMany(Query))
+                foreach (var task in tasks)
                 {
-                    i++;
-                    fail = verify;
-                    await verify.RunAsync();
+                    await task;
 
-                    if (i % UpdateMeEvery is 0)
-                        output.WriteLine($"Successfully ran micro-test {i}/{length}.");
+                    if (i < milestone)
+                        continue;
+
+                    output.WriteLine($"Successfully ran {i}/{length} micro-tests. ({(float)i / length:P})");
+                    milestone += pass;
                 }
             }
             catch (Exception e)
