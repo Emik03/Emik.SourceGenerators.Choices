@@ -161,7 +161,7 @@ sealed partial record Scaffolder(
              .Conjoin("\n")}}
           ///     </list>
           /// </remarks>
-          {{AutoIfStruct}}partial {{Named.Keyword()}} {{Named.Name
+          {{AutoIfStruct}}partial {{Named.Keyword()}} {{Named.GetMinimallyQualifiedName()
           }}{{(Named.TypeArguments is [] ? "" : $"<{Named.TypeArguments.Conjoin()}>")
           }}{{DeclareInterfaces}}
           {
@@ -697,9 +697,9 @@ sealed partial record Scaffolder(
     static string WrapNamespaceOrType(string acc, ISymbol next) =>
         CSharp(
             $$"""
-              {{(next is ITypeSymbol type ? $"partial {type.Keyword()} {next.Name
+              {{(next is ITypeSymbol type ? $"partial {type.Keyword()} {next.GetMinimallyQualifiedName()
               }{(type is INamedTypeSymbol { TypeParameters: var generics and not [] } ? $"<{generics.Conjoin()}>" : "")
-              }" : CSharp($"namespace {next.Name}"))}}
+              }" : CSharp($"namespace {next.GetMinimallyQualifiedName()}"))}}
               {
               {{acc.Split('\r', '\n').Select(x => x is "" or ['#', ..] ? x : $"    {x}").Conjoin("\n")}}
               }
@@ -793,7 +793,7 @@ sealed partial record Scaffolder(
                       {{Annotation}}
                       {{Pure}}
                       {{AggressiveInlining}}
-                      public {{x.Unsafe}}{{Named.Name}}({{parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()}})
+                      public {{x.Unsafe}}{{Named.GetMinimallyQualifiedName()}}({{parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()}})
                           : this({{(isValue ? nameof(ValueTuple) : nameof(Tuple))}}.{{nameof(Tuple.Create)}}({{
                               parameters.Select(x => x.ParameterName).Conjoin()}})) { }
 
@@ -865,7 +865,7 @@ sealed partial record Scaffolder(
                           (conflict ? CSharp("\n    /// <param name=\"x\">The discriminator.</param>") : "")}}
                       {{Annotation}}
                       {{AggressiveInlining}}
-                      {{(conflict ? "private" : "public")}} {{SymbolsUnsafe}}{{Named.Name}}({{x.Type}} {{x.ParameterName
+                      {{(conflict ? "private" : "public")}} {{SymbolsUnsafe}}{{Named.GetMinimallyQualifiedName()}}({{x.Type}} {{x.ParameterName
                       }}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")
                       }}){{(UsesPrimaryConstructor ? $"\n        : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
                       }{x.ParameterName}{(Symbols.Length - i - 1).For(j => $", default({Symbols[i + j + 1].Type})").Conjoin("")

@@ -77,7 +77,7 @@ sealed partial record Scaffolder
 
         string FullyQualified(IParameterSymbol x) =>
             $"{Attributes(x, ' ')}{PrefixAnnotations(x)
-            }{x.Type.GetFullyQualifiedNameWithNullabilityAnnotations()} {x.Name
+            }{x.Type.GetFullyQualifiedNameWithNullabilityAnnotations()} {x.GetFullyQualifiedName()
             }{SuffixAnnotations(x)}";
 
         StringBuilder AppendParameterSymbols(char begin, ImmutableArray<IParameterSymbol> all, char end, bool typed) =>
@@ -369,5 +369,6 @@ sealed partial record Scaffolder
             : (Symbols[i].XmlName, x.Replace('<', '{').Replace('>', '}'));
 
     [Pure]
-    static Func<IParameterSymbol, string> NameGetter() => x => $"{x.RefKind.KeywordInParameter()}{x.Name}";
+    static Func<IParameterSymbol, string> NameGetter() =>
+        x => $"{x.RefKind.KeywordInParameter()}{x.GetFullyQualifiedName()}";
 }

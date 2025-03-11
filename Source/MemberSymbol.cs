@@ -27,17 +27,17 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <summary>Initializes a new instance of the <see cref="MemberSymbol"/> struct.</summary>
     /// <param name="field">The field.</param>
     public MemberSymbol(IFieldSymbol field)
-        : this(field.Type, field.Name, field) { }
+        : this(field.Type, field.GetFullyQualifiedName(), field) { }
 
     /// <summary>Initializes a new instance of the <see cref="MemberSymbol"/> struct.</summary>
     /// <param name="parameter">The parameter.</param>
     public MemberSymbol(IParameterSymbol parameter)
-        : this(parameter.Type, parameter.Name, parameter) { }
+        : this(parameter.Type, parameter.GetFullyQualifiedName(), parameter) { }
 
     /// <summary>Initializes a new instance of the <see cref="MemberSymbol"/> struct.</summary>
     /// <param name="property">The property.</param>
     public MemberSymbol(IPropertySymbol property)
-        : this(property.Type, property.Name, property) { }
+        : this(property.Type, property.GetFullyQualifiedName(), property) { }
 
     /// <summary>
     /// Gets the <see cref="IEqualityComparer{T}"/> for <see cref="MemberSymbol"/> for referential equality.
