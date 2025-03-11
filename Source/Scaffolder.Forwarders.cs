@@ -281,6 +281,26 @@ sealed partial record Scaffolder
             };
 
     [Pure]
+    static bool IsUnscopedRefAttribute(ISymbol x) =>
+        x is
+        {
+            ContainingNamespace:
+            {
+                ContainingNamespace:
+                {
+                    ContainingNamespace:
+                    {
+                        ContainingNamespace.IsGlobalNamespace: true,
+                        Name: nameof(System),
+                    },
+                    Name: nameof(System.Diagnostics),
+                },
+                Name: nameof(System.Diagnostics.CodeAnalysis),
+            },
+            Name: nameof(UnscopedRefAttribute),
+        };
+
+    [Pure]
     static string Display(AttributeData x) => $"[{x.AttributeClass}{DisplayArguments(x)}]";
 
     [Pure]
@@ -333,6 +353,10 @@ sealed partial record Scaffolder
         };
 
     [Pure]
+    static Func<IParameterSymbol, string> NameGetter() =>
+        x => $"{x.RefKind.KeywordInParameter()}{x.GetFullyQualifiedName()}";
+
+    [Pure]
     static Func<ISymbol, bool> Finder(ISymbol y) =>
         x => x.Name == y.Name && (x as IPropertySymbol)?.Parameters.Length == (y as IPropertySymbol)?.Parameters.Length;
 
@@ -343,8 +367,7 @@ sealed partial record Scaffolder
     [Pure]
     bool IsValidAttribute(AttributeData x) =>
         IsGoodClass(x) &&
-        (Named.IsValueType ||
-            x.AttributeClass?.GetFullyQualifiedName() != $"global::{typeof(UnscopedRefAttribute).FullName}") &&
+        (Named.IsValueType || IsUnscopedRefAttribute(x.AttributeClass)) &&
         x.AttributeConstructor?.CanBeAccessedFrom(Named.ContainingAssembly) is true;
 
     [Pure]
@@ -378,8 +401,4 @@ sealed partial record Scaffolder
         x is null || Symbols[i].Type.IsReferenceType
             ? null
             : (Symbols[i].XmlName, x.Replace('<', '{').Replace('>', '}'));
-
-    [Pure]
-    static Func<IParameterSymbol, string> NameGetter() =>
-        x => $"{x.RefKind.KeywordInParameter()}{x.GetFullyQualifiedName()}";
 }
