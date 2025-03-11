@@ -76,7 +76,10 @@ readonly record struct Signature(
 
         var assembly = named.ContainingAssembly;
 
+        [Pure]
         bool IsValid(Extract next) =>
+            next.Symbol.DeclaredAccessibility is not Accessibility.Protected and
+                not Accessibility.ProtectedAndInternal &&
             From(next.Symbol, assembly) is not null &&
             (except is null || MemberSymbol.From(next.Symbol) is not { } x || !except.Contains(x));
 
