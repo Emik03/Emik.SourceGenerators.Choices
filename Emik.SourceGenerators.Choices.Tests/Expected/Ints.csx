@@ -141,7 +141,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Ints OfFirst(int first)
-                        => new global::Emik.SourceGenerators.Choices.Tests.Ints(first, 0);
+                        => new global::Emik.SourceGenerators.Choices.Tests.Ints(first, (byte)0);
 
                     /// <summary>
                     /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Ints"/> struct with the variant <see cref="Second"/> of type <see cref="int"/>.
@@ -152,7 +152,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Ints OfSecond(int second)
-                        => new global::Emik.SourceGenerators.Choices.Tests.Ints(second, 1);
+                        => new global::Emik.SourceGenerators.Choices.Tests.Ints(second, (byte)1);
 
                     /// <summary>
                     /// Determines whether the left-hand side is equal to the right.

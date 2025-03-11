@@ -171,7 +171,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.SuperTask OfLeft(System.Threading.Tasks.Task left)
-                        => new global::Emik.SourceGenerators.Choices.Tests.SuperTask(left, 0);
+                        => new global::Emik.SourceGenerators.Choices.Tests.SuperTask(left, (byte)0);
 
                     /// <summary>
                     /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.SuperTask"/> record with the variant <see cref="Right"/> of type <see cref="System.Threading.Tasks.Task"/>.
@@ -182,7 +182,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.SuperTask OfRight(System.Threading.Tasks.Task right)
-                        => new global::Emik.SourceGenerators.Choices.Tests.SuperTask(right, 1);
+                        => new global::Emik.SourceGenerators.Choices.Tests.SuperTask(right, (byte)1);
 
                     /// <summary>
                     /// Determines whether the left-hand side is greater than the right.

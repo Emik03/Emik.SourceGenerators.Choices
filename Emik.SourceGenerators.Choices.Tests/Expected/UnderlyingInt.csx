@@ -199,7 +199,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.UnderlyingInt OfLeft(int left)
-                        => new global::Emik.SourceGenerators.Choices.Tests.UnderlyingInt(left, 0);
+                        => new global::Emik.SourceGenerators.Choices.Tests.UnderlyingInt(left, (byte)0);
 
                     /// <summary>
                     /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.UnderlyingInt"/> struct with the variant <c>Center</c> of type <see cref="System.ValueTuple"/>.
@@ -221,7 +221,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.UnderlyingInt OfRight(int right)
-                        => new global::Emik.SourceGenerators.Choices.Tests.UnderlyingInt(right, 2);
+                        => new global::Emik.SourceGenerators.Choices.Tests.UnderlyingInt(right, (byte)2);
 
                     /// <summary>
                     /// Determines whether the left-hand side is equal to the right.

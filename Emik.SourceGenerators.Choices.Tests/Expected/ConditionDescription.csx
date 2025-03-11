@@ -271,7 +271,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ConditionDescription OfAnd(Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition and)
-                        => new global::Emik.SourceGenerators.Choices.Tests.ConditionDescription(and, 0);
+                        => new global::Emik.SourceGenerators.Choices.Tests.ConditionDescription(and, (byte)0);
 
                     /// <summary>
                     /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription"/> class with the variant <see cref="Or"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition"/>.
@@ -282,7 +282,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ConditionDescription OfOr(Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition or)
-                        => new global::Emik.SourceGenerators.Choices.Tests.ConditionDescription(or, 1);
+                        => new global::Emik.SourceGenerators.Choices.Tests.ConditionDescription(or, (byte)1);
 
                     /// <summary>
                     /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription"/> class with the variant <see cref="Included"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition"/>.
@@ -293,7 +293,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ConditionDescription OfIncluded(Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition included)
-                        => new global::Emik.SourceGenerators.Choices.Tests.ConditionDescription(included, 2);
+                        => new global::Emik.SourceGenerators.Choices.Tests.ConditionDescription(included, (byte)2);
 
                     /// <summary>
                     /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription"/> class with the variant <see cref="Excluded"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition"/>.
@@ -304,7 +304,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ConditionDescription OfExcluded(Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition excluded)
-                        => new global::Emik.SourceGenerators.Choices.Tests.ConditionDescription(excluded, 3);
+                        => new global::Emik.SourceGenerators.Choices.Tests.ConditionDescription(excluded, (byte)3);
 
                     /// <summary>
                     /// Determines whether the left-hand side is equal to the right.
