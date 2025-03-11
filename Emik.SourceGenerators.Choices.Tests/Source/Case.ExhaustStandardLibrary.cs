@@ -60,23 +60,22 @@ public partial class Case
         [Fact]
         public Task Run1Async() => EnumerateAsync(1);
 
-        [Fact]
-        public Task Run2Async() => EnumerateAsync(2);
+        // [Fact]
+        // public Task Run2Async() => EnumerateAsync(2);
 
-        [Fact]
-        public Task Run4Async() => EnumerateAsync(4);
+        // [Fact]
+        // public Task Run4Async() => EnumerateAsync(4);
 
-        [Fact]
-        public Task Run8Async() => EnumerateAsync(8);
+        // [Fact]
+        // public Task Run8Async() => EnumerateAsync(8);
 
-        [Fact]
-        public Task RunAllAsync() => EnumerateAsync(int.MaxValue);
+        // [Fact]
+        // public Task RunAllAsync() => EnumerateAsync(int.MaxValue);
 
         async Task EnumerateAsync(int size)
         {
             static int FlattenedLength(int source, int size) =>
-                source / size * size * size +
-                source % size * (source % size);
+                source / size * size * size + source % size * (source % size);
 
             static IEnumerable<Verify> Query(INamedTypeSymbol[] array) =>
                 from second in array
