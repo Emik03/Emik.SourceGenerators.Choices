@@ -1,7 +1,2 @@
-[Choice, Obsolete]
-public partial record Test
-{
-    System.Diagnostics.TagList _first;
-
-    System.Diagnostics.TagList _second;
-}
+[Choice.First<System.Xml.XmlNodeList>.Second<System.Xml.XmlNodeList>, Obsolete]
+public partial record struct Test;
