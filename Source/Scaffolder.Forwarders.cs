@@ -20,7 +20,9 @@ sealed partial record Scaffolder
         x switch
         {
             { HasExplicitDefaultValue: false } => "",
-            { ExplicitDefaultValue: { } value } => CSharp($" = {value}"),
+            { ExplicitDefaultValue: true } => CSharp(" = true"),
+            { ExplicitDefaultValue: false } => CSharp(" = false"),
+            { ExplicitDefaultValue: string value } => CSharp($" = \"{value.SelectMany(Escape).Concat()}\""),
             _ => CSharp(" = default"),
         };
 
@@ -222,7 +224,7 @@ sealed partial record Scaffolder
                 (symbol is IPropertySymbol { GetMethod: { } g } ? g : symbol)
                .CanBeAccessedFrom(Named.ContainingAssembly));
 
-        var hasSetter = (MutablePublicly is not null || Unmanaged.IsEmpty && Rest.IsEmpty) &&
+        var hasSetter = (Unmanaged.IsEmpty && Rest.IsEmpty || Named.IsReadOnly) &&
             HasSetter(symbol) &&
             (isInterfaceImplementation ||
                 (symbol is IPropertySymbol { SetMethod: { } s } ? s : symbol)
