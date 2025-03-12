@@ -7,11 +7,13 @@ namespace Emik.SourceGenerators.Choices;
 /// <param name="Parameters">The parameters of the member, for indexers and methods.</param>
 /// <param name="Type">The return type of the member.</param>
 /// <param name="TypeParameters">The type parameters of the member, for methods.</param>
+/// <param name="Has">Defines the set of functions that the member is able to do.</param>
 readonly record struct Signature(
     string Name,
     ImmutableArray<IParameterSymbol> Parameters,
     ITypeSymbol Type,
-    ImmutableArray<ITypeParameterSymbol> TypeParameters
+    ImmutableArray<ITypeParameterSymbol> TypeParameters,
+    (bool Getter, bool Setter, bool Adder, bool Remover) Has
 )
 {
     /// <summary>The default <see cref="IEqualityComparer{T}"/> for <see cref="Extract"/> instances.</summary>
@@ -38,7 +40,11 @@ readonly record struct Signature(
             symbol.GetFullyQualifiedName(),
             parameters.OrEmpty(),
             symbol.ToUnderlying(),
-            typeParameters.OrEmpty()
+            typeParameters.OrEmpty(),
+            (symbol is IFieldSymbol or IPropertySymbol { GetMethod: not null },
+                symbol is IFieldSymbol { IsReadOnly: false } or IPropertySymbol { SetMethod: not null },
+                symbol is IEventSymbol { AddMethod: not null },
+                symbol is IEventSymbol { RemoveMethod: not null })
         ) { }
 
     /// <summary>Extracts the forwarders from the set of <see cref="MemberSymbol"/> instances.</summary>
@@ -78,9 +84,6 @@ readonly record struct Signature(
 
         [Pure]
         bool IsValid(Extract next) =>
-            next.Symbol.DeclaredAccessibility is not Accessibility.Protected and
-                not Accessibility.ProtectedAndInternal and
-                not Accessibility.ProtectedOrInternal &&
             next.Symbol.Name != named.Name &&
             From(next.Symbol, assembly) is not null &&
             (except is null || MemberSymbol.From(next.Symbol) is not { } x || !except.Contains(x));
@@ -90,8 +93,7 @@ readonly record struct Signature(
 
         forwarders.UnionWith(new IntersectedInterfaces(symbols, named.IsReadOnly, named.IsRecord).Members);
         forwarders.UnionWith(FindCommonBaseMembers(symbols));
-        forwarders.ExceptWith(forwarders.ToArray().SelectMany(GeneratedMethods).Filter());
-
+        forwarders.ExceptWith(forwarders.ToArray().SelectMany(GeneratedMethods));
         return forwarders.Where(IsValid);
     }
 
@@ -187,6 +189,7 @@ readonly record struct Signature(
     /// </returns>
     [Pure]
     public bool Equivalent(in Signature other) =>
+        Has == other.Has &&
         Name.AsSpan().SplitOn('.').Last.SequenceEqual(other.Name.AsSpan().SplitOn('.').Last) &&
         SameType(Type, other.Type) &&
         Parameters.GuardedSequenceEqual(other.Parameters, SameType) &&

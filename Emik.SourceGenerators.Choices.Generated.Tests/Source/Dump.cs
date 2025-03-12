@@ -1,3 +1,7 @@
-[Choice.First<System.Runtime.InteropServices.Marshalling.ComVariant>.Second<
-     System.Runtime.InteropServices.Marshalling.ComVariant>, Obsolete]
-public partial class Test;
+[Choice, Obsolete]
+public partial record Test
+{
+    System.Diagnostics.TagList _first;
+
+    System.Diagnostics.TagList _second;
+}

@@ -48,6 +48,9 @@ sealed partial record Scaffolder(
     public GeneratedSource Result => (HintName, Source);
 
     [Pure]
+    bool CanForwardSetters => Rest.IsEmpty && Unmanaged.IsEmpty || !Named.IsReadOnly && MutablePublicly is not null;
+
+    [Pure]
     bool CanOverlapReferenceMemorySpace =>
         CanReserveNull || Reference.Omit(x => Members.Any(x.ReferenceEquals)).Skip(MinimumBoxedSize - 1).Any();
 
@@ -241,7 +244,9 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareAdditionalInterfaces =>
-        new IntersectedInterfaces(Symbols, Named.IsReadOnly, Named.IsRecord).Set.Select(x => $",\n    {x}").Conjoin("");
+        new IntersectedInterfaces(Symbols, !CanForwardSetters, Named.IsRecord).Set
+           .Select(x => $",\n    {x}")
+           .Conjoin("");
 
     [Pure]
     string DeclareDiscriminator =>

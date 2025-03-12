@@ -43,15 +43,24 @@ sealed partial record Scaffolder
             (x.Symbol as IMethodSymbol)?.TypeParameters.Length ==
             (symbol as IMethodSymbol)?.TypeParameters.Length &&
             x.Symbol.GetFullyQualifiedName() == symbol.GetFullyQualifiedName() &&
-            ((x.Symbol as IMethodSymbol)?.Parameters ?? (x.Symbol as IPropertySymbol)?.Parameters ?? default)
+            ((x.Symbol as IMethodSymbol)?.Parameters ??
+                (x.Symbol as IPropertySymbol)?.Parameters ?? ImmutableArray<IParameterSymbol>.Empty)
            .Select(x => x.Type)
            .SequenceEqual(
-                ((symbol as IMethodSymbol)?.Parameters ?? (symbol as IPropertySymbol)?.Parameters ?? default)
+                ((symbol as IMethodSymbol)?.Parameters ??
+                    (symbol as IPropertySymbol)?.Parameters ?? ImmutableArray<IParameterSymbol>.Empty)
                .Select(x => x.Type),
                 Equating<ITypeSymbol>((x, y) => x.GetFullyQualifiedName() == y.GetFullyQualifiedName())
             );
 
         bool SameUnderlying((ISymbol Symbol, string) x) =>
+            (x.Symbol is not IEventSymbol a ||
+                symbol is not IEventSymbol b ||
+                a.AddMethod is null == b.AddMethod is null &&
+                a.RemoveMethod is null == b.RemoveMethod is null) &&
+            (x.Symbol is not IPropertySymbol c ||
+                symbol is not IPropertySymbol d ||
+                c.GetMethod is null == d.GetMethod is null && c.SetMethod is null == d.SetMethod is null) &&
             RoslynComparer.Gu.Equals(x.Symbol.ToUnderlying(), symbol.ToUnderlying());
 
         if (IsIgnored(symbol))
@@ -224,7 +233,7 @@ sealed partial record Scaffolder
                 (symbol is IPropertySymbol { GetMethod: { } g } ? g : symbol)
                .CanBeAccessedFrom(Named.ContainingAssembly));
 
-        var hasSetter = (Unmanaged.IsEmpty && Rest.IsEmpty || Named.IsReadOnly) &&
+        var hasSetter = CanForwardSetters &&
             HasSetter(symbol) &&
             (isInterfaceImplementation ||
                 (symbol is IPropertySymbol { SetMethod: { } s } ? s : symbol)
@@ -259,7 +268,7 @@ sealed partial record Scaffolder
     }
 
     [Pure]
-    static bool HasSetter(ISymbol? symbol) =>
+    static bool HasSetter([NotNullWhen(false)] ISymbol? symbol) =>
         symbol is null or
             IFieldSymbol { IsReadOnly: false } or
             IPropertySymbol { IsReadOnly: false, SetMethod: not { IsInitOnly: true } };
@@ -370,7 +379,9 @@ sealed partial record Scaffolder
         x => $"{x.RefKind.KeywordInParameter()}{x.GetFullyQualifiedName()}";
 
     [Pure]
-    static Func<ISymbol, bool> Finder(ISymbol y) => x => RoslynComparer.Signature.Equals(x, y);
+    static Func<ISymbol, bool> Finder(ISymbol y) =>
+        x => RoslynComparer.Signature.Equals(x, y) &&
+            x.ExplicitInterfaceSymbols().GuardedSequenceEqual(y.ExplicitInterfaceSymbols(), RoslynComparer.Signature);
 
     [Pure]
     static string ObjectSuffix(TypedConstant x) =>
