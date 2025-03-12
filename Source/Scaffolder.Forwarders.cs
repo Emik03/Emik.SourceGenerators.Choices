@@ -215,10 +215,18 @@ sealed partial record Scaffolder
         }
 
         builder.Append("\n    {\n        ");
-        var hasGetter = symbol is IFieldSymbol or IPropertySymbol { IsWriteOnly: false };
+        var isInterfaceImplementation = explicitDeclaration.Any() || interfacesDeclared.All(x => x is not null);
+
+        var hasGetter = symbol is IFieldSymbol or IPropertySymbol { IsWriteOnly: false } &&
+            (isInterfaceImplementation ||
+                (symbol is IPropertySymbol { GetMethod: { } g } ? g : symbol)
+               .CanBeAccessedFrom(Named.ContainingAssembly));
 
         var hasSetter = (MutablePublicly is not null || Unmanaged.IsEmpty && Rest.IsEmpty) &&
             HasSetter(symbol) &&
+            (isInterfaceImplementation ||
+                (symbol is IPropertySymbol { SetMethod: { } s } ? s : symbol)
+               .CanBeAccessedFrom(Named.ContainingAssembly)) &&
             Symbols.Select(x => x.Type.GetMembers().FirstOrDefault(Finder(symbol))).All(HasSetter);
 
         if (hasGetter)
@@ -230,8 +238,11 @@ sealed partial record Scaffolder
         if (hasSetter)
             AppendSwitchExpression(builder, "set ", " = value");
 
-        var hasAdder = symbol is IEventSymbol { AddMethod: not null };
-        var hasRemover = symbol is IEventSymbol { RemoveMethod: not null };
+        var hasAdder = symbol is IEventSymbol { AddMethod: { } a } &&
+            (isInterfaceImplementation || a.CanBeAccessedFrom(Named.ContainingAssembly));
+
+        var hasRemover = symbol is IEventSymbol { RemoveMethod: { } r } &&
+            (isInterfaceImplementation || r.CanBeAccessedFrom(Named.ContainingAssembly));
 
         if (hasAdder)
             AppendSwitchExpression(builder, "add\n        {", " += value", true).Append("\n        }");
@@ -250,6 +261,9 @@ sealed partial record Scaffolder
         symbol is null or
             IFieldSymbol { IsReadOnly: false } or
             IPropertySymbol { IsReadOnly: false, SetMethod: not { IsInitOnly: true } };
+
+    [Pure]
+    static bool IsConstantNegative(object? o) => o is sbyte and < 0 or short and < 0 or < 0 or long and < 0;
 
     [Pure]
     static bool IsGoodClass(AttributeData x) =>
@@ -306,9 +320,6 @@ sealed partial record Scaffolder
         };
 
     [Pure]
-    static string Display(AttributeData x) => $"[{x.AttributeClass}{DisplayArguments(x)}]";
-
-    [Pure]
     static string Display(KeyValuePair<string, TypedConstant> x) => $"{x.Key} = {Display(x.Value)}";
 
     [Pure]
@@ -325,21 +336,12 @@ sealed partial record Scaffolder
             _ when x.Type?.SpecialType is SpecialType.System_String =>
                 $"\"{x.Value?.ToString().SelectMany(Escape).Concat()}\"",
             TypedConstantKind.Error or TypedConstantKind.Primitive => $"{x.Value}",
-            TypedConstantKind.Enum => $"({x.Type})({x.Value})",
+            TypedConstantKind.Enum when IsConstantNegative(x.Value) is var isNegative =>
+                $"({x.Type}){(isNegative ? "(" : "")}{x.Value}{(isNegative ? ")" : "")}",
             TypedConstantKind.Type => $"typeof({x.Type})",
             TypedConstantKind.Array => $"new{ObjectSuffix(x)}[] {{ {x.Values.Select(Display).Conjoin()} }}",
             _ => throw Unreachable,
         };
-
-    [Pure]
-    static string DisplayArguments(AttributeData x) =>
-        x.ConstructorArguments.IsEmpty && x.NamedArguments.IsEmpty
-            ? ""
-            : $"({x.ConstructorArguments.Select(Display).Concat(x.NamedArguments.Where(
-                y => x.AttributeClass?.GetMembers().FirstOrDefault(x => x.Name == y.Key) is not null and
-                    not IPropertySymbol { IsReadOnly: true } and
-                    not IPropertySymbol { SetMethod.DeclaredAccessibility: not Accessibility.Public }
-            ).Select(Display)).Conjoin()})";
 
     [Pure]
     static string Escape(char x) =>
@@ -366,8 +368,7 @@ sealed partial record Scaffolder
         x => $"{x.RefKind.KeywordInParameter()}{x.GetFullyQualifiedName()}";
 
     [Pure]
-    static Func<ISymbol, bool> Finder(ISymbol y) =>
-        x => x.Name == y.Name && (x as IPropertySymbol)?.Parameters.Length == (y as IPropertySymbol)?.Parameters.Length;
+    static Func<ISymbol, bool> Finder(ISymbol y) => x => RoslynComparer.Signature.Equals(x, y);
 
     [Pure]
     static string ObjectSuffix(TypedConstant x) =>
@@ -386,6 +387,15 @@ sealed partial record Scaffolder
            .Where(IsValidAttribute)
            .Select(x => $"{Display(x)}{separator}")
            .Conjoin("");
+
+    [Pure]
+    string Display(AttributeData x) => $"[{x.AttributeClass}{DisplayArguments(x)}]";
+
+    [Pure]
+    string DisplayArguments(AttributeData x) =>
+        x.ConstructorArguments.IsEmpty && x.NamedArguments.IsEmpty
+            ? ""
+            : $"({x.ConstructorArguments.Select(Display).Concat(x.NamedArguments.Where(CanSet(x)).Select(Display)).Conjoin()})";
 
     [Pure]
     string Remarks(ImmutableArray<string?> interfaces) =>
@@ -410,4 +420,9 @@ sealed partial record Scaffolder
         x is null || Symbols[i].Type.IsReferenceType
             ? null
             : (Symbols[i].XmlName, x.Replace('<', '{').Replace('>', '}'));
+
+    [Pure]
+    Func<KeyValuePair<string, TypedConstant>, bool> CanSet(AttributeData x) =>
+        y => x.AttributeClass?.GetMembers().FirstOrDefault(x => x.Name == y.Key) is { } s &&
+            (s is not IPropertySymbol p || p.SetMethod.CanBeAccessedFrom(Named.ContainingAssembly));
 }
