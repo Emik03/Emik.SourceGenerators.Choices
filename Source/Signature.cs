@@ -88,13 +88,24 @@ readonly record struct Signature(
             From(next.Symbol, assembly) is not null &&
             (except is null || MemberSymbol.From(next.Symbol) is not { } x || !except.Contains(x));
 
+        [Pure]
+        Extract ToExplicitInterfaceSymbolWhenRequired(Extract x) =>
+            From(x.Symbol, assembly) is null &&
+            x.Symbol.ContainingType.IsInterface() &&
+            x.InterfaceDeclarations.Any(x => x is not null) &&
+            x.Symbol.ExplicitInterfaceSymbols() is [var single] &&
+            single.ContainingType.IsInterface()
+                ? (single, x.Kind, ImmutableArray.CreateRange(x.InterfaceDeclarations, string? (_) => $"{single}"))
+                : x;
+
         var signatures = ToSelf(except, assembly);
         var forwarders = Add(symbols, assembly, signatures);
 
         forwarders.UnionWith(new IntersectedInterfaces(symbols, named.IsReadOnly, named.IsRecord).Members);
         forwarders.UnionWith(FindCommonBaseMembers(symbols));
         forwarders.ExceptWith(forwarders.ToArray().SelectMany(GeneratedMethods));
-        return forwarders.Where(IsValid);
+
+        return forwarders.Select(ToExplicitInterfaceSymbolWhenRequired).Where(IsValid);
     }
 
     /// <summary>Finds all common base types for the set of <see cref="MemberSymbol"/> instances.</summary>
