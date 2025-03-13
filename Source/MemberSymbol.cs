@@ -270,7 +270,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <summary>Determines whether the name has the possibility of conflict.</summary>
     /// <param name="name">The name to check.</param>
     /// <returns>
-    /// The value <paramref name="true"/> if the parameter <paramref name="name"/>
+    /// The value <see langword="true"/> if the parameter <paramref name="name"/>
     /// contains a name that may conflict with this instance.
     /// </returns>
     public bool CanConflict(string name) =>

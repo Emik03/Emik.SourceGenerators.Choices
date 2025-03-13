@@ -77,20 +77,6 @@ public partial class Case
 
         async Task EnumerateAsync(int size)
         {
-            static int FlattenedLength(int source, int size) =>
-                source / size * size * size + source % size * (source % size);
-
-            static IEnumerable<Test> Query(INamedTypeSymbol[] array) =>
-                from second in array
-                from first in array
-                from typeKeyword in TypeKeywords
-                from structure in Structures
-                select (structure, typeKeyword, first, second, new Verify
-                {
-                    TestCode = Wrap(string.Format(structure, typeKeyword, first, second)),
-                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                });
-
             var pass = FlattenedLength(AccessibleTypes.Length, size);
             var length = pass * Structures.Length * TypeKeywords.Length;
             var milestone = pass;
@@ -194,11 +180,25 @@ public partial class Case
             IsNonGenericInstance(x.ContainingType) &&
             (x.BaseType is not null || x.GetMembers().All(x => !x.IsStatic));
 
+        static int FlattenedLength(int source, int size) =>
+            source / size * size * size + source % size * (source % size);
+
         static string Display(SourceFileCollection? sources) =>
             string.Join('\n', sources?.Select(x => $"// {x.filename}:\n{x.content}") ?? []);
 
         static IEnumerable<ISymbol> GetMembers(INamespaceOrTypeSymbol x) =>
             x.GetMembers().OfType<INamespaceOrTypeSymbol>().SelectMany(GetMembers).Prepend(x);
+
+        static IEnumerable<Test> Query(INamedTypeSymbol[] array) =>
+            from second in array
+            from first in array
+            from typeKeyword in TypeKeywords
+            from structure in Structures
+            select (structure, typeKeyword, first, second, new Verify
+            {
+                TestCode = Wrap(string.Format(structure, typeKeyword, first, second)),
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+            });
 
         static IEnumerable<ITypeSymbol> GetBaseTypes(ITypeSymbol? x) =>
             x is null ? [] : GetBaseTypes(x.BaseType).Prepend(x);
