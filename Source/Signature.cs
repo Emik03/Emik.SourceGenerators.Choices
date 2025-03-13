@@ -10,8 +10,8 @@ namespace Emik.SourceGenerators.Choices;
 /// <param name="Has">Defines the set of functions that the member is able to do.</param>
 readonly record struct Signature(
     string Name,
-    ImmutableArray<IParameterSymbol> Parameters,
     ITypeSymbol Type,
+    ImmutableArray<IParameterSymbol> Parameters,
     ImmutableArray<ITypeParameterSymbol> TypeParameters,
     (bool Getter, bool Setter, bool Adder, bool Remover) Has
 )
@@ -38,8 +38,8 @@ readonly record struct Signature(
     )
         : this(
             symbol.GetFullyQualifiedName(),
-            parameters.OrEmpty(),
             symbol.ToUnderlying(),
+            parameters.OrEmpty(),
             typeParameters.OrEmpty(),
             (symbol is IFieldSymbol or IPropertySymbol { GetMethod: not null },
                 symbol is IFieldSymbol { IsReadOnly: false } or IPropertySymbol { SetMethod: not null },

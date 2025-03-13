@@ -1,2 +1,7 @@
-[Choice.First<System.Xml.XmlNodeList>.Second<System.Xml.XmlNodeList>, Obsolete]
-public partial record struct Test;
+[Choice, Obsolete]
+public partial record Test
+{
+    public System.Numerics.BigInteger First { get; }
+
+    public System.Numerics.BigInteger Second { get; }
+}
