@@ -246,6 +246,12 @@ sealed partial record Scaffolder
                .CanBeAccessedFrom(Named.ContainingAssembly)) &&
             Symbols.Select(x => x.Type.GetMembers().FirstOrDefault(Finder(symbol))).All(HasSetter);
 
+        var hasAdder = symbol is IEventSymbol { AddMethod: { } a } &&
+            (isInterfaceImplementation || a.CanBeAccessedFrom(Named.ContainingAssembly));
+
+        var hasRemover = symbol is IEventSymbol { RemoveMethod: { } r } &&
+            (isInterfaceImplementation || r.CanBeAccessedFrom(Named.ContainingAssembly));
+
         if (hasGetter)
             AppendSwitchExpression(builder, Named.IsValueType && hasSetter ? "readonly get " : "get ");
 
@@ -254,12 +260,6 @@ sealed partial record Scaffolder
 
         if (hasSetter)
             AppendSwitchExpression(builder, "set ", " = value");
-
-        var hasAdder = symbol is IEventSymbol { AddMethod: { } a } &&
-            (isInterfaceImplementation || a.CanBeAccessedFrom(Named.ContainingAssembly));
-
-        var hasRemover = symbol is IEventSymbol { RemoveMethod: { } r } &&
-            (isInterfaceImplementation || r.CanBeAccessedFrom(Named.ContainingAssembly));
 
         if (hasAdder)
             AppendSwitchExpression(builder, "add\n        {", " += value", true).Append("\n        }");
