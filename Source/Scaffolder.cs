@@ -63,6 +63,14 @@ sealed partial record Scaffolder(
         Symbols is [{ IsEmpty: true }, { IsReference: true }] or [{ IsReference: true }, { IsEmpty: true }];
 
     [Pure]
+    bool IsPrimaryConstructorTwoBytes =>
+        Symbols is not
+        [
+            { Symbol: IParameterSymbol, Type.SpecialType: SpecialType.System_Byte },
+            { Symbol: IParameterSymbol, Type.SpecialType: SpecialType.System_Byte },
+        ];
+
+    [Pure]
     bool UsesPrimaryConstructor => Symbols is [{ Symbol: IParameterSymbol }, ..];
 
     [Pure]
@@ -678,7 +686,7 @@ sealed partial record Scaffolder(
         } ||
         methodName != name;
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+    [Inline, MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
     static string CSharp([StringSyntax("C#")] string x) => x;
 
     [Pure]
@@ -858,7 +866,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareConstructor(MemberSymbol x, int i) =>
-        HasConflict(x) is var conflict && conflict && IsNoninitial(x)
+        IsPrimaryConstructorTwoBytes || HasConflict(x) is var conflict && conflict && IsNoninitial(x)
             ? ""
             : CSharp(
                 $$"""
@@ -941,6 +949,10 @@ sealed partial record Scaffolder(
     {
         var discriminator = HasConflict(x) ? $", (byte){i}" : "";
 
+        var args = IsPrimaryConstructorTwoBytes
+            ? i is 0 ? CSharp($"{x.ParameterName}, (byte)0") : CSharp($"(byte)0, {x.ParameterName}")
+            : $"{x.ParameterName}{discriminator}";
+
         return CSharp(
             $"""
                  /// <summary>
@@ -952,7 +964,7 @@ sealed partial record Scaffolder(
                  {Pure}
                  {AggressiveInlining}
                  public static {x.Unsafe}{Name} Of{x.PropertyName}({x.Type} {x.ParameterName}{(x.IsEmpty ? " = default" : "")})
-                     => new {Name}({x.ParameterName}{discriminator});
+                     => new {Name}({args});
 
              {DeclareAlternativeFactory(x, discriminator)}
              """
