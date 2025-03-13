@@ -60,6 +60,9 @@ public partial class Case()
         """
     );
 
+    public sealed class Inheritance()
+        : Case("[Choice.First<ComponentConverter>.Second<CollectionConverter>] partial struct Inheritance;");
+
     public sealed class Ints() : Case(
         """
         [Choice]
@@ -184,6 +187,7 @@ public partial class Case()
     static string Wrap(string? source) => // language=c#
         $$"""
           using System;
+          using System.ComponentModel;
           using System.Reflection;
           using System.Text.Json;
           using System.Threading.Tasks;
