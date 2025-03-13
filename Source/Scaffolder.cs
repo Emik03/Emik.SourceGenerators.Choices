@@ -64,7 +64,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     bool IsPrimaryConstructorTwoBytes =>
-        Symbols is not
+        Symbols is
         [
             { Symbol: IParameterSymbol, Type.SpecialType: SpecialType.System_Byte },
             { Symbol: IParameterSymbol, Type.SpecialType: SpecialType.System_Byte },
