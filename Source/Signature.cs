@@ -53,18 +53,11 @@ readonly record struct Signature(
     /// <param name="except">The set of <see cref="MemberSymbol"/> instances to exclude.</param>
     /// <returns>The set of forwarders.</returns>
     public static IEnumerable<Extract> FindForwarders(
-        in ImmutableArray<MemberSymbol> symbols,
+        ImmutableArray<MemberSymbol> symbols,
         INamedTypeSymbol named,
         ISet<MemberSymbol>? except = null
     )
     {
-        [Pure]
-        static IEnumerable<Extract> FindCommonBaseMembers(ImmutableArray<MemberSymbol> s) =>
-            FindCommonBaseTypes(s)
-               .SelectMany(x => x.GetMembers())
-               .Omit(x => x is ITypeSymbol)
-               .Select(x => AsDirectExtract(x, s.Length));
-
         [Pure]
         static IEnumerable<Extract> GeneratedMethods(Extract symbol) =>
             (symbol switch
@@ -98,6 +91,13 @@ readonly record struct Signature(
             single.ContainingType.IsInterface()
                 ? (single, x.Kind, ImmutableArray.CreateRange(id, string? (_) => $"{single.ContainingType}"))
                 : x;
+
+        [Pure]
+        IEnumerable<Extract> FindCommonBaseMembers(ImmutableArray<MemberSymbol> s) =>
+            FindCommonBaseTypes(s)
+               .SelectMany(x => x.GetMembers())
+               .Omit(x => x is ITypeSymbol || symbols.Any(y => y.Name == x.Name))
+               .Select(x => AsDirectExtract(x, s.Length));
 
         var signatures = ToSelf(except, assembly);
         var forwarders = Add(symbols, assembly, signatures);
