@@ -68,7 +68,8 @@ sealed partial record Scaffolder
 
         var explicitDeclaration = list.Where(SameSignature).ToImmutableArray();
 
-        if (explicitDeclaration.Any(x => interfacesDeclared.IsEmpty || SameUnderlying(x)))
+        if (explicitDeclaration.Any() && interfacesDeclared.All(x => x is null) ||
+            explicitDeclaration.Any(x => interfacesDeclared.IsEmpty || SameUnderlying(x)))
             return list;
 
         var indexerName = symbol is IPropertySymbol { IsIndexer: true } &&
