@@ -96,7 +96,7 @@ readonly record struct Signature(
         IEnumerable<Extract> FindCommonBaseMembers(ImmutableArray<MemberSymbol> s) =>
             FindCommonBaseTypes(s)
                .SelectMany(x => x.GetMembers())
-               .Omit(x => x is ITypeSymbol || symbols.Any(y => y.Name == x.Name))
+               .Omit(x => x is ITypeSymbol || symbols.Any(y => y.CanConflict(x.Name)))
                .Select(x => AsDirectExtract(x, s.Length));
 
         var signatures = ToSelf(except, assembly);
@@ -358,7 +358,7 @@ readonly record struct Signature(
         HashSet<Extract> set = new(s_extracts);
 
         foreach (var member in symbols[0].Type.GetMembers())
-            if (From(member, assembly) is { } signature)
+            if (symbols.All(x => !x.CanConflict(member.Name)) && From(member, assembly) is { } signature)
                 signature.Next(symbols, set, exists, assembly, member);
 
         return set;

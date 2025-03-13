@@ -267,6 +267,16 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
             _ => null,
         };
 
+    /// <summary>Determines whether the name has the possibility of conflict.</summary>
+    /// <param name="name">The name to check.</param>
+    /// <returns>
+    /// The value <paramref name="true"/> if the parameter <paramref name="name"/>
+    /// contains a name that may conflict with this instance.
+    /// </returns>
+    public bool CanConflict(string name) =>
+        Name.AsSpan() is ['_', .. var rest] && name.AsSpan().SequenceEqual(rest) ||
+        Name.AsSpan(0, 1).EqualsIgnoreCase(name.AsSpan(0, 1)) && Name.AsSpan(1).SequenceEqual(name.AsSpan(1));
+
     /// <inheritdoc />
     [Pure]
     public bool Equals(MemberSymbol other) =>
