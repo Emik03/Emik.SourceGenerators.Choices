@@ -274,7 +274,9 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// contains a name that may conflict with this instance.
     /// </returns>
     public bool CanConflict(string name) =>
-        Name.AsSpan() is ['_', .. var rest] && name.AsSpan().SequenceEqual(rest) ||
+        Name.AsSpan() is ['_', .. { IsEmpty: false } rest] &&
+        (name.AsSpan().SequenceEqual(rest) ||
+            rest[..1].EqualsIgnoreCase(name.AsSpan(0, 1)) && rest[1..].SequenceEqual(name.AsSpan(1))) ||
         Name.AsSpan(0, 1).EqualsIgnoreCase(name.AsSpan(0, 1)) && Name.AsSpan(1).SequenceEqual(name.AsSpan(1));
 
     /// <inheritdoc />
