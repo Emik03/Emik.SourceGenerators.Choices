@@ -92,10 +92,11 @@ readonly record struct Signature(
         Extract ToExplicitInterfaceSymbolWhenRequired(Extract x) =>
             From(x.Symbol, assembly) is null &&
             x.Symbol.ContainingType.IsInterface() &&
-            x.InterfaceDeclarations.Any(x => x is not null) &&
+            x.InterfaceDeclarations is var id &&
+            id.Any(x => x is not null) &&
             x.Symbol.ExplicitInterfaceSymbols() is [var single] &&
             single.ContainingType.IsInterface()
-                ? (single, x.Kind, ImmutableArray.CreateRange(x.InterfaceDeclarations, string? (_) => $"{single}"))
+                ? (single, x.Kind, ImmutableArray.CreateRange(id, string? (_) => $"{single.ContainingType}"))
                 : x;
 
         var signatures = ToSelf(except, assembly);
