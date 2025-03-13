@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-// ReSharper disable RedundantNameQualifier RedundantUsingDirective.Global UnusedMember.Local UnusedType.Local
+// ReSharper disable ClassNeverInstantiated.Global InconsistentNaming NotAccessedPositionalProperty.Local NotAccessedPositionalProperty.Global RedundantNameQualifier RedundantUsingDirective.Global UnusedMember.Local UnusedType.Local
 global using Attribute = System.Attribute;
 
 // ReSharper disable once CheckNamespace EmptyNamespace
