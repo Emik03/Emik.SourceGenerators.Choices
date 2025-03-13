@@ -71,6 +71,12 @@ sealed partial record Scaffolder
         if (explicitDeclaration.Any(x => interfacesDeclared.IsEmpty || SameUnderlying(x)))
             return list;
 
+        var indexerName = symbol is IPropertySymbol { IsIndexer: true } &&
+            !symbol.GetAttributes().Any(IsIndexerNameAttribute) &&
+            FindIndexerName(list) is { } potential
+                ? CSharp($"\n    [global::System.Runtime.CompilerServices.IndexerNameAttribute(\"{potential}\")]")
+                : null;
+
         var attributes = Attributes(symbol, '\n');
 
         StringBuilder builder = new(
@@ -79,7 +85,7 @@ sealed partial record Scaffolder
 
 
                      /// {XmlTypeName(symbol, "inheritdoc")}{Remarks(interfacesDeclared)}
-                     {Annotation}{(symbol is IMethodSymbol ? $"\n    {AggressiveInlining}" : "")}
+                     {Annotation}{(symbol is IMethodSymbol ? $"\n    {AggressiveInlining}" : "")}{indexerName}
                      {attributes}{(attributes is "" ? "" : "    ")}{(explicitDeclaration.Any() && interfacesDeclared.Any() ? "" : "public ")
                      }{SymbolsUnsafe}
                  """
@@ -311,6 +317,26 @@ sealed partial record Scaffolder
             };
 
     [Pure]
+    static bool IsIndexerNameAttribute(AttributeData arg) =>
+        arg.AttributeClass is
+        {
+            ContainingNamespace:
+            {
+                ContainingNamespace:
+                {
+                    ContainingNamespace:
+                    {
+                        ContainingNamespace.IsGlobalNamespace: true,
+                        Name: nameof(System),
+                    },
+                    Name: nameof(System.Runtime),
+                },
+                Name: nameof(System.Runtime.CompilerServices),
+            },
+            Name: nameof(IndexerNameAttribute),
+        };
+
+    [Pure]
     static bool IsUnscopedRefAttribute(ISymbol x) =>
         x is
         {
@@ -372,7 +398,23 @@ sealed partial record Scaffolder
             '\"' => @"\""",
             _ when char.IsControl(x) => @$"\u{(int)x:x4}",
             _ => $"{x}",
-        };
+        }; // ReSharper disable once ParameterTypeCanBeEnumerable.Local SuggestBaseTypeForParameter
+
+    static string? FindIndexerName(ForwarderAggregate list)
+    {
+        static bool HasConflict((ISymbol Symbol, string) x, string reserved) =>
+            x.Symbol.Name == reserved &&
+            (x.Symbol is not IPropertySymbol ||
+                x.Symbol.GetAttributes()
+                   .Where(IsIndexerNameAttribute)
+                   .Any(x => x.ConstructorArguments.Any(x => x.Value as string == reserved)));
+
+        var i = 1;
+
+        for (; $"Item{(i is 1 ? "" : i)}" is var ret && list.Any(x => HasConflict(x, ret)); i++) { }
+
+        return i is 1 ? null : $"Item{i}";
+    }
 
     [Pure]
     static Func<IParameterSymbol, string> NameGetter() =>
