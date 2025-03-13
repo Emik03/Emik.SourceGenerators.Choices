@@ -60,21 +60,20 @@ public partial class Case
                .Where(x => GetBaseTypes(x).All(x => x.DeclaredAccessibility is Accessibility.Public)),
         ];
 
-        // [StressfulFact]
-        [Fact]
+        [StressfulFact]
         public Task RunSingleAsync() => EnumerateAsync(1);
 
-        // [Fact]
-        // public Task RunDoubleAsync() => EnumerateAsync(2);
+        [StressfulFact]
+        public Task RunDoubleAsync() => EnumerateAsync(2);
 
-        // [Fact]
-        // public Task RunQuadrupleAsync() => EnumerateAsync(4);
+        [StressfulFact]
+        public Task RunQuadrupleAsync() => EnumerateAsync(4);
 
-        // [Fact]
-        // public Task RunOctupleAsync() => EnumerateAsync(8);
+        [StressfulFact]
+        public Task RunOctupleAsync() => EnumerateAsync(8);
 
-        // [Fact]
-        // public Task RunAllAsync() => EnumerateAsync(int.MaxValue);
+        [StressfulFact]
+        public Task RunAllAsync() => EnumerateAsync(int.MaxValue);
 
         async Task EnumerateAsync(int size)
         {
