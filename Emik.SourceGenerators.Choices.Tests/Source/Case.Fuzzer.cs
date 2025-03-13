@@ -115,7 +115,6 @@ public partial class Case
             var tasks = AccessibleTypes.Chunk(size)
                .SelectMany(Query)
                .Chunk(Environment.ProcessorCount)
-               .Skip(1455)
                .Select(x => Task.WhenAll(x.Select(RunAsync)));
 
             output.WriteLine($"Running {length} micro-tests.");
@@ -132,6 +131,8 @@ public partial class Case
                     output.WriteLine($"Successfully ran {i}/{length} micro-tests. ({(float)i / length:P})");
                     milestone += pass;
                 }
+
+                output.WriteLine("All micro-tests passed. Yippee!");
             }
             catch (Exception e)
             {
