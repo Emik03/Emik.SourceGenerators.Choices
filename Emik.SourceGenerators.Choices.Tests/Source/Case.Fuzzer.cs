@@ -42,7 +42,7 @@ public partial class Case
             """;
 
         static IEnumerable<MetadataReference> References { get; } =
-            Net90.References.All.Where(x => x.Display?.Contains("System") is true);
+            Net100.References.All.Where(x => x.Display?.Contains("System") is true);
 
         static ImmutableArray<string> Structures { get; } = [DotPattern, Fields, PrimaryConstructors, Properties];
 

@@ -61,7 +61,7 @@ public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, Defau
         CancellationToken token
     ) =>
         (await base.CreateProjectImplAsync(primaryProject, additionalProjects, token))
-       .WithMetadataReferences(Net90.References.All)
+       .WithMetadataReferences(Net100.References.All)
        .AddMetadataReferences(KMFramework)
        .AddMetadataReferences(UnityEngine);
 }

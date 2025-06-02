@@ -6,8 +6,8 @@
     <ItemGroup>
         <Content Include="Expected/*.csx"/>
         <Compile Remove="$(Morsels)/Compile/**/*.cs"/>
-        <PackageReference Include="Microsoft.CodeAnalysis" Version="4.13" />
-        <PackageReference Include="Basic.Reference.Assemblies.Net90" Version="1.8" />
+        <PackageReference Include="Microsoft.CodeAnalysis" Version="4.14" />
+        <PackageReference Include="Basic.Reference.Assemblies.Net100" Version="1.8.2" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" Version="1.1.2" />
     </ItemGroup>
 </Project>

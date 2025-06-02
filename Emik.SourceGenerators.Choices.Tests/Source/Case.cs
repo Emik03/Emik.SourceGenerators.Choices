@@ -85,6 +85,13 @@ public partial class Case()
         """
     );
 
+    public sealed class Logic() : Case(
+        """
+        [Choice]
+        public sealed partial class Logic(string? one, (Logic Left, Logic Right) or, (Logic left, Logic right) and);
+        """
+    );
+
     public sealed class Number()
         : Case("[Choice(typeof((int Integer, float Floating, ValueTuple Unknown)), false)] partial class Number;");
 
