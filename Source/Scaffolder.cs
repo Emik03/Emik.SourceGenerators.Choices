@@ -836,7 +836,7 @@ sealed partial record Scaffolder(
                      {Pure}
                      {AggressiveInlining}
                      public static {Name} Of{x.PropertyName}({parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()})
-                         => new {Name}({parameters.Select(x => x.ParameterName).Conjoin()}{discriminator});
+                         => new {Name}(({parameters.Select(x => x.ParameterName).Conjoin()}){discriminator});
 
 
                  """

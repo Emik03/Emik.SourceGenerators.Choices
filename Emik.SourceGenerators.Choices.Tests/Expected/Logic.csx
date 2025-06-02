@@ -275,7 +275,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Logic OfOr(Emik.SourceGenerators.Choices.Tests.Logic left, Emik.SourceGenerators.Choices.Tests.Logic right)
-                        => new global::Emik.SourceGenerators.Choices.Tests.Logic(left, right, (byte)1);
+                        => new global::Emik.SourceGenerators.Choices.Tests.Logic((left, right), (byte)1);
 
                     /// <summary>
                     /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="And"/> of type <see cref="System.ValueTuple{T1, T2}"/>.
@@ -298,7 +298,7 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Logic OfAnd(Emik.SourceGenerators.Choices.Tests.Logic left, Emik.SourceGenerators.Choices.Tests.Logic right)
-                        => new global::Emik.SourceGenerators.Choices.Tests.Logic(left, right, (byte)2);
+                        => new global::Emik.SourceGenerators.Choices.Tests.Logic((left, right), (byte)2);
 
                     /// <summary>
                     /// Determines whether the left-hand side is equal to the right.
@@ -535,7 +535,7 @@ namespace Emik
                     public System.Type GetUnderlyingType()
                         => _discriminator switch
                         {
-                            0 => typeof(string?),
+                            0 => typeof(string),
                             1 => typeof((Emik.SourceGenerators.Choices.Tests.Logic Left, Emik.SourceGenerators.Choices.Tests.Logic Right)),
                             _ => typeof((Emik.SourceGenerators.Choices.Tests.Logic left, Emik.SourceGenerators.Choices.Tests.Logic right)),
                         };

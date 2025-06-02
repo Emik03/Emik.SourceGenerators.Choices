@@ -146,7 +146,7 @@ sealed partial record Scaffolder
                 var isGetType = symbol is IMethodSymbol { Name: nameof(GetType), Parameters: [] };
 
                 var value = isTypeKnown && isGetType
-                    ? CSharp($"typeof({x.Type})")
+                    ? CSharp($"typeof({x.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)})")
                     : $"{kind.KeywordInReturn()}{cast}{member}";
 
                 return CSharp(
@@ -364,19 +364,19 @@ sealed partial record Scaffolder
     static string Display(TypedConstant x) =>
         x.Kind switch
         {
-            _ when x.IsNull => "null",
+            _ when x.IsNull => CSharp("null"),
             _ when x.Type?.SpecialType is SpecialType.System_Boolean ||
                 x.Type is INamedTypeSymbol
                 {
                     TypeArguments: [{ SpecialType: SpecialType.System_Boolean }],
                     SpecialType: SpecialType.System_Nullable_T,
-                } => x.Value switch { true => "true", false => "false", _ => throw Unreachable },
+                } => x.Value switch { true => CSharp("true"), false => CSharp("false"), _ => throw Unreachable },
             _ when x.Type?.SpecialType is SpecialType.System_String =>
                 $"\"{x.Value?.ToString().SelectMany(Escape).Concat()}\"",
             TypedConstantKind.Error or TypedConstantKind.Primitive => $"{x.Value}",
             TypedConstantKind.Enum when IsConstantNegative(x.Value) is var isNegative =>
                 $"({x.Type}){(isNegative ? "(" : "")}{x.Value}{(isNegative ? ")" : "")}",
-            TypedConstantKind.Type => $"typeof({x.Type})",
+            TypedConstantKind.Type => CSharp($"typeof({x.Type})"),
             TypedConstantKind.Array => $"new{ObjectSuffix(x)}[] {{ {x.Values.Select(Display).Conjoin()} }}",
             _ => throw Unreachable,
         };
