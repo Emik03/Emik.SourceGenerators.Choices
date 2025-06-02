@@ -12,8 +12,10 @@ public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, Defau
             $@"HKEY_LOCAL_MACHINE\SOFTWARE\{(Environment.Is64BitOperatingSystem ? @"WOW6432Node\" : "")}Valve\Steam"
                 is var keyName ? Registry.GetValue(keyName, "InstallPath", null) as string :
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) is var home &&
-            OperatingSystem.IsMacOS() ? Path.Join(home, "Library/Application Support/Steam") :
-            OperatingSystem.IsLinux() ? Path.Join(home, ".steam/steam") : null);
+            OperatingSystem.IsMacOS() ? Path.Join(home, "Library", "Application Support", "Steam") :
+            Environment.GetEnvironmentVariable("XDG_DATA_DIR") is { } xdg &&
+            Path.Join(xdg, "Steam") is var xdgSteam &&
+            Path.Exists(xdgSteam) ? xdgSteam : Path.Join(home, ".local", "share", "steam"));
 
     /// <summary>Gets the root of unity, if installed.</summary>
     static string? UnityRoot { get; } =
