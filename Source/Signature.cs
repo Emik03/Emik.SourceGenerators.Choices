@@ -62,8 +62,8 @@ readonly record struct Signature(
         static IEnumerable<Extract> GeneratedMethods(Extract symbol) =>
             (symbol switch
             {
-                (IEventSymbol x, _, _) => ImmutableArray.Create(x.AddMethod, x.RaiseMethod, x.RemoveMethod),
-                (IPropertySymbol x, _, _) => ImmutableArray.Create(x.GetMethod, x.SetMethod),
+                (IEventSymbol x, _, _) => [x.AddMethod, x.RaiseMethod, x.RemoveMethod],
+                (IPropertySymbol x, _, _) => [x.GetMethod, x.SetMethod],
                 _ => ImmutableArray<IMethodSymbol?>.Empty,
             })
            .Filter()
