@@ -201,7 +201,7 @@ sealed partial record Scaffolder(
             ? CSharp(
                 $"""
                      {Annotation}
-                 {(FullyPolyfillAttributes is true ? [nameof(Emik)] : Array.Empty<string>())
+                 {(FullyPolyfillAttributes is true ? [nameof(Emik)] : (string[])[])
                     .Append(ExtendingGenerator.Choice)
                     .Concat(MutablePublicly switch
                      {
@@ -650,30 +650,32 @@ sealed partial record Scaffolder(
 
     [Pure]
     ImmutableArray<MemberSymbol> Reference { get; } =
-        Symbols.Omit(x => x.IsUnmanaged).Where(x => x.IsReference).Concat(SingleEmpty).ToImmutableArray();
+        [..Symbols.Omit(x => x.IsUnmanaged).Where(x => x.IsReference).Concat(SingleEmpty)];
 
     [Pure]
     ImmutableArray<MemberSymbol> Rest { get; } =
-        Symbols.Omit(x => x.IsUnmanaged).Omit(x => x.IsReference).Except(SingleEmpty).ToImmutableArray();
+        [..Symbols.Omit(x => x.IsUnmanaged).Omit(x => x.IsReference).Except(SingleEmpty)];
 
     [Pure]
-    ImmutableArray<MemberSymbol> Unmanaged { get; } =
-        Symbols.Where(x => x.IsUnmanaged).Omit(x => x.IsEmpty).ToImmutableArray();
+    ImmutableArray<MemberSymbol> Unmanaged { get; } = [..Symbols.Where(x => x.IsUnmanaged).Omit(x => x.IsEmpty)];
 
     [Pure]
     public static ImmutableArray<MemberSymbol> Decouple(ImmutableArray<IFieldSymbol> fields) =>
-        (fields.Length is TupleGenericLimit &&
-            fields[^1].Type is INamedTypeSymbol { IsTupleType: true, IsValueType: true, TupleElements: var tuple }
-                ? fields.Take(TupleGenericLimit - 1).Select(x => new MemberSymbol(x)).Concat(Decouple(tuple))
-                : fields.Select(x => new MemberSymbol(x))).ToImmutableArray();
+    [
+        ..fields.Length is TupleGenericLimit &&
+        fields[^1].Type is INamedTypeSymbol { IsTupleType: true, IsValueType: true, TupleElements: var tuple }
+            ? fields.Take(TupleGenericLimit - 1).Select(x => new MemberSymbol(x)).Concat(Decouple(tuple))
+            : fields.Select(x => new MemberSymbol(x)),
+    ];
 
     [Pure]
     public static ImmutableArray<MemberSymbol> Instances(INamespaceOrTypeSymbol x) =>
-        x.GetMembers()
+    [
+        ..x.GetMembers()
            .Select(MemberSymbol.From)
            .Filter()
-           .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] } || x.IsEq)
-           .ToImmutableArray();
+           .Omit(x => x.IsStatic || x.Symbol is IPropertySymbol { ExplicitInterfaceImplementations: not [] } || x.IsEq),
+    ];
 
     [Pure]
     static bool IsUnoriginalMethod(ISymbol x, string name) =>
@@ -748,9 +750,9 @@ sealed partial record Scaffolder(
                 if (single.Type is null)
                     single = symbol;
                 else
-                    return ImmutableArray<MemberSymbol>.Empty;
+                    return [];
 
-        return single.Type is null ? ImmutableArray<MemberSymbol>.Empty : ImmutableArray.Create(single);
+        return single.Type is null ? [] : [single];
     }
 
     [Pure]
@@ -820,7 +822,7 @@ sealed partial record Scaffolder(
         {
             INamedTypeSymbol { IsTupleType: true, TupleElements: var e, TypeArguments.Length: > 1 } => Decouple(e),
             INamedTypeSymbol t when MemberSymbol.IsSystemTuple(t) => Instances(t),
-            _ => ImmutableArray<MemberSymbol>.Empty,
+            _ => [],
         } is not [] and var parameters
             ? CSharp(
                 $"""

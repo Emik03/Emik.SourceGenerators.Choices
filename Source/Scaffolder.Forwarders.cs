@@ -44,11 +44,11 @@ sealed partial record Scaffolder
             (symbol as IMethodSymbol)?.TypeParameters.Length &&
             x.Symbol.GetFullyQualifiedName() == symbol.GetFullyQualifiedName() &&
             ((x.Symbol as IMethodSymbol)?.Parameters ??
-                (x.Symbol as IPropertySymbol)?.Parameters ?? ImmutableArray<IParameterSymbol>.Empty)
+                (x.Symbol as IPropertySymbol)?.Parameters ?? [])
            .Select(x => x.Type)
            .SequenceEqual(
                 ((symbol as IMethodSymbol)?.Parameters ??
-                    (symbol as IPropertySymbol)?.Parameters ?? ImmutableArray<IParameterSymbol>.Empty)
+                    (symbol as IPropertySymbol)?.Parameters ?? [])
                .Select(x => x.Type),
                 Equating<ITypeSymbol>((x, y) => x.GetFullyQualifiedName() == y.GetFullyQualifiedName())
             );

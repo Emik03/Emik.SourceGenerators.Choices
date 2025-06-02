@@ -74,7 +74,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
             {
                 IMethodSymbol { Parameters: var parameters } => parameters,
                 IPropertySymbol { Parameters: var parameters } => parameters,
-                _ => ImmutableArray<IParameterSymbol>.Empty,
+                _ => [],
             };
 
         bool IsEqual(MemberSymbol union) => union.Type.AllInterfaces.Contains(first, RoslynComparer.Signature);
@@ -126,11 +126,12 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
     /// <returns>The list of original definitions of <paramref name="interfaceFromFirst"/>.</returns>
     [Pure]
     ImmutableArray<INamedTypeSymbol> GroupOriginalDefinitions(INamedTypeSymbol interfaceFromFirst) =>
-        Symbols
+    [
+        ..Symbols
            .Skip(1)
            .Select(x => x.Type.AllInterfaces)
            .Select(x => x.FirstOrDefault(x => RoslynComparer.Signature.Equals(x, interfaceFromFirst)))
            .Filter()
-           .Prepend(interfaceFromFirst)
-           .ToImmutableArray();
+           .Prepend(interfaceFromFirst),
+    ];
 }

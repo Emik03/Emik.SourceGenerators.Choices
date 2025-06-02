@@ -252,7 +252,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             _ when MemberSymbol.IsSystemTuple(symbolSet) => Scaffolder.Instances(symbolSet),
             null when primaryConstructorParameters is { } p => p,
             null => Scaffolder.Instances(target),
-            _ => ImmutableArray<MemberSymbol>.Empty,
+            _ => [],
         };
 
         return (target, fields, mutablePublicly, null);
