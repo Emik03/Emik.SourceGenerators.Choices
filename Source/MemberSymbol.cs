@@ -105,10 +105,6 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public bool IsStatic => Symbol is { IsStatic: true };
 
-    /// <summary>Gets a value indicating whether the member is a parameterless <see cref="object.ToString"/>.</summary>
-    [Pure]
-    public bool IsToString => Symbol is IMethodSymbol { Parameters: [], TypeParameters: [], Name: nameof(ToString) };
-
     /// <summary>Gets a value indicating whether the type is unmanaged.</summary>
     [Pure]
     public bool IsUnmanaged => Type.IsUnmanagedType && Type is not ITypeParameterSymbol;

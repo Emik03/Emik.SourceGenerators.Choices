@@ -507,23 +507,23 @@ sealed partial record Scaffolder(
                                  (x.IsEmpty || x.Type.IsRefLikeType && x.Type.GetMembers().All(x => IsUnoriginalMethod(x, nameof(GetHashCode)))
                                      ? "0" : x.Type is IPointerTypeSymbol ? $"(int)(nint){PrefixCast(x)}" : $"{PrefixCast(x)}.GetHashCode()")},")
                              .Conjoin("\n            ")}}
-                      });
-              {{(Members.Any(x => x.IsToString)
-                  ? ""
-                  : CSharp(
-                      $$"""
+                      });{{(Named.TryFindFirstMethod(x => x is { Parameters: [], TypeParameters: [], Name: nameof(ToString), IsImplicitlyDeclared: false }, out _)
+                          ? ""
+                          : CSharp(
+                              $$"""
 
-                            /// <inheritdoc />
-                            {{Annotation}}
-                            {{Pure}}
-                            {{AggressiveInlining}}
-                            public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}override string ToString()
-                                => {{Discriminator}} switch
-                                {
-                                    {{Symbols.Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {ToStringCase(x)},").Conjoin("\n            ")}}
-                                };
-                        """
-                  ))}}
+
+                                    /// <inheritdoc />
+                                    {{Annotation}}
+                                    {{Pure}}
+                                    {{AggressiveInlining}}
+                                    public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}override string ToString()
+                                        => {{Discriminator}} switch
+                                        {
+                                            {{Symbols.Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {ToStringCase(x)},").Conjoin("\n            ")}}
+                                        };
+                                """
+                          ))}}
               """
         );
 

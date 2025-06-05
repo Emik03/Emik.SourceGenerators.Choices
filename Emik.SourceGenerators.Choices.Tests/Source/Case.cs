@@ -81,6 +81,8 @@ public partial class Case()
         partial class KMModule
         {
             readonly byte _discriminator;
+
+            public override string ToString() => name;
         }
         """
     );
