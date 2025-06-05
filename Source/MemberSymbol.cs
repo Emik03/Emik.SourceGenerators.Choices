@@ -105,6 +105,10 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     [Pure]
     public bool IsStatic => Symbol is { IsStatic: true };
 
+    /// <summary>Gets a value indicating whether the member is a parameterless <see cref="object.ToString"/>.</summary>
+    [Pure]
+    public bool IsToString => Symbol is IMethodSymbol { Parameters: [], TypeParameters: [], Name: nameof(ToString) };
+
     /// <summary>Gets a value indicating whether the type is unmanaged.</summary>
     [Pure]
     public bool IsUnmanaged => Type.IsUnmanagedType && Type is not ITypeParameterSymbol;
@@ -174,8 +178,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
     /// <returns>Whether the two <see cref="INamespaceOrTypeSymbol"/> instances are equal.</returns>
     [Pure]
     public static bool Equal(INamespaceOrTypeSymbol? x, INamespaceOrTypeSymbol? y) =>
-        ReferenceEquals(x, y) ||
-        x is not null && y is not null && (SourcedEquals(x, y) || UnsourcedEquals(x, y));
+        ReferenceEquals(x, y) || x is not null && y is not null && (SourcedEquals(x, y) || UnsourcedEquals(x, y));
 
     /// <summary>Determines if the <see cref="ISymbol"/> is an operator.</summary>
     /// <param name="symbol">The <see cref="ISymbol"/> to check.</param>

@@ -115,7 +115,7 @@ namespace Emik
                     global::System.IEquatable<object>,
                     global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.ConditionDescription>
                 {
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
                     private static class Choice
                     {
@@ -137,7 +137,7 @@ namespace Emik
                         }
                     }
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     private readonly byte _discriminator;
 
                     private readonly Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition _and;
@@ -149,7 +149,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="and">The variant.</param>
                     /// <param name="x">The discriminator.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     private ConditionDescription(Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition and, byte x)
                     {
@@ -162,7 +162,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="included">The variant.</param>
                     /// <param name="x">The discriminator.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     private ConditionDescription(Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition included, byte x)
                     {
@@ -173,7 +173,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription"/> is the variant <see cref="And"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public bool IsAnd
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -185,7 +185,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription"/> is the variant <see cref="Or"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public bool IsOr
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -197,7 +197,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription"/> is the variant <see cref="Included"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public bool IsIncluded
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -209,7 +209,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription"/> is the variant <see cref="Excluded"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public bool IsExcluded
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -221,7 +221,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition And
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -232,7 +232,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition Or
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -243,7 +243,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition Included
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -254,7 +254,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition Excluded
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -267,7 +267,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="and">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="and"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ConditionDescription OfAnd(Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition and)
@@ -278,7 +278,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="or">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="or"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ConditionDescription OfOr(Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition or)
@@ -289,7 +289,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="included">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="included"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ConditionDescription OfIncluded(Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition included)
@@ -300,7 +300,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="excluded">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="excluded"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ConditionDescription OfExcluded(Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition excluded)
@@ -315,7 +315,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.ConditionDescription? left, Emik.SourceGenerators.Choices.Tests.ConditionDescription? right)
@@ -338,7 +338,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is unequal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator !=(Emik.SourceGenerators.Choices.Tests.ConditionDescription? left, Emik.SourceGenerators.Choices.Tests.ConditionDescription? right)
@@ -353,7 +353,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.ConditionDescription? left, Emik.SourceGenerators.Choices.Tests.ConditionDescription? right)
@@ -378,7 +378,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.ConditionDescription? left, Emik.SourceGenerators.Choices.Tests.ConditionDescription? right)
@@ -393,7 +393,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.ConditionDescription? left, Emik.SourceGenerators.Choices.Tests.ConditionDescription? right)
@@ -408,42 +408,42 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.ConditionDescription? left, Emik.SourceGenerators.Choices.Tests.ConditionDescription? right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
                         => obj is global::Emik.SourceGenerators.Choices.Tests.ConditionDescription x && Equals(x);
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool Equals(Emik.SourceGenerators.Choices.Tests.ConditionDescription? other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int CompareTo(object? obj)
                         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.ConditionDescription x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int CompareTo(Emik.SourceGenerators.Choices.Tests.ConditionDescription? other)
                         => other is null ? 1 : Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override int GetHashCode()
@@ -457,7 +457,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override string ToString()
@@ -477,7 +477,7 @@ namespace Emik
                     /// <param name="onIncluded">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription"/> class with the variant <see cref="Included"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition"/> is held.</param>
                     /// <param name="onExcluded">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription"/> class with the variant <see cref="Excluded"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.ConditionDescription.InclusionCondition"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Emik.SourceGenerators.Choices.Tests.ConditionDescription? Map(
                         global::System.Action<Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition>? onAnd = null,
@@ -514,7 +514,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public TMappingResult Map<TMappingResult>(
                         global::System.Func<Emik.SourceGenerators.Choices.Tests.ConditionDescription.BinaryCondition, TMappingResult> onAnd,
@@ -536,7 +536,7 @@ namespace Emik
                     /// <returns>
                     /// The underlying value from this instance.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.ValueType GetUnderlyingValue()
@@ -549,7 +549,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="object.GetType()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Type GetUnderlyingType()
                         => _discriminator switch

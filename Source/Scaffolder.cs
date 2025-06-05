@@ -508,16 +508,22 @@ sealed partial record Scaffolder(
                                      ? "0" : x.Type is IPointerTypeSymbol ? $"(int)(nint){PrefixCast(x)}" : $"{PrefixCast(x)}.GetHashCode()")},")
                              .Conjoin("\n            ")}}
                       });
+              {{(Members.Any(x => x.IsToString)
+                  ? ""
+                  : CSharp(
+                      $$"""
 
-                  /// <inheritdoc />
-                  {{Annotation}}
-                  {{Pure}}
-                  {{AggressiveInlining}}
-                  public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}override string ToString()
-                      => {{Discriminator}} switch
-                      {
-                          {{Symbols.Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {ToStringCase(x)},").Conjoin("\n            ")}}
-                      };
+                            /// <inheritdoc />
+                            {{Annotation}}
+                            {{Pure}}
+                            {{AggressiveInlining}}
+                            public {{ReadOnlyIfStruct}}{{SymbolsUnsafe}}override string ToString()
+                                => {{Discriminator}} switch
+                                {
+                                    {{Symbols.Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {ToStringCase(x)},").Conjoin("\n            ")}}
+                                };
+                        """
+                  ))}}
               """
         );
 

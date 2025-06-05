@@ -106,7 +106,7 @@ namespace Emik
                 [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Auto)]
                 partial struct SpanEncodingsDot
                 {
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
                     private static class Choice
                     {
@@ -130,7 +130,7 @@ namespace Emik
                     /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/> due to it being a by-ref like type.
                     /// </summary>
                     /// <param name="utf8">The referenced value.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public delegate void Utf8Handler(System.Span<byte> utf8);
 
                     /// <summary>
@@ -139,14 +139,14 @@ namespace Emik
                     /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
                     /// <param name="utf8">The referenced value.</param>
                     /// <returns>The result of the mapping.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public delegate TMappingResult Utf8Handler<out TMappingResult>(System.Span<byte> utf8);
 
                     /// <summary>
                     /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/> due to it being a by-ref like type.
                     /// </summary>
                     /// <param name="utf16">The referenced value.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public delegate void Utf16Handler(System.Span<char> utf16);
 
                     /// <summary>
@@ -155,10 +155,10 @@ namespace Emik
                     /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
                     /// <param name="utf16">The referenced value.</param>
                     /// <returns>The result of the mapping.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public delegate TMappingResult Utf16Handler<out TMappingResult>(System.Span<char> utf16);
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     private byte _discriminator;
 
                     private System.Span<byte> _utf8;
@@ -169,7 +169,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/>.
                     /// </summary>
                     /// <param name="utf8">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public SpanEncodingsDot(System.Span<byte> utf8)
                     {
@@ -181,7 +181,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/>.
                     /// </summary>
                     /// <param name="utf16">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public SpanEncodingsDot(System.Span<char> utf16)
                     {
@@ -192,7 +192,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot"/> is the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public readonly bool IsUtf8
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -205,7 +205,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot"/> is the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public readonly bool IsUtf16
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -218,7 +218,7 @@ namespace Emik
                     /// <summary>
                     /// Gets or sets the <see cref="System.Span{T}"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public System.Span<byte> Utf8
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -235,7 +235,7 @@ namespace Emik
                     /// <summary>
                     /// Gets or sets the <see cref="System.Span{T}"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public System.Span<char> Utf16
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -254,7 +254,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="utf8">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="utf8"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot(System.Span<byte> utf8)
@@ -265,7 +265,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator System.Span<byte>(global::Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot x)
@@ -276,7 +276,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="utf16">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="utf16"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot(System.Span<char> utf16)
@@ -287,7 +287,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator System.Span<char>(global::Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot x)
@@ -298,7 +298,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="utf8">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="utf8"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot OfUtf8(System.Span<byte> utf8)
@@ -309,7 +309,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="utf16">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="utf16"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot OfUtf16(System.Span<char> utf16)
@@ -324,7 +324,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot left, Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot right)
@@ -344,7 +344,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is unequal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator !=(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot left, Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot right)
@@ -359,7 +359,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot left, Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot right)
@@ -380,7 +380,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot left, Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot right)
@@ -395,7 +395,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot left, Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot right)
@@ -410,42 +410,42 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot left, Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
                         => false;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool Equals(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(object? obj)
                         => -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot other)
                         => Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override int GetHashCode()
@@ -457,7 +457,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override string ToString()
@@ -473,7 +473,7 @@ namespace Emik
                     /// <param name="onUtf8">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot"/> struct with the variant <see cref="Utf8"/> of type <see cref="System.Span{T}"/> is held.</param>
                     /// <param name="onUtf16">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot"/> struct with the variant <see cref="Utf16"/> of type <see cref="System.Span{T}"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly Emik.SourceGenerators.Choices.Tests.SpanEncodingsDot Map(
                         Utf8Handler? onUtf8 = null,
@@ -500,7 +500,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly TMappingResult Map<TMappingResult>(
                         Utf8Handler<TMappingResult> onUtf8,
@@ -513,7 +513,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Span{T}.Clear()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly void Clear()
                     {
@@ -529,7 +529,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Span{T}.IsEmpty"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public readonly bool IsEmpty
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -541,7 +541,7 @@ namespace Emik
                     }
 
                     /// <inheritdoc cref="System.Span{T}.Length"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.3.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.4.0")]
                     public readonly int Length
                     {
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
