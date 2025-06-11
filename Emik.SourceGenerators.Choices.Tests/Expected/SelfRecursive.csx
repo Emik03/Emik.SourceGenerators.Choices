@@ -11,11 +11,11 @@ namespace Emik
         {
             namespace Tests
             {
-                /// <inheritdoc cref="Emik.SourceGenerators.Choices.Tests.Tasks"/>
+                /// <inheritdoc cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/>
                 /// <remarks>
                 ///     <para>
-                ///         The type <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/>
-                ///         is a mutable disjoint union representing the following variants:
+                ///         The type <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/>
+                ///         is an immutable disjoint union representing the following variants:
                 ///     </para>
                 ///     <list type="table">
                 ///         <listheader>
@@ -37,32 +37,16 @@ namespace Emik
                 ///         </listheader>
                 ///         <item>
                 ///             <term>
-                ///                 <see cref="Referenced"/> <see langword="as"/> <see cref="System.Threading.Tasks.Task"/>
+                ///                 <see cref="Recursion"/> <see langword="as"/> <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/>
                 ///                 <list type="bullet">
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="IsReferenced"/>
+                ///                             <see cref="IsRecursion"/>
                 ///                         </description>
                 ///                     </item>
                 ///                     <item>
                 ///                         <description>
-                ///                             <list type="number">
-                ///                                 <item>
-                ///                                     <description>
-                ///                                         <see cref="OfReferenced(System.Threading.Tasks.Task)"/>
-                ///                                     </description>
-                ///                                 </item>
-                ///                                 <item>
-                ///                                     <description>
-                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.Tasks(System.Threading.Tasks.Task)"/>
-                ///                                     </description>
-                ///                                 </item>
-                ///                                 <item>
-                ///                                     <description>
-                ///                                         <see cref="op_Implicit(System.Threading.Tasks.Task)"/>
-                ///                                     </description>
-                ///                                 </item>
-                ///                             </list>
+                ///                             <see cref="OfRecursion(Emik.SourceGenerators.Choices.Tests.SelfRecursive)"/>
                 ///                         </description>
                 ///                     </item>
                 ///                 </list>
@@ -70,11 +54,11 @@ namespace Emik
                 ///         </item>
                 ///         <item>
                 ///             <term>
-                ///                 <see cref="Valued"/> <see langword="as"/> <see cref="System.Threading.Tasks.ValueTask"/>
+                ///                 <see cref="Hope"/> <see langword="as"/> <see cref="int"/>
                 ///                 <list type="bullet">
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="IsValued"/>
+                ///                             <see cref="IsHope"/>
                 ///                         </description>
                 ///                     </item>
                 ///                     <item>
@@ -82,17 +66,17 @@ namespace Emik
                 ///                             <list type="number">
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="OfValued(System.Threading.Tasks.ValueTask)"/>
+                ///                                         <see cref="OfHope(int)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.Tasks(System.Threading.Tasks.ValueTask)"/>
+                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive(int)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                                 <item>
                 ///                                     <description>
-                ///                                         <see cref="op_Implicit(System.Threading.Tasks.ValueTask)"/>
+                ///                                         <see cref="op_Implicit(int)"/>
                 ///                                     </description>
                 ///                                 </item>
                 ///                             </list>
@@ -103,173 +87,144 @@ namespace Emik
                 ///         </item>
                 ///     </list>
                 /// </remarks>
-                [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Auto)]
-                partial struct Tasks :
+                partial class SelfRecursive :
                     global::System.IComparable,
                     global::System.IComparable<object>,
-                    global::System.IComparable<global::Emik.SourceGenerators.Choices.Tests.Tasks>,
+                    global::System.IComparable<global::Emik.SourceGenerators.Choices.Tests.SelfRecursive>,
 #if NET7_0_OR_GREATER
-                    global::System.Numerics.IComparisonOperators<global::Emik.SourceGenerators.Choices.Tests.Tasks, global::Emik.SourceGenerators.Choices.Tests.Tasks, bool>,
+                    global::System.Numerics.IComparisonOperators<global::Emik.SourceGenerators.Choices.Tests.SelfRecursive, global::Emik.SourceGenerators.Choices.Tests.SelfRecursive, bool>,
 #endif
                     global::System.IEquatable<object>,
-                    global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.Tasks>
+                    global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.SelfRecursive>
                 {
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    private byte _discriminator;
+                    private readonly byte _discriminator;
 
-                    private System.Threading.Tasks.Task? _referenced;
+                    private readonly int _hope;
 
-                    private System.Threading.Tasks.ValueTask _valued;
+                    private readonly Emik.SourceGenerators.Choices.Tests.SelfRecursive? _recursion = recursion;
 
                     /// <summary>
-                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> struct with the variant <see cref="Referenced"/> of type <see cref="System.Threading.Tasks.Task"/>.
+                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> class with the variant <see cref="Recursion"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/>.
                     /// </summary>
-                    /// <param name="referenced">The variant.</param>
+                    /// <param name="recursion">The variant.</param>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public Tasks(System.Threading.Tasks.Task referenced)
+                    public SelfRecursive(Emik.SourceGenerators.Choices.Tests.SelfRecursive recursion)
+                        : this(recursion, default(int))
                     {
                         _discriminator = 0;
-                        _referenced = referenced;
+                        _recursion = recursion;
                     }
 
                     /// <summary>
-                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> struct with the variant <see cref="Valued"/> of type <see cref="System.Threading.Tasks.ValueTask"/>.
+                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> class with the variant <see cref="Hope"/> of type <see cref="int"/>.
                     /// </summary>
-                    /// <param name="valued">The variant.</param>
+                    /// <param name="hope">The variant.</param>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public Tasks(System.Threading.Tasks.ValueTask valued)
+                    public SelfRecursive(int hope)
+                        : this(default(Emik.SourceGenerators.Choices.Tests.SelfRecursive), hope)
                     {
                         _discriminator = 1;
-                        _valued = valued;
+                        _hope = hope;
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> is the variant <see cref="Referenced"/> of type <see cref="System.Threading.Tasks.Task"/>.
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> is the variant <see cref="Recursion"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    public readonly bool IsReferenced
+                    public bool IsRecursion
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
-                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Referenced")]
-                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "Valued")]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Recursion")]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "Hope")]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                         get => _discriminator is 0;
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> is the variant <see cref="Valued"/> of type <see cref="System.Threading.Tasks.ValueTask"/>.
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> is the variant <see cref="Hope"/> of type <see cref="int"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    public readonly bool IsValued
+                    public bool IsHope
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
-                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Valued")]
-                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "Referenced")]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Hope")]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "Recursion")]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                         get => _discriminator is 1;
                     }
 
                     /// <summary>
-                    /// Gets or sets the <see cref="System.Threading.Tasks.Task"/> variant.
+                    /// Gets the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> variant.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    public System.Threading.Tasks.Task? Referenced
+                    public Emik.SourceGenerators.Choices.Tests.SelfRecursive? Recursion
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        readonly get => _discriminator is 0 ? _referenced : default;
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        set
-                        {
-                            _discriminator = 0;
-                            _referenced = value;
-                        }
+                        get => _discriminator is 0 ? _recursion : default;
                     }
 
                     /// <summary>
-                    /// Gets or sets the <see cref="System.Threading.Tasks.ValueTask"/> variant.
+                    /// Gets the <see cref="int"/> variant.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    public System.Threading.Tasks.ValueTask Valued
+                    public int Hope
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        readonly get => _discriminator is 1 ? _valued : default;
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        set
-                        {
-                            _discriminator = 1;
-                            _valued = value;
-                        }
+                        get => _discriminator is 1 ? _hope : default;
                     }
 
+                    /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
+                    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+                    bool UsedImplicitly => hope is var _;
+
                     /// <summary>
-                    /// Implicitly converts the <see cref="System.Threading.Tasks.Task"/> parameter to the union.
+                    /// Implicitly converts the <see cref="int"/> parameter to the union.
                     /// </summary>
-                    /// <param name="referenced">The parameter to pass onto the constructor.</param>
-                    /// <returns>The union containing the parameter <paramref name="referenced"/>.</returns>
+                    /// <param name="hope">The parameter to pass onto the constructor.</param>
+                    /// <returns>The union containing the parameter <paramref name="hope"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Tasks(System.Threading.Tasks.Task referenced)
-                        => new global::Emik.SourceGenerators.Choices.Tests.Tasks(referenced);
+                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.SelfRecursive(int hope)
+                        => new global::Emik.SourceGenerators.Choices.Tests.SelfRecursive(hope);
 
                     /// <summary>
-                    /// Explicitly converts the union to the target type <see cref="System.Threading.Tasks.Task"/>.
+                    /// Explicitly converts the union to the target type <see cref="int"/>.
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static explicit operator System.Threading.Tasks.Task?(global::Emik.SourceGenerators.Choices.Tests.Tasks x)
-                        => x.Referenced;
+                    public static explicit operator int(global::Emik.SourceGenerators.Choices.Tests.SelfRecursive x)
+                        => x.Hope;
 
                     /// <summary>
-                    /// Implicitly converts the <see cref="System.Threading.Tasks.ValueTask"/> parameter to the union.
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> class with the variant <see cref="Recursion"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/>.
                     /// </summary>
-                    /// <param name="valued">The parameter to pass onto the constructor.</param>
-                    /// <returns>The union containing the parameter <paramref name="valued"/>.</returns>
+                    /// <param name="recursion">The value to pass into the type.</param>
+                    /// <returns>The union containing the parameter <paramref name="recursion"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Tasks(System.Threading.Tasks.ValueTask valued)
-                        => new global::Emik.SourceGenerators.Choices.Tests.Tasks(valued);
+                    public static global::Emik.SourceGenerators.Choices.Tests.SelfRecursive OfRecursion(Emik.SourceGenerators.Choices.Tests.SelfRecursive recursion)
+                        => new global::Emik.SourceGenerators.Choices.Tests.SelfRecursive(recursion);
 
                     /// <summary>
-                    /// Explicitly converts the union to the target type <see cref="System.Threading.Tasks.ValueTask"/>.
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> class with the variant <see cref="Hope"/> of type <see cref="int"/>.
                     /// </summary>
-                    /// <param name="x">The union to access its property.</param>
-                    /// <returns>The getter of the union <paramref name="x"/>.</returns>
+                    /// <param name="hope">The value to pass into the type.</param>
+                    /// <returns>The union containing the parameter <paramref name="hope"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static explicit operator System.Threading.Tasks.ValueTask(global::Emik.SourceGenerators.Choices.Tests.Tasks x)
-                        => x.Valued;
-
-                    /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> struct with the variant <see cref="Referenced"/> of type <see cref="System.Threading.Tasks.Task"/>.
-                    /// </summary>
-                    /// <param name="referenced">The value to pass into the type.</param>
-                    /// <returns>The union containing the parameter <paramref name="referenced"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    [global::System.Diagnostics.Contracts.PureAttribute]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static global::Emik.SourceGenerators.Choices.Tests.Tasks OfReferenced(System.Threading.Tasks.Task referenced)
-                        => new global::Emik.SourceGenerators.Choices.Tests.Tasks(referenced);
-
-                    /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> struct with the variant <see cref="Valued"/> of type <see cref="System.Threading.Tasks.ValueTask"/>.
-                    /// </summary>
-                    /// <param name="valued">The value to pass into the type.</param>
-                    /// <returns>The union containing the parameter <paramref name="valued"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    [global::System.Diagnostics.Contracts.PureAttribute]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static global::Emik.SourceGenerators.Choices.Tests.Tasks OfValued(System.Threading.Tasks.ValueTask valued)
-                        => new global::Emik.SourceGenerators.Choices.Tests.Tasks(valued);
+                    public static global::Emik.SourceGenerators.Choices.Tests.SelfRecursive OfHope(int hope)
+                        => new global::Emik.SourceGenerators.Choices.Tests.SelfRecursive(hope);
 
                     /// <summary>
                     /// Determines whether the left-hand side is equal to the right.
@@ -283,12 +238,13 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator ==(Emik.SourceGenerators.Choices.Tests.Tasks left, Emik.SourceGenerators.Choices.Tests.Tasks right)
-                        => left._discriminator == right._discriminator &&
+                    public static bool operator ==(Emik.SourceGenerators.Choices.Tests.SelfRecursive? left, Emik.SourceGenerators.Choices.Tests.SelfRecursive? right)
+                        => left is null ? right is null : right is not null &&
+                            left._discriminator == right._discriminator &&
                             left._discriminator switch
                             {
-                                0 => global::System.Collections.Generic.EqualityComparer<System.Threading.Tasks.Task>.Default.Equals(left._referenced!, right._referenced!),
-                                _ => left._valued.Equals(right._valued),
+                                0 => global::System.Collections.Generic.EqualityComparer<Emik.SourceGenerators.Choices.Tests.SelfRecursive>.Default.Equals(left._recursion!, right._recursion!),
+                                _ => left._hope == right._hope,
                             };
 
                     /// <summary>
@@ -303,7 +259,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator !=(Emik.SourceGenerators.Choices.Tests.Tasks left, Emik.SourceGenerators.Choices.Tests.Tasks right)
+                    public static bool operator !=(Emik.SourceGenerators.Choices.Tests.SelfRecursive? left, Emik.SourceGenerators.Choices.Tests.SelfRecursive? right)
                         => !(left == right);
 
                     /// <summary>
@@ -318,14 +274,16 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator >(Emik.SourceGenerators.Choices.Tests.Tasks left, Emik.SourceGenerators.Choices.Tests.Tasks right)
-                        => left._discriminator > right._discriminator ||
+                    public static bool operator >(Emik.SourceGenerators.Choices.Tests.SelfRecursive? left, Emik.SourceGenerators.Choices.Tests.SelfRecursive? right)
+                        => left is not null &&
+                            (right is null ||
+                            left._discriminator > right._discriminator ||
                             left._discriminator == right._discriminator &&
                             left._discriminator switch
                             {
-                                0 => global::System.Collections.Generic.Comparer<System.Threading.Tasks.Task>.Default.Compare(left._referenced!, right._referenced!) > 0,
-                                _ => global::System.Collections.Generic.Comparer<System.Threading.Tasks.ValueTask>.Default.Compare(left._valued, right._valued) > 0,
-                            };
+                                0 => global::System.Collections.Generic.Comparer<Emik.SourceGenerators.Choices.Tests.SelfRecursive>.Default.Compare(left._recursion!, right._recursion!) > 0,
+                                _ => left._hope > right._hope,
+                            });
 
                     /// <summary>
                     /// Determines whether the left-hand side is greater than or equal to the right.
@@ -339,7 +297,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator >=(Emik.SourceGenerators.Choices.Tests.Tasks left, Emik.SourceGenerators.Choices.Tests.Tasks right)
+                    public static bool operator >=(Emik.SourceGenerators.Choices.Tests.SelfRecursive? left, Emik.SourceGenerators.Choices.Tests.SelfRecursive? right)
                         => left == right || left > right;
 
                     /// <summary>
@@ -354,7 +312,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator <(Emik.SourceGenerators.Choices.Tests.Tasks left, Emik.SourceGenerators.Choices.Tests.Tasks right)
+                    public static bool operator <(Emik.SourceGenerators.Choices.Tests.SelfRecursive? left, Emik.SourceGenerators.Choices.Tests.SelfRecursive? right)
                         => right > left;
 
                     /// <summary>
@@ -369,7 +327,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator <=(Emik.SourceGenerators.Choices.Tests.Tasks left, Emik.SourceGenerators.Choices.Tests.Tasks right)
+                    public static bool operator <=(Emik.SourceGenerators.Choices.Tests.SelfRecursive? left, Emik.SourceGenerators.Choices.Tests.SelfRecursive? right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
@@ -377,72 +335,72 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
-                        => obj is global::Emik.SourceGenerators.Choices.Tests.Tasks x && Equals(x);
+                        => obj is global::Emik.SourceGenerators.Choices.Tests.SelfRecursive x && Equals(x);
 
                     /// <inheritdoc />
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly bool Equals(Emik.SourceGenerators.Choices.Tests.Tasks other)
+                    public bool Equals(Emik.SourceGenerators.Choices.Tests.SelfRecursive? other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly int CompareTo(object? obj)
-                        => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.Tasks x ? CompareTo(x) : -1;
+                    public int CompareTo(object? obj)
+                        => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.SelfRecursive x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly int CompareTo(Emik.SourceGenerators.Choices.Tests.Tasks other)
-                        => Equals(other) ? 0 : -1;
+                    public int CompareTo(Emik.SourceGenerators.Choices.Tests.SelfRecursive? other)
+                        => other is null ? 1 : Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly override int GetHashCode()
-                        => unchecked(_discriminator * 24049) ^
+                    public override int GetHashCode()
+                        => unchecked(_discriminator * 11497) ^
                         (_discriminator switch
                         {
-                            0 => _referenced!.GetHashCode(),
-                            _ => _valued.GetHashCode(),
+                            0 => _recursion!.GetHashCode(),
+                            _ => _hope.GetHashCode(),
                         });
 
                     /// <inheritdoc />
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly override string ToString()
+                    public override string ToString()
                         => _discriminator switch
                         {
-                            0 => $"{nameof(Referenced)}({_referenced!})",
-                            _ => $"{nameof(Valued)}({_valued})",
+                            0 => $"{nameof(Recursion)}({_recursion!})",
+                            _ => $"{nameof(Hope)}({_hope})",
                         };
 
                     /// <summary>
                     /// Invokes the callback based on current variance.
                     /// </summary>
-                    /// <param name="onReferenced">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> struct with the variant <see cref="Referenced"/> of type <see cref="System.Threading.Tasks.Task"/> is held.</param>
-                    /// <param name="onValued">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> struct with the variant <see cref="Valued"/> of type <see cref="System.Threading.Tasks.ValueTask"/> is held.</param>
+                    /// <param name="onRecursion">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> class with the variant <see cref="Recursion"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> is held.</param>
+                    /// <param name="onHope">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> class with the variant <see cref="Hope"/> of type <see cref="int"/> is held.</param>
                     /// <returns>Itself.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly Emik.SourceGenerators.Choices.Tests.Tasks Map(
-                        global::System.Action<System.Threading.Tasks.Task>? onReferenced = null,
-                        global::System.Action<System.Threading.Tasks.ValueTask>? onValued = null
+                    public Emik.SourceGenerators.Choices.Tests.SelfRecursive? Map(
+                        global::System.Action<Emik.SourceGenerators.Choices.Tests.SelfRecursive>? onRecursion = null,
+                        global::System.Action<int>? onHope = null
                     )
                     {
                         switch (_discriminator)
                         {
                             case 0:
-                                onReferenced?.Invoke(_referenced!);
+                                onRecursion?.Invoke(_recursion!);
                                 return this;
                             default:
-                                onValued?.Invoke(_valued);
+                                onHope?.Invoke(_hope);
                                 return this;
                         }
                     }
@@ -451,21 +409,21 @@ namespace Emik
                     /// Maps each variant to <typeparamref name="TMappingResult"/>.
                     /// </summary>
                     /// <typeparam name="TMappingResult">The resulting type from the mapping.</typeparam>
-                    /// <param name="onReferenced">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> struct with the variant <see cref="Referenced"/> of type <see cref="System.Threading.Tasks.Task"/> is held.</param>
-                    /// <param name="onValued">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Tasks"/> struct with the variant <see cref="Valued"/> of type <see cref="System.Threading.Tasks.ValueTask"/> is held.</param>
+                    /// <param name="onRecursion">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> class with the variant <see cref="Recursion"/> of type <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> is held.</param>
+                    /// <param name="onHope">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.SelfRecursive"/> class with the variant <see cref="Hope"/> of type <see cref="int"/> is held.</param>
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly TMappingResult Map<TMappingResult>(
-                        global::System.Func<System.Threading.Tasks.Task, TMappingResult> onReferenced,
-                        global::System.Func<System.Threading.Tasks.ValueTask, TMappingResult> onValued
+                    public TMappingResult Map<TMappingResult>(
+                        global::System.Func<Emik.SourceGenerators.Choices.Tests.SelfRecursive, TMappingResult> onRecursion,
+                        global::System.Func<int, TMappingResult> onHope
                     )
                         => _discriminator switch
                         {
-                            0 => onReferenced(_referenced!),
-                            _ => onValued(_valued),
+                            0 => onRecursion(_recursion!),
+                            _ => onHope(_hope),
                         };
 
                     /// <summary>
@@ -477,61 +435,12 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly object GetUnderlyingValue()
+                    public object GetUnderlyingValue()
                         => _discriminator switch
                         {
-                            0 => _referenced!,
-                            _ => _valued,
+                            0 => _recursion!,
+                            _ => _hope,
                         };
-
-                    /// <inheritdoc cref="System.Threading.Tasks.Task.IsCanceled"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    public readonly bool IsCanceled
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => _discriminator switch
-                        {
-                            0 => _referenced!.IsCanceled,
-                            _ => _valued.IsCanceled,
-                        };
-                    }
-
-                    /// <inheritdoc cref="System.Threading.Tasks.Task.IsCompleted"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    public readonly bool IsCompleted
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => _discriminator switch
-                        {
-                            0 => _referenced!.IsCompleted,
-                            _ => _valued.IsCompleted,
-                        };
-                    }
-
-                    /// <inheritdoc cref="System.Threading.Tasks.Task.IsCompletedSuccessfully"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    public readonly bool IsCompletedSuccessfully
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => _discriminator switch
-                        {
-                            0 => _referenced!.IsCompletedSuccessfully,
-                            _ => _valued.IsCompletedSuccessfully,
-                        };
-                    }
-
-                    /// <inheritdoc cref="System.Threading.Tasks.Task.IsFaulted"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
-                    [System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Exception")]
-                    public readonly bool IsFaulted
-                    {
-                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => _discriminator switch
-                        {
-                            0 => _referenced!.IsFaulted,
-                            _ => _valued.IsFaulted,
-                        };
-                    }
 
                     /// <inheritdoc cref="object.GetType()"/>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
@@ -539,8 +448,8 @@ namespace Emik
                     public System.Type GetUnderlyingType()
                         => _discriminator switch
                         {
-                            0 => _referenced!.GetType(),
-                            _ => typeof(System.Threading.Tasks.ValueTask),
+                            0 => _recursion!.GetType(),
+                            _ => typeof(int),
                         };
                 }
             }

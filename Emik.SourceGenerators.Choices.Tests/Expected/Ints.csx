@@ -88,7 +88,7 @@ namespace Emik
                     System.IFormattable,
                     System.IUtf8SpanFormattable
                 {
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     private readonly byte _discriminator;
 
                     /// <summary>
@@ -96,7 +96,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="first">The variant.</param>
                     /// <param name="x">The discriminator.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     private Ints(int first, byte x)
                     {
@@ -109,7 +109,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Ints"/> is the variant <see cref="First"/> of type <see cref="int"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     public readonly bool IsFirst
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -122,7 +122,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Ints"/> is the variant <see cref="Second"/> of type <see cref="int"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     public readonly bool IsSecond
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -137,7 +137,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="first">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="first"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Ints OfFirst(int first)
@@ -148,7 +148,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="second">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="second"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Ints OfSecond(int second)
@@ -163,7 +163,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.Ints left, Emik.SourceGenerators.Choices.Tests.Ints right)
@@ -183,7 +183,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is unequal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator !=(Emik.SourceGenerators.Choices.Tests.Ints left, Emik.SourceGenerators.Choices.Tests.Ints right)
@@ -198,7 +198,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.Ints left, Emik.SourceGenerators.Choices.Tests.Ints right)
@@ -219,7 +219,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.Ints left, Emik.SourceGenerators.Choices.Tests.Ints right)
@@ -234,7 +234,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.Ints left, Emik.SourceGenerators.Choices.Tests.Ints right)
@@ -249,42 +249,42 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.Ints left, Emik.SourceGenerators.Choices.Tests.Ints right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
                         => obj is global::Emik.SourceGenerators.Choices.Tests.Ints x && Equals(x);
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool Equals(Emik.SourceGenerators.Choices.Tests.Ints other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(object? obj)
                         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.Ints x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(Emik.SourceGenerators.Choices.Tests.Ints other)
                         => Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override int GetHashCode()
@@ -296,7 +296,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override string ToString()
@@ -312,7 +312,7 @@ namespace Emik
                     /// <param name="onFirst">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Ints"/> struct with the variant <see cref="First"/> of type <see cref="int"/> is held.</param>
                     /// <param name="onSecond">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Ints"/> struct with the variant <see cref="Second"/> of type <see cref="int"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly Emik.SourceGenerators.Choices.Tests.Ints Map(
                         global::System.Action<int>? onFirst = null,
@@ -339,7 +339,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly TMappingResult Map<TMappingResult>(
                         global::System.Func<int, TMappingResult> onFirst,
@@ -357,7 +357,7 @@ namespace Emik
                     /// <returns>
                     /// The underlying value from this instance.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int GetUnderlyingValue()
@@ -368,7 +368,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="int.CompareTo(int)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(int value)
                         => _discriminator switch
@@ -378,7 +378,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="int.Equals(int)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool Equals(int obj)
                         => _discriminator switch
@@ -388,7 +388,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="int.GetTypeCode()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly System.TypeCode GetTypeCode()
                         => _discriminator switch
@@ -398,7 +398,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="int.ToString(System.IFormatProvider?)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly string ToString(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -408,7 +408,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="int.ToString(string?)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly string ToString([System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("NumericFormat")] string? format)
                         => _discriminator switch
@@ -418,7 +418,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="int.ToString(string?, System.IFormatProvider?)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly string ToString([System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("NumericFormat")] string? format, global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -428,7 +428,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="int.TryFormat(System.Span{byte}, out int, System.ReadOnlySpan{char}, System.IFormatProvider?)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool TryFormat(global::System.Span<byte> utf8Destination, scoped out int bytesWritten, [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("NumericFormat")] global::System.ReadOnlySpan<char> format = default, global::System.IFormatProvider? provider = default)
                         => _discriminator switch
@@ -438,7 +438,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="int.TryFormat(System.Span{char}, out int, System.ReadOnlySpan{char}, System.IFormatProvider?)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool TryFormat(global::System.Span<char> destination, scoped out int charsWritten, [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("NumericFormat")] global::System.ReadOnlySpan<char> format = default, global::System.IFormatProvider? provider = default)
                         => _discriminator switch
@@ -453,7 +453,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool ToBoolean(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -468,7 +468,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public byte ToByte(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -483,7 +483,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public char ToChar(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -498,7 +498,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.DateTime ToDateTime(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -513,7 +513,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public decimal ToDecimal(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -528,7 +528,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public double ToDouble(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -543,7 +543,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public short ToInt16(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -558,7 +558,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int ToInt32(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -573,7 +573,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public long ToInt64(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -588,7 +588,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public sbyte ToSByte(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -603,7 +603,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public float ToSingle(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -618,7 +618,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public object ToType(global::System.Type conversionType, global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -633,7 +633,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public ushort ToUInt16(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -648,7 +648,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public uint ToUInt32(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -663,7 +663,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="Second"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public ulong ToUInt64(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -678,7 +678,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int GetByteCount()
                         => _discriminator switch
@@ -693,7 +693,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int GetShortestBitLength()
                         => _discriminator switch
@@ -708,7 +708,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool TryWriteBigEndian(global::System.Span<byte> destination, scoped out int bytesWritten)
                         => _discriminator switch
@@ -723,7 +723,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool TryWriteLittleEndian(global::System.Span<byte> destination, scoped out int bytesWritten)
                         => _discriminator switch
@@ -738,7 +738,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int WriteBigEndian(byte[] destination)
                         => _discriminator switch
@@ -753,7 +753,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int WriteBigEndian(byte[] destination, int startIndex)
                         => _discriminator switch
@@ -768,7 +768,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int WriteBigEndian(global::System.Span<byte> destination)
                         => _discriminator switch
@@ -783,7 +783,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int WriteLittleEndian(byte[] destination)
                         => _discriminator switch
@@ -798,7 +798,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int WriteLittleEndian(byte[] destination, int startIndex)
                         => _discriminator switch
@@ -813,7 +813,7 @@ namespace Emik
                     /// <see cref="First"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>,
                     /// <see cref="Second"/> as <see cref="System.Numerics.IBinaryInteger{int}"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.5.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.6.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int WriteLittleEndian(global::System.Span<byte> destination)
                         => _discriminator switch

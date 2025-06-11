@@ -769,11 +769,11 @@ sealed partial record Scaffolder(
 
     [Pure]
     bool SkipOperator(MemberSymbol x) =>
-        x.Type is not IPointerTypeSymbol &&
-        (x.Type is not ITypeParameterSymbol and { BaseType: null } ||
-            x.Type.SpecialType is SpecialType.System_ValueType ||
-            HasConflict(x) ||
-            IsNoninitial(x));
+        x.Type is not IPointerTypeSymbol and
+            (not ITypeParameterSymbol and { BaseType: null } or { SpecialType: SpecialType.System_ValueType }) ||
+        RoslynComparer.Signature.Equals(Named, x.Type) ||
+        HasConflict(x) ||
+        IsNoninitial(x);
 
     [Pure]
     int Inheritance((int Index, MemberSymbol Item) tuple) =>

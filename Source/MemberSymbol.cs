@@ -165,7 +165,7 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
 
     /// <summary>Compares two <see cref="INamespaceOrTypeSymbol"/> instances.</summary>
     /// <remarks><para>
-    /// As opposed to <see cref="RoslynComparer.Instance"/>, this method also checks for the members
+    /// As opposed to <see cref="RoslynComparer.Signature"/>, this method also checks for the members
     /// of <see cref="INamespaceOrTypeSymbol"/> instances if they are declared in source, since both instances
     /// could have the same metadata name but come from different iterations of source code.
     /// </para></remarks>

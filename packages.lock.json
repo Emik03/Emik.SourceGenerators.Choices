@@ -87,17 +87,11 @@
         "resolved": "1.6.1",
         "contentHash": "cNFJIQESLXEryIleIx4xqNxA++YtdfyFxkjvmKZygLmgFthb6054deJ20pSl2y92T6J1SRzLGyE4kVaD3cub1g=="
       },
-      "Dwaas.Param.Documentation.Analyzer": {
-        "type": "Direct",
-        "requested": "[1.0.6258.29691, )",
-        "resolved": "1.0.6258.29691",
-        "contentHash": "A6dB2OZjhA9kaIaEiT8L9dCxQAf4ExmOymSbiHFI2oTjT1ZVIkPz82FUBA28GNpqIvElTs/BH0h0louTjAOZOQ=="
-      },
       "Emik.Analyzers.Matches": {
         "type": "Direct",
-        "requested": "[1.2.2, )",
-        "resolved": "1.2.2",
-        "contentHash": "cVx89sCPBU1R+HZKhuewZ3o6ZDTUPhv1XmfLyXVbOeTVgIh8yLGGn33nNFN7ZFdLwwjlB7Jkga2RqCgdzF9ODQ=="
+        "requested": "[1.3.1, )",
+        "resolved": "1.3.1",
+        "contentHash": "rj32kYcoAexzA43J4AYbuVSxvz9+zYIe2ztmKLoBRxxogAc890Rd/W6Hw/SVhryvJBcsWXkR0m1UMB7ELyDwog=="
       },
       "Emik.SourceGenerators.Implicit": {
         "type": "Direct",
@@ -207,15 +201,15 @@
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Direct",
-        "requested": "[4.14.0, )",
-        "resolved": "4.14.0",
-        "contentHash": "fCj+MzjJxN/4iYAz7JPLONGKeTomaZNzx4UgGA0AerTrx4Ou6Rw2J5YF4V51vWW+aSQSCv1nnAkCZUw5Z9+3zw=="
+        "requested": "[5.0.0-1.25277.114, )",
+        "resolved": "5.0.0-1.25277.114",
+        "contentHash": "c6QPsJG6HzM7eA05YjzEerMWIKgyoF7y0D0MC/mftEll4Vd1Gy6dxH8GO9i3dFpUil0Ij7E4hLLsKdD1IJrkrQ=="
       },
       "Microsoft.CodeAnalysis.NetAnalyzers": {
         "type": "Direct",
-        "requested": "[10.0.0-preview.25258.110, )",
-        "resolved": "10.0.0-preview.25258.110",
-        "contentHash": "FRi+GO79QGUY0umNW54hivpKzNEc3EFrwKvFu+1jsJoRASS9DFrosk0vdyI7YW/N15vAmHhDNjm9PhEFwL9Mdg=="
+        "requested": "[10.0.0-preview.25277.114, )",
+        "resolved": "10.0.0-preview.25277.114",
+        "contentHash": "8Nr0OXSkPOGA6MxJa7GDCk4+IEQIJvNRqUW+5Ro0PbmrW7DnV5HZPDxz0Uhi5UJwgE31AIT+zdsaINvFmZpzWQ=="
       },
       "NETStandard.Library": {
         "type": "Direct",

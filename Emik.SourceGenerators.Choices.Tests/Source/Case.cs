@@ -125,6 +125,9 @@ public partial class Case()
         """
     );
 
+    public sealed class SelfRecursive()
+        : Case("[Choice] partial class SelfRecursive(SelfRecursive recursion, int hope);");
+
     public sealed class SpanEncodings() : Case(
         """
         [Choice(true)]
