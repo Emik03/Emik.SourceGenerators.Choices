@@ -400,14 +400,12 @@ readonly record struct Signature(
             left is RefKind.None || right is RefKind.None ? RefKind.None :
             left is RefKind.Ref || right is RefKind.Ref ? RefKind.Ref : RefKind.RefReadOnly;
 
-        var small = ImmutableArray.CreateBuilder<string?>();
+        var small = ImmutableArray.CreateBuilder<string?>(symbols.Length);
         small.Add(InterfaceDeclaration(member));
         var kind = Kind(symbols[0].Symbol);
 
-        for (var i = 1; i < symbols.Length; i++)
+        for (var i = 1; i < symbols.Length && symbols[i] is var current; i++)
         {
-            var current = symbols[i];
-
             if (!IsIn(current, assembly, out var interfaceDeclaration))
                 break;
 
