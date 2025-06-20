@@ -147,15 +147,11 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
                     QualifiedNameSyntax
                     {
                         Left: IdentifierNameSyntax { Identifier.Text: Choice } or QualifiedNameSyntax,
-                        Right: IdentifierNameSyntax
-                        {
-                            Identifier.Text: nameof(Accessibility.Private) or nameof(Accessibility.Public),
-                        } or
-                        GenericNameSyntax,
+                        Right: IdentifierNameSyntax or GenericNameSyntax,
                     },
-                    Right: GenericNameSyntax,
+                    Right: IdentifierNameSyntax or GenericNameSyntax,
                 },
-                Right: GenericNameSyntax,
+                Right: IdentifierNameSyntax or GenericNameSyntax,
             },
         };
 
@@ -186,14 +182,9 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
                     break;
                 else if (right is nameof(Accessibility.Private) or nameof(Accessibility.Public))
                     mutablePublicly = right is nameof(Accessibility.Public);
-                else
-                    return default;
 
-            if (q is { Left: IdentifierNameSyntax { Identifier.Text: var end }, Right: not GenericNameSyntax })
-                if (end is Choice)
-                    break;
-                else
-                    return default;
+            if (q is { Left: IdentifierNameSyntax { Identifier.Text: Choice }, Right: not GenericNameSyntax })
+                break;
 
             if (mutablePublicly is not null || MemberSymbol.From(q, context.SemanticModel, token) is not { } member)
                 return default;
