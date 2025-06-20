@@ -186,7 +186,6 @@ sealed partial record Scaffolder(
           }}{{Symbols.Select(DeclareConstructor).Conjoin("")
           }}{{Symbols.Select(DeclareCheck).Conjoin("")
           }}{{Symbols.Select(DeclareProperty).Conjoin("")
-          }}{{DeclareImplicitlyUsingParametersProperty
           }}{{Symbols.Select(DeclareOperators).Conjoin("")
           }}{{Symbols.Select(DeclareFactory).Conjoin("")
           }}{{DeclareInterfaceImplementations
@@ -212,20 +211,6 @@ sealed partial record Scaffolder(
                     .Reverse()
                     .Index()
                     .Aggregate("", DeclareNestedClass)}
-
-
-                 """
-            )
-            : "";
-
-    [Pure]
-    public string DeclareImplicitlyUsingParametersProperty =>
-        UsesPrimaryConstructor && Members.All(x => x.Name is not UsedImplicitly)
-            ? CSharp(
-                $"""
-                     /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
-                     {HideFromEditor}
-                     {SymbolsUnsafe}bool {UsedImplicitly} => {Symbols.Skip(1).Select(x => $"{x.ParameterName} is var _").Conjoin(" && ")};
 
 
                  """

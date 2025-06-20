@@ -217,10 +217,6 @@ namespace Emik
                         get => _discriminator is 2 ? _or : default;
                     }
 
-                    /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
-                    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                    bool UsedImplicitly => or is var _ && and is var _;
-
                     /// <summary>
                     /// Implicitly converts the <see cref="string"/> parameter to the union.
                     /// </summary>

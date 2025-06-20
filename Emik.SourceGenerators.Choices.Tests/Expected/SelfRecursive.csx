@@ -178,10 +178,6 @@ namespace Emik
                         get => _discriminator is 1 ? _hope : default;
                     }
 
-                    /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
-                    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                    bool UsedImplicitly => hope is var _;
-
                     /// <summary>
                     /// Implicitly converts the <see cref="int"/> parameter to the union.
                     /// </summary>

@@ -310,10 +310,6 @@ namespace Emik
                         get => _discriminator is 2 ? _unmanaged._native : default;
                     }
 
-                    /// <summary>This property exists solely to suppress lints regarding unused parameters.</summary>
-                    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                    unsafe bool UsedImplicitly => chars is var _ && native is var _;
-
                     /// <summary>
                     /// Implicitly converts the <see cref="byte*"/> parameter to the union.
                     /// </summary>
