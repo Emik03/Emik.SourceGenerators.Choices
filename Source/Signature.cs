@@ -415,7 +415,7 @@ readonly record struct Signature(
             small.Add(interfaceDeclaration);
 
             if (i == symbols.Length - 1 && !exists.Contains(this))
-                set.Add((member, kind, small.ToImmutable()));
+                set.Add((member, kind, small.DrainToImmutable()));
         }
     }
 }

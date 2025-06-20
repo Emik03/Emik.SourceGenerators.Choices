@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <FileVersion>1.4.11</FileVersion>
+        <FileVersion>1.4.12</FileVersion>
         <CopyrightSince>2023</CopyrightSince>
         <TargetFramework>netstandard2.0</TargetFramework>
         <RepositoryUrl>https://github.com/Emik03/Emik.SourceGenerators.Choices</RepositoryUrl>

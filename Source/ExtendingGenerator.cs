@@ -171,19 +171,19 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 
         var fields = ImmutableArray.CreateBuilder<MemberSymbol>();
         bool? mutablePublicly = null;
-        var e = false;
 
         for (var n = attribute.Name; n is QualifiedNameSyntax q; n = q.Left)
         {
             token.ThrowIfCancellationRequested();
+            var isLeftChoice = q.Left is IdentifierNameSyntax { Identifier.Text: Choice };
 
             if (q.Right is IdentifierNameSyntax { Identifier.Text: var right })
-                if (right is Choice && q.Left is IdentifierNameSyntax { Identifier.Text: nameof(Emik) } && (e = true))
+                if (right is Choice && q.Left is IdentifierNameSyntax { Identifier.Text: nameof(Emik) })
                     break;
-                else if (right is nameof(Accessibility.Private) or nameof(Accessibility.Public))
+                else if (isLeftChoice && right is nameof(Accessibility.Private) or nameof(Accessibility.Public))
                     mutablePublicly = right is nameof(Accessibility.Public);
 
-            if (q is { Left: IdentifierNameSyntax { Identifier.Text: Choice }, Right: not GenericNameSyntax })
+            if (isLeftChoice)
                 break;
 
             if (mutablePublicly is not null || MemberSymbol.From(q, context.SemanticModel, token) is not { } member)
@@ -193,7 +193,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         }
 
         fields.Reverse();
-        return (named, fields.ToImmutable(), mutablePublicly, e);
+        return (named, fields.DrainToImmutable(), mutablePublicly, true);
     }
 
     /// <summary>Extracts the members from the node.</summary>
