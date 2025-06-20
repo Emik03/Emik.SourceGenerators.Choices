@@ -208,7 +208,7 @@ sealed partial record Scaffolder(
                          true => nameof(Accessibility.Public), false => nameof(Accessibility.Private), null => null,
                      } is { } mutablePublicly ? [mutablePublicly] : [])
                     .Select((x, i) => ((bool?)null, x, i is 0))
-                    .Concat(Symbols.Select(x => ((bool?)x.Type.IsRefLikeType, x.Name, false)))
+                    .Concat(Symbols.Select(x => (x.CanHavePolyfillAttribute ? x.Type.IsRefLikeType : (bool?)null, x.Name, false)))
                     .Reverse()
                     .Index()
                     .Aggregate("", DeclareNestedClass)}

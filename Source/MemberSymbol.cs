@@ -5,7 +5,12 @@ namespace Emik.SourceGenerators.Choices;
 /// <param name="Type">The type of the member.</param>
 /// <param name="Name">The name of the member.</param>
 /// <param name="Symbol">The underlying symbol, if any.</param>
-public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbol? Symbol = null)
+public readonly record struct MemberSymbol(
+    ITypeSymbol Type,
+    string Name,
+    ISymbol? Symbol = null,
+    bool CanHavePolyfillAttribute = true
+)
 {
     [StringSyntax("C#")]
     const string Action = "global::System.Action", Func = "global::System.Func";
@@ -263,6 +268,28 @@ public readonly record struct MemberSymbol(ITypeSymbol Type, string Name, ISymbo
             IFieldSymbol { CanBeReferencedByName: true } x => new(x),
             IPropertySymbol { CanBeReferencedByName: true } x => new(x),
             IParameterSymbol { CanBeReferencedByName: true } x => new(x),
+            _ => null,
+        };
+
+    /// <summary>Creates a new instance of the <see cref="MemberSymbol"/> struct from the underlying syntax.</summary>
+    /// <param name="syntax">The <see cref="QualifiedNameSyntax"/> to deconstruct.</param>
+    /// <param name="model">The <see cref="SemanticModel"/> for looking up <see cref="ITypeSymbol"/>.</param>
+    /// <param name="token">The cancellation token.</param>
+    /// <returns>The new <see cref="MemberSymbol"/> instance.</returns>
+    public static MemberSymbol? From(
+        QualifiedNameSyntax syntax,
+        SemanticModel model,
+        CancellationToken token = default
+    ) =>
+        syntax.Right switch
+        {
+            GenericNameSyntax { Identifier.Text: var generic, TypeArgumentList.Arguments: [var a] } when
+                (model.GetDeclaredSymbolSafe(a, token) ?? model.GetSymbolSafe(a, token)) is ITypeSymbol type =>
+                new(type, generic),
+            IdentifierNameSyntax { Identifier.Text: var identifier } when
+                // ReSharper disable once NullableWarningSuppressionIsUsed
+                model.Compilation.GetTypeByMetadataName(typeof(ValueTuple).FullName!) is { } unit =>
+                new(unit, identifier, null, false),
             _ => null,
         };
 

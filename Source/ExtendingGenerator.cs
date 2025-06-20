@@ -195,13 +195,10 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
                 else
                     return default;
 
-            if (mutablePublicly is not null ||
-                q.Right is not GenericNameSyntax { Identifier.Text: var next, TypeArgumentList.Arguments: [var arg] } ||
-                (context.SemanticModel.GetDeclaredSymbolSafe(arg, token) ??
-                    context.SemanticModel.GetSymbolSafe(arg, token)) is not ITypeSymbol type)
+            if (mutablePublicly is not null || MemberSymbol.From(q, context.SemanticModel, token) is not { } member)
                 return default;
 
-            fields.Add(new(type, next));
+            fields.Add(member);
         }
 
         fields.Reverse();
