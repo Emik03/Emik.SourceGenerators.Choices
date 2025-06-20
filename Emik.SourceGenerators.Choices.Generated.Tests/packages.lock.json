@@ -227,6 +227,12 @@
           "Scifa.CheckedExceptions.Attributes": "1.0.14"
         }
       },
+      "Text.Analyzers": {
+        "type": "Direct",
+        "requested": "[5.0.0-1.25277.114, )",
+        "resolved": "5.0.0-1.25277.114",
+        "contentHash": "nbYnMWteAF4lNvlqD24ejnmeEvmYW3tchdrymrhqhDbnsDqkUyg2N/uQY1FIyQNwLXX3eMwF7GQ+Z37rgtKxgw=="
+      },
       "UnityEngineAnalyzer": {
         "type": "Direct",
         "requested": "[1.0.0, )",
