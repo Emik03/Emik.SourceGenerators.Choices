@@ -150,7 +150,7 @@ namespace Emik
                     /// <summary>
                     /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                     partial struct Unmanaged
                     {
@@ -168,7 +168,7 @@ namespace Emik
                     /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Bytes"/> of type <see cref="byte*"/> due to it being a pointer type.
                     /// </summary>
                     /// <param name="bytes">The referenced value.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public unsafe delegate void BytesHandler(byte* bytes);
 
                     /// <summary>
@@ -177,14 +177,14 @@ namespace Emik
                     /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
                     /// <param name="bytes">The referenced value.</param>
                     /// <returns>The result of the mapping.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public unsafe delegate TMappingResult BytesHandler<out TMappingResult>(byte* bytes);
 
                     /// <summary>
                     /// Explicit side effect delegate for the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Chars"/> of type <see cref="char*"/> due to it being a pointer type.
                     /// </summary>
                     /// <param name="chars">The referenced value.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public unsafe delegate void CharsHandler(char* chars);
 
                     /// <summary>
@@ -193,20 +193,20 @@ namespace Emik
                     /// <typeparam name="TMappingResult">The type of value to return.</typeparam>
                     /// <param name="chars">The referenced value.</param>
                     /// <returns>The result of the mapping.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public unsafe delegate TMappingResult CharsHandler<out TMappingResult>(char* chars);
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     private readonly byte _discriminator;
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     private readonly unsafe Unmanaged _unmanaged = new Unmanaged() { _bytes = bytes };
 
                     /// <summary>
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Bytes"/> of type <see cref="byte*"/>.
                     /// </summary>
                     /// <param name="bytes">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public unsafe Pointers(byte* bytes)
                         : this(bytes, default(char*), default(nint))
@@ -219,7 +219,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Chars"/> of type <see cref="char*"/>.
                     /// </summary>
                     /// <param name="chars">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public unsafe Pointers(char* chars)
                         : this(default(byte*), chars, default(nint))
@@ -232,7 +232,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Native"/> of type <see cref="nint"/>.
                     /// </summary>
                     /// <param name="native">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public unsafe Pointers(nint native)
                         : this(default(byte*), default(char*), native)
@@ -244,7 +244,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> is the variant <see cref="Bytes"/> of type <see cref="byte*"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public readonly bool IsBytes
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -256,7 +256,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> is the variant <see cref="Chars"/> of type <see cref="char*"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public readonly bool IsChars
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -268,7 +268,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> is the variant <see cref="Native"/> of type <see cref="nint"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public readonly bool IsNative
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -280,7 +280,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="byte*"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public readonly unsafe byte* Bytes
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -291,7 +291,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="char*"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public readonly unsafe char* Chars
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -302,7 +302,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="nint"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     public readonly nint Native
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -315,7 +315,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="bytes">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="bytes"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe implicit operator global::Emik.SourceGenerators.Choices.Tests.Pointers(byte* bytes)
@@ -326,7 +326,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe explicit operator byte*(global::Emik.SourceGenerators.Choices.Tests.Pointers x)
@@ -337,7 +337,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="chars">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="chars"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe implicit operator global::Emik.SourceGenerators.Choices.Tests.Pointers(char* chars)
@@ -348,7 +348,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe explicit operator char*(global::Emik.SourceGenerators.Choices.Tests.Pointers x)
@@ -359,7 +359,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="native">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="native"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Pointers(nint native)
@@ -370,7 +370,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator nint(global::Emik.SourceGenerators.Choices.Tests.Pointers x)
@@ -381,7 +381,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="bytes">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="bytes"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe global::Emik.SourceGenerators.Choices.Tests.Pointers OfBytes(byte* bytes)
@@ -392,7 +392,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="chars">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="chars"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe global::Emik.SourceGenerators.Choices.Tests.Pointers OfChars(char* chars)
@@ -403,7 +403,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="native">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="native"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Pointers OfNative(nint native)
@@ -418,7 +418,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe bool operator ==(Emik.SourceGenerators.Choices.Tests.Pointers left, Emik.SourceGenerators.Choices.Tests.Pointers right)
@@ -439,7 +439,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is unequal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator !=(Emik.SourceGenerators.Choices.Tests.Pointers left, Emik.SourceGenerators.Choices.Tests.Pointers right)
@@ -454,7 +454,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static unsafe bool operator >(Emik.SourceGenerators.Choices.Tests.Pointers left, Emik.SourceGenerators.Choices.Tests.Pointers right)
@@ -476,7 +476,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.Pointers left, Emik.SourceGenerators.Choices.Tests.Pointers right)
@@ -491,7 +491,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.Pointers left, Emik.SourceGenerators.Choices.Tests.Pointers right)
@@ -506,42 +506,42 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.Pointers left, Emik.SourceGenerators.Choices.Tests.Pointers right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
                         => obj is global::Emik.SourceGenerators.Choices.Tests.Pointers x && Equals(x);
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool Equals(Emik.SourceGenerators.Choices.Tests.Pointers other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(object? obj)
                         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.Pointers x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(Emik.SourceGenerators.Choices.Tests.Pointers other)
                         => Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly unsafe override int GetHashCode()
@@ -554,7 +554,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly unsafe override string ToString()
@@ -572,7 +572,7 @@ namespace Emik
                     /// <param name="onChars">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Chars"/> of type <see cref="char*"/> is held.</param>
                     /// <param name="onNative">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Pointers"/> struct with the variant <see cref="Native"/> of type <see cref="nint"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly unsafe Emik.SourceGenerators.Choices.Tests.Pointers Map(
                         BytesHandler? onBytes = null,
@@ -604,7 +604,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.10.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.11.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly unsafe TMappingResult Map<TMappingResult>(
                         BytesHandler<TMappingResult> onBytes,
