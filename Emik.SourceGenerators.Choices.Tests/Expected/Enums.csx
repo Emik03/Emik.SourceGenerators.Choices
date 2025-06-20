@@ -186,7 +186,7 @@ namespace Emik
                     /// <summary>
                     /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                     partial struct Unmanaged
                     {
@@ -203,17 +203,17 @@ namespace Emik
                         internal System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags _valueTaskSources;
                     }
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     private readonly byte _discriminator;
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     private readonly Unmanaged _unmanaged;
 
                     /// <summary>
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> struct with the variant <see cref="AssemblyNames"/> of type <see cref="System.Reflection.AssemblyNameFlags"/>.
                     /// </summary>
                     /// <param name="assemblyNames">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Enums(System.Reflection.AssemblyNameFlags assemblyNames)
                     {
@@ -225,7 +225,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> struct with the variant <see cref="Bindings"/> of type <see cref="System.Reflection.BindingFlags"/>.
                     /// </summary>
                     /// <param name="bindings">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Enums(System.Reflection.BindingFlags bindings)
                     {
@@ -237,7 +237,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> struct with the variant <see cref="Sockets"/> of type <see cref="System.Net.Sockets.SocketFlags"/>.
                     /// </summary>
                     /// <param name="sockets">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Enums(System.Net.Sockets.SocketFlags sockets)
                     {
@@ -249,7 +249,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> struct with the variant <see cref="ValueTaskSources"/> of type <see cref="System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags"/>.
                     /// </summary>
                     /// <param name="valueTaskSources">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Enums(System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags valueTaskSources)
                     {
@@ -260,7 +260,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> is the variant <see cref="AssemblyNames"/> of type <see cref="System.Reflection.AssemblyNameFlags"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public readonly bool IsAssemblyNames
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -272,7 +272,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> is the variant <see cref="Bindings"/> of type <see cref="System.Reflection.BindingFlags"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public readonly bool IsBindings
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -284,7 +284,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> is the variant <see cref="Sockets"/> of type <see cref="System.Net.Sockets.SocketFlags"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public readonly bool IsSockets
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -296,7 +296,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> is the variant <see cref="ValueTaskSources"/> of type <see cref="System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public readonly bool IsValueTaskSources
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -308,7 +308,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="System.Reflection.AssemblyNameFlags"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public readonly System.Reflection.AssemblyNameFlags AssemblyNames
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -319,7 +319,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="System.Reflection.BindingFlags"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public readonly System.Reflection.BindingFlags Bindings
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -330,7 +330,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="System.Net.Sockets.SocketFlags"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public readonly System.Net.Sockets.SocketFlags Sockets
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -341,7 +341,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public readonly System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags ValueTaskSources
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -354,7 +354,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="assemblyNames">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="assemblyNames"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Enums(System.Reflection.AssemblyNameFlags assemblyNames)
@@ -365,7 +365,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator System.Reflection.AssemblyNameFlags(global::Emik.SourceGenerators.Choices.Tests.Enums x)
@@ -376,7 +376,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="bindings">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="bindings"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Enums(System.Reflection.BindingFlags bindings)
@@ -387,7 +387,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator System.Reflection.BindingFlags(global::Emik.SourceGenerators.Choices.Tests.Enums x)
@@ -398,7 +398,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="sockets">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="sockets"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Enums(System.Net.Sockets.SocketFlags sockets)
@@ -409,7 +409,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator System.Net.Sockets.SocketFlags(global::Emik.SourceGenerators.Choices.Tests.Enums x)
@@ -420,7 +420,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="valueTaskSources">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="valueTaskSources"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Enums(System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags valueTaskSources)
@@ -431,7 +431,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags(global::Emik.SourceGenerators.Choices.Tests.Enums x)
@@ -442,7 +442,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="assemblyNames">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="assemblyNames"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Enums OfAssemblyNames(System.Reflection.AssemblyNameFlags assemblyNames)
@@ -453,7 +453,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="bindings">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="bindings"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Enums OfBindings(System.Reflection.BindingFlags bindings)
@@ -464,7 +464,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="sockets">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="sockets"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Enums OfSockets(System.Net.Sockets.SocketFlags sockets)
@@ -475,7 +475,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="valueTaskSources">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="valueTaskSources"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Enums OfValueTaskSources(System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags valueTaskSources)
@@ -490,7 +490,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.Enums left, Emik.SourceGenerators.Choices.Tests.Enums right)
@@ -512,7 +512,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is unequal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator !=(Emik.SourceGenerators.Choices.Tests.Enums left, Emik.SourceGenerators.Choices.Tests.Enums right)
@@ -527,7 +527,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.Enums left, Emik.SourceGenerators.Choices.Tests.Enums right)
@@ -550,7 +550,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.Enums left, Emik.SourceGenerators.Choices.Tests.Enums right)
@@ -565,7 +565,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.Enums left, Emik.SourceGenerators.Choices.Tests.Enums right)
@@ -580,42 +580,42 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.Enums left, Emik.SourceGenerators.Choices.Tests.Enums right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
                         => obj is global::Emik.SourceGenerators.Choices.Tests.Enums x && Equals(x);
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool Equals(Emik.SourceGenerators.Choices.Tests.Enums other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(object? obj)
                         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.Enums x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(Emik.SourceGenerators.Choices.Tests.Enums other)
                         => Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override int GetHashCode()
@@ -629,7 +629,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override string ToString()
@@ -649,7 +649,7 @@ namespace Emik
                     /// <param name="onSockets">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> struct with the variant <see cref="Sockets"/> of type <see cref="System.Net.Sockets.SocketFlags"/> is held.</param>
                     /// <param name="onValueTaskSources">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Enums"/> struct with the variant <see cref="ValueTaskSources"/> of type <see cref="System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly Emik.SourceGenerators.Choices.Tests.Enums Map(
                         global::System.Action<System.Reflection.AssemblyNameFlags>? onAssemblyNames = null,
@@ -686,7 +686,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly TMappingResult Map<TMappingResult>(
                         global::System.Func<System.Reflection.AssemblyNameFlags, TMappingResult> onAssemblyNames,
@@ -708,7 +708,7 @@ namespace Emik
                     /// <returns>
                     /// The underlying value from this instance.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly System.Enum GetUnderlyingValue()
@@ -728,7 +728,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.TypeCode GetTypeCode()
                         => _discriminator switch
@@ -747,7 +747,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool ToBoolean(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -766,7 +766,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public byte ToByte(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -785,7 +785,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public char ToChar(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -804,7 +804,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.DateTime ToDateTime(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -823,7 +823,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public decimal ToDecimal(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -842,7 +842,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public double ToDouble(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -861,7 +861,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public short ToInt16(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -880,7 +880,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public int ToInt32(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -899,7 +899,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public long ToInt64(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -918,7 +918,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public sbyte ToSByte(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -937,7 +937,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public float ToSingle(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -956,7 +956,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public string ToString(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -975,7 +975,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public object ToType(global::System.Type conversionType, global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -994,7 +994,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public ushort ToUInt16(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -1013,7 +1013,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public uint ToUInt32(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -1032,7 +1032,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IConvertible"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IConvertible"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public ulong ToUInt64(global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -1051,7 +1051,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.ISpanFormattable"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.ISpanFormattable"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool TryFormat(global::System.Span<char> destination, scoped out int charsWritten, global::System.ReadOnlySpan<char> format, global::System.IFormatProvider? provider)
                         => _discriminator switch
@@ -1070,7 +1070,7 @@ namespace Emik
                     /// <see cref="Sockets"/> as <see cref="System.IFormattable"/>,
                     /// <see cref="ValueTaskSources"/> as <see cref="System.IFormattable"/>.
                     /// </remarks>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public string ToString(string? format, global::System.IFormatProvider? formatProvider)
                         => _discriminator switch
@@ -1082,7 +1082,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Enum.HasFlag(System.Enum)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public bool HasFlag(global::System.Enum flag)
                         => _discriminator switch
@@ -1094,7 +1094,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="System.Enum.ToString(string?)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public string ToString([System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("EnumFormat")] string? format)
                         => _discriminator switch
@@ -1106,7 +1106,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="object.GetType()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.13.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Type GetUnderlyingType()
                         => _discriminator switch
