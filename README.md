@@ -1,6 +1,7 @@
-[![Icon](Images/icon.svg)](https://raw.githubusercontent.com/Emik03/Emik.SourceGenerators.Choices/refs/heads/main/Images/icon.svg)
+[<img src="Images/icon.svg" width=25% height=25%>](https://raw.githubusercontent.com/Emik03/Emik.SourceGenerators.Choices/refs/heads/main/Images/icon.svg)
 
 # Emik.SourceGenerators.Choices
+
 [![NuGet package](https://img.shields.io/nuget/v/Emik.SourceGenerators.Choices.svg?color=50fa7b&logo=NuGet&style=for-the-badge)](https://www.nuget.org/packages/Emik.SourceGenerators.Choices)
 [![License](https://img.shields.io/github/license/Emik03/Emik.SourceGenerators.Choices.svg?color=6272a4&style=for-the-badge)](https://github.com/Emik03/Emik.SourceGenerators.Choices/blob/main/LICENSE)
 
