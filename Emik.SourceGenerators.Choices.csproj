@@ -7,4 +7,8 @@
         <Description>Annotate [Choice] to transform your type into a highly performant and flexible disjoint union.</Description>
         <PackageTags>Analyzer Coproduct Delegate Discriminated Disjoint Either Forwarder Functional Generator Infer Inference Interface Monad Monadic Monoid Performant Roslyn Source Union</PackageTags>
     </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Gu.Roslyn.Extensions.Source" Version="0.17.1" PrivateAssets="all" IncludeAssets="compile" ExcludeAssets="runtime" GeneratePathProperty="true"/>
+        <Compile Include="$(PkgGu_Roslyn_Extensions_Source)/contentFiles/cs/any/**/*.cs"/>
+    </ItemGroup>
 </Project>
