@@ -77,11 +77,13 @@ public readonly record struct MemberSymbol(
 
     /// <summary>Gets a value indicating whether the member has <see cref="IComparable{T}.CompareTo"/>.</summary>
     [Pure]
-    public bool IsInterfaceComparable => Type.GetMembers().Any(x => IsSingleSelf(x, nameof(IComparable.CompareTo)));
+    public bool IsInterfaceComparable =>
+        Type.TryFindFirstMember<IMethodSymbol>(x => IsSingleSelf(x, nameof(IComparable.CompareTo)), out _);
 
     /// <summary>Gets a value indicating whether the member has <see cref="IEquatable{T}.Equals"/>.</summary>
     [Pure]
-    public bool IsInterfaceEquatable => Type.GetMembers().Any(x => IsSingleSelf(x, nameof(Equals)));
+    public bool IsInterfaceEquatable =>
+        Type.TryFindFirstMember<IMethodSymbol>(x => IsSingleSelf(x, nameof(Equals)), out _);
 
     /// <summary>Gets a value indicating whether the member has an operator comparison method.</summary>
     [Pure]
@@ -89,7 +91,7 @@ public readonly record struct MemberSymbol(
         Type is IPointerTypeSymbol ||
         Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         Type.IsUnmanagedPrimitive() ||
-        Type.GetMembers().Any(x => IsOperator(x, "op_GreaterThan"));
+        RoslynComparer.Signature.ContainsOperator(Type, "op_GreaterThan");
 
     /// <summary>Gets a value indicating whether the member has an operator equality method.</summary>
     [Pure]
@@ -97,7 +99,7 @@ public readonly record struct MemberSymbol(
         Type is IPointerTypeSymbol ||
         Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         Type.IsUnmanagedPrimitive() ||
-        Type.GetMembers().Any(x => IsOperator(x, "op_Equality"));
+        RoslynComparer.Signature.ContainsOperator(Type, "op_Equality");
 
     /// <summary>Gets a value indicating whether the type is a reference type.</summary>
     [Pure]
@@ -180,24 +182,6 @@ public readonly record struct MemberSymbol(
     [Pure]
     public static bool Equal(INamespaceOrTypeSymbol? x, INamespaceOrTypeSymbol? y) =>
         ReferenceEquals(x, y) || x is not null && y is not null && (SourcedEquals(x, y) || UnsourcedEquals(x, y));
-
-    /// <summary>Determines if the <see cref="ISymbol"/> is an operator.</summary>
-    /// <param name="symbol">The <see cref="ISymbol"/> to check.</param>
-    /// <param name="expect">The expected name of the operator.</param>
-    /// <returns>
-    /// The value <see langword="true"/> if the <see cref="ISymbol"/>
-    /// is an operator; otherwise, <see langword="false"/>.
-    /// </returns>
-    [Pure]
-    public static bool IsOperator(ISymbol symbol, string expect) =>
-        symbol is IMethodSymbol
-        {
-            IsStatic: true,
-            Name: var name,
-            DeclaredAccessibility: Accessibility.Public,
-            MethodKind: MethodKind.BuiltinOperator,
-        } &&
-        expect == name;
 
     /// <summary>Determines if the <see cref="ISymbol"/> is a method that has one parameter of itself.</summary>
     /// <param name="x">The <see cref="ISymbol"/> to check.</param>

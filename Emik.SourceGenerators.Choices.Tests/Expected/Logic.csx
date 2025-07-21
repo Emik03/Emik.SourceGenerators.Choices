@@ -313,7 +313,7 @@ namespace Emik
                             left._discriminator == right._discriminator &&
                             left._discriminator switch
                             {
-                                0 => left._one!.Equals(right._one!),
+                                0 => left._one! == right._one!,
                                 1 => left._or.Equals(right._or),
                                 _ => left._or.Equals(right._or),
                             };

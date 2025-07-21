@@ -292,26 +292,6 @@ namespace Emik
                         => new global::Emik.SourceGenerators.Choices.Tests.SpanEncodings(utf16);
 
                     /// <summary>
-                    /// Determines whether the left-hand side is equal to the right.
-                    /// </summary>
-                    /// <param name="left">The left-hand side.</param>
-                    /// <param name="right">The right-hand side.</param>
-                    /// <returns>
-                    /// The value determining whether the parameter <paramref name="left"/>
-                    /// is equal to the parameter <paramref name="right"/>.
-                    /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
-                    [global::System.Diagnostics.Contracts.PureAttribute]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator ==(Emik.SourceGenerators.Choices.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Tests.SpanEncodings right)
-                        => left._discriminator == right._discriminator &&
-                            left._discriminator switch
-                            {
-                                0 => false,
-                                _ => false,
-                            };
-
-                    /// <summary>
                     /// Determines whether the left-hand side is unequal to the right.
                     /// </summary>
                     /// <param name="left">The left-hand side.</param>
@@ -325,42 +305,6 @@ namespace Emik
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator !=(Emik.SourceGenerators.Choices.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Tests.SpanEncodings right)
                         => !(left == right);
-
-                    /// <summary>
-                    /// Determines whether the left-hand side is greater than the right.
-                    /// </summary>
-                    /// <param name="left">The left-hand side.</param>
-                    /// <param name="right">The right-hand side.</param>
-                    /// <returns>
-                    /// The value determining whether the parameter <paramref name="left"/>
-                    /// is greater than the parameter <paramref name="right"/>.
-                    /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
-                    [global::System.Diagnostics.Contracts.PureAttribute]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator >(Emik.SourceGenerators.Choices.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Tests.SpanEncodings right)
-                        => left._discriminator > right._discriminator ||
-                            left._discriminator == right._discriminator &&
-                            left._discriminator switch
-                            {
-                                0 => false,
-                                _ => false,
-                            };
-
-                    /// <summary>
-                    /// Determines whether the left-hand side is greater than or equal to the right.
-                    /// </summary>
-                    /// <param name="left">The left-hand side.</param>
-                    /// <param name="right">The right-hand side.</param>
-                    /// <returns>
-                    /// The value determining whether the parameter <paramref name="left"/>
-                    /// is greater than or equal to the parameter <paramref name="right"/>.
-                    /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
-                    [global::System.Diagnostics.Contracts.PureAttribute]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator >=(Emik.SourceGenerators.Choices.Tests.SpanEncodings left, Emik.SourceGenerators.Choices.Tests.SpanEncodings right)
-                        => left == right || left > right;
 
                     /// <summary>
                     /// Determines whether the left-hand side is less than the right.

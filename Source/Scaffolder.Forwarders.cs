@@ -245,7 +245,7 @@ sealed partial record Scaffolder
             (isInterfaceImplementation ||
                 (symbol is IPropertySymbol { SetMethod: { } s } ? s : symbol)
                .CanBeAccessedFrom(Named.ContainingAssembly)) &&
-            Symbols.Select(x => x.Type.GetMembers().FirstOrDefault(Finder(symbol))).All(HasSetter);
+            Symbols.Select(x => x.Type.TryFindFirstMember(Finder(symbol), out var s) ? s : null).All(HasSetter);
 
         var hasAdder = symbol is IEventSymbol { AddMethod: { } a } &&
             (isInterfaceImplementation || a.CanBeAccessedFrom(Named.ContainingAssembly));

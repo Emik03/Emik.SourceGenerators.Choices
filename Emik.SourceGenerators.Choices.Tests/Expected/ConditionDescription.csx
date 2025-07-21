@@ -323,10 +323,10 @@ namespace Emik
                             left._discriminator == right._discriminator &&
                             left._discriminator switch
                             {
-                                0 => left._and.Equals(right._and),
-                                1 => left._and.Equals(right._and),
-                                2 => left._included.Equals(right._included),
-                                _ => left._included.Equals(right._included),
+                                0 => left._and == right._and,
+                                1 => left._and == right._and,
+                                2 => left._included == right._included,
+                                _ => left._included == right._included,
                             };
 
                     /// <summary>

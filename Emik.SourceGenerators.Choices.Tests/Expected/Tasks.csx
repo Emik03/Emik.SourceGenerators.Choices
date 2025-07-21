@@ -288,7 +288,7 @@ namespace Emik
                             left._discriminator switch
                             {
                                 0 => global::System.Collections.Generic.EqualityComparer<System.Threading.Tasks.Task>.Default.Equals(left._referenced!, right._referenced!),
-                                _ => left._valued.Equals(right._valued),
+                                _ => left._valued == right._valued,
                             };
 
                     /// <summary>

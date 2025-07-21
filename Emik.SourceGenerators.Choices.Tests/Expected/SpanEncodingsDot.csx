@@ -331,8 +331,8 @@ namespace Emik
                         => left._discriminator == right._discriminator &&
                             left._discriminator switch
                             {
-                                0 => false,
-                                _ => false,
+                                0 => left._utf8 == right._utf8,
+                                _ => left._utf16 == right._utf16,
                             };
 
                     /// <summary>

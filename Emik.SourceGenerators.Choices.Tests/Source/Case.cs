@@ -136,6 +136,19 @@ public partial class Case()
             Span<byte> _utf8;
 
             Span<char> _utf16;
+
+            public static bool operator ==(SpanEncodings l, SpanEncodings r)
+                => l._utf8.SequenceEqual(r._utf8) && l._utf16.SequenceEqual(r._utf16);
+
+            public static bool operator >(SpanEncodings l, SpanEncodings r)
+                => l._discriminator > r._discriminator ||
+                    l._utf8.SequenceCompareTo(r._utf8) > 0 ||
+                    l._utf16.SequenceCompareTo(r._utf16) > 0;
+
+            public static bool operator >=(SpanEncodings l, SpanEncodings r)
+                => l._discriminator >= r._discriminator ||
+                    l._utf8.SequenceCompareTo(r._utf8) >= 0 ||
+                    l._utf16.SequenceCompareTo(r._utf16) >= 0;
         }
         """
     );
