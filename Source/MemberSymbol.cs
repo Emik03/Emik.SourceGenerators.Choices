@@ -158,6 +158,13 @@ public readonly record struct MemberSymbol(
     [Pure]
     public string Unsafe => Type.IsUnsafe() ? "unsafe " : "";
 
+    /// <summary>Gets the tuple members, or empty if <see cref="Type"/> is not a tuple type.</summary>
+    [Pure]
+    public ImmutableArray<MemberSymbol> TupleMembers { get; } =
+        Type is INamedTypeSymbol { IsTupleType: true, TupleElements: { Length: > 1 } elements }
+            ? ImmutableArray.CreateRange(elements, x => new MemberSymbol(x))
+            : [];
+
     /// <summary>
     /// Gets the first character of the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.
     /// </summary>
