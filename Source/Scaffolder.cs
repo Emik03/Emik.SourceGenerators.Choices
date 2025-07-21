@@ -25,8 +25,7 @@ sealed partial record Scaffolder(
         ReadOnly = "readonly ",
         ReferenceField = "_reference",
         Suppression = "#pragma warning disable\n",
-        UnmanagedField = "_unmanaged",
-        UsedImplicitly = nameof(UsedImplicitly);
+        UnmanagedField = "_unmanaged";
 
     static readonly ConcurrentDictionary<string, short> s_names = new(StringComparer.Ordinal);
 
