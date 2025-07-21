@@ -1,5 +1,5 @@
 ﻿<Solution>
-    <Project Path="Emik.SourceGenerators.Choices.csproj" Type="Classic C#"/>
-    <Project Path="Emik.SourceGenerators.Choices.Tests/Emik.SourceGenerators.Choices.Tests.csproj" Type="Classic C#"/>
-    <Project Path="Emik.SourceGenerators.Choices.Generated.Tests/Emik.SourceGenerators.Choices.Generated.Tests.csproj" Type="Classic C#"/>
+  <Project Path="Emik.SourceGenerators.Choices.csproj" Type="Classic C#" />
+  <Project Path="Emik.SourceGenerators.Choices.Generated.Tests/Emik.SourceGenerators.Choices.Generated.Tests.csproj" Type="Classic C#" />
+  <Project Path="Emik.SourceGenerators.Choices.Tests/Emik.SourceGenerators.Choices.Tests.csproj" Type="Classic C#" />
 </Solution>

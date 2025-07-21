@@ -648,7 +648,12 @@
         }
       },
       "emik.sourcegenerators.choices": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "CommunityToolkit.Common": "[8.4.0, )",
+          "CommunityToolkit.Diagnostics": "[8.4.0, )",
+          "CommunityToolkit.HighPerformance": "[8.4.0, )"
+        }
       }
     }
   }

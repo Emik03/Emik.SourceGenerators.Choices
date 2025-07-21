@@ -262,6 +262,21 @@
         "resolved": "3.1.3",
         "contentHash": "go7e81n/UI3LeNqoJIJ3thkS4JfJtiQnDbAxLh09JkJqoHthnfbLS5p68s4/Bm12B9umkoYSB5SaDr68hZNleg=="
       },
+      "CommunityToolkit.Common": {
+        "type": "Transitive",
+        "resolved": "8.4.0",
+        "contentHash": "yqU6s4sLjaMuJ0OS6MSpOLkdbLS8HhyD0RSMQ/+/AyAjXizLMdXnlImgVBXPEGmBsNKDjApGF7uFmSh/xhie7A=="
+      },
+      "CommunityToolkit.Diagnostics": {
+        "type": "Transitive",
+        "resolved": "8.4.0",
+        "contentHash": "/9Nuy8EWo0ZYQsjn3h4OGxjCWVYXl3TV3fvv29f8IVqplXgXGRzIpbtHEHGOfykh+TPbzUclzIfMCBzmgblKDA=="
+      },
+      "CommunityToolkit.HighPerformance": {
+        "type": "Transitive",
+        "resolved": "8.4.0",
+        "contentHash": "flxspiBs0G/0GMp7IK2J2ijV9bTG6hEwFc/z6ekHqB6nwRJ4Ry2yLdx+TkbCUYFCl4XhABkAwomeKbT6zM2Zlg=="
+      },
       "DotNetAnalyzers.DocumentationAnalyzers.Unstable": {
         "type": "Transitive",
         "resolved": "1.0.0.59",
@@ -425,7 +440,12 @@
         }
       },
       "emik.sourcegenerators.choices": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "CommunityToolkit.Common": "[8.4.0, )",
+          "CommunityToolkit.Diagnostics": "[8.4.0, )",
+          "CommunityToolkit.HighPerformance": "[8.4.0, )"
+        }
       }
     }
   }
