@@ -274,34 +274,44 @@ sealed partial record Scaffolder(
         );
 
     [Pure]
+    string DeclareEqualityOperator =>
+        Named.TryFindFirstMember<IMethodSymbol>(x => MemberSymbol.IsOperator(x, "op_Equality"), out _)
+            ? ""
+            : CSharp(
+                $$"""
+                  /// <summary>
+                  /// Determines whether the left-hand side is equal to the right.
+                  /// </summary>
+                  /// <param name="left">The left-hand side.</param>
+                  /// <param name="right">The right-hand side.</param>
+                  /// <returns>
+                  /// The value determining whether the parameter <paramref name="left"/>
+                  /// is equal to the parameter <paramref name="right"/>.
+                  /// </returns>
+                  {{Annotation}}
+                  {{Pure}}
+                  {{AggressiveInlining}}
+                  public static {{SymbolsUnsafe}}bool operator ==({{NullableName}} left, {{NullableName}} right)
+                      => {{(Named.IsReferenceType ? "left is null ? right is null : right is not null &&\n            " : "")
+                      }}left.{{Discriminator}} == right.{{Discriminator}} &&
+                          left.{{Discriminator}} switch
+                          {
+                              {{Symbols
+                                 .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {Equality(x)},")
+                                 .Conjoin("\n                ")}}
+                          };
+
+
+                  """
+            );
+
+    [Pure]
     string DeclareEqualityOperators =>
         Named.IsRecord
             ? ""
             : CSharp(
-                $$"""
-                      /// <summary>
-                      /// Determines whether the left-hand side is equal to the right.
-                      /// </summary>
-                      /// <param name="left">The left-hand side.</param>
-                      /// <param name="right">The right-hand side.</param>
-                      /// <returns>
-                      /// The value determining whether the parameter <paramref name="left"/>
-                      /// is equal to the parameter <paramref name="right"/>.
-                      /// </returns>
-                      {{Annotation}}
-                      {{Pure}}
-                      {{AggressiveInlining}}
-                      public static {{SymbolsUnsafe}}bool operator ==({{NullableName}} left, {{NullableName}} right)
-                          => {{(Named.IsReferenceType ? "left is null ? right is null : right is not null &&\n            " : "")
-                          }}left.{{Discriminator}} == right.{{Discriminator}} &&
-                              left.{{Discriminator}} switch
-                              {
-                                  {{Symbols
-                                     .Select((x, i) => $"{(i == Symbols.Length - 1 ? "_" : i)} => {Equality(x)},")
-                                     .Conjoin("\n                ")}}
-                              };
-
-                      /// <summary>
+                $"""
+                      {DeclareEqualityOperator}/// <summary>
                       /// Determines whether the left-hand side is unequal to the right.
                       /// </summary>
                       /// <param name="left">The left-hand side.</param>
@@ -310,10 +320,10 @@ sealed partial record Scaffolder(
                       /// The value determining whether the parameter <paramref name="left"/>
                       /// is unequal to the parameter <paramref name="right"/>.
                       /// </returns>
-                      {{Annotation}}
-                      {{Pure}}
-                      {{AggressiveInlining}}
-                      public static bool operator !=({{NullableName}} left, {{NullableName}} right)
+                      {Annotation}
+                      {Pure}
+                      {AggressiveInlining}
+                      public static bool operator !=({NullableName} left, {NullableName} right)
                           => !(left == right);
 
 
