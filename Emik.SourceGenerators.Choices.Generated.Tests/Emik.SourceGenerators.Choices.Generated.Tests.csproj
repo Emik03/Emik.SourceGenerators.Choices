@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <IsKtane>true</IsKtane>
-        <OutputType>Exe</OutputType>
         <TargetFramework>net10.0</TargetFramework>
         <RepositoryUrl>https://github.com/Emik03/Emik.SourceGenerators.Choices</RepositoryUrl>
     </PropertyGroup>
