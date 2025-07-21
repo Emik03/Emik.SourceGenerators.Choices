@@ -240,7 +240,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 
         var fields = symbolSet switch
         {
-            { IsTupleType: true, TupleElements: { Length: > 1 } e } => Scaffolder.Decouple(e),
+            { IsTupleType: true, TupleElements: { Length: >= MinimumMembers } e } => Scaffolder.Decouple(e),
             _ when MemberSymbol.IsSystemTuple(symbolSet) => Scaffolder.Instances(symbolSet),
             null when primaryConstructorParameters is { } p => p,
             null => Scaffolder.Instances(target),

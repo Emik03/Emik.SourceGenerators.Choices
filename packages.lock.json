@@ -195,9 +195,9 @@
       },
       "Meziantou.Analyzer": {
         "type": "Direct",
-        "requested": "[2.0.202, )",
-        "resolved": "2.0.202",
-        "contentHash": "VDsrL0SRYoR6t975NExCRgZzGIYudgIETUAPnyMG17sr9I9OzNGzpwX1dHOPSd8Ue28ltnNiOL3czLmNdQngYA=="
+        "requested": "[2.0.205, )",
+        "resolved": "2.0.205",
+        "contentHash": "adw/4fuYeVyu92yHtoKpjtaBe4VVEjc1nMO/Wy2rZ3ZtOGcNvN6SXwJYAxPDUgDPWwAvfoPYE/jO++1sCs3V8w=="
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Direct",
@@ -207,9 +207,9 @@
       },
       "Microsoft.CodeAnalysis.NetAnalyzers": {
         "type": "Direct",
-        "requested": "[10.0.0-preview.25277.114, )",
-        "resolved": "10.0.0-preview.25277.114",
-        "contentHash": "8Nr0OXSkPOGA6MxJa7GDCk4+IEQIJvNRqUW+5Ro0PbmrW7DnV5HZPDxz0Uhi5UJwgE31AIT+zdsaINvFmZpzWQ=="
+        "requested": "[10.0.0-preview.25358.103, )",
+        "resolved": "10.0.0-preview.25358.103",
+        "contentHash": "yNUAHIaMZ3uxL2qiRAXOZ4nOXQ5Tzui+bIIYIwUgih4iAdmuCa+Byu2+1rdK6W3/F0vfwU5gyAQ6YhO49KMkPw=="
       },
       "NETStandard.Library": {
         "type": "Direct",
