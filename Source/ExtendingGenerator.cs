@@ -226,27 +226,40 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             symbolSet is not null and not { IsTupleType: true, TupleElements.Length: >= MinimumMembers })
             return default;
 
-        var primaryConstructorParameters = target
-           .DeclaringSyntaxReferences
-           .SelectMany(x => x.GetSyntax(token).DescendantNodes())
-           .OfType<ParameterListSyntax>()
-           .Filter()
-           .FirstOrDefault(x => x.Ancestors().FirstOrDefault() is BaseTypeDeclarationSyntax)
-          ?.Parameters
-           .Select(x => context.SemanticModel.GetDeclaredSymbolSafe(x, token))
-           .Filter()
-           .Select(x => new MemberSymbol(x))
-           .ToImmutableArray();
-
         var fields = symbolSet switch
         {
             { IsTupleType: true, TupleElements: { Length: >= MinimumMembers } e } => Scaffolder.Decouple(e),
             _ when MemberSymbol.IsSystemTuple(symbolSet) => Scaffolder.Instances(symbolSet),
-            null when primaryConstructorParameters is { } p => p,
+            null when DiscoverPrimaryConstructor(context, token, target) is { } p => p,
             null => Scaffolder.Instances(target),
             _ => [],
         };
 
         return (target, fields, mutablePublicly, null);
     }
+
+    /// <summary>Extracts the primary constructor arguments.</summary>
+    /// <param name="context">The context to check the node from.</param>
+    /// <param name="token">The cancellation token used for interrupting the iteration of constructor arguments.</param>
+    /// <param name="target">The symbol that may contain the primary constructor.</param>
+    /// <returns>The primary constructor parameters, or <see langword="null"/> if none was found.</returns>
+    [Pure]
+    static ImmutableArray<MemberSymbol>? DiscoverPrimaryConstructor(
+        GeneratorAttributeSyntaxContext context,
+        CancellationToken token,
+        ISymbol target
+    ) =>
+        target
+           .DeclaringSyntaxReferences
+           .SelectMany(x => x.GetSyntax(token).DescendantNodes())
+           .OfType<ParameterListSyntax>()
+           .Filter()
+           .FirstOrDefault(x => x.Ancestors().FirstOrDefault() is BaseTypeDeclarationSyntax) is { Parameters: var p }
+            ? // ReSharper disable once RedundantLinebreak
+            [
+                ..p.Select(x => context.SemanticModel.GetDeclaredSymbolSafe(x, token))
+                   .Filter()
+                   .Select(x => new MemberSymbol(x)),
+            ]
+            : null;
 }
