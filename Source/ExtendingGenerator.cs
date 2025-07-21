@@ -231,7 +231,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
            .SelectMany(x => x.GetSyntax(token).DescendantNodes())
            .OfType<ParameterListSyntax>()
            .Filter()
-           .FirstOrDefault()
+           .FirstOrDefault(x => x.Ancestors().FirstOrDefault() is BaseTypeDeclarationSyntax)
           ?.Parameters
            .Select(x => context.SemanticModel.GetDeclaredSymbolSafe(x, token))
            .Filter()
