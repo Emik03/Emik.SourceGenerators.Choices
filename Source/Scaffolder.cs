@@ -73,12 +73,6 @@ sealed partial record Scaffolder(
     bool UsesPrimaryConstructor => Symbols is [{ Symbol: IParameterSymbol }, ..];
 
     [Pure]
-    string AutoIfStruct =>
-        Named.IsValueType && Named.GetAttributes().All(x => x.AttributeClass?.Name is not nameof(StructLayoutAttribute))
-            ? CSharp($"[global::{typeof(StructLayoutAttribute)}(global::{typeof(LayoutKind)}.Auto)]\n")
-            : "";
-
-    [Pure]
     string PrivatelyReadOnly { get; } = MutablePublicly is null ? ReadOnly : "";
 
     [Pure]
@@ -171,8 +165,7 @@ sealed partial record Scaffolder(
              .Conjoin("\n")}}
           ///     </list>
           /// </remarks>
-          {{AutoIfStruct}}partial {{Named.Keyword()}} {{Named.GetMinimallyQualifiedName()
-          }}{{DeclareInterfaces}}
+          {{DeclareStructLayout}}partial {{Named.Keyword()}} {{Named.GetMinimallyQualifiedName()}}{{DeclareInterfaces}}
           {
           {{DeclarePolyfillAttributes
           }}{{DeclareExplicitStruct
@@ -192,6 +185,12 @@ sealed partial record Scaffolder(
           }}{{DeclareForwarders}}
           }
           """;
+
+    [Pure]
+    string DeclareStructLayout =>
+        Named.IsValueType && Named.GetAttributes().All(x => x.AttributeClass?.Name is not nameof(StructLayoutAttribute))
+            ? CSharp($"[global::{typeof(StructLayoutAttribute)}(global::{typeof(LayoutKind)}.Auto)]\n")
+            : "";
 
     [Pure]
     string DeclarePolyfillAttributes =>
