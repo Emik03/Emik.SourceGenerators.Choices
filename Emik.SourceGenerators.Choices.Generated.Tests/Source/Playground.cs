@@ -7,6 +7,12 @@ namespace Emik.SourceGenerators.Choices.Tests;
 extern alias unity;
 using Task = System.Threading.Tasks.Task;
 
+[Choice.Maybe<ValueTuple>.False.Null<ValueTuple>.True]
+readonly partial struct ThinEnum;
+
+[Choice.Public.Unary<TuplePacking>.Binary<(TuplePacking, TuplePacking)>]
+sealed partial class TuplePacking;
+
 [Choice.Unary<Node>.Binary<(Node, Node)>]
 public sealed partial class Node;
 

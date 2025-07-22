@@ -163,6 +163,14 @@ public partial class Case()
     public sealed class Tasks()
         : Case("[Choice(typeof((Task Referenced, ValueTask Valued)), true)] partial struct Tasks;");
 
+    public sealed class ThinEnum() : Case(
+        "[Choice.Maybe<ValueTuple>.False.Null<ValueTuple>.True] readonly partial struct ThinEnum;"
+    );
+
+    public sealed class TuplePacking() : Case(
+        "[Choice.Public.Unary<TuplePacking>.Binary<(TuplePacking, TuplePacking)>] sealed partial class TuplePacking;"
+    );
+
     public sealed class UnderlyingInt()
         : Case(
             """
