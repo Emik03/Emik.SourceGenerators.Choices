@@ -832,8 +832,8 @@ sealed partial record Scaffolder(
                       {{Pure}}
                       {{AggressiveInlining}}
                       public {{x.Unsafe}}{{Named.GetMinimallyQualifiedName()}}({{parameters.Select(x => $"{x.Type} {x.ParameterName}").Conjoin()}})
-                          : this({{(isValue ? nameof(ValueTuple) : nameof(Tuple))}}.{{nameof(Tuple.Create)}}({{
-                              parameters.Select(x => x.ParameterName).Conjoin()}})) { }
+                          : this(global::{{nameof(System)}}.{{(isValue ? nameof(ValueTuple) : nameof(Tuple))}}.{{
+                              nameof(Tuple.Create)}}({{parameters.Select(x => x.ParameterName).Conjoin()}})) { }
 
 
                   """
