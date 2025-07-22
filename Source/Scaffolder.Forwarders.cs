@@ -5,10 +5,12 @@ sealed partial record Scaffolder
 {
     [Pure]
     string DeclareForwarders =>
-        Signature.FindForwarders(Symbols, Named, Members)
-           .Aggregate(new ForwarderAggregate(), DeclareForwarder)
-           .Select(x => x.Code)
-           .Conjoin("");
+        Symbols.All(x => x.IsEmpty)
+            ? ""
+            : Signature.FindForwarders(Symbols, Named, Members)
+               .Aggregate(new ForwarderAggregate(), DeclareForwarder)
+               .Select(x => x.Code)
+               .Conjoin("");
 
     [Pure]
     static string PrefixAnnotations(IParameterSymbol x) =>
@@ -106,7 +108,7 @@ sealed partial record Scaffolder
         StringBuilder AppendParametersTyped(StringBuilder builder, bool typed = true) =>
             symbol switch
             {
-                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => builder,
+                _ when Signature.IsGetType(symbol) => builder,
                 IMethodSymbol { Parameters: var x } => AppendParameterSymbols('(', x, ')', typed),
                 IPropertySymbol { Parameters: [_, ..] x } => AppendParameterSymbols('[', x, ']', typed),
                 _ => builder,
@@ -143,7 +145,7 @@ sealed partial record Scaffolder
                     );
 
                 var isTypeKnown = x.Type.IsValueType || x.Type.IsSealed;
-                var isGetType = symbol is IMethodSymbol { Name: nameof(GetType), Parameters: [] };
+                var isGetType = Signature.IsGetType(symbol);
 
                 var value = isTypeKnown && isGetType
                     ? CSharp($"typeof({x.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)})")
@@ -178,7 +180,7 @@ sealed partial record Scaffolder
 
             builder.Append(prefix).Append(arrow);
             Symbols.Select(Case).Lazily(AppendCase).Enumerate();
-            return builder.Append(isSwitchCase ? CSharp("        }") : CSharp("        };"));
+            return builder.Append(' ', 8).Append(isSwitchCase ? "}" : "};");
         }
 
         if (Named is { IsValueType: true } &&
@@ -211,7 +213,7 @@ sealed partial record Scaffolder
         builder.Append(
             symbol switch
             {
-                IMethodSymbol { Name: nameof(GetType), Parameters: [] } => $"{nameof(Enum.GetUnderlyingType)}()",
+                _ when Signature.IsGetType(symbol) => $"{nameof(Enum.GetUnderlyingType)}()",
                 IPropertySymbol { Parameters: not [] } => CSharp("this"),
                 _ => symbol.GetFullyQualifiedName(),
             }
@@ -221,7 +223,7 @@ sealed partial record Scaffolder
 
         if (symbol is IMethodSymbol { TypeParameters: var typeParameters } &&
             typeParameters.Select(IncludedSyntaxNodeRegistrant.Constraints).Filter().ToIList() is [_, ..] constraints)
-            builder.Append("\n        ").Append(constraints.Conjoin("\n        "));
+            builder.AppendLine().Append(' ', 8).Append(constraints.Conjoin("\n        "));
 
         switch (symbol)
         {

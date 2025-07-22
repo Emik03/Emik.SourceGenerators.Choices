@@ -238,9 +238,11 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareAdditionalInterfaces =>
-        new IntersectedInterfaces(Symbols, !CanForwardSetters, Named.IsRecord).Set
-           .Select(x => $",\n    {x}")
-           .Conjoin("");
+        Symbols.All(x => x.IsEmpty)
+            ? ""
+            : new IntersectedInterfaces(Symbols, !CanForwardSetters, Named.IsRecord).Set
+               .Select(x => $",\n    {x}")
+               .Conjoin("");
 
     [Pure]
     string DeclareDiscriminator =>

@@ -67,7 +67,7 @@ readonly record struct Signature(
                 _ => ImmutableArray<IMethodSymbol?>.Empty,
             })
            .Filter()
-           .Select(AsDirectExtract);
+           .Select(ToExtract);
 
         [Pure]
         static HashSet<Signature> ToSelf(IEnumerable<MemberSymbol>? except, IAssemblySymbol assembly) =>
@@ -97,7 +97,7 @@ readonly record struct Signature(
             FindCommonBaseTypes(s)
                .SelectMany(x => x.GetMembers())
                .Omit(x => x is ITypeSymbol || symbols.Any(y => y.CanConflict(x.Name)))
-               .Select(x => AsDirectExtract(x, s.Length));
+               .Select(x => ToExtract(x, s.Length));
 
         var signatures = ToSelf(except, assembly);
         var forwarders = Add(symbols, assembly, signatures);
@@ -206,6 +206,16 @@ readonly record struct Signature(
         SameType(Type, other.Type) &&
         Parameters.GuardedSequenceEqual(other.Parameters, SameType) &&
         TypeParameters.GuardedSequenceEqual(other.TypeParameters, Complies);
+
+    /// <summary>Determines whether the symbol is <see cref="object.GetType"/>.</summary>
+    /// <param name="symbol">The symbol to check.</param>
+    /// <returns>
+    /// The value <see langword="true"/> if the parameter <paramref name="symbol"/> is
+    /// the method <see cref="object.GetType"/>; otherwise, <see langword="false"/>
+    /// </returns>
+    [Pure]
+    public static bool IsGetType([NotNullWhen(true)] ISymbol? symbol) =>
+        symbol is IMethodSymbol { Name: nameof(GetType), Parameters: [], TypeParameters: [] };
 
     /// <summary>Checks if a <see cref="MemberSymbol"/> is in an <see cref="IAssemblySymbol"/>.</summary>
     /// <param name="symbol">The <see cref="MemberSymbol"/> to check.</param>
@@ -328,7 +338,7 @@ readonly record struct Signature(
     /// <param name="x">The <see cref="ISymbol"/> to convert.</param>
     /// <returns>The <see cref="Extract"/> of the parameter <paramref name="x"/>.</returns>
     [Pure]
-    static Extract AsDirectExtract(ISymbol x) => (x, Kind(x), default);
+    static Extract ToExtract(ISymbol x) => (x, Kind(x), default);
 
     /// <summary>Converts the <see cref="ISymbol"/> to the <see cref="Extract"/>.</summary>
     /// <param name="x">The <see cref="ISymbol"/> to convert.</param>
@@ -336,7 +346,7 @@ readonly record struct Signature(
     /// <param name="element">The interface prefix.</param>
     /// <returns>The <see cref="Extract"/> of the parameter <paramref name="x"/>.</returns>
     [Pure]
-    static Extract AsDirectExtract(ISymbol x, int count, string? element = null)
+    static Extract ToExtract(ISymbol x, int count, string? element = null)
     {
         var interfaceDeclarations = new string?[count];
         interfaceDeclarations.AsSpan().Fill(element);
