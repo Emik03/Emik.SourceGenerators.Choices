@@ -47,6 +47,9 @@ sealed partial record Scaffolder(
     public GeneratedSource Result => (HintName, Source);
 
     [Pure]
+    public ImmutableArray<MemberSymbol?> Subsets { get; } = MemberSymbol.FindSubsets(Symbols);
+
+    [Pure]
     bool CanForwardSetters => Rest.IsEmpty && Unmanaged.IsEmpty || !Named.IsReadOnly && MutablePublicly is not null;
 
     [Pure]
@@ -994,7 +997,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareField(MemberSymbol x) =>
-        x.IsEmpty || Members.Any(x.ReferenceEquals) || IsNoninitial(x)
+        x.IsEmpty || Members.Any(x.ReferenceEquals) || IsNoninitial(x) || SubsetOf(x) is not null
             ? ""
             : CSharp(
                 $"""
@@ -1095,17 +1098,18 @@ sealed partial record Scaffolder(
             : "";
 
     [Pure]
-    string PrefixCast(MemberSymbol x, string memberAccess = "") =>
-        x.IsEmpty ? SingleEmpty.Any(x.ReferenceEquals) ? CSharp("default") : CSharp($"default({x.Type})") :
-        Prefix(x) is not ReferenceField and var prefix ? $"{memberAccess}{prefix}{x.NullableSuppression}" :
-        $"(({x.Type}){memberAccess}{ReferenceField}{x.NullableSuppression})";
-
-    [Pure]
     string Prefix(MemberSymbol x) =>
         x.Symbol is IPropertySymbol { Name: var name } ? name :
         Symbols.First(x.TypeEquals) is var y && Members.Any(y.ReferenceEquals) ? y.Name :
         CanOverlapUnmanagedMemorySpace && Unmanaged.Any(y.ReferenceEquals) ? $"{UnmanagedField}.{y.FieldName}" :
-        CanOverlapReferenceMemorySpace && Reference.Any(y.ReferenceEquals) ? ReferenceField : y.FieldName;
+        CanOverlapReferenceMemorySpace && Reference.Any(y.ReferenceEquals) ? ReferenceField :
+        SubsetOf(x) is { FieldName: var subset } ? subset : y.FieldName;
+
+    [Pure]
+    string PrefixCast(MemberSymbol x, string memberAccess = "") =>
+        x.IsEmpty ? SingleEmpty.Any(x.ReferenceEquals) ? CSharp("default") : CSharp($"default({x.Type})") :
+        Prefix(x) is not ReferenceField and var prefix ? $"{memberAccess}{prefix}{x.NullableSuppression}" :
+        $"(({x.Type}){memberAccess}{ReferenceField}{x.NullableSuppression})";
 
     [Pure]
     string ToStringCase(MemberSymbol x) =>
@@ -1117,4 +1121,14 @@ sealed partial record Scaffolder(
                   }}{{(x.Type.IsRefLikeType ? ".ToString()" : "")}}})"
                   """
             );
+
+    [Pure]
+    MemberSymbol? SubsetOf(MemberSymbol x)
+    {
+        for (var i = 0; i < Symbols.Length && Symbols[i] is var current; i++)
+            if (x.ReferenceEquals(current))
+                return Subsets[i];
+
+        return null;
+    }
 }

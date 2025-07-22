@@ -228,6 +228,34 @@ public readonly record struct MemberSymbol(
             ContainingNamespace: { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true },
         };
 
+    /// <summary>Gets the subsets.</summary>
+    /// <param name="symbols">The array to collect.</param>
+    /// <returns>The array of subsets.</returns>
+    [Pure]
+    public static ImmutableArray<MemberSymbol?> FindSubsets(ImmutableArray<MemberSymbol> symbols)
+    {
+        var builder = ImmutableArray.CreateBuilder<MemberSymbol?>(symbols.Length);
+
+        for (var i = 0; i < symbols.Length && symbols[i] is var current; i++)
+        {
+            for (var j = 0; j < symbols.Length && symbols[j] is var other; j++)
+            {
+                if (i == j ||
+                    RoslynComparer.Signature.Equals(current.Type, other.Type) ||
+                    current.FindSubset(other) is not { } sub)
+                    continue;
+
+                builder.Add(sub);
+                goto Found;
+            }
+
+            builder.Add(null);
+        Found: ;
+        }
+
+        return builder.DrainToImmutable();
+    }
+
     /// <summary>Gets the name of the delegate type.</summary>
     /// <param name="hasGenericReturn">
     /// The value <see langword="true"/> if the delegate has a generic return type; otherwise, <see langword="false"/>.
@@ -333,6 +361,31 @@ public readonly record struct MemberSymbol(
             IPropertySymbol => $"{Type} {Name} {{ get; }}",
             _ => $"{Name}<{Type}>",
         };
+
+    /// <summary>
+    /// Gets the subset <see cref="MemberSymbol"/> that contains the same type as this
+    /// instance, with the nested names to get to the type contained in the parameter.
+    /// </summary>
+    /// <param name="other">The type that contains tuples to peek into.</param>
+    /// <returns>
+    /// The <see cref="MemberSymbol"/> containing the navigation in the parameter
+    /// <paramref name="other"/> to get to the <see cref="Type"/> of this instance.
+    /// </returns>
+    [Pure]
+    public MemberSymbol? FindSubset(MemberSymbol other)
+    {
+        if (RoslynComparer.Signature.Equals(Type, other.Type))
+            return other;
+
+        if (other.Type is not INamedTypeSymbol { IsTupleType: true, TupleElements: { Length: > 1 } tuples })
+            return null;
+
+        foreach (var element in tuples)
+            if (FindSubset(new(element) { Name = $"{other.Name}.{element.GetFullyQualifiedName()}" }) is { } symbol)
+                return symbol;
+
+        return null;
+    }
 
     /// <summary>Determines if both symbols are equal and in source.</summary>
     /// <param name="x">The first <see cref="INamespaceOrTypeSymbol"/> to compare.</param>

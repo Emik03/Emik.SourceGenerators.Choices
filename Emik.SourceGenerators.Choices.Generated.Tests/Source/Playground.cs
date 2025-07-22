@@ -7,6 +7,9 @@ namespace Emik.SourceGenerators.Choices.Tests;
 extern alias unity;
 using Task = System.Threading.Tasks.Task;
 
+[Choice.Unary<Node>.Binary<(Node, Node)>]
+public sealed partial class Node;
+
 [Choice]
 readonly partial record struct Result<TOk, TErr>
 {
