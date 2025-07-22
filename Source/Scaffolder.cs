@@ -304,7 +304,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareEqualityOperator =>
-        RoslynComparer.Signature.ContainsOperator(Named, "op_Equality")
+        RoslynComparer.Signature.ContainsOperator(Named, "op_Equality", SpecialType.System_Boolean)
             ? ""
             : CSharp(
                 $$"""
@@ -489,7 +489,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareGreaterThanOperator =>
-        RoslynComparer.Signature.ContainsOperator(Named, "op_GreaterThan")
+        RoslynComparer.Signature.ContainsOperator(Named, "op_GreaterThan", SpecialType.System_Boolean)
             ? ""
             : CSharp(
                 $$"""
@@ -522,7 +522,7 @@ sealed partial record Scaffolder(
 
     [Pure]
     string DeclareGreaterThanOrEqualOperator =>
-        RoslynComparer.Signature.ContainsOperator(Named, "op_GreaterThanOrEqual")
+        RoslynComparer.Signature.ContainsOperator(Named, "op_GreaterThanOrEqual", SpecialType.System_Boolean)
             ? ""
             : CSharp(
                 $"""

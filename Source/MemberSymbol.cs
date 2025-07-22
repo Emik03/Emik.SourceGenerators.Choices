@@ -92,7 +92,7 @@ public readonly partial record struct MemberSymbol(
         Type is IPointerTypeSymbol ||
         Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         Type.IsUnmanagedPrimitive() ||
-        RoslynComparer.Signature.ContainsOperator(Type, "op_GreaterThan");
+        RoslynComparer.Signature.ContainsOperator(Type, "op_GreaterThan", SpecialType.System_Boolean);
 
     /// <summary>Gets a value indicating whether the member has an operator equality method.</summary>
     [Pure]
@@ -100,7 +100,7 @@ public readonly partial record struct MemberSymbol(
         Type is IPointerTypeSymbol ||
         Type.BaseType?.SpecialType is SpecialType.System_Enum ||
         Type.IsUnmanagedPrimitive() ||
-        RoslynComparer.Signature.ContainsOperator(Type, "op_Equality");
+        RoslynComparer.Signature.ContainsOperator(Type, "op_Equality", SpecialType.System_Boolean);
 
     /// <summary>Gets a value indicating whether the type is a reference type.</summary>
     [Pure]
