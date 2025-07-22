@@ -745,7 +745,7 @@ sealed partial record Scaffolder(
     [Pure]
     static string XmlEscape(ISymbol x, bool allowTypeSubstitution = false) =>
         (x is INamedTypeSymbol { IsTupleType: true, TypeArguments: { Length: > 1 } args }
-            ? $"{nameof(System)}.{nameof(ValueTuple)}{{{args.Length.For(i => $"T{i + 1}").Conjoin()}}}"
+            ? $"{nameof(System)}.{nameof(ValueTuple)}{{{args.Select(x => x.Name).Conjoin()}}}"
             : $"{(allowTypeSubstitution ? x : x.OriginalDefinition)}")
        .ToBuilder()
        .Replace('<', '{')

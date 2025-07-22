@@ -70,7 +70,7 @@ namespace Emik
                 ///         </item>
                 ///         <item>
                 ///             <term>
-                ///                 <see cref="Or"/> <see langword="as"/> <see cref="System.ValueTuple{T1, T2}"/>
+                ///                 <see cref="Or"/> <see langword="as"/> <see cref="System.ValueTuple{Logic, Logic}"/>
                 ///                 <list type="bullet">
                 ///                     <item>
                 ///                         <description>
@@ -79,7 +79,7 @@ namespace Emik
                 ///                     </item>
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="OfOr(System.ValueTuple{T1, T2})"/>
+                ///                             <see cref="OfOr(System.ValueTuple{Logic, Logic})"/>
                 ///                         </description>
                 ///                     </item>
                 ///                 </list>
@@ -87,7 +87,7 @@ namespace Emik
                 ///         </item>
                 ///         <item>
                 ///             <term>
-                ///                 <see cref="And"/> <see langword="as"/> <see cref="System.ValueTuple{T1, T2}"/>
+                ///                 <see cref="And"/> <see langword="as"/> <see cref="System.ValueTuple{Logic, Logic}"/>
                 ///                 <list type="bullet">
                 ///                     <item>
                 ///                         <description>
@@ -96,7 +96,7 @@ namespace Emik
                 ///                     </item>
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="OfAnd(System.ValueTuple{T1, T2})"/>
+                ///                             <see cref="OfAnd(System.ValueTuple{Logic, Logic})"/>
                 ///                         </description>
                 ///                     </item>
                 ///                 </list>
@@ -135,7 +135,7 @@ namespace Emik
                     }
 
                     /// <summary>
-                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{T1, T2}"/>.
+                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{Logic, Logic}"/>.
                     /// </summary>
                     /// <param name="or">The variant.</param>
                     /// <param name="x">The discriminator.</param>
@@ -161,7 +161,7 @@ namespace Emik
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> is the variant <see cref="Or"/> of type <see cref="System.ValueTuple{T1, T2}"/>.
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> is the variant <see cref="Or"/> of type <see cref="System.ValueTuple{Logic, Logic}"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public bool IsOr
@@ -173,7 +173,7 @@ namespace Emik
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> is the variant <see cref="And"/> of type <see cref="System.ValueTuple{T1, T2}"/>.
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> is the variant <see cref="And"/> of type <see cref="System.ValueTuple{Logic, Logic}"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public bool IsAnd
@@ -196,7 +196,7 @@ namespace Emik
                     }
 
                     /// <summary>
-                    /// Gets the <see cref="System.ValueTuple{T1, T2}"/> variant.
+                    /// Gets the <see cref="System.ValueTuple{Logic, Logic}"/> variant.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public (Emik.SourceGenerators.Choices.Tests.Logic Left, Emik.SourceGenerators.Choices.Tests.Logic Right) Or
@@ -207,7 +207,7 @@ namespace Emik
                     }
 
                     /// <summary>
-                    /// Gets the <see cref="System.ValueTuple{T1, T2}"/> variant.
+                    /// Gets the <see cref="System.ValueTuple{Logic, Logic}"/> variant.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     public (Emik.SourceGenerators.Choices.Tests.Logic left, Emik.SourceGenerators.Choices.Tests.Logic right) And
@@ -251,7 +251,7 @@ namespace Emik
                         => new global::Emik.SourceGenerators.Choices.Tests.Logic(one);
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{T1, T2}"/>.
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{Logic, Logic}"/>.
                     /// </summary>
                     /// <param name="or">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="or"/>.</returns>
@@ -262,7 +262,7 @@ namespace Emik
                         => new global::Emik.SourceGenerators.Choices.Tests.Logic(or, (byte)1);
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{T1, T2}"/>.
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{Logic, Logic}"/>.
                     /// </summary>
                     /// <param name="left">The left item within the value to pass into the type.</param>
                     /// <param name="right">The right item within the value to pass into the type.</param>
@@ -274,7 +274,7 @@ namespace Emik
                         => new global::Emik.SourceGenerators.Choices.Tests.Logic((left, right), (byte)1);
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="And"/> of type <see cref="System.ValueTuple{T1, T2}"/>.
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="And"/> of type <see cref="System.ValueTuple{Logic, Logic}"/>.
                     /// </summary>
                     /// <param name="and">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="and"/>.</returns>
@@ -285,7 +285,7 @@ namespace Emik
                         => new global::Emik.SourceGenerators.Choices.Tests.Logic(and, (byte)2);
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="And"/> of type <see cref="System.ValueTuple{T1, T2}"/>.
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="And"/> of type <see cref="System.ValueTuple{Logic, Logic}"/>.
                     /// </summary>
                     /// <param name="left">The left item within the value to pass into the type.</param>
                     /// <param name="right">The right item within the value to pass into the type.</param>
@@ -459,8 +459,8 @@ namespace Emik
                     /// Invokes the callback based on current variance.
                     /// </summary>
                     /// <param name="onOne">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="One"/> of type <see cref="string"/> is held.</param>
-                    /// <param name="onOr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{T1, T2}"/> is held.</param>
-                    /// <param name="onAnd">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="And"/> of type <see cref="System.ValueTuple{T1, T2}"/> is held.</param>
+                    /// <param name="onOr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{Logic, Logic}"/> is held.</param>
+                    /// <param name="onAnd">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="And"/> of type <see cref="System.ValueTuple{Logic, Logic}"/> is held.</param>
                     /// <returns>Itself.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.14.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
@@ -489,8 +489,8 @@ namespace Emik
                     /// </summary>
                     /// <typeparam name="TMappingResult">The resulting type from the mapping.</typeparam>
                     /// <param name="onOne">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="One"/> of type <see cref="string"/> is held.</param>
-                    /// <param name="onOr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{T1, T2}"/> is held.</param>
-                    /// <param name="onAnd">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="And"/> of type <see cref="System.ValueTuple{T1, T2}"/> is held.</param>
+                    /// <param name="onOr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="Or"/> of type <see cref="System.ValueTuple{Logic, Logic}"/> is held.</param>
+                    /// <param name="onAnd">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Logic"/> class with the variant <see cref="And"/> of type <see cref="System.ValueTuple{Logic, Logic}"/> is held.</param>
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
