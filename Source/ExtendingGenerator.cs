@@ -155,10 +155,10 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             },
         };
 
-    /// <summary>Extracts the members from the node's <see cref="AttributeSyntax"/>.</summary>
+    /// <summary>Extracts the members from the node's <c>AttributeSyntax</c>.</summary>
     /// <param name="context">The syntax context.</param>
     /// <param name="token">
-    /// The cancellation token used for cancelling the iteration over <see cref="QuailifiedNameSyntax"/> instances.
+    /// The cancellation token used for cancelling the iteration over <c>QualifiedNameSyntax</c> instances.
     /// </param>
     /// <returns>The extracted result, or <see langword="default"/> if the input is invalid.</returns>
     // ReSharper disable once CognitiveComplexity
@@ -230,7 +230,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
         {
             { IsTupleType: true, TupleElements: { Length: >= MinimumMembers } e } => Scaffolder.Decouple(e),
             _ when MemberSymbol.IsSystemTuple(symbolSet) => Scaffolder.Instances(symbolSet),
-            null when DiscoverPrimaryConstructor(context, token, target) is { } p => p,
+            null when DiscoverPrimaryConstructor(context, target, token) is { } p => p,
             null => Scaffolder.Instances(target),
             _ => [],
         };
@@ -240,14 +240,14 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
 
     /// <summary>Extracts the primary constructor arguments.</summary>
     /// <param name="context">The context to check the node from.</param>
-    /// <param name="token">The cancellation token used for interrupting the iteration of constructor arguments.</param>
     /// <param name="target">The symbol that may contain the primary constructor.</param>
+    /// <param name="token">The cancellation token used for interrupting the iteration of constructor arguments.</param>
     /// <returns>The primary constructor parameters, or <see langword="null"/> if none was found.</returns>
     [Pure]
     static ImmutableArray<MemberSymbol>? DiscoverPrimaryConstructor(
         GeneratorAttributeSyntaxContext context,
-        CancellationToken token,
-        ISymbol target
+        ISymbol target,
+        CancellationToken token
     ) =>
         target
            .DeclaringSyntaxReferences

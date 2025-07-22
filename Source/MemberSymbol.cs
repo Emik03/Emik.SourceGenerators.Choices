@@ -5,6 +5,7 @@ namespace Emik.SourceGenerators.Choices;
 /// <param name="Type">The type of the member.</param>
 /// <param name="Name">The name of the member.</param>
 /// <param name="Symbol">The underlying symbol, if any.</param>
+/// <param name="CanHavePolyfillAttribute">Whether to polyfill attributes for this instance.</param>
 public readonly record struct MemberSymbol(
     ITypeSymbol Type,
     string Name,
@@ -284,7 +285,7 @@ public readonly record struct MemberSymbol(
         };
 
     /// <summary>Creates a new instance of the <see cref="MemberSymbol"/> struct from the underlying syntax.</summary>
-    /// <param name="syntax">The <see cref="QualifiedNameSyntax"/> to deconstruct.</param>
+    /// <param name="syntax">The <c>QualifiedNameSyntax</c> to deconstruct.</param>
     /// <param name="model">The <see cref="SemanticModel"/> for looking up <see cref="ITypeSymbol"/>.</param>
     /// <param name="token">The cancellation token.</param>
     /// <returns>The new <see cref="MemberSymbol"/> instance.</returns>
