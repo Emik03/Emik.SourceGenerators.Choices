@@ -60,9 +60,9 @@ public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, Defau
     protected override async Task<Project> CreateProjectImplAsync(
         EvaluatedProjectState primaryProject,
         ImmutableArray<EvaluatedProjectState> additionalProjects,
-        CancellationToken token
+        CancellationToken cancellationToken
     ) =>
-        (await base.CreateProjectImplAsync(primaryProject, additionalProjects, token))
+        (await base.CreateProjectImplAsync(primaryProject, additionalProjects, cancellationToken))
        .WithMetadataReferences(Net100.References.All)
        .AddMetadataReferences(KMFramework)
        .AddMetadataReferences(UnityEngine);

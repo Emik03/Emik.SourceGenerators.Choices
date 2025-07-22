@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices.Tests;
-
+#pragma warning disable CA1716, CA1724
 public partial class Case()
+#pragma warning restore CA1716
 {
     readonly string? _source;
 

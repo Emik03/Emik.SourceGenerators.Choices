@@ -3,7 +3,9 @@ namespace Emik.SourceGenerators.Choices.Tests;
 
 using Test = (string Structure, string TypeKeyword, INamedTypeSymbol First, INamedTypeSymbol Second, Verify Verify);
 
+#pragma warning disable CA1716
 public partial class Case
+#pragma warning restore CA1716
 {
     public sealed class Fuzzer(ITestOutputHelper output)
     {
@@ -119,7 +121,9 @@ public partial class Case
 
                 output.WriteLine("All micro-tests passed. Yippee!");
             }
+#pragma warning disable CA1031
             catch (Exception e)
+#pragma warning restore CA1031
             {
                 Throw(e, fail, i, length);
             }
