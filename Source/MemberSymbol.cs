@@ -6,7 +6,7 @@ namespace Emik.SourceGenerators.Choices;
 /// <param name="Name">The name of the member.</param>
 /// <param name="Symbol">The underlying symbol, if any.</param>
 /// <param name="CanHavePolyfillAttribute">Whether to polyfill attributes for this instance.</param>
-public readonly record struct MemberSymbol(
+public readonly partial record struct MemberSymbol(
     ITypeSymbol Type,
     string Name,
     ISymbol? Symbol = null,
@@ -145,7 +145,10 @@ public readonly record struct MemberSymbol(
 
     /// <summary>Gets the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.</summary>
     [Pure]
-    public string ParameterName => $"{FirstCharName?.ToLower()}{RestName}";
+    public string ParameterName =>
+        $"{FirstCharName?.ToLower()}{RestName}" is var parameterName && IsKeyword(parameterName)
+            ? $"@{parameterName}"
+            : parameterName;
 
     /// <summary>Gets the name of the property that corresponds to this <see cref="MemberSymbol"/>.</summary>
     [Pure]
