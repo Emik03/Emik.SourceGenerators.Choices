@@ -204,8 +204,9 @@ public partial class Case()
         }.{typeof(Verify).Namespace}.{(generics is 0 ? memberName : $"{memberName[..^1]}`{generics}")}.g.cs";
 
         var absolute = Path.Join(directory, "Expected", $"{memberName}.csx");
-        var text = await File.ReadAllTextAsync(absolute);
-        verify.TestState.GeneratedSources.Add((name, SourceText.From(text, Encoding.UTF8)));
+        await using var file = File.Open(absolute, FileMode.OpenOrCreate, FileAccess.Read);
+        using StreamReader reader = new(file);
+        verify.TestState.GeneratedSources.Add((name, SourceText.From(await reader.ReadToEndAsync(), Encoding.UTF8)));
         await verify.RunAsync();
     }
 
