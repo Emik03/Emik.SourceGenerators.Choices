@@ -46,11 +46,11 @@ sealed partial record Scaffolder
             (symbol as IMethodSymbol)?.TypeParameters.Length &&
             x.Symbol.GetFullyQualifiedName() == symbol.GetFullyQualifiedName() &&
             ((x.Symbol as IMethodSymbol)?.Parameters ??
-                (x.Symbol as IPropertySymbol)?.Parameters ?? [])
+                (x.Symbol as IPropertySymbol)?.Parameters ?? ImmutableArray<IParameterSymbol>.Empty)
            .Select(x => x.Type)
            .SequenceEqual(
                 ((symbol as IMethodSymbol)?.Parameters ??
-                    (symbol as IPropertySymbol)?.Parameters ?? [])
+                    (symbol as IPropertySymbol)?.Parameters ?? ImmutableArray<IParameterSymbol>.Empty)
                .Select(x => x.Type),
                 Equating<ITypeSymbol>((x, y) => x.GetFullyQualifiedName() == y.GetFullyQualifiedName())
             );
@@ -372,7 +372,7 @@ sealed partial record Scaffolder
                 {
                     TypeArguments: [{ SpecialType: SpecialType.System_Boolean }],
                     SpecialType: SpecialType.System_Nullable_T,
-                } => x.Value switch { true => CSharp("true"), false => CSharp("false"), _ => throw Unreachable },
+                } => x.Value?.ToString() ?? throw new UnreachableException(),
             _ when x.Type?.SpecialType is SpecialType.System_String =>
                 $"\"{x.Value?.ToString().SelectMany(Escape).Concat()}\"",
             TypedConstantKind.Error or TypedConstantKind.Primitive => $"{x.Value}",
@@ -380,7 +380,7 @@ sealed partial record Scaffolder
                 $"({x.Type}){(isNegative ? "(" : "")}{x.Value}{(isNegative ? ")" : "")}",
             TypedConstantKind.Type => CSharp($"typeof({x.Type})"),
             TypedConstantKind.Array => $"new{ObjectSuffix(x)}[] {{ {x.Values.Select(Display).Conjoin()} }}",
-            _ => throw Unreachable,
+            _ => throw new UnreachableException(),
         };
 
     [Pure]

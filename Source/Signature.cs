@@ -64,7 +64,7 @@ readonly record struct Signature(
             {
                 (IEventSymbol x, _, _) => [x.AddMethod, x.RaiseMethod, x.RemoveMethod],
                 (IPropertySymbol x, _, _) => [x.GetMethod, x.SetMethod],
-                _ => ImmutableArray<IMethodSymbol?>.Empty,
+                _ => Enumerable.Empty<IMethodSymbol>(),
             })
            .Filter()
            .Select(ToExtract);
@@ -137,7 +137,7 @@ readonly record struct Signature(
             IPropertySymbol { RefKind: var ret } => ret,
             IParameterSymbol { RefKind: var ret } => ret,
             IEventSymbol or null => RefKind.None,
-            _ => throw Unreachable,
+            _ => throw new UnreachableException(),
         };
 
     /// <summary>Gets the <see cref="Signature"/> of the <see cref="ISymbol"/>.</summary>
@@ -365,7 +365,7 @@ readonly record struct Signature(
         HashSet<Signature> exists
     )
     {
-        HashSet<Extract> set = new(s_extracts);
+        HashSet<Extract> set = [with(s_extracts)];
 
         foreach (var member in symbols[0].Type.GetMembers())
             if (symbols.All(x => !x.CanConflict(member.Name)) && From(member, assembly) is { } signature)

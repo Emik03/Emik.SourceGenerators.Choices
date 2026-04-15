@@ -232,7 +232,7 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
             _ when MemberSymbol.IsSystemTuple(symbolSet) => Scaffolder.Instances(symbolSet),
             null when DiscoverPrimaryConstructor(context, target, token) is { } p => p,
             null => Scaffolder.Instances(target),
-            _ => [],
+            _ => ImmutableArray<MemberSymbol>.Empty,
         };
 
         return (target, fields, mutablePublicly, null);
@@ -255,11 +255,9 @@ public sealed class ExtendingGenerator : IIncrementalGenerator
            .OfType<ParameterListSyntax>()
            .Filter()
            .FirstOrDefault(x => x.Ancestors().FirstOrDefault() is BaseTypeDeclarationSyntax) is { Parameters: var p }
-            ? // ReSharper disable once RedundantLinebreak
-            [
-                ..p.Select(x => context.SemanticModel.GetDeclaredSymbolSafe(x, token))
-                   .Filter()
-                   .Select(x => new MemberSymbol(x)),
-            ]
+            ? p.Select(x => context.SemanticModel.GetDeclaredSymbolSafe(x, token))
+               .Filter()
+               .Select(x => new MemberSymbol(x))
+               .ToImmutableArray()
             : null;
 }

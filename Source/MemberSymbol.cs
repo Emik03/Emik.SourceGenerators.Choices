@@ -349,10 +349,10 @@ public readonly partial record struct MemberSymbol(
     public override int GetHashCode() =>
         Symbol switch
         {
-            IFieldSymbol field => RoslynComparer.Signature.GetHashCode(field) * Prime(),
-            IPropertySymbol property => RoslynComparer.Signature.GetHashCode(property) * Prime(),
-            IParameterSymbol parameter => RoslynComparer.Signature.GetHashCode(parameter) * Prime(),
-            _ => RoslynComparer.Signature.GetHashCode(Type) ^ StringComparer.Ordinal.GetHashCode(Name) * Prime(),
+            IFieldSymbol field => RoslynComparer.Signature.GetHashCode(field) * Primes.Get(),
+            IPropertySymbol property => RoslynComparer.Signature.GetHashCode(property) * Primes.Get(),
+            IParameterSymbol parameter => RoslynComparer.Signature.GetHashCode(parameter) * Primes.Get(),
+            _ => RoslynComparer.Signature.GetHashCode(Type) ^ StringComparer.Ordinal.GetHashCode(Name) * Primes.Get(),
         };
 
     /// <inheritdoc />
