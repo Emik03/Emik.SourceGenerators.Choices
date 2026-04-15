@@ -181,11 +181,12 @@ sealed partial record Scaffolder(
           {{DeclareUnmanagedFields
           }}{{DeclareReferencedFields
           }}{{Rest.Select(DeclareField).Conjoin("")
-          }}{{DeclareHasValue
           }}{{Symbols.Select(DeclareConstructor).Conjoin("")
+          }}{{DeclareUnionAttributeProperties
           }}{{Symbols.Select(DeclareCheck).Conjoin("")
           }}{{Symbols.Select(DeclareProperty).Conjoin("")
           }}{{Symbols.Select(DeclareOperators).Conjoin("")
+          }}{{Symbols.Select(DeclareUnionAttributeMethod).Conjoin("")
           }}{{Symbols.Select(DeclareFactory).Conjoin("")
           }}{{DeclareInterfaceImplementations
           }}{{DeclareMappers
@@ -406,7 +407,7 @@ sealed partial record Scaffolder(
             : Reference.Select(DeclareField).Conjoin("");
 
     [Pure]
-    string DeclareHasValue =>
+    string DeclareUnionAttributeProperties =>
         IsUnion
             ? CSharp(
                 $$"""
@@ -1024,7 +1025,7 @@ sealed partial record Scaffolder(
                      public static {x.Unsafe}explicit operator {x.NullableAnnotated}({Name} x)
                          => x.{x.PropertyName};
 
-                 {DeclareTryGetValue(x)}
+
                  """
             );
 
@@ -1133,7 +1134,7 @@ sealed partial record Scaffolder(
     }
 
     [Pure]
-    string DeclareTryGetValue(MemberSymbol x) =>
+    string DeclareUnionAttributeMethod(MemberSymbol x) =>
         IsUnion
             ? CSharp(
                 $$"""
@@ -1145,7 +1146,7 @@ sealed partial record Scaffolder(
                      {{AggressiveInlining}}
                      public {{x.Unsafe}}bool TryGetValue([global::{{typeof(NotNullWhenAttribute)}}(true)] out {{x.NullableAnnotated}} value)
                      {
-                         value = {{x.PropertyName}};
+                         value = {{(x.IsEmpty ? "default" : x.PropertyName)}};
                          return Is{{x.PropertyName}};
                      }
 
