@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 namespace Emik.SourceGenerators.Choices;
-#pragma warning disable MA0051
+
 sealed partial record Scaffolder
 {
     [Pure]

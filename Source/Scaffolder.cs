@@ -186,9 +186,9 @@ sealed partial record Scaffolder(
           }}{{Symbols.Select(DeclareCheck).Conjoin("")
           }}{{Symbols.Select(DeclareProperty).Conjoin("")
           }}{{Symbols.Select(DeclareOperators).Conjoin("")
-          }}{{Symbols.Select(DeclareUnionAttributeMethod).Conjoin("")
           }}{{Symbols.Select(DeclareFactory).Conjoin("")
           }}{{DeclareInterfaceImplementations
+          }}{{Symbols.Select(DeclareUnionAttributeMethod).Conjoin("")
           }}{{DeclareMappers
           }}{{DeclareForwarders}}
           }
@@ -521,6 +521,8 @@ sealed partial record Scaffolder(
                                         };
                                 """
                           ))}}
+
+
               """
         );
 
@@ -586,8 +588,6 @@ sealed partial record Scaffolder(
     string DeclareMappers =>
         CSharp(
             $$"""
-
-
                   /// <summary>
                   /// Invokes the callback based on current variance.
                   /// </summary>
@@ -1138,13 +1138,13 @@ sealed partial record Scaffolder(
         IsUnion
             ? CSharp(
                 $$"""
-                     /// <summary>Attempts to get {XmlTypeName(x.Type)}.</summary>
+                     /// <summary>Attempts to get {{XmlTypeName(x.Type)}}.</summary>
                      /// <param name="value">The value.</param>
                      /// <returns>Whether the value was extracted.</returns>
                      {{Annotation}}
                      {{Pure}}
                      {{AggressiveInlining}}
-                     public {{x.Unsafe}}bool TryGetValue([global::{{typeof(NotNullWhenAttribute)}}(true)] out {{x.NullableAnnotated}} value)
+                     public {{ReadOnlyIfImmutableStruct}}{{x.Unsafe}}bool TryGetValue([global::{{typeof(NotNullWhenAttribute)}}(true)] out {{x.NullableAnnotated}} value)
                      {
                          value = {{(x.IsEmpty ? "default" : x.PropertyName)}};
                          return Is{{x.PropertyName}};

@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MPL-2.0
 // ReSharper disable ClassNeverInstantiated.Global InconsistentNaming NotAccessedPositionalProperty.Local NotAccessedPositionalProperty.Global RedundantNameQualifier RedundantUsingDirective.Global UnusedMember.Local UnusedType.Local
-#pragma warning disable MA0094
 global using Attribute = System.Attribute; // ReSharper disable once CheckNamespace EmptyNamespace
 namespace Emik.SourceGenerators.Choices.Tests;
-#pragma warning disable 169, IDE0250
+#pragma warning disable CS0169, IDE0250
 extern alias unity;
 using Task = System.Threading.Tasks.Task;
 

@@ -148,7 +148,6 @@ namespace Emik
                         _err = err;
                     }
 
-
                     /// <summary>Returns <see langword="true"/>. This exists solely for the compiler.</summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
@@ -349,30 +348,6 @@ namespace Emik
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> left, Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> right)
                         => right >= left;
 
-                    /// <summary>Attempts to get {XmlTypeName(x.Type)}.</summary>
-                    /// <param name="value">The value.</param>
-                    /// <returns>Whether the value was extracted.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
-                    [global::System.Diagnostics.Contracts.PureAttribute]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public bool TryGetValue([global::System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TOk? value)
-                    {
-                        value = Ok;
-                        return IsOk;
-                    }
-
-                    /// <summary>Attempts to get {XmlTypeName(x.Type)}.</summary>
-                    /// <param name="value">The value.</param>
-                    /// <returns>Whether the value was extracted.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
-                    [global::System.Diagnostics.Contracts.PureAttribute]
-                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public bool TryGetValue([global::System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TErr? value)
-                    {
-                        value = Err;
-                        return IsErr;
-                    }
-
                     /// <inheritdoc />
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
@@ -416,6 +391,30 @@ namespace Emik
                             0 => $"{nameof(Ok)}({_ok!})",
                             _ => $"{nameof(Err)}({_err!})",
                         };
+
+                    /// <summary>Attempts to get <typeparamref name="TOk"/>.</summary>
+                    /// <param name="value">The value.</param>
+                    /// <returns>Whether the value was extracted.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public readonly bool TryGetValue([global::System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TOk? value)
+                    {
+                        value = Ok;
+                        return IsOk;
+                    }
+
+                    /// <summary>Attempts to get <typeparamref name="TErr"/>.</summary>
+                    /// <param name="value">The value.</param>
+                    /// <returns>Whether the value was extracted.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public readonly bool TryGetValue([global::System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TErr? value)
+                    {
+                        value = Err;
+                        return IsErr;
+                    }
 
                     /// <summary>
                     /// Invokes the callback based on current variance.

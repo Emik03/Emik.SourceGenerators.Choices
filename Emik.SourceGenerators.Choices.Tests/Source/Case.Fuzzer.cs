@@ -3,9 +3,7 @@ namespace Emik.SourceGenerators.Choices.Tests;
 
 using Test = (string Structure, string TypeKeyword, INamedTypeSymbol First, INamedTypeSymbol Second, Verify Verify);
 
-#pragma warning disable CA1716
 public partial class Case
-#pragma warning restore CA1716
 {
     public sealed class Fuzzer(ITestOutputHelper output)
     {
