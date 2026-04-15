@@ -108,15 +108,7 @@ readonly partial struct Ints
 }
 
 [Choice, Union]
-readonly partial record struct ResultUnion<TOk, TErr>(TOk? ok, TErr? err)
-{
-    public static int GetHashCode(ResultUnion<int, string> x) =>
-        x switch
-        {
-            int i => i,
-            string s => s.GetDjb2HashCode(),
-        };
-}
+readonly partial record struct ResultUnion<TOk, TErr>(TOk? ok, TErr? err);
 
 static partial class Examples
 {

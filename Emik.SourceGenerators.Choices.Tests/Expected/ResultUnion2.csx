@@ -11,10 +11,10 @@ namespace Emik
         {
             namespace Tests
             {
-                /// <inheritdoc cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/>
+                /// <inheritdoc cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/>
                 /// <remarks>
                 ///     <para>
-                ///         The type <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/>
+                ///         The type <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/>
                 ///         is an immutable disjoint union representing the following variants:
                 ///     </para>
                 ///     <list type="table">
@@ -29,7 +29,7 @@ namespace Emik
                 ///                     </item>
                 ///                     <item>
                 ///                         <description>
-                ///                             Factory
+                ///                             Factories
                 ///                         </description>
                 ///                     </item>
                 ///                 </list>
@@ -37,16 +37,32 @@ namespace Emik
                 ///         </listheader>
                 ///         <item>
                 ///             <term>
-                ///                 <c>Maybe</c> <see langword="as"/> <see cref="System.ValueTuple"/>
+                ///                 <see cref="Ok"/> <see langword="as"/> <typeparamref name="TOk"/>
                 ///                 <list type="bullet">
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="IsMaybe"/>
+                ///                             <see cref="IsOk"/>
                 ///                         </description>
                 ///                     </item>
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="OfMaybe(System.ValueTuple)"/>
+                ///                             <list type="number">
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="OfOk(TOk?)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}(TOk?)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="op_Implicit(TOk?)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                             </list>
                 ///                         </description>
                 ///                     </item>
                 ///                 </list>
@@ -54,50 +70,32 @@ namespace Emik
                 ///         </item>
                 ///         <item>
                 ///             <term>
-                ///                 <c>False</c> <see langword="as"/> <see cref="System.ValueTuple"/>
+                ///                 <see cref="Err"/> <see langword="as"/> <typeparamref name="TErr"/>
                 ///                 <list type="bullet">
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="IsFalse"/>
+                ///                             <see cref="IsErr"/>
                 ///                         </description>
                 ///                     </item>
                 ///                     <item>
                 ///                         <description>
-                ///                             <see cref="OfFalse(System.ValueTuple)"/>
-                ///                         </description>
-                ///                     </item>
-                ///                 </list>
-                ///             </term>
-                ///         </item>
-                ///         <item>
-                ///             <term>
-                ///                 <c>Null</c> <see langword="as"/> <see cref="System.ValueTuple"/>
-                ///                 <list type="bullet">
-                ///                     <item>
-                ///                         <description>
-                ///                             <see cref="IsNull"/>
-                ///                         </description>
-                ///                     </item>
-                ///                     <item>
-                ///                         <description>
-                ///                             <see cref="OfNull(System.ValueTuple)"/>
-                ///                         </description>
-                ///                     </item>
-                ///                 </list>
-                ///             </term>
-                ///         </item>
-                ///         <item>
-                ///             <term>
-                ///                 <c>True</c> <see langword="as"/> <see cref="System.ValueTuple"/>
-                ///                 <list type="bullet">
-                ///                     <item>
-                ///                         <description>
-                ///                             <see cref="IsTrue"/>
-                ///                         </description>
-                ///                     </item>
-                ///                     <item>
-                ///                         <description>
-                ///                             <see cref="OfTrue(System.ValueTuple)"/>
+                ///                             <list type="number">
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="OfErr(TErr?)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}(TErr?)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                                 <item>
+                ///                                     <description>
+                ///                                         <see cref="op_Implicit(TErr?)"/>
+                ///                                     </description>
+                ///                                 </item>
+                ///                             </list>
                 ///                         </description>
                 ///                     </item>
                 ///                 </list>
@@ -106,177 +104,184 @@ namespace Emik
                 ///     </list>
                 /// </remarks>
                 [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Auto)]
-                partial struct ThinEnum :
+                partial record struct ResultUnion<TOk, TErr> :
                     global::System.IComparable,
                     global::System.IComparable<object>,
-                    global::System.IComparable<global::Emik.SourceGenerators.Choices.Tests.ThinEnum>,
+                    global::System.IComparable<global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>>,
 #if NET7_0_OR_GREATER
-                    global::System.Numerics.IComparisonOperators<global::Emik.SourceGenerators.Choices.Tests.ThinEnum, global::Emik.SourceGenerators.Choices.Tests.ThinEnum, bool>,
+                    global::System.Numerics.IComparisonOperators<global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>, global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>, bool>,
 #endif
                     global::System.IEquatable<object>,
-                    global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.ThinEnum>
+                    global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>>,
+                    global::System.Runtime.CompilerServices.IUnion
                 {
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
-                    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                    private static class Choice
-                    {
-                        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                        internal static class Maybe<TMaybeDiscard>
-                        {
-                            [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                            internal static class False
-                            {
-                                [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                                internal static class Null<TNullDiscard>
-                                {
-                                    [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-                                    internal sealed class True : global::System.Attribute
-                                    {
-                                    }
-                                }
-                            }
-                        }
-                    }
-
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     private readonly byte _discriminator;
 
+                    private readonly TOk? _ok = ok;
+
+                    private readonly TErr? _err = err;
+
                     /// <summary>
-                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>Maybe</c> of type <see cref="System.ValueTuple"/>.
+                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
                     /// </summary>
-                    /// <param name="maybe">The variant.</param>
-                    /// <param name="x">The discriminator.</param>
+                    /// <param name="ok">The variant.</param>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    private ThinEnum(System.ValueTuple maybe, byte x)
+                    public ResultUnion(TOk? ok)
+                        : this(ok, default(TErr?))
                     {
-                        _discriminator = x;
+                        _discriminator = 0;
+                        _ok = ok;
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> is the variant <c>Maybe</c> of type <see cref="System.ValueTuple"/>.
+                    /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
                     /// </summary>
+                    /// <param name="err">The variant.</param>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
-                    public readonly bool IsMaybe
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public ResultUnion(TErr? err)
+                        : this(default(TOk?), err)
+                    {
+                        _discriminator = 1;
+                        _err = err;
+                    }
+
+
+                    /// <summary>Returns <see langword="true"/>. This exists solely for the compiler.</summary>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+                    public bool HasValue
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => true;
+                    }
+
+                    /// <summary>Returns the inner value. This exists solely for the compiler.</summary>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+                    public object? Value
+                    {
+                        [global::System.Diagnostics.Contracts.PureAttribute]
+                        [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                        get => GetUnderlyingValue();
+                    }
+
+                    /// <summary>
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> is the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
+                    /// </summary>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    public readonly bool IsOk
+                    {
+                        [global::System.Diagnostics.Contracts.PureAttribute]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Ok")]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "Err")]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                         get => _discriminator is 0;
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> is the variant <c>False</c> of type <see cref="System.ValueTuple"/>.
+                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> is the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
-                    public readonly bool IsFalse
+                    public readonly bool IsErr
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(true, "Err")]
+                        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute(false, "Ok")]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                         get => _discriminator is 1;
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> is the variant <c>Null</c> of type <see cref="System.ValueTuple"/>.
+                    /// Gets the <typeparamref name="TOk"/> variant.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
-                    public readonly bool IsNull
+                    public readonly TOk? Ok
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => _discriminator is 2;
+                        get => _discriminator is 0 ? _ok : default;
                     }
 
                     /// <summary>
-                    /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> is the variant <c>True</c> of type <see cref="System.ValueTuple"/>.
+                    /// Gets the <typeparamref name="TErr"/> variant.
                     /// </summary>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
-                    public readonly bool IsTrue
+                    public readonly TErr? Err
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
                         [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                        get => _discriminator is 3;
+                        get => _discriminator is 1 ? _err : default;
                     }
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>Maybe</c> of type <see cref="System.ValueTuple"/>.
+                    /// Implicitly converts the <typeparamref name="TOk"/> parameter to the union.
                     /// </summary>
-                    /// <param name="maybe">The value to pass into the type.</param>
-                    /// <returns>The union containing the parameter <paramref name="maybe"/>.</returns>
+                    /// <param name="ok">The parameter to pass onto the constructor.</param>
+                    /// <returns>The union containing the parameter <paramref name="ok"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static global::Emik.SourceGenerators.Choices.Tests.ThinEnum OfMaybe(System.ValueTuple maybe = default)
-                        => new global::Emik.SourceGenerators.Choices.Tests.ThinEnum(maybe, (byte)0);
+                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>(TOk ok)
+                        => new global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>(ok);
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>False</c> of type <see cref="System.ValueTuple"/>.
+                    /// Explicitly converts the union to the target type <typeparamref name="TOk"/>.
                     /// </summary>
-                    /// <param name="@false">The value to pass into the type.</param>
-                    /// <returns>The union containing the parameter <paramref name="@false"/>.</returns>
+                    /// <param name="x">The union to access its property.</param>
+                    /// <returns>The getter of the union <paramref name="x"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static global::Emik.SourceGenerators.Choices.Tests.ThinEnum OfFalse(System.ValueTuple @false = default)
-                        => new global::Emik.SourceGenerators.Choices.Tests.ThinEnum(@false, (byte)1);
+                    public static explicit operator TOk?(global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> x)
+                        => x.Ok;
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>Null</c> of type <see cref="System.ValueTuple"/>.
+                    /// Implicitly converts the <typeparamref name="TErr"/> parameter to the union.
                     /// </summary>
-                    /// <param name="@null">The value to pass into the type.</param>
-                    /// <returns>The union containing the parameter <paramref name="@null"/>.</returns>
+                    /// <param name="err">The parameter to pass onto the constructor.</param>
+                    /// <returns>The union containing the parameter <paramref name="err"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static global::Emik.SourceGenerators.Choices.Tests.ThinEnum OfNull(System.ValueTuple @null = default)
-                        => new global::Emik.SourceGenerators.Choices.Tests.ThinEnum(@null, (byte)2);
+                    public static implicit operator global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>(TErr err)
+                        => new global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>(err);
 
                     /// <summary>
-                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>True</c> of type <see cref="System.ValueTuple"/>.
+                    /// Explicitly converts the union to the target type <typeparamref name="TErr"/>.
                     /// </summary>
-                    /// <param name="@true">The value to pass into the type.</param>
-                    /// <returns>The union containing the parameter <paramref name="@true"/>.</returns>
+                    /// <param name="x">The union to access its property.</param>
+                    /// <returns>The getter of the union <paramref name="x"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static global::Emik.SourceGenerators.Choices.Tests.ThinEnum OfTrue(System.ValueTuple @true = default)
-                        => new global::Emik.SourceGenerators.Choices.Tests.ThinEnum(@true, (byte)3);
+                    public static explicit operator TErr?(global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> x)
+                        => x.Err;
 
                     /// <summary>
-                    /// Determines whether the left-hand side is equal to the right.
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
                     /// </summary>
-                    /// <param name="left">The left-hand side.</param>
-                    /// <param name="right">The right-hand side.</param>
-                    /// <returns>
-                    /// The value determining whether the parameter <paramref name="left"/>
-                    /// is equal to the parameter <paramref name="right"/>.
-                    /// </returns>
+                    /// <param name="ok">The value to pass into the type.</param>
+                    /// <returns>The union containing the parameter <paramref name="ok"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator ==(Emik.SourceGenerators.Choices.Tests.ThinEnum left, Emik.SourceGenerators.Choices.Tests.ThinEnum right)
-                        => left._discriminator == right._discriminator &&
-                            left._discriminator switch
-                            {
-                                0 => true,
-                                1 => true,
-                                2 => true,
-                                _ => true,
-                            };
+                    public static global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> OfOk(TOk? ok)
+                        => new global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>(ok);
 
                     /// <summary>
-                    /// Determines whether the left-hand side is unequal to the right.
+                    /// Creates a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
                     /// </summary>
-                    /// <param name="left">The left-hand side.</param>
-                    /// <param name="right">The right-hand side.</param>
-                    /// <returns>
-                    /// The value determining whether the parameter <paramref name="left"/>
-                    /// is unequal to the parameter <paramref name="right"/>.
-                    /// </returns>
+                    /// <param name="err">The value to pass into the type.</param>
+                    /// <returns>The union containing the parameter <paramref name="err"/>.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator !=(Emik.SourceGenerators.Choices.Tests.ThinEnum left, Emik.SourceGenerators.Choices.Tests.ThinEnum right)
-                        => !(left == right);
+                    public static global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> OfErr(TErr? err)
+                        => new global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>(err);
 
                     /// <summary>
                     /// Determines whether the left-hand side is greater than the right.
@@ -290,15 +295,13 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator >(Emik.SourceGenerators.Choices.Tests.ThinEnum left, Emik.SourceGenerators.Choices.Tests.ThinEnum right)
+                    public static bool operator >(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> left, Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> right)
                         => left._discriminator > right._discriminator ||
                             left._discriminator == right._discriminator &&
                             left._discriminator switch
                             {
-                                0 => true,
-                                1 => true,
-                                2 => true,
-                                _ => true,
+                                0 => global::System.Collections.Generic.Comparer<TOk?>.Default.Compare(left._ok!, right._ok!) > 0,
+                                _ => global::System.Collections.Generic.Comparer<TErr?>.Default.Compare(left._err!, right._err!) > 0,
                             };
 
                     /// <summary>
@@ -313,7 +316,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator >=(Emik.SourceGenerators.Choices.Tests.ThinEnum left, Emik.SourceGenerators.Choices.Tests.ThinEnum right)
+                    public static bool operator >=(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> left, Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> right)
                         => left == right || left > right;
 
                     /// <summary>
@@ -328,7 +331,7 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator <(Emik.SourceGenerators.Choices.Tests.ThinEnum left, Emik.SourceGenerators.Choices.Tests.ThinEnum right)
+                    public static bool operator <(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> left, Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> right)
                         => right > left;
 
                     /// <summary>
@@ -343,21 +346,38 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public static bool operator <=(Emik.SourceGenerators.Choices.Tests.ThinEnum left, Emik.SourceGenerators.Choices.Tests.ThinEnum right)
+                    public static bool operator <=(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> left, Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> right)
                         => right >= left;
 
-                    /// <inheritdoc cref="object.Equals(object)"/>
+                    /// <summary>Attempts to get {XmlTypeName(x.Type)}.</summary>
+                    /// <param name="value">The value.</param>
+                    /// <returns>Whether the value was extracted.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public override bool Equals(object? obj)
-                        => obj is global::Emik.SourceGenerators.Choices.Tests.ThinEnum x && Equals(x);
+                    public bool TryGetValue([global::System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TOk? value)
+                    {
+                        value = Ok;
+                        return IsOk;
+                    }
+
+                    /// <summary>Attempts to get {XmlTypeName(x.Type)}.</summary>
+                    /// <param name="value">The value.</param>
+                    /// <returns>Whether the value was extracted.</returns>
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.Diagnostics.Contracts.PureAttribute]
+                    [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
+                    public bool TryGetValue([global::System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TErr? value)
+                    {
+                        value = Err;
+                        return IsErr;
+                    }
 
                     /// <inheritdoc />
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly bool Equals(Emik.SourceGenerators.Choices.Tests.ThinEnum other)
+                    public readonly bool Equals(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
@@ -365,13 +385,13 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(object? obj)
-                        => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.ThinEnum x ? CompareTo(x) : -1;
+                        => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly int CompareTo(Emik.SourceGenerators.Choices.Tests.ThinEnum other)
+                    public readonly int CompareTo(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> other)
                         => Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
@@ -379,13 +399,11 @@ namespace Emik
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override int GetHashCode()
-                        => unchecked(_discriminator * 3049) ^
+                        => unchecked(_discriminator * 19813) ^
                         (_discriminator switch
                         {
-                            0 => 0,
-                            1 => 0,
-                            2 => 0,
-                            _ => 0,
+                            0 => _ok!.GetHashCode(),
+                            _ => _err!.GetHashCode(),
                         });
 
                     /// <inheritdoc />
@@ -395,42 +413,30 @@ namespace Emik
                     public readonly override string ToString()
                         => _discriminator switch
                         {
-                            0 => "Maybe",
-                            1 => "False",
-                            2 => "Null",
-                            _ => "True",
+                            0 => $"{nameof(Ok)}({_ok!})",
+                            _ => $"{nameof(Err)}({_err!})",
                         };
 
                     /// <summary>
                     /// Invokes the callback based on current variance.
                     /// </summary>
-                    /// <param name="onMaybe">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>Maybe</c> of type <see cref="System.ValueTuple"/> is held.</param>
-                    /// <param name="onFalse">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>False</c> of type <see cref="System.ValueTuple"/> is held.</param>
-                    /// <param name="onNull">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>Null</c> of type <see cref="System.ValueTuple"/> is held.</param>
-                    /// <param name="onTrue">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>True</c> of type <see cref="System.ValueTuple"/> is held.</param>
+                    /// <param name="onOk">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/> is held.</param>
+                    /// <param name="onErr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/> is held.</param>
                     /// <returns>Itself.</returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly Emik.SourceGenerators.Choices.Tests.ThinEnum Map(
-                        global::System.Action? onMaybe = null,
-                        global::System.Action? onFalse = null,
-                        global::System.Action? onNull = null,
-                        global::System.Action? onTrue = null
+                    public readonly Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> Map(
+                        global::System.Action<TOk?>? onOk = null,
+                        global::System.Action<TErr?>? onErr = null
                     )
                     {
                         switch (_discriminator)
                         {
                             case 0:
-                                onMaybe?.Invoke();
-                                return this;
-                            case 1:
-                                onFalse?.Invoke();
-                                return this;
-                            case 2:
-                                onNull?.Invoke();
+                                onOk?.Invoke(_ok!);
                                 return this;
                             default:
-                                onTrue?.Invoke();
+                                onErr?.Invoke(_err!);
                                 return this;
                         }
                     }
@@ -439,27 +445,21 @@ namespace Emik
                     /// Maps each variant to <typeparamref name="TMappingResult"/>.
                     /// </summary>
                     /// <typeparam name="TMappingResult">The resulting type from the mapping.</typeparam>
-                    /// <param name="onMaybe">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>Maybe</c> of type <see cref="System.ValueTuple"/> is held.</param>
-                    /// <param name="onFalse">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>False</c> of type <see cref="System.ValueTuple"/> is held.</param>
-                    /// <param name="onNull">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>Null</c> of type <see cref="System.ValueTuple"/> is held.</param>
-                    /// <param name="onTrue">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ThinEnum"/> struct with the variant <c>True</c> of type <see cref="System.ValueTuple"/> is held.</param>
+                    /// <param name="onOk">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/> is held.</param>
+                    /// <param name="onErr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/> is held.</param>
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly TMappingResult Map<TMappingResult>(
-                        global::System.Func<TMappingResult> onMaybe,
-                        global::System.Func<TMappingResult> onFalse,
-                        global::System.Func<TMappingResult> onNull,
-                        global::System.Func<TMappingResult> onTrue
+                        global::System.Func<TOk?, TMappingResult> onOk,
+                        global::System.Func<TErr?, TMappingResult> onErr
                     )
                         => _discriminator switch
                         {
-                            0 => onMaybe(),
-                            1 => onFalse(),
-                            2 => onNull(),
-                            _ => onTrue(),
+                            0 => onOk(_ok!),
+                            _ => onErr(_err!),
                         };
 
                     /// <summary>
@@ -471,13 +471,11 @@ namespace Emik
                     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
-                    public readonly System.ValueTuple GetUnderlyingValue()
+                    public readonly object GetUnderlyingValue()
                         => _discriminator switch
                         {
-                            0 => default(System.ValueTuple),
-                            1 => default(System.ValueTuple),
-                            2 => default(System.ValueTuple),
-                            _ => default(System.ValueTuple),
+                            0 => _ok!,
+                            _ => _err!,
                         };
                 }
             }

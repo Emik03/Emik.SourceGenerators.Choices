@@ -186,6 +186,14 @@ public partial class Case()
             """
         );
 
+    public sealed class ResultUnion2()
+        : Case(
+            """
+            [Choice, Union]
+            readonly partial record struct ResultUnion<TOk, TErr>(TOk? ok, TErr? err);
+            """
+        );
+
     [Fact]
     public async Task RunAsync()
     {
@@ -214,7 +222,8 @@ public partial class Case()
         var absolute = Path.Join(directory, "Expected", $"{memberName}.csx");
         await using var file = File.Open(absolute, FileMode.OpenOrCreate, FileAccess.Read);
         using StreamReader reader = new(file);
-        verify.TestState.GeneratedSources.Add((name, SourceText.From(await reader.ReadToEndAsync(), Encoding.UTF8)));
+        var source = SourceText.From(await reader.ReadToEndAsync(), Encoding.UTF8, SourceHashAlgorithm.Sha256);
+        verify.TestState.GeneratedSources.Add((name, source));
         await verify.RunAsync();
     }
 
@@ -224,6 +233,7 @@ public partial class Case()
           using System;
           using System.ComponentModel;
           using System.Reflection;
+          using System.Runtime.CompilerServices;
           using System.Text.Json;
           using System.Threading.Tasks;
           using Emik;
@@ -231,6 +241,11 @@ public partial class Case()
           namespace Emik.SourceGenerators.Choices.Tests
           {
           {{string.Join('\n', source?.Split('\n').Select(x => $"    {x}") ?? [])}}
+          }
+          namespace System.Runtime.CompilerServices
+          {
+              [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false)]
+              sealed class UnionAttribute : Attribute;
           }
           #pragma warning restore SYSLIB5003
           """;
