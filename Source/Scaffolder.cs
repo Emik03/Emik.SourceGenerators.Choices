@@ -397,7 +397,7 @@ sealed partial record Scaffolder(
             ? CSharp(
                 $"""
                      {Annotation}
-                     private {PrivatelyReadOnly}{(Common is null ? "object" : new MemberSymbol(Common, "").NullableAnnotated)
+                     private {PrivatelyReadOnly}{(Common.Type is null ? "object" : new MemberSymbol(Common.Type, "").NullableAnnotated)
                      } {ReferenceField}{(UsesPrimaryConstructor && !Symbols[0].IsEmpty && Reference.Contains(Symbols[0]) ? CSharp($" = {Symbols[0].ParameterName}") : "")};
 
 
@@ -420,14 +420,14 @@ sealed partial record Scaffolder(
                          get => true;
                      }
 
-                     /// <summary>Returns <see langword="null"/>. This exists solely for the compiler.</summary>
+                     /// <summary>Returns the inner value. This exists solely for the compiler.</summary>
                      {{Annotation}}
                      [{{typeof(EditorBrowsableAttribute)}}({{typeof(EditorBrowsableState)}}.{{EditorBrowsableState.Never}})]
                      public object? Value
                      {
                          {{Pure}}
                          {{AggressiveInlining}}
-                         get => null;
+                         get => {{(Common.DisallowUpcasts ? "null" : "GetUnderlyingValue()")}};
                      }
 
 
@@ -638,7 +638,7 @@ sealed partial record Scaffolder(
         );
 
     string DeclareUnderlyingValue =>
-        Common is null
+        Common.DisallowUpcasts
             ? ""
             : CSharp(
                 $"""
@@ -653,9 +653,9 @@ sealed partial record Scaffolder(
                      {Annotation}
                      {Pure}
                      {AggressiveInlining}
-                     public {ReadOnlyIfStruct}{SymbolsUnsafe}{Common} GetUnderlyingValue()
+                     public {ReadOnlyIfStruct}{SymbolsUnsafe}{Common.Type?.ToString() ?? "object"} GetUnderlyingValue()
                          => {(CanOverlapReferenceMemorySpace && Symbols.Length == Reference.Length
-                             ? $"{(Common.SpecialType is SpecialType.System_Object ? "" : $"({Common})")}{ReferenceField}!"
+                             ? $"{(Common.Type?.SpecialType is null or SpecialType.System_Object ? "" : $"({Common.Type})")}{ReferenceField}!"
                              : CSharp(
                                  $$"""
                                    {{Discriminator}} switch
@@ -706,7 +706,8 @@ sealed partial record Scaffolder(
     HashSet<MemberSymbol> Members { get; } = Named.GetMembers().Select(MemberSymbol.From).Filter().ToSet();
 
     [Pure]
-    ITypeSymbol? Common { get; } = Signature.FindCommonBaseTypes(Symbols.RemoveRange(SingleEmpty)).FirstOrDefault();
+    (ITypeSymbol? Type, bool DisallowUpcasts) Common { get; } =
+        (Signature.FindCommonBaseTypes(Symbols.RemoveRange(SingleEmpty), out var disallow).FirstOrDefault(), disallow);
 
     [Pure]
     ImmutableArray<MemberSymbol> Reference { get; } =

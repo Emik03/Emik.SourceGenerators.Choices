@@ -94,7 +94,7 @@ readonly record struct Signature(
 
         [Pure]
         IEnumerable<Extract> FindCommonBaseMembers(ImmutableArray<MemberSymbol> s) =>
-            FindCommonBaseTypes(s)
+            FindCommonBaseTypes(s, out _)
                .SelectMany(x => x.GetMembers())
                .Omit(x => x is ITypeSymbol || symbols.Any(y => y.CanConflict(x.Name)))
                .Select(x => ToExtract(x, s.Length));
@@ -111,11 +111,16 @@ readonly record struct Signature(
 
     /// <summary>Finds all common base types for the set of <see cref="MemberSymbol"/> instances.</summary>
     /// <param name="symbols">The set of <see cref="MemberSymbol"/> instances.</param>
+    /// <param name="disallowUpcasts">Whether casting to object is allowed.</param>
     /// <returns>All common base types in descending order of specificity.</returns>
     [Pure]
-    public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(ImmutableArray<MemberSymbol> symbols) =>
-        symbols.Skip(1).All(symbols[0].TypeEquals) ? [symbols[0].Type] :
-        symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true }) ? [] : symbols
+    public static IEnumerable<ITypeSymbol> FindCommonBaseTypes(
+        ImmutableArray<MemberSymbol> symbols,
+        out bool disallowUpcasts
+    ) =>
+        symbols.Skip(1).All(symbols[0].TypeEquals) && (disallowUpcasts = true) ? [symbols[0].Type] :
+        (disallowUpcasts = symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true })) ? [] :
+        symbols
            .Select(x => Inheritance(x.Type).ToSet(RoslynComparer.Signature))
            .Aggregate(IntersectWith)
            .OrderBy(x => x.SpecialType is SpecialType.System_Object)
