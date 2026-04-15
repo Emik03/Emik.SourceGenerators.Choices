@@ -118,7 +118,7 @@ readonly record struct Signature(
         ImmutableArray<MemberSymbol> symbols,
         out bool disallowUpcasts
     ) =>
-        symbols.Skip(1).All(symbols[0].TypeEquals) && (disallowUpcasts = true) ? [symbols[0].Type] :
+        symbols.Skip(1).All(symbols[0].TypeEquals) && !(disallowUpcasts = false) ? [symbols[0].Type] :
         (disallowUpcasts = symbols.Any(x => x.Type is { TypeKind: TypeKind.Pointer } or { IsRefLikeType: true })) ? [] :
         symbols
            .Select(x => Inheritance(x.Type).ToSet(RoslynComparer.Signature))
