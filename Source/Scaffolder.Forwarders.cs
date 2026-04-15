@@ -372,7 +372,10 @@ sealed partial record Scaffolder
                 {
                     TypeArguments: [{ SpecialType: SpecialType.System_Boolean }],
                     SpecialType: SpecialType.System_Nullable_T,
-                } => x.Value?.ToString() ?? throw new UnreachableException(),
+                } => x.Value switch
+                {
+                    true => CSharp("true"), false => CSharp("false"), _ => throw new UnreachableException(),
+                },
             _ when x.Type?.SpecialType is SpecialType.System_String =>
                 $"\"{x.Value?.ToString().SelectMany(Escape).Concat()}\"",
             TypedConstantKind.Error or TypedConstantKind.Primitive => $"{x.Value}",

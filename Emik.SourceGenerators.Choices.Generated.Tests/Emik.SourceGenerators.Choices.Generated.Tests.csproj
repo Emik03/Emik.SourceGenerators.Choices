@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <IsKtane>true</IsKtane>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
         <RepositoryUrl>https://github.com/Emik03/Emik.SourceGenerators.Choices</RepositoryUrl>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Remove="$(Morsels)/Compile/**/*.cs"/>
+        <Compile Include="$(Morsels)/Compile/Source/References/System/Diagnostics/Attributes.cs" Link="Source/References/System/Diagnostics/Attributes.cs"/>
     </ItemGroup>
 </Project>

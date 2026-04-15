@@ -73,6 +73,9 @@ sealed partial record Scaffolder(
         ];
 
     [Pure]
+    bool IsUnion => Named.GetAttributes().Any(IsUnionAttribute);
+
+    [Pure]
     bool UsesPrimaryConstructor => Symbols is [{ Symbol: IParameterSymbol }, ..];
 
     [Pure]
@@ -178,6 +181,7 @@ sealed partial record Scaffolder(
           {{DeclareUnmanagedFields
           }}{{DeclareReferencedFields
           }}{{Rest.Select(DeclareField).Conjoin("")
+          }}{{DeclareHasValue
           }}{{Symbols.Select(DeclareConstructor).Conjoin("")
           }}{{Symbols.Select(DeclareCheck).Conjoin("")
           }}{{Symbols.Select(DeclareProperty).Conjoin("")
@@ -232,7 +236,9 @@ sealed partial record Scaffolder(
                      global::System.Numerics.IComparisonOperators<{Name}, {Name}, bool>,
                  #endif
                      global::System.IEquatable<object>,
-                     global::System.IEquatable<{Name}>{DeclareAdditionalInterfaces}
+                     global::System.IEquatable<{Name}>{
+                         (IsUnion ? $",\n    global::{typeof(IUnion)}" : "")
+                     }{DeclareAdditionalInterfaces}
                  """
             );
 
@@ -371,6 +377,21 @@ sealed partial record Scaffolder(
             );
 
     [Pure]
+    string DeclareUnmanagedFields =>
+        CanOverlapUnmanagedMemorySpace
+            ? CSharp(
+                $"""
+                     {Annotation}
+                     private {PrivatelyReadOnly}{(UsesPrimaryConstructor && Unmanaged.Contains(Symbols[0]) ? Symbols[0].Unsafe : "")
+                     }Unmanaged {UnmanagedField}{(UsesPrimaryConstructor && !Symbols[0].IsEmpty ? CSharp($" = new Unmanaged() {{ {Symbols[0].FieldName
+                     } = {Symbols[0].ParameterName} }}") : "")};
+
+
+                 """
+            )
+            : Unmanaged.Select(DeclareField).Conjoin("");
+
+    [Pure]
     string DeclareReferencedFields =>
         CanOverlapReferenceMemorySpace
             ? CSharp(
@@ -385,19 +406,34 @@ sealed partial record Scaffolder(
             : Reference.Select(DeclareField).Conjoin("");
 
     [Pure]
-    string DeclareUnmanagedFields =>
-        CanOverlapUnmanagedMemorySpace
+    string DeclareHasValue =>
+        IsUnion
             ? CSharp(
-                $"""
-                     {Annotation}
-                     private {PrivatelyReadOnly}{(UsesPrimaryConstructor && Unmanaged.Contains(Symbols[0]) ? Symbols[0].Unsafe : "")
-                     }Unmanaged {UnmanagedField}{(UsesPrimaryConstructor && !Symbols[0].IsEmpty ? CSharp($" = new Unmanaged() {{ {Symbols[0].FieldName
-                     } = {Symbols[0].ParameterName} }}") : "")};
+                $$"""
+                     /// <summary>Returns <see langword="true"/>. This exists solely for the compiler.</summary>
+                     {{Annotation}}
+                     [{{typeof(EditorBrowsableAttribute)}}({{typeof(EditorBrowsableState)}}.{{EditorBrowsableState.Never}})]
+                     public bool HasValue
+                     {
+                         {{Pure}}
+                         {{AggressiveInlining}}
+                         get => true;
+                     }
+
+                     /// <summary>Returns <see langword="null"/>. This exists solely for the compiler.</summary>
+                     {{Annotation}}
+                     [{{typeof(EditorBrowsableAttribute)}}({{typeof(EditorBrowsableState)}}.{{EditorBrowsableState.Never}})]
+                     public object? Value
+                     {
+                         {{Pure}}
+                         {{AggressiveInlining}}
+                         get => null;
+                     }
 
 
                  """
             )
-            : Unmanaged.Select(DeclareField).Conjoin("");
+            : "";
 
     [Pure]
     string DeclareInterfaceImplementations =>
@@ -702,6 +738,27 @@ sealed partial record Scaffolder(
            .ToImmutableArray();
 
     [Pure]
+    static bool IsUnionAttribute(AttributeData arg) =>
+        arg.AttributeClass is
+        {
+            Name: nameof(UnionAttribute),
+            TypeArguments: [],
+            ContainingNamespace:
+            {
+                ContainingNamespace:
+                {
+                    ContainingNamespace:
+                    {
+                        ContainingNamespace.IsGlobalNamespace: true,
+                        Name: nameof(System),
+                    },
+                    Name: nameof(System.Runtime),
+                },
+                Name: nameof(System.Runtime.CompilerServices),
+            },
+        };
+
+    [Pure]
     static bool IsUnoriginalMethod(ISymbol x, string name) =>
         x is not IMethodSymbol
         {
@@ -966,7 +1023,7 @@ sealed partial record Scaffolder(
                      public static {x.Unsafe}explicit operator {x.NullableAnnotated}({Name} x)
                          => x.{x.PropertyName};
 
-
+                 {DeclareTryGetValue(x)}
                  """
             );
 
@@ -1073,6 +1130,28 @@ sealed partial record Scaffolder(
               """
         );
     }
+
+    [Pure]
+    string DeclareTryGetValue(MemberSymbol x) =>
+        IsUnion
+            ? CSharp(
+                $$"""
+                     /// <summary>Attempts to get {XmlTypeName(x.Type)}.</summary>
+                     /// <param name="value">The value.</param>
+                     /// <returns>Whether the value was extracted.</returns>
+                     {{Annotation}}
+                     {{Pure}}
+                     {{AggressiveInlining}}
+                     public {{x.Unsafe}}bool TryGetValue([global::{{typeof(NotNullWhenAttribute)}}(true)] out {{x.NullableAnnotated}} value)
+                     {
+                         value = {{x.PropertyName}};
+                         return Is{{x.PropertyName}};
+                     }
+
+
+                 """
+            )
+            : "";
 
     [Pure]
     string Describe(MemberSymbol x) =>
