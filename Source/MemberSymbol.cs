@@ -141,7 +141,7 @@ public readonly partial record struct MemberSymbol(
 
     /// <summary>Gets the name of the field that corresponds to this <see cref="MemberSymbol"/>.</summary>
     [Pure]
-    public string FieldName => $"_{ParameterName}";
+    public string FieldName => $"_{FirstCharName?.ToLower()}{RestName}";
 
     /// <summary>Gets the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.</summary>
     [Pure]
@@ -166,13 +166,13 @@ public readonly partial record struct MemberSymbol(
     /// Gets the first character of the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.
     /// </summary>
     [Pure]
-    char? FirstCharName => Name.Nth((Name is ['_', ..]).ToByte());
+    char? FirstCharName => Name.Nth((Name is ['@' or '_', ..]).ToByte());
 
     /// <summary>
     /// Gets the rest of the name of the parameter that corresponds to this <see cref="MemberSymbol"/>.
     /// </summary>
     [Pure]
-    ReadOnlySpan<char> RestName => Name.AsSpan().Nth(((Name is ['_', ..]).ToByte() + 1)..);
+    ReadOnlySpan<char> RestName => Name.AsSpan().Nth(((Name is ['@' or '_', ..]).ToByte() + 1)..);
 
     /// <summary>Compares two <see cref="INamespaceOrTypeSymbol"/> instances.</summary>
     /// <remarks><para>

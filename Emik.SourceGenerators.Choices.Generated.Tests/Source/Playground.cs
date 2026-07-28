@@ -109,6 +109,9 @@ readonly partial struct Ints
 [Choice, Union]
 readonly partial record struct ResultUnion<TOk, TErr>(TOk? ok, TErr? err);
 
+[Choice] // ReSharper disable once StructCanBeMadeReadOnly
+partial struct Keywords(byte @byte, char @char, int @int, string @namespace, object @class, Delegate @delegate);
+
 static partial class Examples
 {
     [Choice]

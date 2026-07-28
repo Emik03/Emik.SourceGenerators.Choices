@@ -75,6 +75,13 @@ public partial class Case()
         """
     );
 
+    public sealed class Keywords() : Case(
+        """
+        [Choice]
+        partial struct Keywords(byte @byte, char @char, int @int, string @namespace, object @class, Delegate @delegate);
+        """
+    );
+
     public sealed class KMModule() : Case(
         """
         [Choice(typeof((KMBombModule Regular, KMNeedyModule Needy)))]

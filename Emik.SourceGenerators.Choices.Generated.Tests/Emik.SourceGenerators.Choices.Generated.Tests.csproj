@@ -2,6 +2,8 @@
     <PropertyGroup>
         <IsKtane>true</IsKtane>
         <TargetFramework>net11.0</TargetFramework>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <CompilerGeneratedFilesOutputPath>artifacts/gen</CompilerGeneratedFilesOutputPath>
         <RepositoryUrl>https://github.com/Emik03/Emik.SourceGenerators.Choices</RepositoryUrl>
     </PropertyGroup>
     <ItemGroup>
