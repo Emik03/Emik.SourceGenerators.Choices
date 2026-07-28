@@ -233,7 +233,7 @@ namespace Emik
                     /// <summary>
                     /// Compact representation of all unmanaged memory within the union <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                     partial struct Unmanaged
                     {
@@ -247,20 +247,20 @@ namespace Emik
                         internal int _int;
                     }
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     private readonly byte _discriminator;
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     private readonly Unmanaged _unmanaged = new Unmanaged() { _byte = @byte };
 
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     private readonly object? _reference;
 
                     /// <summary>
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> struct with the variant <see cref="Byte"/> of type <see cref="byte"/>.
                     /// </summary>
                     /// <param name="@byte">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Keywords(byte @byte)
                         : this(@byte, default(char), default(int), default(string), default(object), default(System.Delegate))
@@ -273,7 +273,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> struct with the variant <see cref="Char"/> of type <see cref="char"/>.
                     /// </summary>
                     /// <param name="@char">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Keywords(char @char)
                         : this(default(byte), @char, default(int), default(string), default(object), default(System.Delegate))
@@ -286,7 +286,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> struct with the variant <see cref="Int"/> of type <see cref="int"/>.
                     /// </summary>
                     /// <param name="@int">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Keywords(int @int)
                         : this(default(byte), default(char), @int, default(string), default(object), default(System.Delegate))
@@ -299,7 +299,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> struct with the variant <see cref="Namespace"/> of type <see cref="string"/>.
                     /// </summary>
                     /// <param name="@namespace">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Keywords(string @namespace)
                         : this(default(byte), default(char), default(int), @namespace, default(object), default(System.Delegate))
@@ -312,7 +312,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> struct with the variant <see cref="Class"/> of type <see cref="object"/>.
                     /// </summary>
                     /// <param name="@class">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Keywords(object @class)
                         : this(default(byte), default(char), default(int), default(string), @class, default(System.Delegate))
@@ -325,7 +325,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> struct with the variant <see cref="Delegate"/> of type <see cref="System.Delegate"/>.
                     /// </summary>
                     /// <param name="@delegate">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public Keywords(System.Delegate @delegate)
                         : this(default(byte), default(char), default(int), default(string), default(object), @delegate)
@@ -337,7 +337,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> is the variant <see cref="Byte"/> of type <see cref="byte"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly bool IsByte
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -349,7 +349,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> is the variant <see cref="Char"/> of type <see cref="char"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly bool IsChar
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -361,7 +361,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> is the variant <see cref="Int"/> of type <see cref="int"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly bool IsInt
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -373,7 +373,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> is the variant <see cref="Namespace"/> of type <see cref="string"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly bool IsNamespace
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -385,7 +385,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> is the variant <see cref="Class"/> of type <see cref="object"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly bool IsClass
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -397,7 +397,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> is the variant <see cref="Delegate"/> of type <see cref="System.Delegate"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly bool IsDelegate
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -409,7 +409,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="byte"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly byte Byte
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -420,7 +420,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="char"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly char Char
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -431,7 +431,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="int"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly int Int
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -442,7 +442,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="string"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly string? Namespace
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -453,7 +453,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="object"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly object? Class
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -464,7 +464,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <see cref="System.Delegate"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly System.Delegate? Delegate
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -477,7 +477,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@byte">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="@byte"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Keywords(byte @byte)
@@ -488,7 +488,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator byte(global::Emik.SourceGenerators.Choices.Tests.Keywords x)
@@ -499,7 +499,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@char">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="@char"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Keywords(char @char)
@@ -510,7 +510,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator char(global::Emik.SourceGenerators.Choices.Tests.Keywords x)
@@ -521,7 +521,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@int">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="@int"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Keywords(int @int)
@@ -532,7 +532,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator int(global::Emik.SourceGenerators.Choices.Tests.Keywords x)
@@ -543,7 +543,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@namespace">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="@namespace"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Keywords(string @namespace)
@@ -554,7 +554,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator string?(global::Emik.SourceGenerators.Choices.Tests.Keywords x)
@@ -565,7 +565,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@delegate">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="@delegate"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.Keywords(System.Delegate @delegate)
@@ -576,7 +576,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator System.Delegate?(global::Emik.SourceGenerators.Choices.Tests.Keywords x)
@@ -587,7 +587,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@byte">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="@byte"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Keywords OfByte(byte @byte)
@@ -598,7 +598,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@char">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="@char"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Keywords OfChar(char @char)
@@ -609,7 +609,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@int">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="@int"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Keywords OfInt(int @int)
@@ -620,7 +620,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@namespace">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="@namespace"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Keywords OfNamespace(string @namespace)
@@ -631,7 +631,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@class">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="@class"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Keywords OfClass(object @class)
@@ -642,7 +642,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="@delegate">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="@delegate"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.Keywords OfDelegate(System.Delegate @delegate)
@@ -657,7 +657,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator ==(Emik.SourceGenerators.Choices.Tests.Keywords left, Emik.SourceGenerators.Choices.Tests.Keywords right)
@@ -681,7 +681,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is unequal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator !=(Emik.SourceGenerators.Choices.Tests.Keywords left, Emik.SourceGenerators.Choices.Tests.Keywords right)
@@ -696,7 +696,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.Keywords left, Emik.SourceGenerators.Choices.Tests.Keywords right)
@@ -721,7 +721,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.Keywords left, Emik.SourceGenerators.Choices.Tests.Keywords right)
@@ -736,7 +736,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.Keywords left, Emik.SourceGenerators.Choices.Tests.Keywords right)
@@ -751,42 +751,42 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.Keywords left, Emik.SourceGenerators.Choices.Tests.Keywords right)
                         => right >= left;
 
                     /// <inheritdoc cref="object.Equals(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public override bool Equals(object? obj)
                         => obj is global::Emik.SourceGenerators.Choices.Tests.Keywords x && Equals(x);
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool Equals(Emik.SourceGenerators.Choices.Tests.Keywords other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(object? obj)
                         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.Keywords x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(Emik.SourceGenerators.Choices.Tests.Keywords other)
                         => Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override int GetHashCode()
@@ -802,7 +802,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override string ToString()
@@ -826,7 +826,7 @@ namespace Emik
                     /// <param name="onClass">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> struct with the variant <see cref="Class"/> of type <see cref="object"/> is held.</param>
                     /// <param name="onDelegate">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.Keywords"/> struct with the variant <see cref="Delegate"/> of type <see cref="System.Delegate"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly Emik.SourceGenerators.Choices.Tests.Keywords Map(
                         global::System.Action<byte>? onByte = null,
@@ -873,7 +873,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly TMappingResult Map<TMappingResult>(
                         global::System.Func<byte, TMappingResult> onByte,
@@ -899,7 +899,7 @@ namespace Emik
                     /// <returns>
                     /// The underlying value from this instance.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly object GetUnderlyingValue()
@@ -914,7 +914,7 @@ namespace Emik
                         };
 
                     /// <inheritdoc cref="object.GetType()"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public System.Type GetUnderlyingType()
                         => _discriminator switch

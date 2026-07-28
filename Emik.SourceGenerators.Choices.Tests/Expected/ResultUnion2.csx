@@ -115,7 +115,7 @@ namespace Emik
                     global::System.IEquatable<global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>>,
                     global::System.Runtime.CompilerServices.IUnion
                 {
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     private readonly byte _discriminator;
 
                     private readonly TOk? _ok = ok;
@@ -126,7 +126,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
                     /// </summary>
                     /// <param name="ok">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public ResultUnion(TOk? ok)
                         : this(ok, default(TErr?))
@@ -139,7 +139,7 @@ namespace Emik
                     /// Initializes a new instance of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
                     /// </summary>
                     /// <param name="err">The variant.</param>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public ResultUnion(TErr? err)
                         : this(default(TOk?), err)
@@ -149,7 +149,7 @@ namespace Emik
                     }
 
                     /// <summary>Returns <see langword="true"/>. This exists solely for the compiler.</summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
                     public bool HasValue
                     {
@@ -159,7 +159,7 @@ namespace Emik
                     }
 
                     /// <summary>Returns the inner value. This exists solely for the compiler.</summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
                     public object? Value
                     {
@@ -171,7 +171,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> is the variant <see cref="Ok"/> of type <typeparamref name="TOk"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly bool IsOk
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -184,7 +184,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the value determining if the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> is the variant <see cref="Err"/> of type <typeparamref name="TErr"/>.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly bool IsErr
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -197,7 +197,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <typeparamref name="TOk"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly TOk? Ok
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -208,7 +208,7 @@ namespace Emik
                     /// <summary>
                     /// Gets the <typeparamref name="TErr"/> variant.
                     /// </summary>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     public readonly TErr? Err
                     {
                         [global::System.Diagnostics.Contracts.PureAttribute]
@@ -221,7 +221,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="ok">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="ok"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>(TOk ok)
@@ -232,7 +232,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator TOk?(global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> x)
@@ -243,7 +243,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="err">The parameter to pass onto the constructor.</param>
                     /// <returns>The union containing the parameter <paramref name="err"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static implicit operator global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr>(TErr err)
@@ -254,7 +254,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="x">The union to access its property.</param>
                     /// <returns>The getter of the union <paramref name="x"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static explicit operator TErr?(global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> x)
@@ -265,7 +265,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="ok">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="ok"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> OfOk(TOk? ok)
@@ -276,7 +276,7 @@ namespace Emik
                     /// </summary>
                     /// <param name="err">The value to pass into the type.</param>
                     /// <returns>The union containing the parameter <paramref name="err"/>.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> OfErr(TErr? err)
@@ -291,7 +291,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> left, Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> right)
@@ -312,7 +312,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is greater than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator >=(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> left, Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> right)
@@ -327,7 +327,7 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> left, Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> right)
@@ -342,35 +342,35 @@ namespace Emik
                     /// The value determining whether the parameter <paramref name="left"/>
                     /// is less than or equal to the parameter <paramref name="right"/>.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public static bool operator <=(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> left, Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> right)
                         => right >= left;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool Equals(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> other)
                         => this == other;
 
                     /// <inheritdoc cref="IComparable.CompareTo(object)"/>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(object? obj)
                         => obj is null ? 1 : obj is global::Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> x ? CompareTo(x) : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly int CompareTo(Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> other)
                         => Equals(other) ? 0 : -1;
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override int GetHashCode()
@@ -382,7 +382,7 @@ namespace Emik
                         });
 
                     /// <inheritdoc />
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly override string ToString()
@@ -395,7 +395,7 @@ namespace Emik
                     /// <summary>Attempts to get <typeparamref name="TOk"/>.</summary>
                     /// <param name="value">The value.</param>
                     /// <returns>Whether the value was extracted.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool TryGetValue([global::System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TOk? value)
@@ -407,7 +407,7 @@ namespace Emik
                     /// <summary>Attempts to get <typeparamref name="TErr"/>.</summary>
                     /// <param name="value">The value.</param>
                     /// <returns>Whether the value was extracted.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly bool TryGetValue([global::System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TErr? value)
@@ -422,7 +422,7 @@ namespace Emik
                     /// <param name="onOk">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Ok"/> of type <typeparamref name="TOk"/> is held.</param>
                     /// <param name="onErr">The callback to use when the contract of the <see cref="Emik.SourceGenerators.Choices.Tests.ResultUnion{TOk, TErr}"/> record struct with the variant <see cref="Err"/> of type <typeparamref name="TErr"/> is held.</param>
                     /// <returns>Itself.</returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly Emik.SourceGenerators.Choices.Tests.ResultUnion<TOk, TErr> Map(
                         global::System.Action<TOk?>? onOk = null,
@@ -449,7 +449,7 @@ namespace Emik
                     /// <returns>
                     /// The resulting value from one of the parameters based on the current state of the object.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly TMappingResult Map<TMappingResult>(
                         global::System.Func<TOk?, TMappingResult> onOk,
@@ -467,7 +467,7 @@ namespace Emik
                     /// <returns>
                     /// The underlying value from this instance.
                     /// </returns>
-                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.17.0")]
+                    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Emik.SourceGenerators.Choices", "1.4.18.0")]
                     [global::System.Diagnostics.Contracts.PureAttribute]
                     [global::System.Runtime.CompilerServices.MethodImplAttribute(256)]
                     public readonly object GetUnderlyingValue()
