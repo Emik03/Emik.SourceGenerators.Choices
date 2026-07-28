@@ -76,7 +76,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
                 IPropertySymbol { Parameters: var parameters } => parameters,
                 _ => ImmutableArray<IParameterSymbol>.Empty,
             };
-
+#pragma warning disable RS1024
         bool IsEqual(MemberSymbol union) => union.Type.AllInterfaces.Contains(first, RoslynComparer.Signature);
 
         bool CanReturnTypeBeIncluded(ISymbol symbol) =>
@@ -84,7 +84,7 @@ sealed record IntersectedInterfaces(ImmutableArray<MemberSymbol> Symbols, bool I
 
         bool CanParameterBeIncluded(IParameterSymbol symbol) =>
             !first.TypeParameters.Contains(symbol.OriginalDefinition.Type, RoslynComparer.Signature);
-
+#pragma warning restore RS1024
         var interfacesEqual = Symbols.All(IsEqual);
 
         bool CanBeIncluded(ISymbol symbol) =>

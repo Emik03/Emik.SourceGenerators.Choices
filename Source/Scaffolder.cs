@@ -30,7 +30,8 @@ sealed partial record Scaffolder(
     static readonly ConcurrentDictionary<string, short> s_names = new(StringComparer.Ordinal);
 
     [ValueRange(Primes.Min, Primes.MaxInt16)]
-    readonly short _hash = s_names.GetOrAdd(Named.GetFullyQualifiedName(), x => Primes.Index(x.GetDjb2HashCode()));
+    readonly short _hash = s_names
+       .GetOrAdd(Named.GetFullyQualifiedName(), x => Primes.Int16[x.GetDjb2HashCode().Mod(Primes.Int16.Length)]);
 
     public Scaffolder(
         INamedTypeSymbol named,
@@ -697,7 +698,7 @@ sealed partial record Scaffolder(
     string Source =>
         field ??= $"{Header}{Suppression}{Named
            .ContainingWithoutGlobal()
-           .FindSmallPathToNull(x => x.ContainingWithoutGlobal())
+           .FindPathToNull(x => x.ContainingWithoutGlobal())
            .Aggregate(DeclareType, WrapNamespaceOrType)}\n";
 
     [Pure]
@@ -851,15 +852,15 @@ sealed partial record Scaffolder(
         RoslynComparer.Signature.Equals(Named, x.Type) ||
         HasConflict(x) ||
         IsNoninitial(x);
-
+#pragma warning disable RS1024
     [Pure]
     int Inheritance((int Index, MemberSymbol Item) tuple) =>
         Symbols.Count(
             y => RoslynComparer.Signature.Equals(tuple.Item.Type, y.Type) ||
                 tuple.Item.Type.AllInterfaces.Contains(y.Type, RoslynComparer.Signature) ||
-                tuple.Item.Type.FindSmallPathToNull(x => x.BaseType).Contains(y.Type, RoslynComparer.Signature)
+                tuple.Item.Type.FindPathToNull(x => x.BaseType).Contains(y.Type, RoslynComparer.Signature)
         );
-
+#pragma warning restore RS1024
     [Pure]
     string Comparison(MemberSymbol x) =>
         x.IsEmpty ? CSharp("true") :
@@ -967,8 +968,8 @@ sealed partial record Scaffolder(
                          .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers))
                       }}({{x.Type}} {{x.ParameterName
                       }}{{(conflict ? ", byte x" : x.IsEmpty ? " = default" : "")
-                      }}){{(UsesPrimaryConstructor ? $"\n        : this({i.For(i => $"default({Symbols[i].Type}), ").Conjoin("")
-                      }{x.ParameterName}{(Symbols.Length - i - 1).For(j => $", default({Symbols[i + j + 1].Type})").Conjoin("")
+                      }}){{(UsesPrimaryConstructor ? $"\n        : this({i.For().Select(i => $"default({Symbols[i].Type}), ").Conjoin("")
+                      }{x.ParameterName}{(Symbols.Length - i - 1).For().Select(j => $", default({Symbols[i + j + 1].Type})").Conjoin("")
                       })" : "")}}
                       {
                           {{Discriminator}} = {{(conflict ? "x" : i)}};{{(x.IsEmpty ? "" : conflict && Symbols.Where(x.TypeEquals)

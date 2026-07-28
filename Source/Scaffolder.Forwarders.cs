@@ -39,7 +39,7 @@ sealed partial record Scaffolder
     ForwarderAggregate DeclareForwarder(ForwarderAggregate list, Extract extract)
     {
         var (symbol, kind, interfacesDeclared) = extract;
-
+#pragma warning disable RS1024
         bool SameSignature((ISymbol Symbol, string) x) =>
             x.Symbol.Kind == symbol.Kind &&
             (x.Symbol as IMethodSymbol)?.TypeParameters.Length ==
@@ -54,7 +54,7 @@ sealed partial record Scaffolder
                .Select(x => x.Type),
                 Equating<ITypeSymbol>((x, y) => x.GetFullyQualifiedName() == y.GetFullyQualifiedName())
             );
-
+#pragma warning restore RS1024
         bool SameUnderlying((ISymbol Symbol, string) x) =>
             (x.Symbol is not IEventSymbol a ||
                 symbol is not IEventSymbol b ||
@@ -464,7 +464,7 @@ sealed partial record Scaffolder
            .Select(XmlMemberTypeNames)
            .Filter()
            .Select(x => $"""{x.Member} as <see cref="{x.Type}"/>""")
-           .ToSmallList() is [_, ..] boxes
+           .ToIList() is [_, ..] boxes
             ? CSharp(
                 $"""
 

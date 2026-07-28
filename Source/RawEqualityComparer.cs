@@ -27,7 +27,7 @@ sealed class RawEqualityComparer : IEqualityComparer<Raw>
         hash ^= RoslynComparer.Signature.GetHashCode(x.Named);
 
         for (var i = 0; i < x.Fields.Length; i++)
-            hash ^= unchecked(x.Fields[i].GetHashCode() * Primes.Index(^(i + 1)));
+            hash ^= unchecked(x.Fields[i].GetHashCode() * Primes.Int16[^(i.Mod(Primes.Int16.Length) + 1)]);
 
         return hash;
     }
