@@ -15,7 +15,12 @@ public sealed class Verify : CSharpSourceGeneratorTest<ExtendingGenerator, Defau
             OperatingSystem.IsMacOS() ? Path.Join(home, "Library", "Application Support", "Steam") :
             Environment.GetEnvironmentVariable("XDG_DATA_DIR") is { } xdg &&
             Path.Join(xdg, "Steam") is var xdgSteam &&
-            Path.Exists(xdgSteam) ? xdgSteam : Path.Join(home, ".local", "share", "Steam"));
+            Path.Exists(xdgSteam) ? xdgSteam :
+            Path.Join(".local", "share", "Steam") is var shareSteam &&
+            Path.Join(home, shareSteam) is var localSteam &&
+            Path.Exists(localSteam) ? localSteam :
+            Path.Join(home, ".var", "app", "com.valvesoftware.Steam") is var flatpakSteam &&
+            Path.Exists(flatpakSteam) ? flatpakSteam : null);
 
     /// <summary>Gets the root of unity, if installed.</summary>
     static string? UnityRoot { get; } =
